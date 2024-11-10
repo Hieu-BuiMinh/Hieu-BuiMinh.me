@@ -4,9 +4,9 @@ export const siteConfig = {
 	description: 'Next js 15 blog using velite, tailwind and shadcn',
 	author: 'HieuBuiMinh',
 	links: {
-		twitter: '',
-		github: '',
-		personalSite: '',
+		twitter: '/',
+		github: '/',
+		personalSite: '/',
 	},
 }
 
