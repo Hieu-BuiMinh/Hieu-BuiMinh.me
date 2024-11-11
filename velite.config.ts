@@ -13,6 +13,7 @@ const posts = defineCollection({
 			slug: s.path(),
 			title: s.string().max(999),
 			date: s.isodate(),
+			lastUpdated: s.isodate().optional(),
 			cover: s.image().optional(),
 			video: s.file().optional(),
 			metadata: s.metadata().optional(),
@@ -20,6 +21,11 @@ const posts = defineCollection({
 			published: s.boolean().default(true),
 			tags: s.array(s.string()).optional(),
 			body: s.mdx(),
+			author: s.object({
+				avatar: s.string(),
+				name: s.string(),
+				github: s.string(),
+			}),
 			//slugAsParams <=> needed transform
 		})
 		.transform(computedFields),

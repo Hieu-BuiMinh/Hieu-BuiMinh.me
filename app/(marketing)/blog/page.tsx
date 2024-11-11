@@ -10,7 +10,6 @@ function BlogPage() {
 	const tags = getAllTags(posts)
 	const sortedTags = sortTagsByCount(tags)
 
-	console.log('sortedTags', posts)
 	return (
 		<div className="container max-w-4xl py-6 lg:py-10">
 			<div className="flex flex-col items-start gap-4 md:flex-row md:justify-between md:gap-8">

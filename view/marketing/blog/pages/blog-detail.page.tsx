@@ -23,8 +23,7 @@ export default async function BlogDetailPageView({ params }: PostPageProps) {
 	}
 
 	return (
-		<article className="prose dark:prose-invert container mx-auto max-w-3xl py-6">
-			<h1 className="mb-2">{post.title}</h1>
+		<article className="container prose mx-auto max-w-3xl pb-6 dark:prose-invert">
 			<MDXContent code={post.body} />
 		</article>
 	)
