@@ -115,6 +115,10 @@ const config: Config = {
 				'marquee-left': 'marquee-left var(--duration, 30s) linear infinite',
 				'marquee-up': 'marquee-up var(--duration, 30s) linear infinite',
 			},
+			boxShadow: {
+				'feature-card': '0 -1px 3px 0 rgb(0 0 0 / 0.05)',
+				'feature-card-dark': '0 0 0 1px rgb(255 255 255 / 0.06), 0 -1px rgb(255 255 255 / 0.1)',
+			},
 		},
 	},
 	plugins: [require('tailwindcss-animate'), require('@tailwindcss/typography')],

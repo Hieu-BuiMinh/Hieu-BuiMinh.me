@@ -29,7 +29,7 @@ const components = {
 
 		return (
 			<Link
-				className="font-bold text-[#ff6363] no-underline transition-colors hover:text-foreground"
+				className="font-bold text-green-600 no-underline transition-colors hover:text-foreground hover:underline dark:text-green-400"
 				href={href}
 				{...rest}
 			>

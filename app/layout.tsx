@@ -1,6 +1,6 @@
 import './globals.css'
 
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 
 import AppProvider from '@/components/commons/providers/app-provider'
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 		site: '@Walter_BM_777',
 		siteId: '@Walter_BM_777',
 		creator: '@Walter_BM_777',
-		creatorId: '@Walter_BM_777', // get this from twitter
+		creatorId: '@Walter_BM_777',
 		images: [
 			{
 				url: '/assets/images/og.png',
@@ -122,13 +122,20 @@ export const metadata: Metadata = {
 	},
 }
 
+export const viewport: Viewport = {
+	themeColor: [
+		{ media: '(prefers-color-scheme: light)', color: 'white' },
+		{ media: '(prefers-color-scheme: dark)', color: 'black' },
+	],
+}
+
 export default function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode
 }>) {
 	return (
-		<html suppressHydrationWarning lang="en">
+		<html className="scroll-smooth" suppressHydrationWarning lang="en">
 			<body suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<AppProvider>
 					<SideHeader />
