@@ -1,13 +1,12 @@
 'use client'
 
 import { Menu } from 'lucide-react'
+import Image from 'next/image'
 import type { LinkProps } from 'next/link'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
-import { Icons } from '@/components/commons/icons'
-import { Button } from '@/components/ui/button'
 import { DialogTitle } from '@/components/ui/dialog'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { siteConfig } from '@/config/site'
@@ -19,15 +18,28 @@ export function MobileNav() {
 		<Sheet open={open} onOpenChange={setOpen}>
 			<DialogTitle />
 			<SheetTrigger asChild>
-				<Button variant="outline" className="w-10 px-0 sm:hidden">
+				<div role="button" className="w-10 px-0 sm:hidden">
 					<Menu className="size-5" />
 					<span className="sr-only">Toggle Theme</span>
-				</Button>
+				</div>
 			</SheetTrigger>
 			<SheetContent side="right">
 				<MobileLink onOpenChange={setOpen} href="/" className="flex items-center">
-					<Icons.logo className="mr-2 size-4" />
-					<span className="font-bold">{siteConfig.name}</span>
+					<Image
+						className="mr-3 hidden dark:block"
+						src="/assets/images/logo/logo-dark.svg"
+						alt="logo"
+						width={35}
+						height={35}
+					/>
+					<Image
+						className="mr-3 block dark:hidden"
+						src="/assets/images/logo/logo-light.svg"
+						alt="logo"
+						width={35}
+						height={35}
+					/>
+					<span className="font-bold">{siteConfig.shortName}</span>
 				</MobileLink>
 				<div className="mt-3 flex flex-col gap-3">
 					<MobileLink onOpenChange={setOpen} href="/blog">
@@ -36,11 +48,8 @@ export function MobileNav() {
 					<MobileLink onOpenChange={setOpen} href="/about">
 						About
 					</MobileLink>
-					<Link target="_blank" rel="noreferrer" href={siteConfig.links.github}>
+					<Link target="_blank" rel="noreferrer" aria-label="github" href={siteConfig.links.github}>
 						GitHub
-					</Link>
-					<Link target="_blank" rel="noreferrer" href={siteConfig.links.twitter}>
-						Twitter
 					</Link>
 				</div>
 			</SheetContent>

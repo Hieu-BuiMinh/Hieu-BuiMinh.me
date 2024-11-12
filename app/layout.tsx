@@ -21,8 +21,8 @@ const geistMono = localFont({
 export const metadata: Metadata = {
 	metadataBase: new URL(siteConfig.url),
 	title: {
-		default: siteConfig.name,
-		template: `%s | ${siteConfig.name}`,
+		default: siteConfig.shortName,
+		template: `%s | ${siteConfig.shortName}`,
 	},
 	description: siteConfig.description,
 	manifest: '/favicon/site.webmanifest',
@@ -39,12 +39,12 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: 'summary_large_image',
-		title: siteConfig.name,
+		title: siteConfig.shortName,
 		description: siteConfig.description,
-		site: '@hieu.buiminh',
-		siteId: '1152256803746377730',
-		creator: '@hieu.buiminh',
-		creatorId: '1152256803746377730', // get this from twitter
+		site: '@Walter_BM_777',
+		siteId: '@Walter_BM_777',
+		creator: '@Walter_BM_777',
+		creatorId: '@Walter_BM_777', // get this from twitter
 		images: [
 			{
 				url: '/assets/images/og.png',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
 	openGraph: {
 		url: siteConfig.url,
 		type: 'website',
-		title: siteConfig.name,
+		title: siteConfig.shortName,
 		siteName: siteConfig.name,
 		description: siteConfig.description,
 		locale: 'en-US',
@@ -110,13 +110,13 @@ export const metadata: Metadata = {
 				rel: 'icon',
 				type: 'image/png',
 				sizes: '16x16',
-				url: '/assets/favicon/favicon-16x16.png',
+				url: '/favicon/favicon-16x16.png',
 			},
 			{
 				rel: 'icon',
 				type: 'image/png',
 				sizes: '32x32',
-				url: '/assets/favicon/favicon-32x32.png',
+				url: '/favicon/favicon-32x32.png',
 			},
 		],
 	},
@@ -132,7 +132,7 @@ export default function RootLayout({
 			<body suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<AppProvider>
 					<SideHeader />
-					{children}
+					<main role="main">{children}</main>
 				</AppProvider>
 			</body>
 		</html>

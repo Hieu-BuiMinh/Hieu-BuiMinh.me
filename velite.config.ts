@@ -1,15 +1,16 @@
 import { defineCollection, defineConfig, s } from 'velite'
 
-const computedFields = <T extends { slug: string }>(data: T) => {
+export const computedFields = <T extends { slug: string }>(data: T) => {
 	return { ...data, slugAsParams: data.slug.split('/').slice(1).join('/') }
 	// blog/hello-world => ['blog', 'hello-world'] => ['hello-world] => '/hello-world'
 }
 
-const posts = defineCollection({
-	name: 'Post',
+const devBlog = defineCollection({
+	name: 'DevBlog',
 	pattern: 'blog/**/*.mdx',
 	schema: s
 		.object({
+			id: s.string(),
 			slug: s.path(),
 			title: s.string().max(999),
 			date: s.isodate(),
@@ -40,6 +41,6 @@ export default defineConfig({
 		name: '[name]-[hash:6].[ext]',
 		clean: true,
 	},
-	collections: { posts },
+	collections: { devBlog },
 	mdx: { rehypePlugins: [], remarkPlugins: [] },
 })

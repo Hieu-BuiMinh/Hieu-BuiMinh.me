@@ -2,12 +2,12 @@ import React from 'react'
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { getAllTags, sortTagsByCount } from '@/lib/posts'
-import { PostItem } from '@/view/marketing/blog/components/post-item'
-import { Tag } from '@/view/marketing/blog/components/tag'
-import { posts } from '#site/content'
+import { PostItem } from '@/view/route/blog/components/post-item'
+import { Tag } from '@/view/route/blog/components/tag'
+import { devBlog } from '#site/content'
 
 function BlogPage() {
-	const tags = getAllTags(posts)
+	const tags = getAllTags(devBlog)
 	const sortedTags = sortTagsByCount(tags)
 
 	return (
@@ -21,9 +21,9 @@ function BlogPage() {
 				<div className="mt-8 grid grid-cols-12 gap-3">
 					<hr />
 					<div className="col-span-12 col-start-1 sm:col-span-8">
-						{posts?.length > 0 ? (
+						{devBlog?.length > 0 ? (
 							<ul className="flex flex-col">
-								{posts.map((post) => {
+								{devBlog.map((post) => {
 									const { slug, date, title, description, tags } = post
 									return (
 										<li key={slug}>

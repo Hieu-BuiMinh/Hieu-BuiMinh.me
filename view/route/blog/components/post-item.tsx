@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { buttonVariants } from '@/components/ui/button'
 import { formatDate } from '@/lib/posts'
 import { cn } from '@/lib/utils'
-import { Tag } from '@/view/marketing/blog/components/tag'
+import { Tag } from '@/view/route/blog/components/tag'
 
 interface PostItemProps {
 	slug: string

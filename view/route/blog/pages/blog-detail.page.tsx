@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 
-import { posts } from '@/.velite'
+import { devBlog } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 
 interface PostPageProps {
@@ -10,7 +10,7 @@ interface PostPageProps {
 async function getPostFromParams(params: PostPageProps['params']) {
 	const resolvedParams = await params
 	const slug = resolvedParams.slug.join('/')
-	const post = posts.find((post) => post.slugAsParams === slug)
+	const post = devBlog.find((post) => post.slugAsParams === slug)
 
 	return post
 }

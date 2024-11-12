@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-import { posts } from '@/.velite'
+import { devBlog } from '@/.velite'
 import ImageZoom from '@/components/commons/image/image-zoom'
 
 interface IPostDetailHeaderProps {
@@ -11,7 +11,7 @@ interface IPostDetailHeaderProps {
 async function getPostFromParams(params: IPostDetailHeaderProps['params']) {
 	const resolvedParams = await params
 	const slug = resolvedParams.slug.join('/')
-	const post = posts.find((post) => post.slugAsParams === slug)
+	const post = devBlog.find((post) => post.slugAsParams === slug)
 
 	return post
 }
@@ -28,7 +28,7 @@ export async function PostDetailHeader({ params }: IPostDetailHeaderProps) {
 				{post.title}
 			</h1>
 
-			<div className="grid grid-cols-2 text-sm max-md:gap-4 md:grid-cols-4"></div>
+			<div className="grid grid-cols-2 border text-sm max-md:gap-4 md:grid-cols-4"></div>
 
 			<ImageZoom alt="title" src={`/assets/images/${post.slug}/cover.png`} width={1200} height={630} />
 		</div>

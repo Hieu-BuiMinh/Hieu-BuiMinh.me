@@ -1,6 +1,6 @@
 import React from 'react'
 
-import BlogDetailPageView from '@/view/marketing/blog/pages/blog-detail.page'
+import BlogDetailPageView from '@/view/route/blog/pages/blog-detail.page'
 
 interface IPostPageProps {
 	params: Promise<{ slug: string[] }>
