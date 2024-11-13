@@ -20,7 +20,9 @@ export const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) =
 	const [currentSrc, setCurrentSrc] = useState(src)
 
 	return (
-		<div className={cn('overflow-hidden', isLoading && 'animate-pulse', className)}>
+		<div
+			className={cn('flex items-center justify-center overflow-hidden', isLoading && 'animate-pulse', className)}
+		>
 			<Image
 				ref={ref}
 				className={cn(isLoading && 'scale-[1.02] blur-xl grayscale', imageClassName)}

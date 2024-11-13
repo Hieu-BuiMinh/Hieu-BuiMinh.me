@@ -3,33 +3,32 @@ import pluralize from 'pluralize'
 
 import type { DevBlog } from '@/.velite'
 import { BlurImage } from '@/components/commons/image/blur-image'
+import { formatDate } from '@/lib/utils'
 
 type PostCardsProps = {
 	posts: DevBlog[]
+	root: string
 }
 
-type PostCardProps = DevBlog
-
-const PostCards = (props: PostCardsProps) => {
-	const { posts } = props
-
+const PostCards = ({ posts, root }: PostCardsProps) => {
 	return (
 		<div className="grid gap-4 md:grid-cols-2">
 			{posts.map((post) => (
-				<PostCard key={post.slug} {...post} />
+				<PostCard key={post.slug} post={post} root={root} />
 			))}
 		</div>
 	)
 }
 
-const PostCard = (props: PostCardProps) => {
-	const { slug, title, description, date, slugAsParams } = props
+interface PostCardProps {
+	post: DevBlog
+	root: string
+}
 
-	const formattedDate = new Date(date).toLocaleDateString('em-EN', {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-	})
+const PostCard = ({ post, root }: PostCardProps) => {
+	const { slug, title, description, date, slugAsParams } = post
+
+	const formattedDate = formatDate(date)
 
 	const viewsQuery = 100 // save in api here
 
@@ -37,12 +36,12 @@ const PostCard = (props: PostCardProps) => {
 
 	return (
 		<Link
-			href={`/${slug}`}
-			className="group rounded-xl px-2 py-4 shadow-feature-card dark:shadow-feature-card-dark"
+			href={`/${root}/${slugAsParams}`}
+			className="group rounded-md px-2 py-4 shadow-feature-card dark:shadow-feature-card-dark"
 		>
 			<BlurImage
-				src={`/assets/images/dev-blog/${slugAsParams}/cover.png`}
-				className="rounded-lg"
+				src={`/assets/images/${slug}/cover.png`}
+				className="h-[220px] rounded-md object-cover"
 				width={1200}
 				height={630}
 				imageClassName="transition-transform group-hover:scale-105"

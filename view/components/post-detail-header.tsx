@@ -1,8 +1,10 @@
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
 import { devBlog } from '@/.velite'
 import ImageZoom from '@/components/commons/image/image-zoom'
+import { formatDate } from '@/lib/utils'
 
 interface IPostDetailHeaderProps {
 	params: Promise<{ slug: string[] }>
@@ -22,13 +24,34 @@ export async function PostDetailHeader({ params }: IPostDetailHeaderProps) {
 	if (!post || !post.published) {
 		notFound()
 	}
+
 	return (
-		<div>
+		<div className="py-10">
 			<h1 className="font-title bg-gradient-to-b from-black via-black/90 to-black/70 to-90% bg-clip-text text-center text-4xl font-bold text-transparent dark:from-white dark:via-white/90 dark:to-white/70 md:text-5xl md:leading-[64px]">
 				{post.title}
 			</h1>
 
-			<div className="grid grid-cols-2 border text-sm max-md:gap-4 md:grid-cols-4"></div>
+			<div className="my-4 grid grid-cols-2 text-sm max-md:gap-4 md:grid-cols-4">
+				<div className="flex flex-col gap-2 p-2 md:mx-auto">
+					<span className="text-muted-foreground">Written by</span>
+					<div className="flex items-center gap-2">
+						<Image alt="auth-avt" width={20} height={20} src={post.author.avatar} />
+						{post.author.name}
+					</div>
+				</div>
+				<div className="flex flex-col gap-2 p-2 md:mx-auto">
+					<span className="text-muted-foreground">Published on</span>
+					<span>{formatDate(post.date)}</span>
+				</div>
+				<div className="flex flex-col gap-2 p-2 md:mx-auto">
+					<span className="text-muted-foreground">Views</span>
+					<span>{100}</span>
+				</div>
+				<div className="flex flex-col gap-2 p-2 md:mx-auto">
+					<span className="text-muted-foreground">Comments</span>
+					<span>{100}</span>
+				</div>
+			</div>
 
 			<ImageZoom alt="title" src={`/assets/images/${post.slug}/cover.png`} width={1200} height={630} />
 		</div>

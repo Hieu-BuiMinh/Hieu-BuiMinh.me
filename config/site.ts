@@ -14,6 +14,8 @@ export const siteConfig = {
 	},
 	links: {
 		twitter: 'https://x.com/Walter_BM_777',
+		youtube: 'https://x.com/Walter_BM_777',
+		instagram: 'https://x.com/Walter_BM_777',
 		facebook: 'https://www.facebook.com/hieu.buiminh.37',
 		github: 'https://github.com/Hieu-BuiMinh',
 		personalSite: '/',

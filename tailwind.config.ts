@@ -104,6 +104,21 @@ const config: Config = {
 					from: { transform: 'translateY(0)' },
 					to: { transform: 'translateY(calc(-100% - var(--gap)))' },
 				},
+				// Bounce
+				bounce: {
+					0: {
+						transform: 'translateY(0)',
+						animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
+					},
+					50: {
+						transform: 'translateY(-20%)',
+						animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
+					},
+					100: {
+						transform: 'translateY(0)',
+						animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
+					},
+				},
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
@@ -114,10 +129,16 @@ const config: Config = {
 				// Marquee
 				'marquee-left': 'marquee-left var(--duration, 30s) linear infinite',
 				'marquee-up': 'marquee-up var(--duration, 30s) linear infinite',
+				// Bounce
+				bounce: 'bounce 1s infinite',
 			},
 			boxShadow: {
 				'feature-card': '0 -1px 3px 0 rgb(0 0 0 / 0.05)',
 				'feature-card-dark': '0 0 0 1px rgb(255 255 255 / 0.06), 0 -1px rgb(255 255 255 / 0.1)',
+			},
+			backgroundImage: {
+				pinned: 'linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)',
+				'pinned-dark': 'linear-gradient(to right top, #845ec2, #d65db1, #ff6f91, #ff9671, #ffc75f, #f9f871)',
 			},
 		},
 	},

@@ -1,10 +1,6 @@
-import Link from 'next/link'
-
-import { Icons } from '@/components/commons/icons'
-import { MainNav } from '@/components/commons/main-nav'
-import { MobileNav } from '@/components/commons/mobile-nav'
+import CommandMenu from '@/components/commons/command-menu'
+import { MainNav, MobileNav } from '@/components/commons/main-nav'
 import { ModeToggle } from '@/components/commons/mode-toggle'
-import { siteConfig } from '@/config/site'
 
 function SideHeader() {
 	return (
@@ -13,17 +9,9 @@ function SideHeader() {
 				<MainNav />
 				<div className="flex items-center justify-end space-x-2">
 					<nav className="flex items-center gap-2">
-						<Link
-							className="hidden px-0 sm:inline-flex"
-							href={siteConfig.links.github}
-							target="_blank"
-							rel="noreferrer"
-							aria-label="github"
-						>
-							<Icons.gitHub className="size-6" />
-						</Link>
 						<ModeToggle />
 						<MobileNav />
+						<CommandMenu />
 					</nav>
 				</div>
 			</div>
