@@ -13,9 +13,9 @@ import {
 } from 'lucide-react'
 import { Fragment, useCallback, useEffect, useState } from 'react'
 
-import { buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import {
-	Command,
+	CommandDialog,
 	CommandEmpty,
 	CommandGroup,
 	CommandInput,
@@ -23,7 +23,7 @@ import {
 	CommandList,
 	CommandSeparator,
 } from '@/components/ui/command'
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { DialogTitle } from '@/components/ui/dialog'
 import { siteConfig } from '@/config/site'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 
@@ -127,34 +127,39 @@ function CommandMenu() {
 	}, [])
 
 	return (
-		<Dialog open={isOpen}>
-			<DialogTrigger className={buttonVariants({ variant: 'ghost', size: 'icon' })}>
-				<CommandIcon />
-			</DialogTrigger>
-			<DialogContent className="p-0">
+		<>
+			<Button
+				variant="ghost"
+				className="size-9 p-0"
+				onClick={() => {
+					setIsOpen(true)
+				}}
+				type="button"
+				aria-label="Open command menu"
+			>
+				<CommandIcon className="size-4" />
+			</Button>
+			<CommandDialog open={isOpen} onOpenChange={setIsOpen}>
 				<DialogTitle />
-
-				<Command>
-					<CommandInput placeholder="Type a command or search..." />
-					<CommandList>
-						<CommandEmpty>No results found.</CommandEmpty>
-						{groups.map((group, i) => (
-							<Fragment key={group.name}>
-								<CommandGroup heading={group.name}>
-									{group.actions.map((action) => (
-										<CommandItem key={action.title} onSelect={action.onSelect}>
-											{action.icon}
-											{action.title}
-										</CommandItem>
-									))}
-								</CommandGroup>
-								{i === groups.length - 1 ? null : <CommandSeparator />}
-							</Fragment>
-						))}
-					</CommandList>
-				</Command>
-			</DialogContent>
-		</Dialog>
+				<CommandInput placeholder="Type a command or search..." />
+				<CommandList>
+					<CommandEmpty>No results found.</CommandEmpty>
+					{groups.map((group, i) => (
+						<Fragment key={group.name}>
+							<CommandGroup heading={group.name}>
+								{group.actions.map((action) => (
+									<CommandItem key={action.title} onSelect={action.onSelect}>
+										{action.icon}
+										{action.title}
+									</CommandItem>
+								))}
+							</CommandGroup>
+							{i === groups.length - 1 ? null : <CommandSeparator />}
+						</Fragment>
+					))}
+				</CommandList>
+			</CommandDialog>
+		</>
 	)
 }
 
