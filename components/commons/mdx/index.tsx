@@ -2,6 +2,7 @@ import Link from 'next/link'
 import * as runtime from 'react/jsx-runtime'
 
 import ImageZoom from '@/components/commons/image/image-zoom'
+import { CodeBlock } from '@/components/commons/mdx/custom-components/code-block'
 import Heading from '@/components/commons/mdx/custom-components/heading'
 import LinkCard from '@/components/commons/mdx/custom-components/link-card'
 
@@ -47,6 +48,7 @@ const components = {
 			</>
 		)
 	},
+	pre: CodeBlock,
 	LinkCard,
 }
 

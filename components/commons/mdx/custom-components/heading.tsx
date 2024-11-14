@@ -14,15 +14,26 @@ const Heading = <T extends Types = 'h1'>(props: HeadingProps<T>) => {
 	const { as, className, children, ...rest } = props
 	const Component = as ?? 'h1'
 
+	// return (
+	// 	<Component className={cn('scroll-m-32', className)} id={children?.toString()} {...rest}>
+	// 		<a href={`#${children?.toString()}`} className="not-prose group">
+	// 			{children}
+	// 			<LinkIcon
+	// 				aria-label="Link to section"
+	// 				className="ml-2 inline size-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
+	// 			/>
+	// 		</a>
+	// 	</Component>
+	// )
 	return (
 		<Component className={cn('scroll-m-32', className)} id={children?.toString()} {...rest}>
-			<a href={`#${children?.toString()}`} className="not-prose group">
+			<span className="not-prose group">
 				{children}
 				<LinkIcon
 					aria-label="Link to section"
 					className="ml-2 inline size-4 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
 				/>
-			</a>
+			</span>
 		</Component>
 	)
 }
