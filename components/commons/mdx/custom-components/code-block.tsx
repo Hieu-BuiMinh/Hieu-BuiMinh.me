@@ -1,12 +1,13 @@
 'use client'
 
-import { ScrollArea } from '@radix-ui/react-scroll-area'
+import '../style/code-block.css'
+
 import { CheckIcon, CopyIcon } from 'lucide-react'
 import { forwardRef, useEffect, useRef, useState } from 'react'
 
 import type { ButtonProps } from '@/components/ui/button'
 import { Button } from '@/components/ui/button'
-import { ScrollBar } from '@/components/ui/scroll-area'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { getIconByFilename } from '@/lib/get-icon-by-filename'
 import { cn } from '@/lib/utils'
 
@@ -15,9 +16,9 @@ type CodeBlockProps = {
 	figureClassName?: string
 } & React.ComponentPropsWithoutRef<'pre'>
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref) => {
 	const { children, className, title, 'data-language': lang, figureClassName, ...rest } = props
-	console.log(props)
 
 	const textInput = useRef<HTMLPreElement>(null)
 	const Icon = getIconByFilename(lang ?? '')
@@ -29,7 +30,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref)
 	return (
 		<figure
 			className={cn(
-				'not-prose group relative my-1 overflow-hidden rounded-lg border bg-secondary/50 text-sm',
+				'not-prose group relative my-1 overflow-hidden rounded-md border bg-secondary/50 text-sm',
 				figureClassName
 			)}
 		>
@@ -46,7 +47,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref)
 			)}
 
 			<ScrollArea>
-				<pre className={cn('p-4', className)} {...rest}>
+				<pre ref={textInput} className={cn('p-4', className)} {...rest}>
 					{children}
 				</pre>
 				<ScrollBar orientation="horizontal" />

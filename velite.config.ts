@@ -1,4 +1,6 @@
+import rehypeShiki from '@shikijs/rehype'
 import rehypeAutoLinkHeading from 'rehype-autolink-headings'
+import rehypeHighlight from 'rehype-highlight'
 import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import { defineCollection, defineConfig, s } from 'velite'
@@ -30,6 +32,7 @@ const devBlog = defineCollection({
 				name: s.string(),
 				github: s.string(),
 			}),
+			toc: s.toc({ tight: true, ordered: true, maxDepth: 6 }),
 			//slugAsParams <=> needed transform
 		})
 		.transform(computedFields),
@@ -76,10 +79,15 @@ export default defineConfig({
 		rehypePlugins: [
 			rehypeSlug,
 			[
-				rehypePrettyCode,
+				rehypeShiki,
 				{
-					them: 'github-dark',
-					keepBackground: false,
+					themes: {
+						light: 'github-light',
+						dark: 'github-dark',
+					},
+					// theme: 'night-owl',
+					defaultColor: 'light',
+					cssVariablePrefix: '--shiki-',
 				},
 			],
 			[
@@ -93,6 +101,6 @@ export default defineConfig({
 				},
 			],
 		],
-		remarkPlugins: [],
+		remarkPlugins: [rehypeHighlight],
 	},
 })

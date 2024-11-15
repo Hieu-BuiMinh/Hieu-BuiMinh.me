@@ -13,7 +13,7 @@ const ImageZoom = forwardRef<HTMLImageElement, React.ComponentPropsWithoutRef<ty
 			<DialogTrigger asChild role="button">
 				<BlurImage ref={ref} className="rounded-lg border" {...rest} />
 			</DialogTrigger>
-			<DialogContent className="sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
+			<DialogContent className="sm:max-w-screen-sm md:max-w-screen-md md:p-0 lg:max-w-screen-lg">
 				<BlurImage className="rounded-lg border" {...rest} />
 			</DialogContent>
 		</Dialog>

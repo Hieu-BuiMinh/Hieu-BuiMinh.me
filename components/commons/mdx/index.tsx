@@ -1,3 +1,5 @@
+import './style/code-block.css'
+
 import Link from 'next/link'
 import * as runtime from 'react/jsx-runtime'
 
