@@ -78,18 +78,22 @@ export default defineConfig({
 	mdx: {
 		rehypePlugins: [
 			rehypeSlug,
-			[
-				rehypeShiki,
-				{
-					themes: {
-						light: 'github-light',
-						dark: 'github-dark',
-					},
-					// theme: 'night-owl',
-					defaultColor: 'light',
-					cssVariablePrefix: '--shiki-',
-				},
-			],
+			// this use for shiki https://shiki.style/guide/dual-themes#light-dark-dual-themes
+			// if use shiki, remmeber to uncomment css in code-block.css file
+			// @/components/commons/mdx/style/code-block.css
+			// [
+			// 	rehypeShiki,
+			// 	{
+			// 		themes: {
+			// 			light: 'github-light',
+			// 			dark: 'night-owl',
+			// 		},
+			// 	},
+			// ],
+
+			// rehypePrettyCode doc: https://rehype-pretty.pages.dev/#options
+			[rehypePrettyCode, { theme: { light: 'github-light', dark: 'night-owl', keepBackground: true } }],
+			[rehypeHighlight],
 			[
 				rehypeAutoLinkHeading,
 				{
@@ -101,6 +105,6 @@ export default defineConfig({
 				},
 			],
 		],
-		remarkPlugins: [rehypeHighlight],
+		remarkPlugins: [],
 	},
 })

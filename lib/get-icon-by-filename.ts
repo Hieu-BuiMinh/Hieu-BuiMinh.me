@@ -1,5 +1,5 @@
 import { FileIcon, TerminalIcon } from 'lucide-react'
-import { SiJavascript, SiMarkdown, SiMdx, SiNodedotjs, SiReact, SiTypescript } from 'react-icons/si'
+import { SiHtml5, SiJavascript, SiMarkdown, SiMdx, SiNodedotjs, SiReact, SiTypescript } from 'react-icons/si'
 
 type Icon = {
 	extensions?: string[]
@@ -23,6 +23,10 @@ const icons: Icon[] = [
 	{
 		extensions: ['sh', 'bash', 'zsh'],
 		icon: TerminalIcon,
+	},
+	{
+		extensions: ['html'],
+		icon: SiHtml5,
 	},
 	{
 		extensions: ['md'],

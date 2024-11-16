@@ -3,6 +3,7 @@
 import '../style/code-block.css'
 
 import { CheckIcon, CopyIcon } from 'lucide-react'
+import { JetBrains_Mono } from 'next/font/google'
 import { forwardRef, useEffect, useRef, useState } from 'react'
 
 import type { ButtonProps } from '@/components/ui/button'
@@ -11,17 +12,21 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { getIconByFilename } from '@/lib/get-icon-by-filename'
 import { cn } from '@/lib/utils'
 
+const JetBrainsMono = JetBrains_Mono({ subsets: ['latin'] })
+
 type CodeBlockProps = {
-	'data-language'?: string
 	figureClassName?: string
+	title?: string
+	caption?: string
+	children: React.ReactNode
 } & React.ComponentPropsWithoutRef<'pre'>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref) => {
-	const { children, className, title, 'data-language': lang, figureClassName, ...rest } = props
+	const { children, className, title, figureClassName, ...rest } = props
 
 	const textInput = useRef<HTMLPreElement>(null)
-	const Icon = getIconByFilename(lang ?? '')
+	const Icon = getIconByFilename(title ?? '')
 
 	const onCopy = () => {
 		void navigator.clipboard.writeText(textInput.current?.textContent ?? '')
@@ -30,7 +35,8 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref)
 	return (
 		<figure
 			className={cn(
-				'not-prose group relative my-1 overflow-hidden rounded-md border bg-secondary/50 text-sm',
+				'not-prose group relative my-1 overflow-hidden rounded-sm border border-[#AAAAAA] text-sm dark:border-muted',
+				JetBrainsMono.className,
 				figureClassName
 			)}
 		>
@@ -47,7 +53,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref)
 			)}
 
 			<ScrollArea>
-				<pre ref={textInput} className={cn('p-4', className)} {...rest}>
+				<pre ref={textInput} className={cn(JetBrainsMono.className, className)} {...rest}>
 					{children}
 				</pre>
 				<ScrollBar orientation="horizontal" />

@@ -50,7 +50,11 @@ const components = {
 			</>
 		)
 	},
-	pre: CodeBlock,
+	// code: (props) => {
+	// 	return <>{props.children} 123</>
+	// },
+	// pre: CodeBlock,
+	CodeBlock,
 	LinkCard,
 }
 

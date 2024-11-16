@@ -6,6 +6,7 @@
 import Image from 'next/image'
 import { forwardRef, useState } from 'react'
 
+import Spinner from '@/components/commons/spinner'
 import { cn } from '@/lib/utils'
 
 type ImageProps = {
@@ -21,8 +22,17 @@ export const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) =
 
 	return (
 		<div
-			className={cn('flex items-center justify-center overflow-hidden', isLoading && 'animate-pulse', className)}
+			className={cn(
+				'relative flex items-center justify-center overflow-hidden',
+				isLoading && 'animate-pulse',
+				className
+			)}
 		>
+			{isLoading && (
+				<div className="absolute left-0 top-0 flex size-full items-center justify-center backdrop-blur-md">
+					<Spinner size={'lg'} />
+				</div>
+			)}
 			<Image
 				ref={ref}
 				className={cn(isLoading && 'scale-[1.02] blur-xl grayscale', imageClassName)}
