@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useMemo } from 'react'
 
-import type { DevBlog } from '@/.velite'
+import type { DevBlogPost } from '@/.velite'
 
 type Header = {
 	title: string
@@ -11,7 +11,7 @@ type Header = {
 	items?: Header[]
 }
 
-function TableOfContent({ post }: { post: DevBlog }) {
+function TableOfContent({ post }: { post: DevBlogPost }) {
 	const TOC = post.toc
 
 	const flatTocArray = useMemo(() => {

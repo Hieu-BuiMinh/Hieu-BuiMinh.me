@@ -18,7 +18,7 @@ export const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) =
 	const fallbackSrc = '/assets/images/fallback/img-fallback-dark.jpg'
 	const { alt, src, className, imageClassName, lazy = true, ...rest } = props
 	const [isLoading, setIsLoading] = useState(true)
-	const [currentSrc, setCurrentSrc] = useState(src)
+	const [currentSrc, setCurrentSrc] = useState(src || fallbackSrc)
 
 	return (
 		<div
@@ -35,7 +35,11 @@ export const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) =
 			)}
 			<Image
 				ref={ref}
-				className={cn(isLoading && 'scale-[1.02] blur-xl grayscale', imageClassName)}
+				className={cn(
+					'size-full object-cover',
+					isLoading && 'scale-[1.02] object-cover blur-xl grayscale',
+					imageClassName
+				)}
 				style={{
 					transition: 'filter 700ms ease, transform 150ms ease',
 				}}

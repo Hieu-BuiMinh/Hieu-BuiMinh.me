@@ -1,8 +1,8 @@
 import slug from 'slug'
 
-import type { DevBlog } from '#site/content'
+import type { DevBlogPost } from '#site/content'
 
-export function sortPosts(posts: Array<DevBlog>) {
+export function sortPosts(posts: Array<DevBlogPost>) {
 	return posts.sort((a, b) => {
 		if (a.date > b.date) return -1
 		if (a.date < b.date) return 1
@@ -10,11 +10,11 @@ export function sortPosts(posts: Array<DevBlog>) {
 	})
 }
 
-export function getAllTags(posts: Array<DevBlog>) {
+export function getAllTags(posts: Array<DevBlogPost>) {
 	const tags: Record<string, number> = {}
 	posts.forEach((post) => {
 		if (post.published) {
-			post.tags?.forEach((tag: string) => {
+			post.hashTags?.tags?.forEach((tag: string) => {
 				tags[tag] = (tags[tag] ?? 0) + 1
 			})
 		}
@@ -27,10 +27,10 @@ export function sortTagsByCount(tags: Record<string, number>) {
 	return Object.keys(tags).sort((a, b) => tags[b] - tags[a])
 }
 
-export function getPostsByTagSlug(posts: Array<DevBlog>, tag: string) {
+export function getPostsByTagSlug(posts: Array<DevBlogPost>, tag: string) {
 	return posts.filter((post) => {
-		if (!post.tags) return false
-		const slugifiedTags = post.tags.map((tag: string) => slug(tag))
+		if (!post.hashTags?.tags) return false
+		const slugifiedTags = post.hashTags?.tags.map((tag: string) => slug(tag))
 		return slugifiedTags.includes(tag)
 	})
 }

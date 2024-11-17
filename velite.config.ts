@@ -1,4 +1,4 @@
-import rehypeShiki from '@shikijs/rehype'
+//import rehypeShiki from '@shikijs/rehype'
 import rehypeAutoLinkHeading from 'rehype-autolink-headings'
 import rehypeHighlight from 'rehype-highlight'
 import rehypePrettyCode from 'rehype-pretty-code'
@@ -10,8 +10,8 @@ export const computedFields = <T extends { slug: string }>(data: T) => {
 	// blog/hello-world => ['blog', 'hello-world'] => ['hello-world] => '/hello-world'
 }
 
-const devBlog = defineCollection({
-	name: 'DevBlog',
+const devBlogPost = defineCollection({
+	name: 'DevBlogPost',
 	pattern: 'dev-blog/**/*.mdx',
 	schema: s
 		.object({
@@ -20,12 +20,17 @@ const devBlog = defineCollection({
 			title: s.string().max(999),
 			date: s.isodate(),
 			lastUpdated: s.isodate().optional(),
-			cover: s.image().optional(),
+			cover: s.string().optional(),
 			video: s.file().optional(),
 			metadata: s.metadata().optional(),
 			description: s.string().max(999).optional(),
 			published: s.boolean().default(true),
-			tags: s.array(s.string()).optional(),
+			hashTags: s
+				.object({
+					category: s.string(),
+					tags: s.array(s.string()),
+				})
+				.optional(),
 			body: s.mdx(),
 			author: s.object({
 				avatar: s.string(),
@@ -74,7 +79,7 @@ export default defineConfig({
 		name: '[name]-[hash:6].[ext]',
 		clean: true,
 	},
-	collections: { devBlog, pages },
+	collections: { devBlogPost, pages },
 	mdx: {
 		rehypePlugins: [
 			rehypeSlug,

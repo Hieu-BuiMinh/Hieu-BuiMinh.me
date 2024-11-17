@@ -1,4 +1,4 @@
-import { TagIcon } from 'lucide-react'
+import { Hash } from 'lucide-react'
 import Link from 'next/link'
 import slug from 'slug'
 
@@ -17,10 +17,10 @@ export function Tag({ tag, current, count }: TagProps) {
 			})}
 			href={`/tags/${slug(tag)}`}
 		>
+			<Hash size={15} />
 			<span>
 				{tag} {count ? `(${count})` : null}
 			</span>
-			<TagIcon size={15} />
 		</Link>
 	)
 }
