@@ -7,6 +7,7 @@ import ImageZoom from '@/components/commons/image/image-zoom'
 import { CodeBlock } from '@/components/commons/mdx/custom-components/code-block'
 import Heading from '@/components/commons/mdx/custom-components/heading'
 import LinkCard from '@/components/commons/mdx/custom-components/link-card'
+import TreeView from '@/components/commons/tree-view'
 
 const useMDXComponent = (code: string) => {
 	const fn = new Function(code)
@@ -56,6 +57,7 @@ const components = {
 	// pre: CodeBlock,
 	CodeBlock,
 	LinkCard,
+	TreeView,
 }
 
 interface MdxProps {

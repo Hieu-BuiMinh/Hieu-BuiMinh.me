@@ -6,27 +6,26 @@ import { CheckIcon, CopyIcon } from 'lucide-react'
 import { JetBrains_Mono } from 'next/font/google'
 import { forwardRef, useEffect, useRef, useState } from 'react'
 
+import { LangIcons } from '@/components/commons/icons/lang-icons'
 import type { ButtonProps } from '@/components/ui/button'
 import { Button } from '@/components/ui/button'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
-import { getIconByFilename } from '@/lib/get-icon-by-filename'
 import { cn } from '@/lib/utils'
 
 const JetBrainsMono = JetBrains_Mono({ subsets: ['latin'] })
 
 type CodeBlockProps = {
 	figureClassName?: string
-	title?: string
+	fileName?: string
 	caption?: string
 	children: React.ReactNode
 } & React.ComponentPropsWithoutRef<'pre'>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref) => {
-	const { children, className, title, figureClassName, ...rest } = props
+	const { children, className, fileName, figureClassName, ...rest } = props
 
 	const textInput = useRef<HTMLPreElement>(null)
-	const Icon = getIconByFilename(title ?? '')
 
 	const onCopy = () => {
 		void navigator.clipboard.writeText(textInput.current?.textContent ?? '')
@@ -35,17 +34,18 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref)
 	return (
 		<figure
 			className={cn(
-				'not-prose group relative my-1 overflow-hidden rounded-sm border border-[#AAAAAA] text-sm dark:border-muted',
+				'not-prose group relative my-1 overflow-hidden rounded-sm border text-sm',
 				JetBrainsMono.className,
 				figureClassName
 			)}
 		>
-			{title ? (
+			{fileName ? (
 				<div className="flex flex-row items-center gap-2 border-b bg-muted/50 px-4 py-1.5">
 					<div className="text-muted-foreground">
-						<Icon className="size-3.5" />
+						{/* <Icon className="size-3.5" /> */}
+						<LangIcons fileName={fileName} />
 					</div>
-					<figcaption className="flex-1 truncate text-muted-foreground">{title}</figcaption>
+					<figcaption className="flex-1 truncate text-muted-foreground">{fileName}</figcaption>
 					<CopyButton onCopy={onCopy} />
 				</div>
 			) : (

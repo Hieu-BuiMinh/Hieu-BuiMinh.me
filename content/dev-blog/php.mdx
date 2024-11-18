@@ -26,7 +26,7 @@ The PHP file extension is `.php`, E.g `index.php`. As mentioned above, `PHP` can
 
 When the browser reads `<?php` from top to bottom, it executes `PHP` and ends with `?>`. Such as:
 
-<CodeBlock title="doc.html" caption="this is the caption">
+<CodeBlock fileName="doc.html" caption="this is the caption">
 ```php {4} showLineNumbers /head/#v
 <!DOCTYPE html>
 <html>
@@ -99,7 +99,7 @@ We can assign a value to a variable to make it easier for us to write `PHP`, sim
 
 There are some rules to follow when we name variables.
 
-{/*_ <Table
+{/_* <Table
 headers={['Example', 'Description', 'Rules']}
 rows={[
 ['$value', 'Lowercase', '✅'],
@@ -107,7 +107,7 @@ rows={[
 ['$_value', 'Underscore', '✅'],
 ['$1value', 'Start from number', '❌'],
 ]}
-/> _*/}
+/> *_/}
 
 There is a difference between `uppercase` and `lowercase` in variable names. Uppercase variables are not equal to lowercase variables.
 
@@ -147,7 +147,7 @@ There are two string operators. The first is the concatenation operator ("."), w
 
 ## Arithmetic operator
 
-<CodeBlock title="doc.html" caption="this is the caption">
+<CodeBlock fileName="doc.html" caption="this is the caption">
 ```php
 <?php
     $value0 = 1.5 // Float

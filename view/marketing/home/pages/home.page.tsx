@@ -40,7 +40,7 @@ function HomePageView() {
 	return (
 		<div className="m-auto max-w-screen-lg p-3 md:py-6">
 			<HeroSection />
-			<TreeView dir="rtl" data={tree.data} expandAll={tree.expandAll} defaultExpandIds={tree.defaultExpandIds} />
+			<TreeView data={tree.data} expandAll={tree.expandAll} defaultExpandIds={tree.defaultExpandIds} />
 		</div>
 	)
 }

@@ -3,40 +3,42 @@
 import { Folder, FolderOpen } from 'lucide-react'
 import * as React from 'react'
 
+import { LangIcons } from '@/components/commons/icons/lang-icons'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import { getIconByFilename } from '@/lib/get-icon-by-filename'
+import { cn } from '@/lib/utils'
 
 type TreeItem = {
 	id: string
 	name: string
+	active?: boolean
 	children?: TreeItem[]
 }
 
 export type TreeViewProps = {
 	data: TreeItem[]
-	dir?: 'rtl' | 'ltr'
 	expandAll: boolean
-	defaultExpandIds: string[]
+	defaultExpandIds?: string[]
+	className?: string
 }
 
-function shouldExpand(item: TreeItem, defaultExpandIds: string[]): boolean {
-	if (defaultExpandIds.includes(item.id)) return true
+function shouldExpand(item: TreeItem, defaultExpandIds?: string[]): boolean {
+	if (defaultExpandIds?.includes(item.id)) return true
 	return item.children?.some((child) => shouldExpand(child, defaultExpandIds)) || false
 }
 
-export default function TreeView({ data, expandAll, defaultExpandIds }: TreeViewProps) {
+export default function TreeView({ data, expandAll, defaultExpandIds, className }: TreeViewProps) {
 	return (
-		<>
+		<div className={className}>
 			{data?.map((item) => (
 				<TreeItem
 					key={item.id}
 					item={item}
 					expandAll={expandAll}
-					defaultExpandIds={defaultExpandIds}
+					defaultExpandIds={defaultExpandIds || []}
 					shouldExpandDefault={shouldExpand(item, defaultExpandIds)}
 				/>
 			))}
-		</>
+		</div>
 	)
 }
 
@@ -53,7 +55,6 @@ function TreeItem({
 }) {
 	const [isOpen, setIsOpen] = React.useState(expandAll || shouldExpandDefault)
 	const hasChildren = item.children && item.children.length > 0
-	const Icon = getIconByFilename(item.name)
 
 	React.useEffect(() => {
 		setIsOpen(expandAll || shouldExpandDefault)
@@ -66,7 +67,7 @@ function TreeItem({
 				collapsible
 				value={isOpen ? item.id : ''}
 				onValueChange={(value) => setIsOpen(value === item.id)}
-				className="border-none"
+				className="not-prose border-none"
 			>
 				<AccordionItem value={item.id} className="border-none">
 					<AccordionTrigger className="py-1 hover:no-underline">
@@ -76,10 +77,16 @@ function TreeItem({
 							) : (
 								<Folder className="mr-2 size-4 shrink-0" />
 							)}
-							<span className="text-sm font-medium">{item.name}</span>
+							<span
+								className={cn('text-sm font-medium', {
+									'text-green-500 dark:text-green-400 font-bold': item.active,
+								})}
+							>
+								{item.name}
+							</span>
 						</div>
 					</AccordionTrigger>
-					<AccordionContent>
+					<AccordionContent className="pb-1">
 						<div className="ml-1 border-l pl-2">
 							<TreeView
 								data={item.children || []}
@@ -95,8 +102,14 @@ function TreeItem({
 
 	return (
 		<div className="flex items-center py-1">
-			<Icon className="mr-2 size-4 shrink-0" />
-			<span className="text-sm">{item.name}</span>
+			<LangIcons fileName={item.name} className="mr-2 size-4 shrink-0" />
+			<span
+				className={cn('text-sm font-medium', {
+					'text-green-500 dark:text-green-400 font-bold': item.active,
+				})}
+			>
+				{item.name}
+			</span>
 		</div>
 	)
 }

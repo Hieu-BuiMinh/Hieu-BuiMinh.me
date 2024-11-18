@@ -1,0 +1,306 @@
+---
+id: 'd297cc17-fbc7-4583-9bd0-4d27b83f0a06'
+title: 'How to build a blog with Next.js and Velite.js'
+cover: '/assets/images/dev-blog/top-8-attractive-web-design-websites/cover.png'
+date: '2024-11-18T00:00:00Z'
+lastUpdated: '2024-11-18T00:00:00Z'
+description: 'Creating a fast, SEO-friendly blog using Next.js and Velite for easy content management. It covers setup, integration, styling, and deployment, ideal for streamlined blog development.'
+author:
+    {
+        avatar: '/assets/images/logo/logo-circle-dark.svg',
+        name: 'Hieu.BuiMinh',
+        github: 'https://github.com/Hieu-BuiMinh',
+    }
+published: true
+hashTags: { category: 'Blog', tags: ['Hello', 'Hi'] }
+---
+
+## Preface
+
+Velite is a powerful configuration tool for building type-safe data layer for Next.js with Zod schema, allowing developers to manage their apps with streamlined settings. Here, we will explore how to set up Velite for a Next.js project and enhance the development process.
+
+## Why Use Velite in Next.js?
+
+-   **Efficiency**: Simplifies configuration management with structured files.
+-   **Scalability**: Ideal for projects with complex routing or multilingual setups.
+-   **Developer-Friendly**: Easy to integrate with minimal setup.
+
+## Step-by-Step Guide
+
+### Getting started with Next js
+
+#### 1. Create a Next js project
+
+Use the following commands to create a Next.js project and navigate to it:
+
+<CodeBlock fileName="bash">
+
+```bash
+npx create-next-app@latest my-next-app
+cd my-next-app
+```
+
+</CodeBlock>
+
+#### 2. Run Development Server
+
+Start the development server:
+
+<CodeBlock fileName="bash">
+
+```bash
+npm run dev
+```
+
+</CodeBlock>
+
+Visit [http://localhost:3000](http://localhost:3000).
+
+#### 3. Learn More
+
+Visit the [Next.js Documentation](https://nextjs.org/docs).
+
+### Velite configuration
+
+#### 1. Install Velite
+
+To get started, ensure you have Node.js installed. Then, install Velite using npm or yarn:
+
+<CodeBlock fileName="bash">
+
+```bash
+npm install velite -D
+# or
+yarn add velite -D
+```
+
+</CodeBlock>
+
+#### 2. Folder structured
+
+<TreeView
+	className="p-2 border rounded"
+	data={[
+		{
+			id: '1',
+			name: 'app',
+			children: [
+				{
+					id: '1.1',
+					name: 'blog',
+					children: [
+						{
+							id: '1.1.1',
+							name: '[...slug]',
+							children: [{ id: '1.1.1.1', name: 'page.tsx', active: true }],
+						},
+						{ id: '1.1.2', name: 'page.tsx', active: true },
+						{ id: '1.1.3', name: 'layout.tsx' },
+					],
+				},
+			],
+		},
+		{
+			id: '2',
+			name: 'components',
+			children: [
+				{
+					id: '2.1',
+					name: 'mdx.tsx',
+					active: true,
+				},
+			],
+		},
+		{
+			id: '3',
+			name: 'content',
+			children: [
+				{
+					id: '3.1',
+					name: 'blog',
+					children: [{ id: '3.1.1', name: 'hello-world.mdx', active: true }],
+				},
+			],
+		},
+		{
+			id: '4',
+			name: '.velite',
+			children: [
+				{
+					id: '4.1',
+					name: '...velite auto genarating json files',
+				},
+				{ id: '4.2', name: 'blog.json', active: true },
+			],
+		},
+		{ id: '5', name: 'package.json' },
+		{ id: '6', name: 'next.config.mjs', active: true },
+		{ id: '7', name: 'velite.config.ts', active: true },
+	]}
+	expandAll={true}
+/>
+
+#### 3. In `next.config.mjs`
+
+Config for Velite plugins wiht webpack
+
+<CodeBlock fileName="next.config.mjs">
+
+```ts showLineNumbers
+import { build } from 'velite'
+
+/** @type {import('next').NextConfig} */
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
+	webpack: (config) => {
+		config.plugins.push(new VeliteWebpackPlugin())
+		return config
+	},
+}
+
+class VeliteWebpackPlugin {
+	static started = false
+	constructor(/** @type {import('velite').Options} */ options = {}) {
+		this.options = options
+	}
+	apply(/** @type {import('webpack').Compiler} */ compiler) {
+		compiler.hooks.beforeCompile.tapPromise('VeliteWebpackPlugin', async () => {
+			if (VeliteWebpackPlugin.started) return
+			VeliteWebpackPlugin.started = true
+			const dev = compiler.options.mode === 'development'
+			this.options.watch = this.options.watch ?? dev
+			this.options.clean = this.options.clean ?? !dev
+			await build(this.options)
+		})
+	}
+}
+```
+
+</CodeBlock>
+
+#### 4. Define Collections in `velite.config.ts`
+
+After creating a velite.config.ts file in the root directory of your project to define collections config
+
+<CodeBlock fileName="velite.config.ts">
+
+```ts showLineNumbers
+import { defineCollection, defineConfig, s } from 'velite'
+
+export const computedFields = <T extends { slug: string }>(data: T) => {
+	return { ...data, slugAsParams: data.slug.split('/').slice(1).join('/') }
+	// blog/hello-world => ['blog', 'hello-world'] => ['hello-world] => '/hello-world'
+}
+
+const Posts = defineCollection({
+	name: 'posts', // name of colection
+	pattern: 'blog/**/*.mdx', // watch all mdx file in blog folder
+	schema: s
+		.object({
+			id: s.string(),
+			slug: s.path(), // return blog path
+			title: s.string().max(999),
+			date: s.isodate(),
+			cover: s.string().optional(),
+			metadata: s.metadata().optional(),
+			description: s.string().max(999).optional(),
+			published: s.boolean().default(true),
+			hashTags: s
+				.object({
+					category: s.string(),
+					tags: s.array(s.string()),
+				})
+				.optional(),
+			body: s.mdx(), // mdx content
+			author: s.object({
+				// author infor
+				avatar: s.string(),
+				name: s.string(),
+				github: s.string(),
+			}),
+			toc: s.toc({ tight: true, ordered: true, maxDepth: 6 }), // toc stand for table-of-content
+			//slugAsParams <=> needed transform
+		})
+		.transform(computedFields),
+})
+```
+
+</CodeBlock>
+
+#### 5. Velite configuration
+
+Velite uses `velite.config.js/ts` as the config file. You can see it in the root directory of your project.
+Now we can put our blog in to velite defineConfig function
+
+<CodeBlock fileName="velite.config.ts">
+
+```ts showLineNumbers
+import { defineCollection, defineConfig, s } from 'velite'
+
+export default defineConfig({
+	root: 'content',
+	output: {
+		data: '.velite',
+		assets: 'public/static',
+		base: '/static/',
+		name: '[name]-[hash:6].[ext]',
+		clean: true,
+	},
+	collections: { Posts },
+	mdx: {
+		rehypePlugins: [
+			/* some rehypePlugins for code block here, https://rehype-pretty.pages.dev/#options */
+		],
+		remarkPlugins: [],
+	},
+})
+```
+
+</CodeBlock>
+
+#### 6. Create the first content 🔥
+
+<CodeBlock fileName="/content/blog/hello-world.mdx">
+```mdx
+---
+id: '77980926-5baa-4b1c-b528-51b0c82eecdc'
+title: 'Hello world'
+cover: 'cover image url'
+date: '2024-11-18T00:00:00Z'
+lastUpdated: '2024-11-18T00:00:00Z'
+description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+author:
+    {
+        avatar: 'your avatar url',
+        name: 'your name',
+        github: 'your github url',
+    }
+published: true
+hashTags: { category: 'Blog', tags: ['Hello', 'Hi'] }
+---
+
+This is the first blog of mine!
+Welcome to my blog page
+
+```
+
+</CodeBlock>
+
+#### 7. Get all blogs
+
+After creating your first content .mdx, check your folder structured, you would see a folder named `.velite`, inside it you can see 2 files named `index.d.ts` and `blog.json`, that means ours `hello-world.mdx` have been parsed successfuly.
+
+Inside
+
+## Best Practices
+
+-   Always document your configuration for team collaborations.
+-   Use `.env` files for sensitive data like API keys.
+
+Velite makes Next.js projects easier to maintain and expand, especially for growing applications.
+
+---
+
+Thank you for exploring Velite with Next.js. Happy coding!
+
+```

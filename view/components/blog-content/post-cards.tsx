@@ -28,7 +28,7 @@ interface PostCardProps {
 }
 
 const PostCard = ({ post, root }: PostCardProps) => {
-	const { slug, title, description, date, slugAsParams } = post
+	const { title, description, date, slugAsParams } = post
 
 	const formattedDate = formatDate(date)
 
