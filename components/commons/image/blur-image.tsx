@@ -4,7 +4,8 @@
 'use client'
 
 import Image from 'next/image'
-import { forwardRef, useState } from 'react'
+import { useTheme } from 'next-themes'
+import { forwardRef, useEffect, useState } from 'react'
 
 import Spinner from '@/components/commons/spinner'
 import { cn } from '@/lib/utils'
@@ -15,10 +16,24 @@ type ImageProps = {
 } & React.ComponentPropsWithoutRef<typeof Image>
 
 export const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
-	const fallbackSrc = '/assets/images/fallback/img-fallback-dark.jpg'
+	const { theme } = useTheme()
+	const fallbackSrc =
+		theme === 'dark'
+			? '/assets/images/fallback/img-fallback-light.jpg'
+			: '/assets/images/fallback/img-fallback-dark.jpg'
 	const { alt, src, className, imageClassName, lazy = true, ...rest } = props
 	const [isLoading, setIsLoading] = useState(true)
 	const [currentSrc, setCurrentSrc] = useState(src || fallbackSrc)
+
+	useEffect(() => {
+		setCurrentSrc(src || fallbackSrc)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [theme])
+
+	useEffect(() => {
+		setCurrentSrc(src || fallbackSrc)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
 
 	return (
 		<div
