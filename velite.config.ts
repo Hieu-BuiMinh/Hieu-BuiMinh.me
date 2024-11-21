@@ -44,7 +44,7 @@ const devBlogPost = defineCollection({
 })
 
 const pages = defineCollection({
-	name: 'PageContent',
+	name: 'PagePost',
 	pattern: 'pages/**/*.mdx',
 	schema: s
 		.object({
@@ -53,11 +53,39 @@ const pages = defineCollection({
 			title: s.string().max(999),
 			date: s.isodate(),
 			lastUpdated: s.isodate().optional(),
-			cover: s.image().optional(),
+			cover: s.string().optional(),
 			video: s.file().optional(),
 			metadata: s.metadata().optional(),
 			description: s.string().max(999).optional(),
 			published: s.boolean().default(true),
+			tags: s.array(s.string()).optional(),
+			body: s.mdx(),
+			author: s.object({
+				avatar: s.string(),
+				name: s.string(),
+				github: s.string(),
+			}),
+			//slugAsParams <=> needed transform
+		})
+		.transform(computedFields),
+})
+
+const projects = defineCollection({
+	name: 'ProjectPost',
+	pattern: 'projects/**/*.mdx',
+	schema: s
+		.object({
+			id: s.string(),
+			slug: s.path(),
+			title: s.string().max(999),
+			date: s.isodate(),
+			lastUpdated: s.isodate().optional(),
+			cover: s.string().optional(),
+			video: s.file().optional(),
+			metadata: s.metadata().optional(),
+			description: s.string().max(999).optional(),
+			published: s.boolean().default(true),
+			shown: s.boolean().default(false),
 			tags: s.array(s.string()).optional(),
 			body: s.mdx(),
 			author: s.object({
@@ -79,7 +107,7 @@ export default defineConfig({
 		name: '[name]-[hash:6].[ext]',
 		clean: true,
 	},
-	collections: { devBlogPost, pages },
+	collections: { devBlogPost, pages, projects },
 	mdx: {
 		rehypePlugins: [
 			rehypeSlug,

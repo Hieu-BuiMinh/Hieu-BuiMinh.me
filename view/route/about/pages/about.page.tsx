@@ -6,7 +6,7 @@ import { MDXContent } from '@/components/commons/mdx'
 import PageTitle from '@/view/components/blog-content/page-title'
 
 const title = 'About'
-const description = '👋 Hi there! I am Hieu, a student who loves web development.'
+const description = '👋 Hi there! I am Hieu, a learner who loves web development.'
 
 export default function AboutPageView() {
 	const post = pages.find((post) => post.slugAsParams === 'about')
