@@ -1,10 +1,12 @@
 'use client'
 
 import createGlobe from 'cobe'
+import { useTheme } from 'next-themes'
 import React, { useEffect, useRef } from 'react'
 import { useSpring } from 'react-spring'
 
 function LocationCard() {
+	const { theme } = useTheme()
 	const canvasRef = useRef<HTMLCanvasElement>(null)
 	const pointerInteracting = useRef<number | null>(null)
 	const pointerInteractionMovement = useRef(0)
@@ -33,13 +35,13 @@ function LocationCard() {
 			height: width * 2,
 			phi: 0,
 			theta: 0.1,
-			dark: 1,
+			dark: theme === 'dark' ? 1 : 0,
 			diffuse: 3,
 			mapSamples: 16000,
-			mapBrightness: 1.2,
+			mapBrightness: theme === 'dark' ? 1.2 : 3.5,
 			baseColor: [1, 1, 1],
-			markerColor: [251 / 255, 100 / 255, 21 / 255],
-			glowColor: [1.2, 1.2, 1.2],
+			markerColor: [48 / 255, 213 / 255, 52 / 255],
+			glowColor: theme === 'dark' ? [1.2, 1.2, 1.2] : [0, 0, 0],
 			markers: [{ location: [10.82302, 106.62965], size: 0.1 }],
 			onRender: (state) => {
 				if (!pointerInteracting.current) {
@@ -60,12 +62,12 @@ function LocationCard() {
 			window.removeEventListener('resize', onResize)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [])
+	}, [theme])
 	return (
 		<div
 			style={{
 				width: '100%',
-				maxWidth: 500,
+				maxWidth: 350,
 				aspectRatio: 1,
 				margin: 'auto',
 				position: 'relative',
