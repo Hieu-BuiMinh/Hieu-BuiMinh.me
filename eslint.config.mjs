@@ -22,7 +22,7 @@ const compat = new FlatCompat({
 
 const ESLINT_CONFIG = [
 	{
-		ignores: ['components/ui/*', '**/tailwind.config.ts', 'convex/_generated/*', '.next/*'],
+		ignores: ['components/ui/*', '**/tailwind.config.ts', 'convex/_generated/*', '.next/*', '.velite'],
 	},
 	...compat.extends(
 		'next/core-web-vitals',
