@@ -19,6 +19,7 @@ function LocationCard() {
 			precision: 0.001,
 		},
 	}))
+
 	useEffect(() => {
 		if (!canvasRef.current) return
 
