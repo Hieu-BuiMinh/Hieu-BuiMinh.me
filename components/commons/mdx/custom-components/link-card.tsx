@@ -28,7 +28,7 @@ const LinkCard = (props: LinkCardProps) => {
 				/>
 				<div>
 					<div>{title}</div>
-					<div className="text-sm text-muted-foreground">{href}</div>
+					<div className="max-w-[250px] truncate text-sm text-muted-foreground">{href}</div>
 				</div>
 				<ExternalLinkIcon className="size-[22px]" />
 			</Link>

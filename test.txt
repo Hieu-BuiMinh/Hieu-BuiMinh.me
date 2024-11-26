@@ -1,22 +1,32 @@
-1. npm install -D tailwindcss postcss autoprefixer eslint prettier eslint-config-prettier eslint-plugin-prettier @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-plugin-tailwindcss eslint-plugin-react eslint-plugin-import eslint-plugin-simple-import-sort
+1. npm install -D @eslint/compat @eslint/eslintrc @eslint/js @tanstack/eslint-plugin-query @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-prettier eslint-plugin-import eslint-plugin-prettier eslint-plugin-simple-import-sort eslint-plugin-tailwindcss eslint-plugin-react
+1.1 npx eslint .
+
 2. npm install --save-dev husky
+2.1 npx husky init
 
 3. Git convention:
-<emoji> <type>(<scope>): <subject>
-<body> (optional)
-//=============================================
-✨ feat(auth): add user login flow
-🐛 fix(api): resolve 500 error on user registration
-📝 docs(README): update contributing guidelines
-⭐ refactor(api): simplify error handling in user controller
-🔥 chore: remove deprecated files
-//=============================================
-Common Emojis:
+<emoji>_[<type_task-id>_<scope>]_[branch]: [<description>]
+
 ✨ feat: A new feature.
-🐛 fix: A bug fix.
+✨ [feat-001]_[auth]_[master]: [Add user login feature]
+
+🐞 fix: A bug fix.
+🐞 [fix-023]_[login]_[master]: [Fix crash on login page]
+
 📝 docs: Documentation changes.
-🛠 refactor: Code refactoring.
+📝 [docs-012]_[readme]_[master]: [Update README with installation instructions]
+
+⚙️ refactor: Code refactoring.
+⚙️ [refactor-045]_[auth]_[master]: [Refactor authentication middleware]
+
 ⭐ Performance improvement.
+⭐ [performance-007]_[api]_[master]: [Improve response time for user data API]
+
 🔥 Removing code or files.
-✅ test: Adding or updating tests.
+🔥 [remove-098]_[oldCode]_[master]: [Remove deprecated functions]
+
+🧪 test: Adding or updating tests.
+🧪 [test-034]_[auth]_[master]: [Add unit tests for user registration]
+
 🔧 build: Build system or external dependencies.
+🔧 [build-011]_[config]_[master]: [Update build configuration for production]

@@ -56,9 +56,9 @@ npm run dev
 
 Visit [http://localhost:3000](http://localhost:3000).
 
-#### 3. Learn More
+Read the Next.js Documentation:
 
-Visit the [Next.js Documentation](https://nextjs.org/docs).
+<LinkCard href="https://nextjs.org/docs" hostname="nextjs.org" title="Next js" />
 
 ### Velite configuration
 
@@ -75,6 +75,8 @@ yarn add velite -D
 ```
 
 </CodeBlock>
+
+<LinkCard href="https://velite.js.org" hostname="velite.js.org" title="Velite.js" />
 
 #### 2. Folder structured
 
@@ -106,6 +108,11 @@ yarn add velite -D
 			children: [
 				{
 					id: '2.1',
+					name: 'heading.tsx',
+					active: true,
+				},
+				{
+					id: '2.2',
 					name: 'mdx.tsx',
 					active: true,
 				},
@@ -178,9 +185,12 @@ class VeliteWebpackPlugin {
 
 </CodeBlock>
 
-#### 4. Define Collections in `velite.config.ts`
+#### 4. Velite configuration and Define Collections in `velite.config.ts`
 
-After creating a velite.config.ts file in the root directory of your project to define collections config
+After creating a velite.config.ts file in the root directory of your project to define collections config.
+
+Velite uses `velite.config.js/ts` as the config file. You can see it in the root directory of your project.
+Now we can put our blog in to velite defineConfig function
 
 <CodeBlock fileName="velite.config.ts">
 
@@ -192,8 +202,8 @@ export const computedFields = <T extends { slug: string }>(data: T) => {
 	// blog/hello-world => ['blog', 'hello-world'] => ['hello-world] => '/hello-world'
 }
 
-const Posts = defineCollection({
-	name: 'posts', // name of colection
+const post = defineCollection({
+	name: 'Post', // name of colection
 	pattern: 'blog/**/*.mdx', // watch all mdx file in blog folder
 	schema: s
 		.object({
@@ -201,7 +211,7 @@ const Posts = defineCollection({
 			slug: s.path(), // return blog path
 			title: s.string().max(999),
 			date: s.isodate(),
-			cover: s.string().optional(),
+			lastUpdated: s.isodate().optional(),
 			metadata: s.metadata().optional(),
 			description: s.string().max(999).optional(),
 			published: s.boolean().default(true),
@@ -212,30 +222,11 @@ const Posts = defineCollection({
 				})
 				.optional(),
 			body: s.mdx(), // mdx content
-			author: s.object({
-				// author infor
-				avatar: s.string(),
-				name: s.string(),
-				github: s.string(),
-			}),
 			toc: s.toc({ tight: true, ordered: true, maxDepth: 6 }), // toc stand for table-of-content
 			//slugAsParams <=> needed transform
 		})
 		.transform(computedFields),
 })
-```
-
-</CodeBlock>
-
-#### 5. Velite configuration
-
-Velite uses `velite.config.js/ts` as the config file. You can see it in the root directory of your project.
-Now we can put our blog in to velite defineConfig function
-
-<CodeBlock fileName="velite.config.ts">
-
-```ts showLineNumbers
-import { defineCollection, defineConfig, s } from 'velite'
 
 export default defineConfig({
 	root: 'content',
@@ -246,11 +237,9 @@ export default defineConfig({
 		name: '[name]-[hash:6].[ext]',
 		clean: true,
 	},
-	collections: { Posts },
+	collections: { post },
 	mdx: {
-		rehypePlugins: [
-			/* some rehypePlugins for code block here, https://rehype-pretty.pages.dev/#options */
-		],
+		rehypePlugins: [],
 		remarkPlugins: [],
 	},
 })
@@ -258,49 +247,238 @@ export default defineConfig({
 
 </CodeBlock>
 
-#### 6. Create the first content 🔥
+#### 5. Create the first content 🔥
 
 <CodeBlock fileName="/content/blog/hello-world.mdx">
-```mdx
+```mdx showLineNumbers
 ---
-id: '77980926-5baa-4b1c-b528-51b0c82eecdc'
-title: 'Hello world'
-cover: 'cover image url'
+id: 'xxxxxxxx-xxxx-xxxx-...'
+title: 'This is the first post'
 date: '2024-11-18T00:00:00Z'
 lastUpdated: '2024-11-18T00:00:00Z'
 description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-author:
-    {
-        avatar: 'your avatar url',
-        name: 'your name',
-        github: 'your github url',
-    }
 published: true
-hashTags: { category: 'Blog', tags: ['Hello', 'Hi'] }
+hashTags: { category: 'Blog', tags: ['Lorem', 'Ipsum'] }
 ---
 
-This is the first blog of mine!
-Welcome to my blog page
+`##` Hello world
 
+`###` This is my first post
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+````
+
+</CodeBlock>
+
+---
+
+<CodeBlock fileName="components/mdx.tsx">
+
+```tsx showLineNumbers
+import Link from 'next/link'
+import * as runtime from 'react/jsx-runtime'
+
+import Heading from '@/components/heading'
+
+const useMDXComponent = (code: string) => {
+	const fn = new Function(code)
+	return fn({ ...runtime }).default
+}
+
+const components = {
+	// overwrite heading or other components here...
+	h2: (props: React.ComponentPropsWithoutRef<'h2'>) => <Heading as="h2" {...props} />,
+	h3: (props: React.ComponentPropsWithoutRef<'h3'>) => <Heading as="h3" {...props} />,
+	h4: (props: React.ComponentPropsWithoutRef<'h4'>) => <Heading as="h4" {...props} />,
+	h5: (props: React.ComponentPropsWithoutRef<'h5'>) => <Heading as="h5" {...props} />,
+	h6: (props: React.ComponentPropsWithoutRef<'h6'>) => <Heading as="h6" {...props} />,
+	a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
+		const { children, href, ...rest } = props
+
+		if (!href) {
+			return (
+				<span className="text-muted-foreground line-through transition-colors hover:text-foreground" {...rest}>
+					{children}
+				</span>
+			)
+		}
+
+		return (
+			<Link
+				className="font-bold text-green-600 no-underline transition-colors hover:text-foreground hover:underline dark:text-green-400"
+				href={href}
+				{...rest}
+			>
+				{children}
+			</Link>
+		)
+	},
+}
+
+interface MdxProps {
+	code: string
+}
+
+export function MDXContent({ code }: MdxProps) {
+	const Component = useMDXComponent(code)
+	return <Component components={components} />
+}
+````
+
+</CodeBlock>
+
+---
+
+<CodeBlock fileName="app/blog/page.tsx">
+
+```tsx showLineNumbers {3,8}
+import Link from 'next/link'
+
+import { posts } from '@/.velite'
+
+function BlogPage() {
+	return (
+		<div className="flex h-screen w-screen items-center justify-center">
+			{posts.map((post) => {
+				return (
+					<Link key={post.id} href={post.slug}>
+						<div className="flex h-[200px] w-[400px] flex-col justify-between rounded-md border p-4">
+							<p className="text-md font-bold">{post.title}</p>
+							<p className="text-sm">{post.description}</p>
+							<span>{post.date}</span>
+						</div>
+					</Link>
+				)
+			})}
+		</div>
+	)
+}
+
+export default BlogPage
 ```
 
 </CodeBlock>
 
-#### 7. Get all blogs
+---
+
+<CodeBlock fileName="app/blog/[...slug]/page.tsx">
+
+```tsx showLineNumbers {4,28}
+import { notFound } from 'next/navigation'
+
+import { posts } from '@/.velite'
+import { MDXContent } from '@/components/mdx'
+
+interface PostPageProps {
+	params: Promise<{ slug: string[] }>
+}
+
+async function getPostFromParams(params: PostPageProps['params']) {
+	const resolvedParams = await params
+	const slug = resolvedParams.slug.join('/')
+	const post = posts.find((post) => post.slugAsParams === slug)
+
+	return post
+}
+
+export default async function BlogDetailPageView({ params }: PostPageProps) {
+	const post = await getPostFromParams(params)
+
+	if (!post || !post.published) {
+		notFound()
+	}
+
+	return (
+		<div className="relative flex justify-between gap-10">
+			<article>
+				<MDXContent code={post.body} />
+			</article>
+		</div>
+	)
+}
+```
+
+</CodeBlock>
+
+---
+
+<CodeBlock fileName="bash">
+
+```bash
+npm i @tailwindcss/typography
+```
+
+</CodeBlock>
+
+<CodeBlock fileName="tailwind.config.ts">
+
+```ts showLineNumbers
+const config: Config = {
+	plugins: [require('@tailwindcss/typography')],
+}
+```
+
+</CodeBlock>
+
+<LinkCard href="https://www.npmjs.com/package/@tailwindcss/typography" hostname="tailwindcss" title="Tailwind" />
+
+---
+
+Now you can use the prose classes to add sensible typography styles to any vanilla HTML:
+
+<CodeBlock fileName="tailwind.config.ts">
+
+```tsx showLineNumbers {10}
+export default async function BlogDetailPageView({ params }: PostPageProps) {
+	const post = await getPostFromParams(params)
+
+	if (!post || !post.published) {
+		notFound()
+	}
+
+	return (
+		<div className="relative flex justify-between gap-10">
+			<article className="prose lg:prose-xl">
+				<MDXContent code={post.body} />
+			</article>
+		</div>
+	)
+}
+```
+
+</CodeBlock>
+
+#### 6. Get all blogs
 
 After creating your first content .mdx, check your folder structured, you would see a folder named `.velite`, inside it you can see 2 files named `index.d.ts` and `blog.json`, that means ours `hello-world.mdx` have been parsed successfuly.
 
 Inside
 
-## Best Practices
+## Final result
 
--   Always document your configuration for team collaborations.
--   Use `.env` files for sensitive data like API keys.
+<Image
+	src="/assets/images/dev-blog/how-to-build-a-blog-with-next-js-and-velite-js/first-post.png"
+	width={1920}
+	height={1024}
+	alt="first-post.png"
+/>
+<Image
+	src="/assets/images/dev-blog/how-to-build-a-blog-with-next-js-and-velite-js/first-post-detail.png"
+	width={1920}
+	height={1024}
+	alt="first-post-detail.png"
+/>
 
-Velite makes Next.js projects easier to maintain and expand, especially for growing applications.
 
 ---
 
-Thank you for exploring Velite with Next.js. Happy coding!
+## Conclusion
 
-```
+Velite makes your projects easier to maintain and expand, especially for growing applications.
+
+By combining Next.js with Velite.js, you can efficiently build a fast, SEO-friendly blog with minimal configuration. This guide has covered the essential steps to get you started, from creating the Next.js project and installing Velite to defining blog content and rendering posts dynamically. The result is a streamlined, type-safe blog development experience that scales well for future projects.
+
+With Next.js and Velite.js, you gain full control over your content, ensuring a smooth development process and an optimized blog that ranks well on search engines. 
+
+Happy coding （づ￣3￣）づ╭❤️～

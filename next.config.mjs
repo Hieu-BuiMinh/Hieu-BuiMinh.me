@@ -3,6 +3,9 @@ import { build } from 'velite'
 /** @type {import('next').NextConfig} */
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+	images: {
+		domains: ['img001.prntscr.com'],
+	},
 	webpack: (config) => {
 		config.plugins.push(new VeliteWebpackPlugin())
 		return config
