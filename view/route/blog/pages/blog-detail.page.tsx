@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation'
 
 import { devBlogPost } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
-import BlockQuote from '@/components/commons/mdx/custom-components/block-quote'
 import TableOfContent from '@/components/commons/table-of-content'
 
 interface PostPageProps {

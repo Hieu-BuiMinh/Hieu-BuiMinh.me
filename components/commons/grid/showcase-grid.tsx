@@ -25,7 +25,7 @@ function ShowcaseGrid({ data }: IShowcaseGridProps) {
 						[`md:row-span-${item.rowSpan || 1}`]: item.rowSpan,
 					})}
 				>
-					<div className="relative size-full overflow-hidden rounded-md">{item.content}</div>
+					<div className="size-full overflow-hidden rounded-md">{item.content}</div>
 				</div>
 			))}
 		</div>
