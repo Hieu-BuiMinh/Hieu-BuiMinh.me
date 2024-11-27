@@ -3,7 +3,9 @@ import './style/code-block.css'
 import Link from 'next/link'
 import * as runtime from 'react/jsx-runtime'
 
+import ShowcaseGrid from '@/components/commons/grid/showcase-grid'
 import ImageZoom from '@/components/commons/image/image-zoom'
+import BlockQuote from '@/components/commons/mdx/custom-components/block-quote'
 import { CodeBlock } from '@/components/commons/mdx/custom-components/code-block'
 import Heading from '@/components/commons/mdx/custom-components/heading'
 import LinkCard from '@/components/commons/mdx/custom-components/link-card'
@@ -46,7 +48,7 @@ const components = {
 
 		return (
 			<>
-				<ImageZoom className="rounded-lg border" alt={alt} {...rest} />
+				<ImageZoom className="rounded-lg border" alt={alt || ''} width={1920} height={1024} {...rest} />
 				<figcaption className="mt-4 text-center">{alt}</figcaption>
 			</>
 		)
@@ -58,6 +60,8 @@ const components = {
 	CodeBlock,
 	LinkCard,
 	TreeView,
+	BlockQuote,
+	ShowcaseGrid,
 }
 
 interface MdxProps {

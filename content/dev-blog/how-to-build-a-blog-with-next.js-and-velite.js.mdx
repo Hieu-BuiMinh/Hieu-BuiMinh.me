@@ -1,5 +1,5 @@
 ---
-id: 'd297cc17-fbc7-4583-9bd0-4d27b83f0a06'
+id: 'b764fb28-cebb-42fd-9b4e-f056e55a6a3f'
 title: 'How to build a blog with Next.js and Velite.js'
 cover: '/assets/images/dev-blog/how-to-build-a-blog-with-next-js-and-velite-js/cover.png'
 date: '2024-11-18T00:00:00Z'
@@ -12,12 +12,18 @@ author:
         github: 'https://github.com/Hieu-BuiMinh',
     }
 published: true
-hashTags: { category: 'Blog', tags: ['Hello', 'Hi'] }
+hashTags: { category: 'blog', tags: ['dev', 'coding', 'blog', 'mdx'] }
 ---
 
 ## Preface
 
 Velite is a powerful configuration tool for building type-safe data layer for Next.js with Zod schema, allowing developers to manage their apps with streamlined settings. Here, we will explore how to set up Velite for a Next.js project and enhance the development process.
+
+The packages to be used:
+
+-   [next](https://nextjs.org/) Next.js framework
+-   [velite](https://velite.js.org/) Handling and loading mdx content
+-   [tailwindcss](https://tailwindcss.com/) A utility-first CSS framework packed with classes
 
 ## Why Use Velite in Next.js?
 
@@ -202,7 +208,7 @@ export const computedFields = <T extends { slug: string }>(data: T) => {
 	// blog/hello-world => ['blog', 'hello-world'] => ['hello-world] => '/hello-world'
 }
 
-const post = defineCollection({
+const posts = defineCollection({
 	name: 'Post', // name of colection
 	pattern: 'blog/**/*.mdx', // watch all mdx file in blog folder
 	schema: s
@@ -237,7 +243,7 @@ export default defineConfig({
 		name: '[name]-[hash:6].[ext]',
 		clean: true,
 	},
-	collections: { post },
+	collections: { posts },
 	mdx: {
 		rehypePlugins: [],
 		remarkPlugins: [],
@@ -470,7 +476,6 @@ Inside
 	alt="first-post-detail.png"
 />
 
-
 ---
 
 ## Conclusion
@@ -479,6 +484,6 @@ Velite makes your projects easier to maintain and expand, especially for growing
 
 By combining Next.js with Velite.js, you can efficiently build a fast, SEO-friendly blog with minimal configuration. This guide has covered the essential steps to get you started, from creating the Next.js project and installing Velite to defining blog content and rendering posts dynamically. The result is a streamlined, type-safe blog development experience that scales well for future projects.
 
-With Next.js and Velite.js, you gain full control over your content, ensuring a smooth development process and an optimized blog that ranks well on search engines. 
+With Next.js and Velite.js, you gain full control over your content, ensuring a smooth development process and an optimized blog that ranks well on search engines.
 
 Happy coding （づ￣3￣）づ╭❤️～

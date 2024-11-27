@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 
 import { devBlogPost } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
+import BlockQuote from '@/components/commons/mdx/custom-components/block-quote'
 import TableOfContent from '@/components/commons/table-of-content'
 
 interface PostPageProps {
@@ -24,16 +25,18 @@ export default async function BlogDetailPageView({ params }: PostPageProps) {
 	}
 
 	return (
-		<div className="relative flex justify-between gap-10">
-			<article className="prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]">
-				<MDXContent code={post.body} />
-			</article>
+		<>
+			<div className="relative flex justify-between gap-10">
+				<article className="prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]">
+					<MDXContent code={post.body} />
+				</article>
 
-			<aside className="hidden lg:block lg:w-[220px]">
-				<div className="sticky top-24">
-					<TableOfContent post={post} />
-				</div>
-			</aside>
-		</div>
+				<aside className="hidden lg:block lg:w-[220px]">
+					<div className="sticky top-24">
+						<TableOfContent post={post} />
+					</div>
+				</aside>
+			</div>
+		</>
 	)
 }

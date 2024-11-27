@@ -3,7 +3,7 @@ import Link from 'next/link'
 import pluralize from 'pluralize'
 
 import type { DevBlogPost } from '@/.velite'
-import { BlurImage } from '@/components/commons/image/blur-image'
+import BlurImage from '@/components/commons/image/blur-image'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { formatDate } from '@/lib/utils'
 
@@ -14,7 +14,7 @@ type PostCardsProps = {
 
 const PostCards = ({ posts, root }: PostCardsProps) => {
 	return (
-		<div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
+		<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
 			{posts.map((post) => (
 				<PostCard key={post.slug} post={post} root={root} />
 			))}
@@ -40,7 +40,7 @@ const PostCard = ({ post, root }: PostCardProps) => {
 		<Link
 			href={`/${root}/${slugAsParams}`}
 			// className="group rounded-md px-2 py-4 shadow-feature-card dark:shadow-feature-card-dark"
-			className="group rounded-md border p-2 dark:border-none"
+			className="group rounded-md border p-2 dark:border-none dark:p-0"
 		>
 			<BlurImage
 				src={post.cover || ''}

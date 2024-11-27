@@ -11,11 +11,12 @@ import Spinner from '@/components/commons/spinner'
 import { cn } from '@/lib/utils'
 
 type ImageProps = {
+	description?: string
 	imageClassName?: string
 	lazy?: boolean
 } & React.ComponentPropsWithoutRef<typeof Image>
 
-export const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
+const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 	const { theme } = useTheme()
 	const fallbackSrc =
 		theme === 'dark'
@@ -43,11 +44,6 @@ export const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) =
 				className
 			)}
 		>
-			{isLoading && (
-				<div className="absolute left-0 top-0 flex size-full items-center justify-center backdrop-blur-md">
-					<Spinner size={'lg'} />
-				</div>
-			)}
 			<Image
 				ref={ref}
 				className={cn(
@@ -71,8 +67,22 @@ export const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) =
 				}}
 				{...rest}
 			/>
+
+			{rest?.description && (
+				<div className="absolute left-0 top-0 line-clamp-1 flex size-[100px] flex-col items-start justify-end truncate bg-gradient-to-b from-transparent to-black p-3 font-semibold">
+					{rest?.description}
+				</div>
+			)}
+
+			{isLoading && (
+				<div className="absolute left-0 top-0 flex size-full items-center justify-center backdrop-blur-md">
+					<Spinner size={'lg'} />
+				</div>
+			)}
 		</div>
 	)
 })
 
 BlurImage.displayName = 'Image'
+
+export default BlurImage

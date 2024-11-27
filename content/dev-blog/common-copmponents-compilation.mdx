@@ -1,0 +1,279 @@
+---
+id: 'cc49bde0-b3fa-4207-8e55-931b929e7037'
+title: 'Common copmponents compilation'
+cover: '/assets/images/dev-blog/common-copmponents-compilation/cover.png'
+date: '2023-12-02T00:00:00Z'
+lastUpdated: '2024-11-27T00:00:00Z'
+description: 'My Favorite MDX Components and How They Look!'
+author:
+    {
+        avatar: '/assets/images/logo/logo-circle-dark.svg',
+        name: 'Hieu.BuiMinh',
+        github: 'https://github.com/Hieu-BuiMinh',
+    }
+
+published: true
+hashTags: { category: 'blog', tags: ['mdx', 'coding'] }
+---
+
+In this post, I'll share the MDX components I frequently use in my projects and how they render visually. From interactive buttons and code blocks to custom alert messages and image components, I'll walk you through the design and usage of each one.
+
+## Heading 2:
+
+### Heading 3...
+
+#### Heading 4...
+
+##### Heading 5...
+
+###### Heading 6...
+
+## Paragraphs:
+
+Lorem ipsum odor amet, consectetuer adipiscing elit.
+
+_Lorem ipsum odor amet, consectetuer adipiscing elit._
+
+**Lorem ipsum odor amet, consectetuer adipiscing elit.**
+
+**_Lorem ipsum odor amet, consectetuer adipiscing elit._**
+
+`Lorem ipsum odor amet, consectetuer adipiscing elit.`
+
+~Lorem ipsum odor amet, consectetuer adipiscing elit.~
+
+## Blockquotes:
+
+> Lorem ipsum odor amet, consectetuer adipiscing elit.
+> Lorem ipsum odor amet, consectetuer adipiscing elit.
+> Lorem ipsum odor amet, consectetuer adipiscing elit.
+
+<BlockQuote
+	data={{
+		author: {
+			name: 'Captain Jack Sparrow 🐦',
+			avatar: '/assets/images/quotes/movies/captain-jack-sparrow.png',
+			url: '',
+		},
+		quote: 'The problem is not the problem. The problem is your attitude about the problem',
+	}}
+/>
+
+## Bullet list:
+
+1. First item
+2. Second item
+3. Third item
+    1. Indented item
+    2. Indented item
+4. Fourth item
+
+-   First item
+-   Second item
+-   Third item
+    -   Indented item
+    -   Indented item
+-   Fourth item
+
+## Code block:
+
+<CodeBlock fileName="component.tsx" >
+
+```tsx showLineNumbers {2,4,6} /MDXContent/ /post.body/ /TableOfContent/
+export default async function BlogDetailPageView({ params }: PostPageProps) {
+	const post = await getPostFromParams(params)
+
+	if (!post || !post.published) {
+		notFound()
+	}
+
+	return (
+		<div className="relative flex justify-between gap-10">
+			<article className="prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]">
+				<MDXContent code={post.body} />
+			</article>
+
+			<aside className="hidden lg:block lg:w-[220px]">
+				<div className="sticky top-24">
+					<TableOfContent post={post} />
+				</div>
+			</aside>
+		</div>
+	)
+}
+```
+
+</CodeBlock>
+
+## Formatting Links:
+
+I love supporting the **[EFF](https://eff.org)**.
+
+This is the _[Markdown Guide](https://www.markdownguide.org)_.
+
+See the section on [`code`](#code).
+
+<LinkCard href="https://nextjs.org/docs" hostname="nextjs.org" title="Next js" />
+
+## Images:
+
+<Image src="/assets/images/dev-blog/common-copmponents-compilation/cover.png" alt="image-alt" />
+
+## Tree view:
+
+<TreeView
+	className="p-2 border rounded"
+	data={[
+		{
+			id: '1',
+			name: 'app',
+			children: [
+				{
+					id: '1.1',
+					name: 'blog',
+					children: [
+						{
+							id: '1.1.1',
+							name: '[...slug]',
+							children: [{ id: '1.1.1.1', name: 'page.tsx', active: true }],
+						},
+						{ id: '1.1.2', name: 'page.tsx', active: true },
+						{ id: '1.1.3', name: 'layout.tsx' },
+					],
+				},
+			],
+		},
+		{
+			id: '2',
+			name: 'components',
+			children: [
+				{
+					id: '2.1',
+					name: 'heading.tsx',
+					active: true,
+				},
+				{
+					id: '2.2',
+					name: 'mdx.tsx',
+					active: true,
+				},
+			],
+		},
+		{
+			id: '3',
+			name: 'content',
+			children: [
+				{
+					id: '3.1',
+					name: 'blog',
+					children: [{ id: '3.1.1', name: 'hello-world.mdx', active: true }],
+				},
+			],
+		},
+		{
+			id: '4',
+			name: '.velite',
+			children: [
+				{
+					id: '4.1',
+					name: '...velite auto genarating json files',
+				},
+				{ id: '4.2', name: 'blog.json', active: true },
+			],
+		},
+		{ id: '5', name: 'package.json' },
+		{ id: '6', name: 'next.config.mjs', active: true },
+		{ id: '7', name: 'velite.config.ts', active: true },
+	]}
+	expandAll={true}
+/>
+
+## Image list:
+
+<ShowcaseGrid
+	data={[
+		{
+			content: (
+				<Image
+					src="/assets/images/dev-blog/how-to-build-a-blog-with-next-js-and-velite-js/cover.png"
+					className="size-full rounded-sm"
+					width={1200}
+					height={1200}
+					description="Title"
+				/>
+			),
+			colSpan: 2,
+			description: 'Title',
+		},
+		{
+			content: (
+				<Image
+					src="/assets/images/dev-blog/how-to-build-a-blog-with-next-js-and-velite-js/cover.png"
+					className="size-full rounded-sm"
+					width={1200}
+					height={1200}
+				/>
+			),
+		},
+		{
+			content: (
+				<Image
+					src="/assets/images/dev-blog/how-to-build-a-blog-with-next-js-and-velite-js/cover.png"
+					className="size-full rounded-sm"
+					width={1200}
+					height={1200}
+				/>
+			),
+			rowSpan: 2,
+		},
+		{
+			content: (
+				<Image
+					src="/assets/images/dev-blog/how-to-build-a-blog-with-next-js-and-velite-js/cover.png"
+					className="size-full rounded-sm"
+					width={1500}
+					height={1500}
+				/>
+			),
+		},
+		{
+			content: (
+				<Image
+					src="/assets/images/dev-blog/how-to-build-a-blog-with-next-js-and-velite-js/cover.png"
+					className="size-full rounded-sm"
+					width={1200}
+					height={1200}
+				/>
+			),
+			colSpan: 2,
+		},
+		{
+			content: (
+				<Image
+					src="/assets/images/dev-blog/how-to-build-a-blog-with-next-js-and-velite-js/cover.png"
+					className="size-full rounded-sm"
+					width={1200}
+					height={1200}
+				/>
+			),
+			colSpan: 2,
+		},
+		{
+			content: (
+				<Image
+					src="/assets/images/dev-blog/how-to-build-a-blog-with-next-js-and-velite-js/cover.png"
+					className="size-full rounded-sm"
+					width={1200}
+					height={1200}
+				/>
+			),
+			colSpan: 2,
+		},
+	]}
+/>
+
+## Task list:
+
+-   [x] Write the press release
+-   [ ] Update the website
+-   [ ] Contact the media

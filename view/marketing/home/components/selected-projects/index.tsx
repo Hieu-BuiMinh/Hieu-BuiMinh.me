@@ -2,7 +2,7 @@ import { ArrowUpRightIcon, LightbulbIcon } from 'lucide-react'
 import Link from 'next/link'
 
 import type { ProjectPost } from '@/.velite'
-import { BlurImage } from '@/components/commons/image/blur-image'
+import BlurImage from '@/components/commons/image/blur-image'
 import { buttonVariants } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 

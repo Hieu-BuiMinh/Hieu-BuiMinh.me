@@ -3,7 +3,7 @@
 import React from 'react'
 
 import DownLoadResumeButton from '@/components/commons/buttons/resume-button'
-import { BlurImage } from '@/components/commons/image/blur-image'
+import BlurImage from '@/components/commons/image/blur-image'
 import { BadgeAnimated } from '@/view/marketing/home/components/badge-animated'
 
 function HeroSection() {
