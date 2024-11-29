@@ -4,30 +4,29 @@ import { cn } from '@/lib/utils'
 
 interface IShowcaseGridProps {
 	data?: {
-		description: React.ReactNode | string
 		content: React.ReactNode | string
 		colSpan?: number
 		rowSpan?: number
+		className?: string
 	}[]
 }
 
 function ShowcaseGrid({ data }: IShowcaseGridProps) {
-	const boxStyle =
-		'transition-transform bg-muted border-2 rounded-md p-1 flex flex-col items-center justify-center md:hover:scale-105'
-
 	return (
-		<div className="not-prose my-10 grid auto-rows-[250px] gap-4 md:auto-rows-[200px] lg:grid-cols-4">
-			{data?.map((item, i) => (
-				<div
-					key={i}
-					className={cn(boxStyle, {
-						[`md:col-span-${item.colSpan || 1}`]: item.colSpan,
-						[`md:row-span-${item.rowSpan || 1}`]: item.rowSpan,
-					})}
-				>
-					<div className="size-full overflow-hidden rounded-md">{item.content}</div>
-				</div>
-			))}
+		<div className="not-prose my-10 grid auto-rows-[250px] grid-cols-4 gap-4 md:auto-rows-[200px]">
+			{data?.map((item, i) => {
+				return (
+					<div
+						key={i}
+						className={cn(
+							'col-span-4 row-span-1 flex flex-col items-center justify-center rounded-md border-2 bg-muted p-1 transition-transform md:col-span-2 md:hover:scale-105 ',
+							item.className
+						)}
+					>
+						{item.content}
+					</div>
+				)
+			})}
 		</div>
 	)
 }

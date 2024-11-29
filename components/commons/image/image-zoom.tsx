@@ -1,3 +1,4 @@
+'use client'
 import type Image from 'next/image'
 import React, { forwardRef } from 'react'
 

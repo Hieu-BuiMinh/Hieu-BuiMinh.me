@@ -48,7 +48,7 @@ const components = {
 
 		return (
 			<>
-				<ImageZoom className="rounded-lg border" alt={alt || ''} width={1920} height={1024} {...rest} />
+				<ImageZoom className="rounded-lg border" alt={alt || ''} width={1200} height={630} {...rest} />
 				<figcaption className="mt-4 text-center">{alt}</figcaption>
 			</>
 		)

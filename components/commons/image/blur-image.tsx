@@ -43,6 +43,7 @@ const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 				isLoading && 'animate-pulse',
 				className
 			)}
+			data-description={props.description}
 		>
 			<Image
 				ref={ref}
@@ -69,8 +70,8 @@ const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 			/>
 
 			{rest?.description && (
-				<div className="absolute left-0 top-0 line-clamp-1 flex size-full flex-col items-start justify-end truncate bg-gradient-to-b from-transparent to-black p-3 font-semibold">
-					{rest?.description}
+				<div className="pointer-events-none absolute left-0 top-0 flex size-full flex-col items-start justify-end bg-gradient-to-b from-transparent to-black p-3 text-xs font-semibold italic">
+					<p className="line-clamp-2">{rest?.description}</p>
 				</div>
 			)}
 
