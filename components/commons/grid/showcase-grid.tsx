@@ -19,11 +19,11 @@ function ShowcaseGrid({ data }: IShowcaseGridProps) {
 					<div
 						key={i}
 						className={cn(
-							'col-span-4 row-span-1 flex flex-col items-center justify-center rounded-md border-2 bg-muted p-1 transition-transform md:col-span-2 md:hover:scale-105 ',
+							'col-span-4 row-span-1 flex flex-col items-center justify-center rounded-md border-2 bg-muted p-1 transition-transform md:col-span-2 md:hover:scale-105',
 							item.className
 						)}
 					>
-						{item.content}
+						<div className="size-full">{item.content}</div>
 					</div>
 				)
 			})}
