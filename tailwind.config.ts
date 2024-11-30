@@ -128,8 +128,8 @@ const config: Config = {
 				flip: 'flip 6s infinite steps(2, end)',
 				rotate: 'rotate 3s linear infinite both',
 				// Marquee
-				'marquee-left': 'marquee-left var(--duration, 30s) linear infinite',
-				'marquee-up': 'marquee-up var(--duration, 30s) linear infinite',
+				'marquee-left': 'marquee-left var(--duration, 15s) linear infinite',
+				'marquee-up': 'marquee-up var(--duration, 15s) linear infinite',
 				// Bounce
 				bounce: 'bounce 1s infinite',
 			},

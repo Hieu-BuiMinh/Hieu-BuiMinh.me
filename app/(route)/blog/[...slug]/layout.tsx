@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import React from 'react'
 
 import { devBlogPost } from '@/.velite'
-import { siteConfig } from '@/config/site'
+import { SITE_CONFIG } from '@/config/site'
 import { PostDetailHeader } from '@/view/components/blog-content/post-detail-header'
 
 interface PostPageProps {
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 	return {
 		title: post.title,
 		description: post.description,
-		authors: { name: siteConfig.author.name },
+		authors: { name: SITE_CONFIG.author.name },
 		openGraph: {
 			title: post.title,
 			description: post.description,

@@ -1,6 +1,9 @@
+import type { SVGIconComponent } from '@/components/commons/icons/svg-icons'
+import { SVGIcons } from '@/components/commons/icons/svg-icons'
+
 export const isProduction = process.env.NODE_ENV === 'production'
 
-export const siteConfig = {
+export const SITE_CONFIG = {
 	name: 'Hieu.BuiMinh',
 	shortName: 'Hieu.BM',
 	url: isProduction ? 'https://hieu-buiminh.vercel.app/' : 'http://localhost:3000',
@@ -22,4 +25,21 @@ export const siteConfig = {
 	},
 }
 
-export type SiteConfig = typeof siteConfig
+export type SITE_CONFIG = typeof SITE_CONFIG
+
+export const SOCIAL_LINKS: {
+	label: string
+	icon: SVGIconComponent
+	href: string
+}[] = [
+	{
+		label: 'GitHub',
+		icon: SVGIcons.gitHub,
+		href: SITE_CONFIG.links.github,
+	},
+	{
+		label: 'Twitter',
+		icon: SVGIcons.twitter,
+		href: SITE_CONFIG.links.twitter,
+	},
+]

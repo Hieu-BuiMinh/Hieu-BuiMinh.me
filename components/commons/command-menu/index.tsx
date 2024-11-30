@@ -24,7 +24,7 @@ import {
 	CommandSeparator,
 } from '@/components/ui/command'
 import { DialogTitle } from '@/components/ui/dialog'
-import { siteConfig } from '@/config/site'
+import { SITE_CONFIG } from '@/config/site'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 
 function CommandMenu() {
@@ -76,35 +76,35 @@ function CommandMenu() {
 					title: 'GitHub',
 					icon: <Github className="mr-3 size-4" />,
 					onSelect: () => {
-						openLink(siteConfig.links.github)
+						openLink(SITE_CONFIG.links.github)
 					},
 				},
 				{
 					title: 'Facebook',
 					icon: <Facebook className="mr-3 size-4" />,
 					onSelect: () => {
-						openLink(siteConfig.links.facebook)
+						openLink(SITE_CONFIG.links.facebook)
 					},
 				},
 				{
 					title: 'Instagram',
 					icon: <Instagram className="mr-3 size-4" />,
 					onSelect: () => {
-						openLink(siteConfig.links.instagram)
+						openLink(SITE_CONFIG.links.instagram)
 					},
 				},
 				{
 					title: 'X',
 					icon: <Twitter className="mr-3 size-4" />,
 					onSelect: () => {
-						openLink(siteConfig.links.twitter)
+						openLink(SITE_CONFIG.links.twitter)
 					},
 				},
 				{
 					title: 'YouTube',
 					icon: <Youtube className="mr-3 size-4" />,
 					onSelect: () => {
-						openLink(siteConfig.links.youtube)
+						openLink(SITE_CONFIG.links.youtube)
 					},
 				},
 			],

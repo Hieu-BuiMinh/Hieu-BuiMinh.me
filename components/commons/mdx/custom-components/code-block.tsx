@@ -42,7 +42,6 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref)
 			{fileName ? (
 				<div className="flex flex-row items-center gap-2 border-b bg-muted/50 px-4 py-1.5">
 					<div className="text-muted-foreground">
-						{/* <Icon className="size-3.5" /> */}
 						<LangIcons fileName={fileName} />
 					</div>
 					<figcaption className="flex-1 truncate text-muted-foreground">{fileName}</figcaption>

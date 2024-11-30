@@ -16,7 +16,7 @@ import {
 	NavigationMenuTrigger,
 } from '@/components/ui/navigation-menu'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
-import { siteConfig } from '@/config/site'
+import { SITE_CONFIG } from '@/config/site'
 import { cn } from '@/lib/utils'
 
 const blogItems: { title: string; href: string; description: string }[] = [
@@ -85,7 +85,7 @@ export function MainNav() {
 							width={35}
 							height={35}
 						/>
-						<span className="font-bold">{siteConfig.name}</span>
+						<span className="font-bold">{SITE_CONFIG.name}</span>
 					</Link>
 				</NavigationMenuItem>
 				<NavigationMenuItem className="hidden sm:inline-flex">

@@ -5,7 +5,7 @@ import localFont from 'next/font/local'
 
 import AppProvider from '@/components/commons/providers/app-provider'
 import SideHeader from '@/components/commons/side-header'
-import { siteConfig } from '@/config/site'
+import { SITE_CONFIG } from '@/config/site'
 
 const geistSans = localFont({
 	src: './fonts/GeistVF.woff',
@@ -19,12 +19,12 @@ const geistMono = localFont({
 })
 
 export const metadata: Metadata = {
-	metadataBase: new URL(siteConfig.url),
+	metadataBase: new URL(SITE_CONFIG.url),
 	title: {
-		default: siteConfig.shortName,
-		template: `%s | ${siteConfig.shortName}`,
+		default: SITE_CONFIG.shortName,
+		template: `%s | ${SITE_CONFIG.shortName}`,
 	},
-	description: siteConfig.description,
+	description: SITE_CONFIG.description,
 	manifest: '/favicon/site.webmanifest',
 	robots: {
 		index: true,
@@ -39,8 +39,8 @@ export const metadata: Metadata = {
 	},
 	twitter: {
 		card: 'summary_large_image',
-		title: siteConfig.shortName,
-		description: siteConfig.description,
+		title: SITE_CONFIG.shortName,
+		description: SITE_CONFIG.description,
 		site: '@Walter_BM_777',
 		siteId: '@Walter_BM_777',
 		creator: '@Walter_BM_777',
@@ -50,25 +50,25 @@ export const metadata: Metadata = {
 				url: '/assets/images/og.png',
 				width: 1200,
 				height: 630,
-				alt: siteConfig.description,
+				alt: SITE_CONFIG.description,
 			},
 		],
 	},
-	keywords: siteConfig.siteKeywords,
+	keywords: SITE_CONFIG.siteKeywords,
 	creator: 'Hieu.BuiMinh',
 	openGraph: {
-		url: siteConfig.url,
+		url: SITE_CONFIG.url,
 		type: 'website',
-		title: siteConfig.shortName,
-		siteName: siteConfig.name,
-		description: siteConfig.description,
+		title: SITE_CONFIG.shortName,
+		siteName: SITE_CONFIG.name,
+		description: SITE_CONFIG.description,
 		locale: 'en-US',
 		images: [
 			{
 				url: '/images/og.png',
 				width: 1200,
 				height: 630,
-				alt: siteConfig.description,
+				alt: SITE_CONFIG.description,
 				type: 'image/png',
 			},
 		],

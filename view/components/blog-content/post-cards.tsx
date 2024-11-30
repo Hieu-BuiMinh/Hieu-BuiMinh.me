@@ -50,11 +50,9 @@ const PostCard = ({ post, root }: PostCardProps) => {
 				imageClassName="transition-transform group-hover:scale-105 object-cover"
 				alt={title}
 			/>
-			<div className="flex items-center justify-between gap-2 px-2 pt-4 text-xs text-zinc-500">
-				{formattedDate}
-			</div>
+			<div className="flex items-center justify-between gap-2 pt-4 text-xs text-zinc-500">{formattedDate}</div>
 
-			<div className="flex flex-col px-2 py-4">
+			<div className="flex flex-col py-4">
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger>
@@ -77,7 +75,7 @@ const PostCard = ({ post, root }: PostCardProps) => {
 				</TooltipProvider>
 			</div>
 
-			<div className="flex items-center justify-between gap-2 px-2 text-xs text-zinc-500">
+			<div className="flex items-center justify-between gap-2 text-xs text-zinc-500">
 				<div className="flex gap-2">
 					<div>{pluralize('like', likesQuery, true)}</div>
 					<div>&middot;</div>

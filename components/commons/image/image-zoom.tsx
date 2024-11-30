@@ -20,7 +20,7 @@ const ImageZoom = forwardRef<HTMLImageElement, IImageZoomProps>((props, ref) => 
 			<DialogTrigger asChild role="button">
 				<BlurImage ref={ref} className="h-[495px]" width={1200} height={630} {...rest} />
 			</DialogTrigger>
-			<DialogContent className="overflow-hidden sm:max-w-screen-sm md:max-w-screen-md md:p-0">
+			<DialogContent className="max-w-screen-sm overflow-hidden md:max-w-screen-md md:p-0 lg:max-w-screen-xl">
 				<BlurImage className="border" {...rest} description="" />
 			</DialogContent>
 		</Dialog>
