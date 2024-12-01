@@ -4,7 +4,7 @@ import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 
 import AppProvider from '@/components/commons/providers/app-provider'
-import SideHeader from '@/components/commons/side-header'
+import SiteHeader from '@/components/commons/site-header'
 import { SITE_CONFIG } from '@/config/site'
 
 const geistSans = localFont({
@@ -138,7 +138,7 @@ export default function RootLayout({
 		<html className="scroll-smooth" suppressHydrationWarning lang="en">
 			<body suppressHydrationWarning className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
 				<AppProvider>
-					<SideHeader />
+					<SiteHeader />
 					<main role="main">{children}</main>
 				</AppProvider>
 			</body>

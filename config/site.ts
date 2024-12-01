@@ -21,6 +21,7 @@ export const SITE_CONFIG = {
 		instagram: 'https://x.com/Walter_BM_777',
 		facebook: 'https://www.facebook.com/hieu.buiminh.37',
 		github: 'https://github.com/Hieu-BuiMinh',
+		linkedin: 'https://www.linkedin.com/in/minh-hieu-bui-78a315208',
 		personalSite: '/',
 	},
 }
@@ -39,7 +40,7 @@ export const SOCIAL_LINKS: {
 	},
 	{
 		label: 'Twitter',
-		icon: SVGIcons.twitter,
+		icon: SVGIcons.X,
 		href: SITE_CONFIG.links.twitter,
 	},
 ]

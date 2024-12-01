@@ -9,8 +9,8 @@ import { technologies } from '@/view/marketing/home/components/about-me/data/tec
 
 function StacksSection() {
 	return (
-		<div className="group/stacks-section flex w-full flex-col p-4 lg:p-6">
-			<span className="mb-2 flex items-center text-xs text-foreground/50 transition-all group-hover/stacks-section:text-foreground md:text-base">
+		<div className="flex w-full flex-col p-4 lg:p-6">
+			<span className="mb-2 flex items-center gap-2 text-xs text-foreground md:text-base">
 				<ZapIcon size={20} />
 				<span>Stacks</span>
 			</span>

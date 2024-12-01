@@ -1,18 +1,9 @@
 'use client'
 
-import {
-	CodeIcon,
-	CommandIcon,
-	Facebook,
-	Github,
-	Instagram,
-	LinkIcon,
-	LogOutIcon,
-	Twitter,
-	Youtube,
-} from 'lucide-react'
+import { CodeIcon, CommandIcon, LinkIcon, LogOutIcon } from 'lucide-react'
 import { Fragment, useCallback, useEffect, useState } from 'react'
 
+import { SVGIcons } from '@/components/commons/icons/svg-icons'
 import { Button } from '@/components/ui/button'
 import {
 	CommandDialog,
@@ -74,35 +65,35 @@ function CommandMenu() {
 			actions: [
 				{
 					title: 'GitHub',
-					icon: <Github className="mr-3 size-4" />,
+					icon: <SVGIcons.gitHub className="mr-3 size-4" />,
 					onSelect: () => {
 						openLink(SITE_CONFIG.links.github)
 					},
 				},
 				{
 					title: 'Facebook',
-					icon: <Facebook className="mr-3 size-4" />,
+					icon: <SVGIcons.facebook className="mr-3 size-4" />,
 					onSelect: () => {
 						openLink(SITE_CONFIG.links.facebook)
 					},
 				},
 				{
 					title: 'Instagram',
-					icon: <Instagram className="mr-3 size-4" />,
+					icon: <SVGIcons.instagram className="mr-3 size-4" />,
 					onSelect: () => {
 						openLink(SITE_CONFIG.links.instagram)
 					},
 				},
 				{
-					title: 'X',
-					icon: <Twitter className="mr-3 size-4" />,
+					title: 'x.com',
+					icon: <SVGIcons.X className="mr-3 size-4" />,
 					onSelect: () => {
 						openLink(SITE_CONFIG.links.twitter)
 					},
 				},
 				{
 					title: 'YouTube',
-					icon: <Youtube className="mr-3 size-4" />,
+					icon: <SVGIcons.youtube className="mr-3 size-4" />,
 					onSelect: () => {
 						openLink(SITE_CONFIG.links.youtube)
 					},
