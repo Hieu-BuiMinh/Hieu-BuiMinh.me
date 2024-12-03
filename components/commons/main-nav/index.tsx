@@ -54,12 +54,12 @@ const aboutItems: { title: string; href: string; description: string }[] = [
 	},
 	{
 		title: 'Some topics I like ❤️',
-		href: '/about/primitives/scroll-area',
+		href: '/about/interests',
 		description: `A place to explore the things I'm passionate about and love sharing.`,
 	},
 	{
 		title: 'Insanity 🤡',
-		href: '/about/primitives/tabs',
+		href: '/about/insanity',
 		description: 'How far down the rabbit hole do you wanna go!?',
 	},
 ]

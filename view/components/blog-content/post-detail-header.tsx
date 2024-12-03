@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-import { devBlogPost } from '@/.velite'
+import { devBlogPosts, interests } from '@/.velite'
 import ImageZoom from '@/components/commons/image/image-zoom'
 import { formatDate } from '@/lib/utils'
 
@@ -13,7 +13,7 @@ interface IPostDetailHeaderProps {
 async function getPostFromParams(params: IPostDetailHeaderProps['params']) {
 	const resolvedParams = await params
 	const slug = resolvedParams.slug.join('/')
-	const post = devBlogPost.find((post) => post.slugAsParams === slug)
+	const post = [...devBlogPosts, ...interests].find((post) => post.slugAsParams === slug)
 
 	return post
 }

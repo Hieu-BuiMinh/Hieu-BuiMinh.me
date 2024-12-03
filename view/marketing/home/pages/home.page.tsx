@@ -1,12 +1,12 @@
 import { projects } from '@/.velite'
-import { devBlogPost } from '@/.velite'
+import { devBlogPosts } from '@/.velite'
 import AboutMe from '@/view/marketing/home/components/about-me'
 import HeroSection from '@/view/marketing/home/components/hero-section'
 import LatestArticles from '@/view/marketing/home/components/latest-articles'
 import SelectedProjects from '@/view/marketing/home/components/selected-projects'
 
 function HomePageView() {
-	const latestPosts = devBlogPost
+	const latestPosts = devBlogPosts
 		.sort((a, b) => {
 			return new Date(b.date).getTime() - new Date(a.date).getTime()
 		})

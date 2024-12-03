@@ -1,28 +1,28 @@
 import { notFound } from 'next/navigation'
+import React from 'react'
 
-import { devBlogPosts } from '@/.velite'
+import { interests } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
 
-interface PostPageProps {
+interface IInterestsDetailPageProps {
 	params: Promise<{ slug: string[] }>
 }
 
-async function getPostFromParams(params: PostPageProps['params']) {
+async function getPostFromParams(params: IInterestsDetailPageProps['params']) {
 	const resolvedParams = await params
 	const slug = resolvedParams.slug.join('/')
-	const post = devBlogPosts.find((post) => post.slugAsParams === slug)
+	const post = interests.find((post) => post.slugAsParams === slug)
 
 	return post
 }
 
-export default async function BlogDetailPageView({ params }: PostPageProps) {
+export default async function InterestsDetailPage({ params }: IInterestsDetailPageProps) {
 	const post = await getPostFromParams(params)
 
 	if (!post || !post.published) {
 		notFound()
 	}
-
 	return (
 		<>
 			<div className="relative flex justify-between gap-10">
