@@ -1,8 +1,8 @@
-import type { DevBlogPost } from '@/.velite'
+import type { DevBlogPost, InterestPost } from '@/.velite'
 import { PostCard } from '@/view/components/blog-content/post-card'
 
 type PostCardsProps = {
-	posts: DevBlogPost[]
+	posts: DevBlogPost[] | InterestPost[]
 	root: string
 }
 
