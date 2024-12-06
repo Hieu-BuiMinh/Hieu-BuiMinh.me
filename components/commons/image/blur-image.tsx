@@ -14,6 +14,7 @@ type ImageProps = {
 	description?: string
 	imageClassName?: string
 	lazy?: boolean
+	pulse?: boolean
 } & React.ComponentPropsWithoutRef<typeof Image>
 
 const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
@@ -22,7 +23,7 @@ const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 		theme === 'dark'
 			? '/assets/images/fallback/img-fallback-light.jpg'
 			: '/assets/images/fallback/img-fallback-dark.jpg'
-	const { alt, src, className, imageClassName, lazy = true, ...rest } = props
+	const { alt, src, className, imageClassName, lazy = true, pulse = true, ...rest } = props
 	const [isLoading, setIsLoading] = useState(true)
 	const [currentSrc, setCurrentSrc] = useState(src || fallbackSrc)
 
@@ -40,7 +41,7 @@ const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 		<div
 			className={cn(
 				'relative flex items-center justify-center overflow-hidden',
-				isLoading && 'animate-pulse',
+				isLoading && pulse && 'animate-pulse',
 				className
 			)}
 			data-description={props.description}
@@ -50,6 +51,7 @@ const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 				className={cn(
 					'size-full object-cover',
 					isLoading && 'scale-[1.02] object-cover blur-xl grayscale',
+					!pulse && ' blur-0 ',
 					imageClassName
 				)}
 				style={{
@@ -75,8 +77,10 @@ const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 				</div>
 			)}
 
-			{isLoading && (
-				<div className="absolute left-0 top-0 flex size-full items-center justify-center backdrop-blur-md">
+			{isLoading && pulse && (
+				<div
+					className={cn('absolute left-0 top-0 flex size-full items-center justify-center backdrop-blur-md')}
+				>
 					<Spinner size={'lg'} />
 				</div>
 			)}

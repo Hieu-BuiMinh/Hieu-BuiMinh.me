@@ -5,7 +5,7 @@ import InterestsPageView from '@/view/route/about/pages/interests/pages/interest
 
 export const metadata: Metadata = {
 	title: 'My interests',
-	description: `A place to explore the things I'm passionate about and love sharing.`,
+	description: `A place to explore the things I'm passionate about and love sharing `,
 }
 
 function InterestsPage() {

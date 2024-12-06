@@ -1,4 +1,5 @@
 import CategoryCard from '@/view/components/blog-content/category-card'
+import CategoryCardV2 from '@/view/components/blog-content/category-card-v2'
 
 export type Category = {
 	title: string
@@ -14,10 +15,11 @@ interface CategoryCardsProps {
 
 const CategoryCards = ({ categories }: CategoryCardsProps) => {
 	return (
-		<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-2">
 			{categories.map((category) => (
 				<CategoryCard key={category.title} data={category} />
 			))}
+			<CategoryCardV2 />
 		</div>
 	)
 }
