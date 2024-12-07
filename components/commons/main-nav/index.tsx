@@ -54,7 +54,7 @@ const aboutItems: { title: string; href: string; description: string }[] = [
 	},
 	{
 		title: 'Some topics I like ❤️',
-		href: '/about/interests',
+		href: '/interests',
 		description: `A place to explore the things I'm passionate about and love sharing.`,
 	},
 	{
@@ -93,7 +93,11 @@ export function MainNav() {
 							<li className="row-span-3">
 								<NavigationMenuLink asChild>
 									<Link
-										className="flex size-full select-none flex-col justify-end rounded-md bg-pinned p-6 no-underline outline-none focus:shadow-md dark:bg-pinned-dark"
+										className={cn(
+											'flex size-full select-none flex-col justify-end rounded-md bg-[length:400%_100%] p-6 no-underline outline-none focus:shadow-md',
+											'bg-gradient-to-r from-[#0FBDBD] via-[#26D97F] to-[#5af6a8]',
+											'dark:bg-gradient-to-tl dark:from-[#fb7185] dark:via-[#a21caf] dark:to-[#6366f1]'
+										)}
 										href="/"
 									>
 										<Image

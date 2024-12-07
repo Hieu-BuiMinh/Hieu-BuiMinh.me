@@ -1,3 +1,5 @@
+import '../style/index.css'
+
 import { projects } from '@/.velite'
 import { devBlogPosts } from '@/.velite'
 import AboutMe from '@/view/marketing/home/components/about-me'

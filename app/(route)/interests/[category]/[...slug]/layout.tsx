@@ -2,26 +2,27 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
+import type { InterestPost } from '@/.velite'
 import { interests } from '@/.velite'
 import { SITE_CONFIG } from '@/config/site'
 import { PostDetailHeader } from '@/view/components/blog-content/post-detail-header'
 
 interface PostPageProps {
-	params: Promise<{ slug: string[] }>
+	params: Promise<{ category: string; slug: string[] }>
 }
 
 async function getPostFromParams(params: PostPageProps['params']) {
 	const resolvedParams = await params
-	const slug = resolvedParams.slug.join('/')
+	const slug = [resolvedParams.category, ...resolvedParams.slug].join('/')
 	const post = interests.find((post) => post.slugAsParams === slug)
 
-	return post
+	return post as InterestPost
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
 	const post = await getPostFromParams(params)
 
-	if (!post) {
+	if (!post || !post.published) {
 		notFound()
 	}
 
@@ -52,16 +53,17 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 	}
 }
 
-function InterestDetailLayout({
+async function InterestDetailLayout({
 	children,
 	params,
 }: {
 	children: React.ReactNode
-	params: Promise<{ slug: string[] }>
+	params: Promise<{ category: string; slug: string[] }>
 }) {
+	const post = await getPostFromParams(params)
 	return (
 		<>
-			<PostDetailHeader params={params} />
+			<PostDetailHeader post={post} />
 			{children}
 		</>
 	)

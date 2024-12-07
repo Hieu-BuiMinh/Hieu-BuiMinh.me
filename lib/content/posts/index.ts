@@ -12,6 +12,7 @@ export function sortPosts(posts: Array<DevBlogPost>) {
 
 export function getAllTags(posts: Array<DevBlogPost>) {
 	const tags: Record<string, number> = {}
+
 	posts.forEach((post) => {
 		if (post.published) {
 			post.hashTags?.tags?.forEach((tag: string) => {

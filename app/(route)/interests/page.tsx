@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
-import React from 'react'
 
-import InterestsPageView from '@/view/route/about/pages/interests/pages/interests.page'
+import InterestsPageView from '@/view/route/interests/pages/interests.page'
 
 export const metadata: Metadata = {
 	title: 'My interests',

@@ -107,18 +107,23 @@ const config: Config = {
 				},
 				// Bounce
 				bounce: {
-					0: {
+					'0%': {
 						transform: 'translateY(0)',
 						animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
 					},
-					50: {
+					'50%': {
 						transform: 'translateY(-20%)',
 						animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)',
 					},
-					100: {
+					'100%': {
 						transform: 'translateY(0)',
 						animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)',
 					},
+				},
+				// Linear gradient running
+				'gradient-running': {
+					'50%': { backgroundPosition: '100% 50%' },
+					'100%': { backgroundPosition: '0% 50%' },
 				},
 			},
 			animation: {
@@ -132,6 +137,8 @@ const config: Config = {
 				'marquee-up': 'marquee-up var(--duration, 15s) linear infinite',
 				// Bounce
 				bounce: 'bounce 1s infinite',
+				// Linear gradient running
+				'gradient-running': 'gradient-running var(--duration, 8s) ease infinite',
 			},
 			boxShadow: {
 				'feature-card': '0 -1px 3px 0 rgb(0 0 0 / 0.05)',

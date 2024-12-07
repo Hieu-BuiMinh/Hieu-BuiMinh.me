@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
+import type { DevBlogPost } from '@/.velite'
 import { devBlogPosts } from '@/.velite'
 import { SITE_CONFIG } from '@/config/site'
 import { PostDetailHeader } from '@/view/components/blog-content/post-detail-header'
@@ -15,7 +16,7 @@ async function getPostFromParams(params: PostPageProps['params']) {
 	const slug = resolvedParams.slug.join('/')
 	const post = devBlogPosts.find((post) => post.slugAsParams === slug)
 
-	return post
+	return post as DevBlogPost
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
@@ -52,10 +53,17 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 	}
 }
 
-function BlogDetailLayout({ children, params }: { children: React.ReactNode; params: Promise<{ slug: string[] }> }) {
+async function BlogDetailLayout({
+	children,
+	params,
+}: {
+	children: React.ReactNode
+	params: Promise<{ slug: string[] }>
+}) {
+	const post = await getPostFromParams(params)
 	return (
 		<>
-			<PostDetailHeader params={params} />
+			<PostDetailHeader post={post} />
 			{children}
 		</>
 	)

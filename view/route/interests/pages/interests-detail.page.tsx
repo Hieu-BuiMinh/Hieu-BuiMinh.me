@@ -6,12 +6,12 @@ import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
 
 interface IInterestsDetailPageProps {
-	params: Promise<{ slug: string[] }>
+	params: Promise<{ category: string; slug: string[] }>
 }
 
 async function getPostFromParams(params: IInterestsDetailPageProps['params']) {
 	const resolvedParams = await params
-	const slug = resolvedParams.slug.join('/')
+	const slug = [resolvedParams.category, ...resolvedParams.slug].join('/')
 	const post = interests.find((post) => post.slugAsParams === slug)
 
 	return post
@@ -23,6 +23,7 @@ export default async function InterestsDetailPage({ params }: IInterestsDetailPa
 	if (!post || !post.published) {
 		notFound()
 	}
+
 	return (
 		<>
 			<div className="relative flex justify-between gap-10">

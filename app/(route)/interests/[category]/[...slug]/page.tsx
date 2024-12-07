@@ -1,9 +1,9 @@
 import React from 'react'
 
-import InterestsDetailPage from '@/view/route/about/pages/interests/pages/interests-detail.page'
+import InterestsDetailPage from '@/view/route/interests/pages/interests-detail.page'
 
 interface IInterestsPageDetailProps {
-	params: Promise<{ slug: string[] }>
+	params: Promise<{ category: string; slug: string[] }>
 }
 
 function InterestsPageDetail({ params }: IInterestsPageDetailProps) {

@@ -5,6 +5,7 @@ import { useEffect } from 'react'
 const Hello = () => {
 	useEffect(() => {
 		console.log(`
+				You can call me:
 
 ██╗    ██╗ █████╗ ██╗  ████████╗███████╗██████╗ 
 ██║    ██║██╔══██╗██║  ╚══██╔══╝██╔════╝██╔══██╗
@@ -19,6 +20,8 @@ const Hello = () => {
 
 	email: minhhieu2122000@gmail.com
 	github: https://github.com/Hieu-BuiMinh
+
+
 `)
 	}, [])
 

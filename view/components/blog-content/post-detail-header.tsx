@@ -2,25 +2,15 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-import { devBlogPosts, interests } from '@/.velite'
+import type { DevBlogPost, InterestPost } from '@/.velite'
 import ImageZoom from '@/components/commons/image/image-zoom'
 import { formatDate } from '@/lib/utils'
 
 interface IPostDetailHeaderProps {
-	params: Promise<{ slug: string[] }>
+	post: DevBlogPost | InterestPost
 }
 
-async function getPostFromParams(params: IPostDetailHeaderProps['params']) {
-	const resolvedParams = await params
-	const slug = resolvedParams.slug.join('/')
-	const post = [...devBlogPosts, ...interests].find((post) => post.slugAsParams === slug)
-
-	return post
-}
-
-export async function PostDetailHeader({ params }: IPostDetailHeaderProps) {
-	const post = await getPostFromParams(params)
-
+export async function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 	if (!post || !post.published) {
 		notFound()
 	}
