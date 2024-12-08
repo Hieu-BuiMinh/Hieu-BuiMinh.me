@@ -30,7 +30,7 @@ function getPostIntroFromSlug(slug: string) {
 
 async function InterestsPageView() {
 	const allCategories = findUniqueCategories(interests).map((category) => ({
-		slug: `${category}/intro`,
+		slug: `${category}`,
 		href: `/interests/${category}`,
 	}))
 

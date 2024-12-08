@@ -4,6 +4,7 @@ import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 
 import AppProvider from '@/components/commons/providers/app-provider'
+import SiteFooter from '@/components/commons/site-footer'
 import SiteHeader from '@/components/commons/site-header'
 import { SITE_CONFIG } from '@/config/site'
 
@@ -140,6 +141,7 @@ export default function RootLayout({
 				<AppProvider>
 					<SiteHeader />
 					<main role="main">{children}</main>
+					<SiteFooter />
 				</AppProvider>
 			</body>
 		</html>

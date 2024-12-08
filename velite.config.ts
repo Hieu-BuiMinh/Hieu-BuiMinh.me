@@ -113,6 +113,43 @@ const interests = defineCollection({
 			metadata: s.metadata().optional(),
 			description: s.string().max(999).optional(),
 			published: s.boolean().default(true),
+			type: s.enum(['DOC', 'SINGLE_POST']),
+			hashTags: s
+				.object({
+					category: s.string(),
+					tags: s.array(s.string()),
+				})
+				.optional(),
+			body: s.mdx(),
+			author: s.object({
+				avatar: s.string(),
+				name: s.string(),
+				github: s.string(),
+			}),
+			toc: s.toc({ tight: true, ordered: true, maxDepth: 6 }),
+			//slugAsParams <=> needed transform
+		})
+		.transform(computedFields),
+})
+
+const docs = defineCollection({
+	name: 'DocPost',
+	pattern: 'docs/**/*.mdx',
+	schema: s
+		.object({
+			id: s.string(),
+			slug: s.path(),
+			title: s.string().max(999),
+			date: s.isodate(),
+			lastUpdated: s.isodate().optional(),
+			cover: s.string().optional(),
+			video: s.file().optional(),
+			metadata: s.metadata().optional(),
+			description: s.string().max(999).optional(),
+			published: s.boolean().default(true),
+			type: s.enum(['ROOT', 'CHILD']),
+			parent: s.string().optional(),
+			root: s.string().optional(),
 			hashTags: s
 				.object({
 					category: s.string(),
@@ -140,7 +177,7 @@ export default defineConfig({
 		name: '[name]-[hash:6].[ext]',
 		clean: true,
 	},
-	collections: { devBlogPosts, pages, projects, interests },
+	collections: { devBlogPosts, pages, projects, interests, docs },
 	mdx: {
 		rehypePlugins: [
 			rehypeSlug,

@@ -23,7 +23,7 @@ const routes = [
 
 function SiteFooter() {
 	return (
-		<div className="relative z-[2] m-auto flex max-w-screen-lg flex-col gap-8 rounded border border-b-0 p-3 md:py-6">
+		<div className="flex w-full flex-col gap-8 border-t p-3 md:py-6">
 			<BlurImage
 				src="/assets/images/logo/logo-dark.svg"
 				className="hidden w-[80px] dark:block"

@@ -1,9 +1,10 @@
 'use client'
 
+import { Text } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
 
-import type { DevBlogPost } from '@/.velite'
+import type { DevBlogPost, DocPost, InterestPost } from '@/.velite'
 
 type Header = {
 	title: string
@@ -11,7 +12,7 @@ type Header = {
 	items?: Header[]
 }
 
-function TableOfContent({ post }: { post: DevBlogPost }) {
+function TableOfContent({ post }: { post: DevBlogPost | DocPost | InterestPost }) {
 	const TOC = post.toc
 
 	const flatTocArray = useMemo(() => {
@@ -34,7 +35,10 @@ function TableOfContent({ post }: { post: DevBlogPost }) {
 
 	return (
 		<nav aria-label="Table of Contents" className="relative">
-			<p className="text-md font-bold text-foreground">On this page</p>
+			<p className="flex gap-1 text-sm font-bold text-muted-foreground">
+				<Text size={20} />
+				On this page
+			</p>
 			{flatTocArray.map((toc, index) => (
 				<div key={`${toc.title}-${index}`} className={`pt-5`} style={{ paddingLeft: toc.level * 15 }}>
 					<Link

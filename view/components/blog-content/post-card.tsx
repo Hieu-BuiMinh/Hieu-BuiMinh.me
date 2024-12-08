@@ -2,13 +2,13 @@ import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import pluralize from 'pluralize'
 
-import type { DevBlogPost, InterestPost } from '@/.velite'
+import type { DevBlogPost, DocPost, InterestPost } from '@/.velite'
 import BlurImage from '@/components/commons/image/blur-image'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { formatDate } from '@/lib/utils'
 
 interface PostCardProps {
-	post: DevBlogPost | InterestPost
+	post: DevBlogPost | InterestPost | DocPost
 	root: string
 }
 
