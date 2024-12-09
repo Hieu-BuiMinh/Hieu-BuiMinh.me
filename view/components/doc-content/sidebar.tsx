@@ -1,4 +1,5 @@
 import type { DocPost } from '@/.velite'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 interface IDocSidebarProps {
 	post: DocPost
@@ -8,13 +9,13 @@ function DocSidebar({ post }: IDocSidebarProps) {
 	console.log(post)
 
 	return (
-		// <div className="relative hidden h-full border border-red-500 md:block">
-		// 	<aside className="sticky top-0 h-[calc(100%-385.41px)] w-full border border-white"></aside>
-		// </div>
-		<aside className="sticky top-0 h-[calc(100%-385.41px)] w-full border border-white"></aside>
+		<aside className="sticky top-[calc(3.5rem)] hidden h-[calc(100vh-3.5rem)] w-full md:block">
+			<div className="flex size-full flex-col gap-2 border">
+				header
+				<ScrollArea className="w-full flex-1 rounded-md border"></ScrollArea>
+			</div>
+		</aside>
 	)
 }
 
 export default DocSidebar
-
-//border-e bg-background/80 p-3 text-sm md:fixed md:w-[220px] xl:w-[240px]
