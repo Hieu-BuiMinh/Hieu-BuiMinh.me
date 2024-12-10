@@ -1,15 +1,16 @@
 import Image from 'next/image'
 
 import type { DocPost } from '@/.velite'
-import { formatDate } from '@/lib/utils'
+import { cn, formatDate } from '@/lib/utils'
 
 interface IDocPostDetailHeaderProps {
 	post: DocPost
+	className?: string
 }
 
-function DocPostDetailHeader({ post }: IDocPostDetailHeaderProps) {
+function DocPostDetailHeader({ post, className }: IDocPostDetailHeaderProps) {
 	return (
-		<div className="relative flex flex-col gap-5 border-b border-dashed pb-5">
+		<div className={cn('relative flex flex-col gap-5 border-b border-dashed pb-5', className)}>
 			<h1 className="text-2xl font-bold md:text-3xl">{post.title}</h1>
 
 			<div className="my-4 grid grid-cols-2 text-sm max-md:gap-4 md:grid-cols-4">

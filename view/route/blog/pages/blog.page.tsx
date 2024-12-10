@@ -35,7 +35,7 @@ async function BlogPageView({ searchParams }: IBlogpageProps) {
 			{displayPosts?.length > 0 ? (
 				<PostCards root="blog" posts={displayPosts} />
 			) : (
-				<p>We have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
+				<p>I have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
 			)}
 			<PostPagination totalPages={totalPages} className="mt-4 justify-end" />
 		</div>

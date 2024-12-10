@@ -24,6 +24,10 @@ export const SITE_CONFIG = {
 		linkedin: 'https://www.linkedin.com/in/minh-hieu-bui-78a315208',
 		personalSite: '/',
 	},
+	logos: {
+		light: '/assets/images/logo/logo-circle-light.svg',
+		dark: '/assets/images/logo/logo-circle-dark.svg',
+	},
 }
 
 export type SITE_CONFIG = typeof SITE_CONFIG

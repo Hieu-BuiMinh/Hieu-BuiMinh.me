@@ -52,7 +52,7 @@ async function CategoryPage({ params, searchParams }: ICategoryPageProps) {
 					{postsBelongToThisCategory?.length > 0 ? (
 						<PostCards root="interests" posts={displayPosts} />
 					) : (
-						<p>We have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
+						<p>I have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
 					)}
 					<PostPagination totalPages={totalPages} className="mt-4 justify-end" />
 				</>
@@ -68,7 +68,7 @@ async function CategoryPage({ params, searchParams }: ICategoryPageProps) {
 						{postsBelongToThisCategory?.length > 0 ? (
 							<PostCards root="interests" posts={displayPosts} />
 						) : (
-							<p>We have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
+							<p>I have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
 						)}
 						<PostPagination totalPages={totalPages} className="mt-4 justify-end" />
 					</TabsContent>
@@ -76,7 +76,7 @@ async function CategoryPage({ params, searchParams }: ICategoryPageProps) {
 						{docsBelongToThisCategory?.length > 0 ? (
 							<PostCards root="docs" posts={docsBelongToThisCategory} />
 						) : (
-							<p>We have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
+							<p>I have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
 						)}
 					</TabsContent>
 				</Tabs>
