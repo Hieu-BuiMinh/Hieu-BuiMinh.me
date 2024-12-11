@@ -1,23 +1,19 @@
 import Link from 'next/link'
-import { notFound } from 'next/navigation'
 
 import type { DocPost } from '@/.velite'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { docPostsHierarchy, findAllPostInDocsBySinglePost } from '@/lib/content/docs'
+import { docPostsHierarchy, findAllChildPostsInDocs } from '@/lib/content/docs'
 import TableOfContent from '@/view/components/doc-content/table-of-content'
 
 interface IDocSidebarProps {
 	post: DocPost
+	slug: string
 }
 
-function DocSidebar({ post }: IDocSidebarProps) {
-	const allDocByPost = findAllPostInDocsBySinglePost(post)
+async function DocSidebar({ post, slug }: IDocSidebarProps) {
+	const allDocByPost = findAllChildPostsInDocs(post)
 
-	if (!allDocByPost) {
-		return notFound()
-	}
-
-	// const tableOfContent = docPostsHierarchy(allDocByPost)
+	const tableOfContent = docPostsHierarchy(allDocByPost, slug)
 
 	return (
 		<aside className="sticky top-[calc(3.5rem+1px)] hidden h-[calc(100vh-3.5rem)] w-full border-r border-dashed pt-2 md:block">
@@ -27,7 +23,7 @@ function DocSidebar({ post }: IDocSidebarProps) {
 					<span className="text-sm font-bold">Hieu.docs</span>
 				</Link>
 				<ScrollArea className="w-full flex-1 rounded-md px-4">
-					<TableOfContent />
+					<TableOfContent data={tableOfContent} />
 				</ScrollArea>
 			</div>
 		</aside>
