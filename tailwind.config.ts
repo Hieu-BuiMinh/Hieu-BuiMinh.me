@@ -147,7 +147,7 @@ const config: Config = {
 			backgroundImage: {
 				pinned: 'linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)',
 				'pinned-dark': 'linear-gradient(to right top, #845ec2, #d65db1, #ff6f91, #ff9671, #ffc75f, #f9f871)',
-				'doc-header-gradient': 'radial-gradient(49.63% 47.02% at 48% -7.2%, #89b5fa1a 6.4%, transparent 100%)',
+				'doc-header-gradient': 'radial-gradient(49.63% 57.02% at 58% -7.2%, #89b5fa1a 35.4%, transparent 100%)',
 			},
 		},
 	},

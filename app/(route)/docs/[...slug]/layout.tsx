@@ -20,7 +20,7 @@ async function DocDetailLayout({ children, params }: PostPageProps) {
 
 	return (
 		<div className="grid border-none md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)] 2xl:border-x 2xl:border-dashed">
-			<DocSidebar post={post} slug={slug} />
+			<DocSidebar post={post} />
 			<div className="min-h-screen">{children}</div>
 		</div>
 	)

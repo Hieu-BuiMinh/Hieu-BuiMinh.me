@@ -20,7 +20,7 @@ export function docPostsHierarchy(posts: DocPost[], slug: string) {
 			parent: item.parent,
 			children: [],
 			active: item.slugAsParams === slug,
-		}) // add empty `children` array for each item
+		})
 	})
 
 	const hierarchy: (DocPost & { children: DocPost[] })[] = []
@@ -29,12 +29,11 @@ export function docPostsHierarchy(posts: DocPost[], slug: string) {
 		if (item.parent) {
 			const parent = map.get(item.parent)
 			if (parent) {
-				parent.children.push(map.get(item.id)) // add the current item as a child of its `parent`
+				parent.children.push(map.get(item.id))
 			} else {
-				hierarchy.push(map.get(item.id)) // if no `parent` found, this is a `parent` element itself
+				hierarchy.push(map.get(item.id))
 			}
 		} else {
-			// if no `parent` field exists, treat it as a top-level item
 			hierarchy.push(map.get(item.id))
 		}
 	})
