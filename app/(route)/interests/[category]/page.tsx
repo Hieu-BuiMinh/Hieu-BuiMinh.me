@@ -42,7 +42,6 @@ async function CategoryPage({ params, searchParams }: ICategoryPageProps) {
 	const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE)
 	const displayPosts = sortedPosts.slice(POSTS_PER_PAGE * (currentPage - 1), POSTS_PER_PAGE * currentPage)
 
-	console.log(post)
 	return (
 		<div className="m-auto flex max-w-screen-lg flex-col gap-3 p-3 md:px-10 md:py-6">
 			<PageTitle title={post.title} description={post.description || ''} />
