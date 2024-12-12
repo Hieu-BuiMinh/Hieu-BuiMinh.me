@@ -24,7 +24,7 @@ interface ITableOfContent {
 
 function TableOfContent({ className, sidebarData }: ITableOfContent) {
 	return (
-		<div className={cn('flex w-full flex-col gap-2', className)}>
+		<div className={cn('flex w-full flex-col', className)}>
 			{sidebarData?.map((item) => <TreeItem key={item.id} item={item} />)}
 		</div>
 	)
@@ -66,15 +66,15 @@ function TreeItem({ item }: { item: TreeItem }) {
 	if (hasChildren) {
 		return (
 			<Accordion value={isOpen ? item.id : ''} type="single" collapsible>
-				<AccordionItem value={item.id} className="border-none">
+				<AccordionItem value={item.id} className="mt-1 border-none">
 					<AccordionTrigger
 						onClick={() => {
 							// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 							!!item.href && handleRedirect(`/${item.href}`)
 						}}
 						className={cn(
-							'rounded px-2 py-1 text-muted-foreground transition-colors duration-100 [overflow-wrap:anywhere] hover:bg-accent/50 hover:text-accent-foreground/80 hover:no-underline hover:transition-none',
-							isActive && 'bg-accent/50 font-semibold text-green-500 dark:text-green-400'
+							'rounded px-2 py-1 text-muted-foreground transition-colors duration-100 [overflow-wrap:anywhere] hover:bg-primary/10 hover:text-accent-foreground/80 hover:no-underline hover:transition-none',
+							isActive && 'bg-primary/10 font-semibold text-primary dark:text-green-400'
 						)}
 					>
 						<Link
@@ -85,8 +85,8 @@ function TreeItem({ item }: { item: TreeItem }) {
 							{item.title}
 						</Link>
 					</AccordionTrigger>
-					<AccordionContent className="ms-2 mt-2 pb-2">
-						<div className="ml-1 border-l pl-2">
+					<AccordionContent className="pb-0">
+						<div className="ml-2.5 border-l pl-2 pt-2">
 							{item.children?.map((item) => {
 								return <TreeItem item={item} key={item.id} />
 							})}
@@ -101,8 +101,8 @@ function TreeItem({ item }: { item: TreeItem }) {
 		<Link
 			href={`/${item.href}` || ''}
 			className={cn(
-				'flex w-full items-center gap-2 rounded px-2 py-1 text-sm font-medium text-muted-foreground transition-colors duration-100 [overflow-wrap:anywhere] hover:bg-accent/50 hover:text-accent-foreground',
-				isActive && 'bg-accent/50 font-semibold text-green-500 dark:text-green-400'
+				'mb-2 flex w-full items-center gap-2 rounded px-2 py-1 text-sm font-medium text-muted-foreground transition-colors duration-100 [overflow-wrap:anywhere] hover:bg-primary/10 hover:text-accent-foreground',
+				isActive && 'bg-primary/10 font-semibold text-primary dark:text-green-400'
 			)}
 		>
 			{item.type === 'ROOT' && <BookMarked size={16} />}
