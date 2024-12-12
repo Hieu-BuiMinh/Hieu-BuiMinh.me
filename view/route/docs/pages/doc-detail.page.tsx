@@ -7,19 +7,12 @@ import TableOfContent from '@/components/commons/table-of-content'
 import DocPostDetailHeader from '@/view/components/doc-content/doc-post-detail-header'
 
 interface PostPageProps {
-	params: Promise<{ slug: string[] }>
+	slug: string
 }
 
-async function getPostFromParams(params: PostPageProps['params']) {
-	const resolvedParams = await params
-	const slug = resolvedParams.slug.join('/')
+async function DocDetailPageView({ slug }: PostPageProps) {
+	console.log(slug)
 	const post = docs.find((post) => post.slugAsParams === slug)
-
-	return post
-}
-
-async function DocDetailPageView({ params }: PostPageProps) {
-	const post = await getPostFromParams(params)
 
 	if (!post || !post.published) {
 		notFound()
@@ -27,7 +20,7 @@ async function DocDetailPageView({ params }: PostPageProps) {
 
 	return (
 		<div className="relative flex justify-between gap-10 p-3">
-			<div className="absolute inset-0 z-[-1] hidden h-[64rem] max-h-screen overflow-hidden bg-doc-header-gradient opacity-50 lg:block">
+			<div className="absolute inset-0 z-[-1] hidden h-[64rem] max-h-screen overflow-hidden bg-doc-header-gradient opacity-100 lg:block">
 				<Image
 					src="/assets/images/docs/docs-header-decor.svg"
 					width={790}

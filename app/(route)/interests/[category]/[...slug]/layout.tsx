@@ -37,7 +37,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 			url: post.slug,
 			images: [
 				{
-					url: post.cover || '',
+					url: post.cover || SITE_CONFIG.og,
 					width: 1200,
 					height: 630,
 					alt: post.title,
@@ -48,7 +48,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 			card: 'summary_large_image',
 			title: post.title,
 			description: post.description,
-			images: [post.cover || ''],
+			images: [post.cover || SITE_CONFIG.og],
 		},
 	}
 }

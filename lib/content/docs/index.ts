@@ -14,10 +14,8 @@ export function docPostsHierarchy(posts: DocPost[], slug: string) {
 
 	posts.forEach((item) => {
 		map.set(item.id, {
-			id: item.id,
-			title: item.title,
+			...item,
 			href: item.slug,
-			parent: item.parent,
 			children: [],
 			active: item.slugAsParams === slug,
 		})
@@ -37,8 +35,6 @@ export function docPostsHierarchy(posts: DocPost[], slug: string) {
 			hierarchy.push(map.get(item.id))
 		}
 	})
-
-	console.log(hierarchy)
 
 	return hierarchy
 }

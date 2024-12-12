@@ -9,6 +9,7 @@ export const SITE_CONFIG = {
 	url: isProduction ? 'https://hieu-buiminh.vercel.app/' : 'http://localhost:3000',
 	description: 'Next js 15 blog using velite, tailwind and shadcn',
 	siteKeywords: ['hieu.buiminh', 'next.js', 'react', 'typeScript', 'node.js', 'tailwind', 'shadcn'],
+	og: '/assets/images/og.png',
 	author: {
 		avatar: '/assets/images/avt/avt_001.jpg',
 		name: 'Hieu.BuiMinh',
