@@ -1,13 +1,13 @@
 import React from 'react'
 
-import InterestsDetailPage from '@/view/route/interests/pages/interests-detail.page'
+import CategoryDetailPage from '@/view/route/interests/pages/category-detail.page'
 
 interface IInterestsPageDetailProps {
 	params: Promise<{ category: string; slug: string[] }>
 }
 
 function InterestsPageDetail({ params }: IInterestsPageDetailProps) {
-	return <InterestsDetailPage params={params} />
+	return <CategoryDetailPage params={params} />
 }
 
 export default InterestsPageDetail
