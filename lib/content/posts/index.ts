@@ -2,7 +2,7 @@ import slug from 'slug'
 
 import type { DevBlogPost, DocPost, InterestPost } from '#site/content'
 
-export function sortPosts(posts: Array<DevBlogPost>) {
+export function sortPosts(posts: Array<DevBlogPost | InterestPost | DocPost>) {
 	return posts.sort((a, b) => {
 		if (a.date > b.date) return -1
 		if (a.date < b.date) return 1
@@ -10,7 +10,7 @@ export function sortPosts(posts: Array<DevBlogPost>) {
 	})
 }
 
-export function getAllTags(posts: Array<DevBlogPost | DocPost | InterestPost>) {
+export function getAllTags(posts: Array<DevBlogPost | InterestPost | DocPost>) {
 	const tags: Record<string, number> = {}
 
 	posts.forEach((post) => {
@@ -28,7 +28,7 @@ export function sortTagsByCount(tags: Record<string, number>) {
 	return Object.keys(tags).sort((a, b) => tags[b] - tags[a])
 }
 
-export function getPostsByTagSlug(posts: Array<DevBlogPost | DocPost | InterestPost>, tag: string) {
+export function getPostsByTagSlug(posts: Array<DevBlogPost | InterestPost | DocPost>, tag: string) {
 	return posts.filter((post) => {
 		if (!post.hashTags?.tags) return false
 		const slugifiedTags = post.hashTags?.tags.map((tag: string) => slug(tag))

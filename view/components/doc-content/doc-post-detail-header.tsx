@@ -11,7 +11,7 @@ interface IDocPostDetailHeaderProps {
 function DocPostDetailHeader({ post, className }: IDocPostDetailHeaderProps) {
 	return (
 		<div className={cn('relative flex flex-col gap-5 border-b border-dashed pb-5', className)}>
-			<h1 className="text-2xl font-bold md:text-3xl">{post.title}</h1>
+			<h1 className="text-2xl font-bold text-foreground md:text-3xl">{post.title}</h1>
 
 			<div className="my-4 grid grid-cols-2 text-sm max-md:gap-4 md:grid-cols-4">
 				<div className="flex flex-col gap-2 p-2 md:mx-auto">
@@ -35,7 +35,7 @@ function DocPostDetailHeader({ post, className }: IDocPostDetailHeaderProps) {
 				</div>
 			</div>
 
-			<h2 className="text-muted-foreground">{post.description}</h2>
+			<h2 className="text-foreground">{post.description}</h2>
 		</div>
 	)
 }

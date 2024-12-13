@@ -12,8 +12,11 @@ import LinkCard from '@/components/commons/mdx/custom-components/link-card'
 import TreeView from '@/components/commons/tree-view'
 
 const useMDXComponent = (code: string) => {
+	if (!code) {
+		return
+	}
 	const fn = new Function(code)
-	return fn({ ...runtime }).default
+	return fn({ ...runtime })?.default
 }
 
 const components = {
@@ -70,5 +73,8 @@ interface MdxProps {
 
 export function MDXContent({ code }: MdxProps) {
 	const Component = useMDXComponent(code)
+	if (!code) {
+		return <p className="py-5">This post is on updating 🧪...</p>
+	}
 	return <Component components={components} />
 }

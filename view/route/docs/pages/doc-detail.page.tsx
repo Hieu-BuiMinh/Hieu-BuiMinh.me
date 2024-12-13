@@ -1,17 +1,23 @@
+import { Roboto } from 'next/font/google'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
 import { docs } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
+import { cn } from '@/lib/utils'
 import DocPostDetailHeader from '@/view/components/doc-content/doc-post-detail-header'
 
 interface PostPageProps {
 	slug: string
 }
 
+const roboto = Roboto({
+	subsets: ['latin'],
+	weight: ['100', '300', '400', '500', '700', '900'],
+})
+
 async function DocDetailPageView({ slug }: PostPageProps) {
-	console.log(slug)
 	const post = docs.find((post) => post.slugAsParams === slug)
 
 	if (!post || !post.published) {
@@ -28,7 +34,12 @@ async function DocDetailPageView({ slug }: PostPageProps) {
 					alt="docs-header-decor"
 				/>
 			</div>
-			<article className="prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]">
+			<article
+				className={cn(
+					'prose max-w-full text-muted-foreground dark:prose-invert lg:max-w-[calc(100%-220px)]',
+					roboto.className
+				)}
+			>
 				<DocPostDetailHeader post={post} className="not-prose" />
 				<MDXContent code={post.body} />
 			</article>
