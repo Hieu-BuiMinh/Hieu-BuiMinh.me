@@ -4,7 +4,7 @@ import React from 'react'
 import type { InterestPost } from '@/.velite'
 import { docs, interests } from '@/.velite'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { sortPosts } from '@/lib/content/posts'
+import { sortPostsByDate } from '@/lib/content/posts'
 import PageTitle from '@/view/components/blog-content/page-title'
 import PostCards from '@/view/components/blog-content/post-cards'
 import PostPagination from '@/view/components/blog-content/post-pagination'
@@ -38,7 +38,10 @@ async function CategoryPageView({ params, searchParams }: ICategoryPageProps) {
 	}
 
 	// paging for interests posts
-	const sortedPosts = sortPosts(postsBelongToThisCategory.filter((post) => post.published))
+	const sortedPosts = sortPostsByDate(
+		postsBelongToThisCategory.filter((post) => post.published),
+		'desc'
+	)
 	const currentPage = Number(resolvedSearchParams?.page) || 1
 	const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE)
 	const displayPosts = sortedPosts.slice(POSTS_PER_PAGE * (currentPage - 1), POSTS_PER_PAGE * currentPage)

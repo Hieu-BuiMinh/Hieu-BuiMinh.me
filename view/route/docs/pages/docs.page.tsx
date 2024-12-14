@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { docs } from '@/.velite'
-import { sortPosts } from '@/lib/content/posts'
+import { sortPostsByDate } from '@/lib/content/posts'
 import PageTitle from '@/view/components/blog-content/page-title'
 import PostCards from '@/view/components/blog-content/post-cards'
 import PostPagination from '@/view/components/blog-content/post-pagination'
@@ -18,7 +18,10 @@ const POSTS_PER_PAGE = 10
 
 async function DocsPageView({ searchParams }: IDocPageProps) {
 	const resolvedSearchParams = await searchParams
-	const sortedPosts = sortPosts(docs.filter((post) => post.published && post.type === 'ROOT'))
+	const sortedPosts = sortPostsByDate(
+		docs.filter((post) => post.published && post.type === 'ROOT'),
+		'desc'
+	)
 
 	const currentPage = Number(resolvedSearchParams?.page) || 1
 	const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE)

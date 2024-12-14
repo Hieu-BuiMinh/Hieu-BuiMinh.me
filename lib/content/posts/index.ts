@@ -2,11 +2,21 @@ import slug from 'slug'
 
 import type { DevBlogPost, DocPost, InterestPost } from '#site/content'
 
-export function sortPosts(posts: Array<DevBlogPost | InterestPost | DocPost>) {
+export function sortPostsByDate(
+	posts: Array<DevBlogPost | InterestPost | DocPost>,
+	order: 'asc' | 'desc' = 'asc'
+): Array<DevBlogPost | InterestPost | DocPost> {
 	return posts.sort((a, b) => {
-		if (a.date > b.date) return -1
-		if (a.date < b.date) return 1
-		return 0
+		const dateA = new Date(a.date).getTime()
+		const dateB = new Date(b.date).getTime()
+
+		if (order === 'asc') {
+			return dateA - dateB // Sort in ascending order
+		} else if (order === 'desc') {
+			return dateB - dateA // Sort in descending order
+		} else {
+			throw new Error("Invalid order parameter. Use 'asc' for ascending or 'desc' for descending.")
+		}
 	})
 }
 

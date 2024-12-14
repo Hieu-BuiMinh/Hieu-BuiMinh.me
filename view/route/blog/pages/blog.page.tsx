@@ -1,4 +1,4 @@
-import { getAllTags, sortPosts, sortTagsByCount } from '@/lib/content/posts'
+import { getAllTags, sortPostsByDate, sortTagsByCount } from '@/lib/content/posts'
 import PageTitle from '@/view/components/blog-content/page-title'
 import PostCards from '@/view/components/blog-content/post-cards'
 import PostPagination from '@/view/components/blog-content/post-pagination'
@@ -19,7 +19,10 @@ async function BlogPageView({ searchParams }: IBlogpageProps) {
 	const resolvedSearchParams = await searchParams
 	const tags = getAllTags(devBlogPosts)
 	const sortedTags = sortTagsByCount(tags)
-	const sortedPosts = sortPosts(devBlogPosts.filter((post) => post.published))
+	const sortedPosts = sortPostsByDate(
+		devBlogPosts.filter((post) => post.published),
+		'desc'
+	)
 
 	const currentPage = Number(resolvedSearchParams?.page) || 1
 	const totalPages = Math.ceil(sortedPosts.length / POSTS_PER_PAGE)

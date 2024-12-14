@@ -10,6 +10,7 @@ import { CodeBlock } from '@/components/commons/mdx/custom-components/code-block
 import Heading from '@/components/commons/mdx/custom-components/heading'
 import LinkCard from '@/components/commons/mdx/custom-components/link-card'
 import TreeView from '@/components/commons/tree-view'
+import { cn } from '@/lib/utils'
 
 const useMDXComponent = (code: string) => {
 	if (!code) {
@@ -47,11 +48,17 @@ const components = {
 		)
 	},
 	Image: (props: React.ComponentPropsWithoutRef<typeof ImageZoom>) => {
-		const { alt, ...rest } = props
+		const { alt, className, ...rest } = props
 
 		return (
 			<>
-				<ImageZoom className="rounded-lg border" alt={alt || ''} width={1200} height={630} {...rest} />
+				<ImageZoom
+					className={cn('h-[530px] rounded-lg border', className)}
+					alt={alt || ''}
+					width={1200}
+					height={630}
+					{...rest}
+				/>
 				<figcaption className="mt-4 text-center">{alt}</figcaption>
 			</>
 		)

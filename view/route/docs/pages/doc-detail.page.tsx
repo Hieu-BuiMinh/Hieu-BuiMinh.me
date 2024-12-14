@@ -7,6 +7,7 @@ import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
 import { cn } from '@/lib/utils'
 import DocPostDetailHeader from '@/view/components/doc-content/doc-post-detail-header'
+import FooterNavigator from '@/view/components/doc-content/footer-navigator'
 
 interface PostPageProps {
 	slug: string
@@ -42,6 +43,7 @@ async function DocDetailPageView({ slug }: PostPageProps) {
 			>
 				<DocPostDetailHeader post={post} className="not-prose" />
 				<MDXContent code={post.body} />
+				<FooterNavigator post={post} />
 			</article>
 
 			<aside className="hidden lg:block lg:w-[220px]">

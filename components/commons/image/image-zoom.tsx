@@ -4,6 +4,7 @@ import React, { forwardRef } from 'react'
 
 import BlurImage from '@/components/commons/image/blur-image'
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { cn } from '@/lib/utils'
 
 type IImageZoomProps = {
 	description?: string
@@ -18,10 +19,18 @@ const ImageZoom = forwardRef<HTMLImageElement, IImageZoomProps>((props, ref) => 
 		<Dialog>
 			<DialogTitle />
 			<DialogTrigger asChild role="button">
-				<BlurImage ref={ref} className="h-[495px]" width={1200} height={630} {...rest} />
+				<BlurImage ref={ref} className={cn('h-[495px]', rest.className)} width={1200} height={630} {...rest} />
 			</DialogTrigger>
-			<DialogContent className="max-w-screen-sm overflow-hidden md:max-w-screen-md md:p-0 lg:max-w-screen-xl">
-				<BlurImage className="border" {...rest} description="" />
+			<DialogContent className="h-[75vh] max-w-screen-sm overflow-hidden md:max-w-screen-md md:p-0 lg:max-w-screen-xl">
+				<BlurImage
+					className="size-full border"
+					width={1080}
+					height={1200}
+					src={rest.src}
+					alt=""
+					description=""
+					imageClassName="object-contain"
+				/>
 			</DialogContent>
 		</Dialog>
 	)
