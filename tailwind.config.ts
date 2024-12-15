@@ -145,8 +145,8 @@ const config: Config = {
 				'feature-card-dark': '0 0 0 1px rgb(255 255 255 / 0.06), 0 -1px rgb(255 255 255 / 0.1)',
 			},
 			backgroundImage: {
-				pinned: 'linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1)',
-				'pinned-dark': 'linear-gradient(to right top, #845ec2, #d65db1, #ff6f91, #ff9671, #ffc75f, #f9f871)',
+				pinned: 'linear-gradient(45deg, #20f961 0%, #20f9ce 17%, #20b8f9 34%, #204bf9 51%, #6120f9 68%, #ce20f9 85%, #f920b8 102%)',
+				'pinned-dark': 'linear-gradient(to right, #3b82f6, #6366f1, #db2777)',
 				'doc-header-gradient': 'radial-gradient(49.63% 57.02% at 58% -7.2%, #89b5fa1a 35.4%, transparent 100%)',
 			},
 		},

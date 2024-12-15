@@ -25,9 +25,9 @@ const blogItems: { title: string; href: string; description: string }[] = [
 		description: 'Re-usable components built using Radix UI and Tailwind CSS.',
 	},
 	{
-		title: 'blog 🛸',
-		href: '/blog/404',
-		description: 'How to install dependencies and structure your app.',
+		title: 'Guestbook 🛸',
+		href: '/guestbook',
+		description: 'Sign my guestbook and share your idea. You can tell me anything here!',
 	},
 	{
 		title: 'blog 🛸...',
