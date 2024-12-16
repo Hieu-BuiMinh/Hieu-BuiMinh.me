@@ -2,13 +2,14 @@
 
 import { SignInButton, SignOutButton, UserButton, useUser } from '@clerk/clerk-react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Authenticated, Unauthenticated, useConvexAuth } from 'convex/react'
+import { Authenticated, Unauthenticated, useConvexAuth, useMutation } from 'convex/react'
 import { Loader } from 'lucide-react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import RHFTextArea from '@/components/commons/form-input/RHF-text-area'
 import { Button } from '@/components/ui/button'
+import { api } from '@/convex/_generated/api'
 
 const guestbookFormSchema = z.object({
 	message: z.string().min(1, {
@@ -22,6 +23,8 @@ function PostComment() {
 	const { isLoading } = useConvexAuth()
 	const { user } = useUser()
 
+	const createComment = useMutation(api.guestbookComment.createComment)
+
 	const methods = useForm<z.infer<TGuestbookFromSchemaType>>({
 		resolver: zodResolver(guestbookFormSchema),
 		defaultValues: {
@@ -29,14 +32,17 @@ function PostComment() {
 		},
 	})
 
-	const onSubmit = (data: z.infer<TGuestbookFromSchemaType>) => {
-		console.log(data)
+	const onSubmit = async (data: z.infer<TGuestbookFromSchemaType>) => {
+		await createComment({ message: data.message }).then(() => {
+			methods.reset()
+		})
 	}
 
 	if (isLoading) {
 		return (
-			<div className="flex gap-3">
-				<Loader className="animate-spin" size={20} /> Loading...
+			<div className="flex items-center gap-3">
+				<Loader className="animate-spin" size={20} />
+				<span className="text-muted-foreground">Authenticating...</span>
 			</div>
 		)
 	}

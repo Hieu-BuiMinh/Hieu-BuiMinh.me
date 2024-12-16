@@ -1,4 +1,5 @@
 import PageTitle from '@/view/components/blog-content/page-title'
+import Comments from '@/view/route/guestbook/components/comments'
 import Pinned from '@/view/route/guestbook/components/pinned'
 import PostComment from '@/view/route/guestbook/components/post-comment'
 
@@ -13,6 +14,8 @@ function GuestbookPageView() {
 			<Pinned />
 
 			<PostComment />
+
+			<Comments />
 		</div>
 	)
 }

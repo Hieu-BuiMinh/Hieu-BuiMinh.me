@@ -12,7 +12,7 @@ interface IDocPageProps {
 
 const title = 'Docs'
 const description =
-	'My personal website and blog where I share my thoughts on various topics including tutorials, notes, and personal experiences. As a frontend developer from Vietnam, I started learning web development as a hobby in December 2020. I use Next.js for building websites, GitHub for code hosting, and Vercel for deployment. Explore my site to learn more about my Journey and discover some of the web development resources that have inspired me 😘'
+	'Welcome to my collection of insights on ancient wisdom and philosophical concepts. Here, I delve into the timeless teachings of the Yi Jing (I Ching), the profound principles of Yin Yang, and other thought-provoking topics that explore the balance between opposites, the flow of energy, and the interconnectedness of all things 🌵'
 
 const POSTS_PER_PAGE = 10
 

@@ -30,8 +30,8 @@ const blogItems: { title: string; href: string; description: string }[] = [
 		description: 'Sign my guestbook and share your idea. You can tell me anything here!',
 	},
 	{
-		title: 'blog 🛸...',
-		href: '/blog/404',
+		title: 'Documents 🌵',
+		href: '/docs',
 		description: 'Styles for headings, paragraphs, lists...etc',
 	},
 ]
@@ -45,7 +45,7 @@ const aboutItems: { title: string; href: string; description: string }[] = [
 	{
 		title: 'My dev journey 🚀',
 		href: '/about/my-journey',
-		description: `A sneak peek into my coding adventures and the projects I've been working on.`,
+		description: `A glimpse into my coding adventures and projects.`,
 	},
 	{
 		title: 'Me & my Crew 🤌',

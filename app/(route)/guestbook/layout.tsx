@@ -31,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 function GuestbookLayout({ children }: { children: React.ReactNode }) {
-	return <div className="m-auto max-w-screen-lg p-3 md:px-10 md:py-6">{children}</div>
+	return <div className="m-auto min-h-screen max-w-screen-lg p-3 md:px-10 md:py-6">{children}</div>
 }
 
 export default GuestbookLayout
