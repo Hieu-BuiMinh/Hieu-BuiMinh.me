@@ -51,7 +51,7 @@ function PostComment() {
 	return (
 		<div>
 			<Unauthenticated>
-				<SignInButton fallbackRedirectUrl="/guestbook" mode="modal">
+				<SignInButton fallbackRedirectUrl="/guestbook" signUpFallbackRedirectUrl="/guestbook" mode="modal">
 					<Button
 						variant="ghost"
 						className="bg-foreground text-white dark:bg-gradient-to-br dark:from-yellow-500 dark:to-red-500"
