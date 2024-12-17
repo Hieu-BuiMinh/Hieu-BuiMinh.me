@@ -4,13 +4,7 @@ import { build } from 'velite'
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
 	images: {
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: 'img001.prntscr.com',
-				port: '',
-			},
-		],
+		domains: ['img.clerk.com', 'img001.prntscr.com'],
 	},
 	webpack: (config) => {
 		config.plugins.push(new VeliteWebpackPlugin())

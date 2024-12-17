@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 import { docs } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
-import { cn } from '@/lib/utils'
+import { cn, formatDate } from '@/lib/utils'
 import DocPostDetailHeader from '@/view/components/doc-content/doc-post-detail-header'
 import FooterNavigator from '@/view/components/doc-content/footer-navigator'
 
@@ -43,6 +43,11 @@ async function DocDetailPageView({ slug }: PostPageProps) {
 			>
 				<DocPostDetailHeader post={post} className="not-prose" />
 				<MDXContent code={post.body} />
+
+				{post.lastUpdated && (
+					<div className="text-right text-sm">Last updated:&nbsp;{formatDate(post.lastUpdated)}</div>
+				)}
+
 				<FooterNavigator post={post} />
 			</article>
 

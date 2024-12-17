@@ -113,7 +113,6 @@ const interests = defineCollection({
 			metadata: s.metadata().optional(),
 			description: s.string().max(999).optional(),
 			published: s.boolean().default(true),
-			type: s.enum(['DOC', 'SINGLE_POST']),
 			hashTags: s
 				.object({
 					category: s.string(),

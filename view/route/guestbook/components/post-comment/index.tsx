@@ -2,7 +2,7 @@
 
 import { SignInButton, SignOutButton, UserButton, useUser } from '@clerk/clerk-react'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Authenticated, Unauthenticated, useConvexAuth, useMutation } from 'convex/react'
+import { Authenticated, Unauthenticated, useMutation } from 'convex/react'
 import { Loader } from 'lucide-react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
@@ -10,6 +10,7 @@ import { z } from 'zod'
 import RHFTextArea from '@/components/commons/form-input/RHF-text-area'
 import { Button } from '@/components/ui/button'
 import { api } from '@/convex/_generated/api'
+import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
 
 const guestbookFormSchema = z.object({
 	message: z.string().min(1, {
@@ -20,7 +21,7 @@ const guestbookFormSchema = z.object({
 type TGuestbookFromSchemaType = typeof guestbookFormSchema
 
 function PostComment() {
-	const { isLoading } = useConvexAuth()
+	const { isLoading } = useStoreUserEffect()
 	const { user } = useUser()
 
 	const createComment = useMutation(api.guestbookComment.createComment)

@@ -11,7 +11,7 @@ function Pinned() {
 			</div>
 			<div>
 				Hey there! Thanks for visiting my website. If you have a moment, I&apos;d love to hear your thoughts on
-				my work. Please log in with your account to leave a comment. Thanks!
+				my work. Please log in with your account to leave a comment. Thank you 🥰
 			</div>
 		</div>
 	)

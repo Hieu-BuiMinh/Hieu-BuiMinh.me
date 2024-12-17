@@ -3,6 +3,7 @@ import React from 'react'
 
 import { pages } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
+import { formatDate } from '@/lib/utils'
 import PageTitle from '@/view/components/blog-content/page-title'
 
 const title = 'About'
@@ -20,6 +21,9 @@ export default function AboutPageView() {
 			<PageTitle title={title} description={description} />
 			<article className="container prose mx-auto max-w-3xl pb-6 dark:prose-invert">
 				<MDXContent code={post.body} />
+				{post.lastUpdated && (
+					<div className="text-right text-sm">Last updated:&nbsp;{formatDate(post.lastUpdated)}</div>
+				)}
 			</article>
 		</div>
 	)

@@ -12,13 +12,13 @@
 
 @media (min-width: 1024px) {
 	.masonry {
-		column-count: 3; /* 3 columns on large screens */
+		column-count: 2; /* 2 columns on large screens */
 	}
 }
 
 @media (min-width: 1280px) {
 	.masonry {
-		column-count: 4; /* 4 columns on extra-large screens */
+		column-count: 2; /* 2 columns on extra-large screens */
 	}
 }
 

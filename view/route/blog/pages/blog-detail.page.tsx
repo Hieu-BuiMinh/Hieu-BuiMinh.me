@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 import { devBlogPosts } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
+import { formatDate } from '@/lib/utils'
 
 interface PostPageProps {
 	params: Promise<{ slug: string[] }>
@@ -28,6 +29,10 @@ export default async function BlogDetailPageView({ params }: PostPageProps) {
 			<div className="relative flex justify-between gap-10">
 				<article className="prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]">
 					<MDXContent code={post.body} />
+
+					{post.lastUpdated && (
+						<div className="text-right text-sm">Last updated:&nbsp;{formatDate(post.lastUpdated)}</div>
+					)}
 				</article>
 
 				<aside className="hidden lg:block lg:w-[220px]">
