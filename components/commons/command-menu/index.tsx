@@ -1,6 +1,7 @@
 'use client'
 
-import { CodeIcon, CommandIcon, LinkIcon, LogOutIcon } from 'lucide-react'
+import { useClerk } from '@clerk/clerk-react'
+import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon } from 'lucide-react'
 import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import { SVGIcons } from '@/components/commons/icons/svg-icons'
@@ -17,10 +18,15 @@ import {
 import { DialogTitle } from '@/components/ui/dialog'
 import { SITE_CONFIG } from '@/config/site'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
+import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
 
 function CommandMenu() {
 	const [isOpen, setIsOpen] = useState(false)
 	const [copy] = useCopyToClipboard()
+
+	const clerk = useClerk()
+
+	const { isAuthenticated } = useStoreUserEffect()
 
 	const openLink = useCallback((url: string) => {
 		setIsOpen(false)
@@ -32,9 +38,20 @@ function CommandMenu() {
 			name: 'Account',
 			actions: [
 				{
-					title: 'Sign out',
-					icon: <LogOutIcon className="mr-3 size-4" />,
-					onSelect: () => {},
+					title: isAuthenticated ? 'Logout' : 'Login',
+					icon: isAuthenticated ? (
+						<LogOutIcon className="mr-3 size-4" />
+					) : (
+						<LogInIcon className="mr-3 size-4" />
+					),
+					onSelect: () => {
+						setIsOpen(false)
+						if (!isAuthenticated) {
+							clerk.openSignIn({})
+						} else if (isAuthenticated) {
+							clerk.signOut({})
+						}
+					},
 				},
 			],
 		},
