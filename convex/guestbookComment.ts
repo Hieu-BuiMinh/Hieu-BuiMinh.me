@@ -4,10 +4,15 @@ import { v } from 'convex/values'
 export const getAllComments = queryGeneric({
 	handler: async (ctx) => {
 		const guestbookComments = await ctx.db.query('guestbookCommentSchema').collect()
+
 		const users = await ctx.db.query('users').collect()
 
+		const sortedComments = guestbookComments.sort((a, b) => {
+			return new Date(b.date).getTime() - new Date(a.date).getTime() // descending order (latest first)
+		})
+
 		return Promise.all(
-			guestbookComments.map(async (message) => {
+			sortedComments.map(async (message) => {
 				const user = users.find((u) => u.userId === message.userId)
 				return {
 					author: user?.name ?? 'Anonymous',

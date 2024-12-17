@@ -4,7 +4,7 @@ export const store = mutationGeneric({
 	args: {},
 	handler: async (ctx) => {
 		const identity = await ctx.auth.getUserIdentity()
-
+		console.log(identity)
 		if (!identity) {
 			throw new Error('Called storeUser without authentication present')
 		}
