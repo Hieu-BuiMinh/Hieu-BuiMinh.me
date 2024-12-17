@@ -4,6 +4,7 @@ export const store = mutationGeneric({
 	args: {},
 	handler: async (ctx) => {
 		const identity = await ctx.auth.getUserIdentity()
+		console.log(identity)
 		if (!identity) {
 			throw new Error('Called storeUser without authentication present')
 		}
@@ -26,7 +27,7 @@ export const store = mutationGeneric({
 		}
 		// If it's a new identity, create a new `User`.
 		return await ctx.db.insert('users', {
-			name: identity.name ?? 'Anonymous',
+			name: identity.name || identity.givenName || identity.email || 'Anonymous',
 			email: identity.email,
 			avatar: identity.pictureUrl,
 			userId: identity.subject,
