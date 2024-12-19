@@ -1,0 +1,55 @@
+import { nanoid } from 'nanoid'
+import React, { useMemo } from 'react'
+
+import YinYang from '@/components/commons/mdx/custom-components/yi-jing/yin-yang'
+import { cn } from '@/lib/utils'
+
+interface IBagua {
+	index?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+	actives?: number[]
+	className?: string
+	yinYangClassName?: string
+}
+
+function Bagua({ index = 1, actives, className, yinYangClassName }: IBagua) {
+	const bagua: { value: (0 | 1)[]; label: string } = useMemo(() => {
+		switch (index) {
+			case 0 || 8:
+				return { value: [0, 0, 0], label: 'Khôn' }
+			case 1 || 9:
+				return { value: [1, 1, 1], label: 'Càn' }
+			case 2:
+				return { value: [0, 1, 1], label: 'Đoài' }
+			case 3:
+				return { value: [1, 0, 1], label: 'Ly' }
+			case 4:
+				return { value: [0, 0, 1], label: 'Chấn' }
+			case 5:
+				return { value: [1, 1, 0], label: 'Tốn' }
+			case 6:
+				return { value: [0, 1, 0], label: 'Khảm' }
+			case 7:
+				return { value: [1, 0, 0], label: 'Cấn' }
+
+			default:
+				return { value: [1, 1, 1], label: 'Càn' }
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
+	return (
+		<div className={cn('flex flex-col gap-2', className)}>
+			{bagua.value.map((item, index) => (
+				<YinYang
+					className={yinYangClassName}
+					type={item}
+					key={nanoid()}
+					active={actives?.includes(index - 1)}
+				/>
+			))}
+			<span className="text-center text-xs">{bagua.label}</span>
+		</div>
+	)
+}
+
+export default Bagua

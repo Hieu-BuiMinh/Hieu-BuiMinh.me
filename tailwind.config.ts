@@ -148,6 +148,7 @@ const config: Config = {
 				pinned: 'linear-gradient(45deg, #20f961 0%, #20f9ce 17%, #20b8f9 34%, #204bf9 51%, #6120f9 68%, #ce20f9 85%, #f920b8 102%)',
 				'pinned-dark': 'linear-gradient(to right, #3b82f6, #6366f1, #db2777)',
 				'doc-header-gradient': 'radial-gradient(49.63% 57.02% at 58% -7.2%, #89b5fa1a 35.4%, transparent 100%)',
+				// 'stripes': 'linear-gradient(135deg,#ec489980 10%,#0000 0,#0000 50%,#ec489980 0,#ec489980 60%,#0000 0,#0000)',
 			},
 		},
 	},
