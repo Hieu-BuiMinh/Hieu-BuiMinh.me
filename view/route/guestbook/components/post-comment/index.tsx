@@ -24,7 +24,7 @@ function PostComment() {
 	const { isLoading } = useStoreUserEffect()
 	const { user } = useUser()
 
-	const createComment = useMutation(api.guestbookComment.createComment)
+	const createComment = useMutation(api.services.guestbookComment.createComment)
 
 	const methods = useForm<z.infer<TGuestbookFromSchemaType>>({
 		resolver: zodResolver(guestbookFormSchema),

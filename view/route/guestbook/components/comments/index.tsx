@@ -17,8 +17,8 @@ import type { Id } from '@/convex/_generated/dataModel'
 import { range } from '@/utils/range'
 
 function Comments() {
-	const allComments = useQuery(api.guestbookComment.getAllComments)
-	const deleteComment = useMutation(api.guestbookComment.deleteComment)
+	const allComments = useQuery(api.services.guestbookComment.getAllComments)
+	const deleteComment = useMutation(api.services.guestbookComment.deleteComment)
 
 	const { user } = useUser()
 
