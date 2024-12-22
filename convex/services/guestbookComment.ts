@@ -3,7 +3,7 @@ import { v } from 'convex/values'
 
 export const getAllComments = queryGeneric({
 	handler: async (ctx) => {
-		const guestbookComments = await ctx.db.query('guestbookCommentSchema').collect()
+		const guestbookComments = await ctx.db.query('guestbookComment').collect()
 
 		const users = await ctx.db.query('users').collect()
 
@@ -46,7 +46,7 @@ export const createComment = mutationGeneric({
 			throw new Error('Unauthenticated call to send message')
 		}
 
-		const guestbookComment = await ctx.db.insert('guestbookCommentSchema', {
+		const guestbookComment = await ctx.db.insert('guestbookComment', {
 			userId: user.userId,
 			date: new Date().toISOString(),
 			message: args.message,
@@ -57,7 +57,7 @@ export const createComment = mutationGeneric({
 })
 
 export const deleteComment = mutationGeneric({
-	args: { id: v.id('guestbookCommentSchema') },
+	args: { id: v.id('guestbookComment') },
 	handler: async (ctx, args) => {
 		// check if user log in
 		const identity = await ctx.auth.getUserIdentity()

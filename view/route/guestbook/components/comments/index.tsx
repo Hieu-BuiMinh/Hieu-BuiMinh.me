@@ -22,7 +22,7 @@ function Comments() {
 
 	const { user } = useUser()
 
-	const handleDeleteComment = (id: Id<'guestbookCommentSchema'>) => {
+	const handleDeleteComment = (id: Id<'guestbookComment'>) => {
 		const promise = deleteComment({ id })
 		toast.promise(promise, {
 			loading: 'Deleting note...',

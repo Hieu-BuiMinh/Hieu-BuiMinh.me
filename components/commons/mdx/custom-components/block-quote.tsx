@@ -20,11 +20,9 @@ function BlockQuote({ data }: IBlockQuote) {
 			<span className="absolute left-0 top-0 h-full w-1 rounded-md bg-green-600 dark:bg-green-400" />
 			<QuoteIcon className="absolute bottom-4 right-4 text-muted-foreground" size={35} />
 
-			<div className="relative z-10">
-				<p className="text-gray-800 dark:text-white sm:text-base">
-					<em>`{data.quote}`</em>
-				</p>
-			</div>
+			<p className="text-gray-800 dark:text-white sm:text-base">
+				<em>`{data.quote}`</em>
+			</p>
 
 			{data?.author && (
 				<div className="flex items-center gap-3">

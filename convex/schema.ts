@@ -1,6 +1,7 @@
 import { defineSchema } from 'convex/server'
 
-import guestbookCommentSchema from './schemas/guestbook-comment/guestbook-comment.schema'
-import { users } from './schemas/users/users.schema'
+import guestbookComment from './schemas/guestbook-comment.schema'
+import post from './schemas/post.schema'
+import users from './schemas/users.schema'
 
-export default defineSchema({ guestbookCommentSchema, users })
+export default defineSchema({ guestbookComment, users, post })

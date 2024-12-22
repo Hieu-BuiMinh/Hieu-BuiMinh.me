@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useMemo } from 'react'
 
 import type { DevBlogPost, DocPost, InterestPost } from '@/.velite'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 type Header = {
 	title: string
@@ -34,21 +35,28 @@ function TableOfContent({ post }: { post: DevBlogPost | DocPost | InterestPost }
 	}
 
 	return (
-		<nav aria-label="Table of Contents" className="relative">
+		<nav aria-label="Table of Contents" className="relative flex flex-col gap-3">
 			<p className="flex gap-1 text-sm font-bold text-muted-foreground">
 				<Text size={20} />
 				On this page
 			</p>
-			{flatTocArray.map((toc, index) => (
-				<div key={`${toc.title}-${index}`} className={`pt-5`} style={{ paddingLeft: toc.level * 15 }}>
-					<Link
-						className="line-clamp-1 text-sm leading-[1.2] text-muted-foreground no-underline transition-colors hover:text-foreground"
-						href={toc.url}
+
+			<ScrollArea className="flex max-h-[calc(100vh-20rem)] w-48 flex-col overflow-y-auto rounded-md">
+				{flatTocArray.map((toc, index) => (
+					<div
+						key={`${toc.title}-${index}`}
+						className={`pt-5 first:pt-0`}
+						style={{ paddingLeft: toc.level * 15 }}
 					>
-						{toc.title}
-					</Link>
-				</div>
-			))}
+						<Link
+							className="line-clamp-1 text-sm leading-[1.2] text-muted-foreground no-underline transition-colors hover:text-foreground"
+							href={toc.url}
+						>
+							{toc.title}
+						</Link>
+					</div>
+				))}
+			</ScrollArea>
 		</nav>
 	)
 }

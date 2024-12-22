@@ -42,6 +42,7 @@ const ESLINT_CONFIG = [
 			'import/order': 'off', // Avoid conflict rule between `eslint-plugin-import` and `eslint-plugin-simple-import-sort`
 			'import/extensions': 'off', // Avoid missing file extension errors, TypeScript already provides a similar feature
 			'unused-imports/no-unused-imports': 'off',
+			'react-hooks/rules-of-hooks': 'off',
 
 			'unused-imports/no-unused-vars': [
 				'off',

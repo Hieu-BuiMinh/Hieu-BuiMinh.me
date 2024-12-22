@@ -36,7 +36,7 @@ function PostPagination({ totalPages, className }: IPostPaginationProps) {
 		Array(totalPages)
 			.fill('')
 			.map((_, index) => {
-				console.log(createPageURL(index + 1))
+				createPageURL(index + 1)
 			})
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
