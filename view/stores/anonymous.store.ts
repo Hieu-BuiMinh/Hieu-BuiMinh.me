@@ -1,5 +1,27 @@
+import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
-import { createStore } from 'zustand/vanilla'
+
+const noopStorage = {
+	// Internal in-memory storage object
+	storage: {} as Record<string, string>,
+
+	getItem: async (key: string): Promise<string | null> => {
+		if (noopStorage.storage.hasOwnProperty(key)) {
+			return noopStorage.storage[key]
+		}
+		return null
+	},
+
+	setItem: async (key: string, value: string): Promise<void> => {
+		noopStorage.storage[key] = value
+	},
+
+	removeItem: async (key: string): Promise<void> => {
+		if (noopStorage.storage.hasOwnProperty(key)) {
+			delete noopStorage.storage[key]
+		}
+	},
+}
 
 type AnonymousState = { likes: { postSlug: string; count: number }[] }
 
@@ -9,7 +31,7 @@ type AnonymousStateActions = {
 
 const anonymousInitialState: AnonymousState = { likes: [] }
 
-const anonymousStore = createStore<AnonymousState & AnonymousStateActions>()(
+const anonymousStore = create<AnonymousState & AnonymousStateActions>()(
 	persist(
 		(set) => ({
 			...anonymousInitialState,
@@ -28,5 +50,5 @@ const anonymousStore = createStore<AnonymousState & AnonymousStateActions>()(
 	)
 )
 
-const useAnonymousStore = () => anonymousStore.getState()
+const useAnonymousStore = anonymousStore
 export default useAnonymousStore

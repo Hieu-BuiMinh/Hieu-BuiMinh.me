@@ -20,7 +20,7 @@ const guestbookFormSchema = z.object({
 
 type TGuestbookFromSchemaType = typeof guestbookFormSchema
 
-function PostComment() {
+function GuestbookPostCommentForm() {
 	const { isLoading } = useStoreUserEffect()
 	const { user } = useUser()
 
@@ -79,7 +79,7 @@ function PostComment() {
 
 					<FormProvider {...methods}>
 						<form onSubmit={methods.handleSubmit(onSubmit)} className="w-full">
-							<RHFTextArea name="message" />
+							<RHFTextArea name="message" errorMessage="Message cannot be empty" />
 
 							<div className="mt-4 flex justify-end gap-2">
 								<SignOutButton redirectUrl="/guestbook">
@@ -97,4 +97,4 @@ function PostComment() {
 	)
 }
 
-export default PostComment
+export default GuestbookPostCommentForm

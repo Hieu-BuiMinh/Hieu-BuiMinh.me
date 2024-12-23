@@ -16,7 +16,7 @@ import { api } from '@/convex/_generated/api'
 import type { Id } from '@/convex/_generated/dataModel'
 import { range } from '@/utils/range'
 
-function Comments() {
+function GuestbookComments() {
 	const allComments = useQuery(api.services.guestbookComment.getAllComments)
 	const deleteComment = useMutation(api.services.guestbookComment.deleteComment)
 
@@ -104,4 +104,4 @@ function Comments() {
 	)
 }
 
-export default Comments
+export default GuestbookComments

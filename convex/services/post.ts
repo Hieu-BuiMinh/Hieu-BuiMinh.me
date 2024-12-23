@@ -1,6 +1,8 @@
 import { mutationGeneric, queryGeneric } from 'convex/server'
 import { v } from 'convex/values'
 
+import type { DocPost } from '../schemas/post.schema'
+
 export const createPost = mutationGeneric({
 	args: {
 		slug: v.string(),
@@ -20,7 +22,7 @@ export const createPost = mutationGeneric({
 
 export const getPostBySlug = queryGeneric({
 	args: { slug: v.string() },
-	handler: async (ctx, args) => {
+	handler: async (ctx, args): Promise<DocPost | null> => {
 		if (args.slug === '') return null
 
 		const post = await ctx.db
@@ -36,16 +38,16 @@ export const updatePostView = mutationGeneric({
 	args: {
 		id: v.id('post'),
 	},
-	handler: async (ctx, args) => {
+	handler: async (ctx, args): Promise<DocPost | null> => {
 		if (args.id === '') return null
 
 		const existPost = await ctx.db.get(args.id)
 
 		if (!existPost) return null
 
-		const post = await ctx.db.patch(args.id, { views: existPost.views + 1 })
+		await ctx.db.patch(args.id, { views: existPost.views + 1 })
 
-		return post
+		return existPost
 	},
 })
 
@@ -53,8 +55,9 @@ export const updatePostLikes = mutationGeneric({
 	args: {
 		id: v.id('post'),
 	},
-	handler: async (ctx, args) => {
-		if (!args.id) return
+	handler: async (ctx, args): Promise<DocPost | null> => {
+		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
+		if (!args.id) null
 		// check if user log in
 		const identity = await ctx.auth.getUserIdentity()
 
@@ -68,8 +71,10 @@ export const updatePostLikes = mutationGeneric({
 				(like: { userId: string }) => like?.userId === 'Anonymous'
 			)
 			existPost.likes[likeAnonymousIndex].count += 1
-			const post = await ctx.db.patch(args.id, { likes: existPost.likes })
-			return post
+
+			await ctx.db.patch(args.id, { likes: existPost.likes })
+
+			return existPost
 		}
 
 		// update current user likes
@@ -81,8 +86,8 @@ export const updatePostLikes = mutationGeneric({
 			existPost.likes[likeIndex].count += 1
 		}
 
-		const post = await ctx.db.patch(args.id, { likes: existPost.likes })
+		await ctx.db.patch(args.id, { likes: existPost.likes })
 
-		return post
+		return existPost
 	},
 })

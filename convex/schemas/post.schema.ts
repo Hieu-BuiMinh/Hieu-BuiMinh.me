@@ -1,6 +1,8 @@
 import { defineTable } from 'convex/server'
 import { v } from 'convex/values'
 
+import type { Doc } from '../../convex/_generated/dataModel'
+
 const post = defineTable({
 	slug: v.string(),
 	likes: v.array(v.object({ userId: v.string(), count: v.number() })),
@@ -16,3 +18,4 @@ const post = defineTable({
 }).index('by_slug', ['slug'])
 
 export default post
+export type DocPost = Doc<'post'>

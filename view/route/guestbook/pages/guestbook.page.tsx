@@ -1,7 +1,7 @@
 import PageTitle from '@/view/components/blog-content/page-title'
-import Comments from '@/view/route/guestbook/components/comments'
+import GuestbookComments from '@/view/route/guestbook/components/guestbook-comments'
 import Pinned from '@/view/route/guestbook/components/pinned'
-import PostComment from '@/view/route/guestbook/components/post-comment'
+import GuestbookPostCommentForm from '@/view/route/guestbook/components/post-comment-form'
 
 const title = 'Guestbook'
 const description = 'Sign my guestbook and share your idea. You can tell me anything here!'
@@ -13,9 +13,9 @@ function GuestbookPageView() {
 
 			<Pinned />
 
-			<PostComment />
+			<GuestbookPostCommentForm />
 
-			<Comments />
+			<GuestbookComments />
 		</div>
 	)
 }

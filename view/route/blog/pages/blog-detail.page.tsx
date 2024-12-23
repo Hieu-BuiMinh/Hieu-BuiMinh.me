@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation'
 
+import type { DevBlogPost } from '@/.velite'
 import { devBlogPosts } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
 import { formatDate } from '@/lib/utils'
-import PostCommentForm from '@/view/components/blog-content/post-comment-form,'
+import PostCommentForm from '@/view/components/blog-content/post-comment-form'
 import PostComments from '@/view/components/blog-content/post-comments'
 import PostLikeButton from '@/view/components/blog-content/post-like-button'
 
@@ -15,7 +16,7 @@ interface PostPageProps {
 async function getPostFromParams(params: PostPageProps['params']) {
 	const resolvedParams = await params
 	const slug = resolvedParams.slug.join('/')
-	const post = devBlogPosts.find((post) => post.slugAsParams === slug)
+	const post = devBlogPosts.find((post: DevBlogPost) => post.slugAsParams === slug)
 
 	return post
 }
@@ -33,13 +34,15 @@ export default async function BlogDetailPageView({ params }: PostPageProps) {
 				<article className="prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]">
 					<MDXContent code={post.body} />
 
+					{post.lastUpdated && (
+						<div className="py-10 text-right text-sm">
+							Last updated:&nbsp;{formatDate(post.lastUpdated)}
+						</div>
+					)}
+
 					{/* User comments */}
 					<PostCommentForm post={post} />
 					<PostComments post={post} />
-
-					{post.lastUpdated && (
-						<div className="text-right text-sm">Last updated:&nbsp;{formatDate(post.lastUpdated)}</div>
-					)}
 				</article>
 
 				<aside className="hidden lg:block lg:w-[220px]">
