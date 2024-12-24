@@ -1,5 +1,6 @@
 import { mutationGeneric, queryGeneric } from 'convex/server'
 import { v } from 'convex/values'
+import { nanoid } from 'nanoid'
 
 import type { DocPost } from '../schemas/post.schema'
 
@@ -25,7 +26,7 @@ export const getPostBySlug = queryGeneric({
 	handler: async (ctx, args): Promise<DocPost | null> => {
 		if (args.slug === '') return null
 
-		const post = await ctx.db
+		const post: DocPost = await ctx.db
 			.query('post')
 			.withIndex('by_slug', (q) => q.eq('slug', args.slug))
 			.unique()
@@ -88,6 +89,35 @@ export const updatePostLikes = mutationGeneric({
 
 		await ctx.db.patch(args.id, { likes: existPost.likes })
 
+		return existPost
+	},
+})
+
+export const postComment = mutationGeneric({
+	args: { id: v.id('post'), message: v.string(), parentId: v.optional(v.id('post')) },
+	handler: async (ctx, args): Promise<DocPost | null> => {
+		if (!args.id) return null
+
+		const identity = await ctx.auth.getUserIdentity()
+		if (!identity) {
+			throw new Error('Not authenticated')
+		}
+		const userId = identity.subject
+
+		const existPost: DocPost = await ctx.db.get(args.id)
+
+		if (!existPost) return null
+
+		existPost?.comments.push({
+			commentId: nanoid(),
+			content: args.message,
+			userId: userId,
+			parentId: args.parentId,
+			likes: 0,
+			disLikes: 0,
+		})
+
+		await ctx.db.patch(args.id, { comments: existPost.comments })
 		return existPost
 	},
 })

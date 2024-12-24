@@ -41,9 +41,9 @@ function GuestbookPostCommentForm() {
 
 	if (isLoading) {
 		return (
-			<div className="flex items-center gap-3">
+			<div className="flex items-center justify-center gap-3">
 				<Loader className="animate-spin" size={20} />
-				<span className="text-muted-foreground">Authenticating...</span>
+				<span className="text-sm text-muted-foreground">Authenticating...</span>
 			</div>
 		)
 	}

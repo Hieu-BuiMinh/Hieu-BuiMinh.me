@@ -13,6 +13,8 @@ const post = defineTable({
 			content: v.string(),
 			commentId: v.string(),
 			parentId: v.optional(v.string()),
+			likes: v.number(),
+			disLikes: v.number(),
 		})
 	),
 }).index('by_slug', ['slug'])

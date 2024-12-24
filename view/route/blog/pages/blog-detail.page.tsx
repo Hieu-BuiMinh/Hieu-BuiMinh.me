@@ -5,8 +5,7 @@ import { devBlogPosts } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
 import { formatDate } from '@/lib/utils'
-import PostCommentForm from '@/view/components/blog-content/post-comment-form'
-import PostComments from '@/view/components/blog-content/post-comments'
+import CommentSection from '@/view/components/blog-content/comments'
 import PostLikeButton from '@/view/components/blog-content/post-like-button'
 
 interface PostPageProps {
@@ -41,8 +40,7 @@ export default async function BlogDetailPageView({ params }: PostPageProps) {
 					)}
 
 					{/* User comments */}
-					<PostCommentForm post={post} />
-					<PostComments post={post} />
+					<CommentSection post={post} />
 				</article>
 
 				<aside className="hidden lg:block lg:w-[220px]">

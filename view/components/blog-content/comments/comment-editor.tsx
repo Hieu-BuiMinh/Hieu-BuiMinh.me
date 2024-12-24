@@ -6,19 +6,18 @@ import { useRef } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
-import type { DevBlogPost, DocPost, InterestPost } from '@/.velite'
 import RHFTextArea from '@/components/commons/form-input/RHF-text-area'
 import { Button } from '@/components/ui/button'
 import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
 import { cn } from '@/lib/utils'
 
-const guestbookFormSchema = z.object({
+const postCommentFormSchema = z.object({
 	message: z.string().min(1, {
 		message: 'Message cannot be empty',
 	}),
 })
 
-type TGuestbookFromSchemaType = typeof guestbookFormSchema
+export type TPostCommentFromSchemaType = typeof postCommentFormSchema
 
 type Command = {
 	onModEnter?: () => void
@@ -70,7 +69,7 @@ const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>, command:
 
 	if (event.key === 'Tab') {
 		event.preventDefault()
-		const tabSpace = '  '
+		const tabSpace = '		'
 
 		setRangeText(textarea, tabSpace, selectionStart, selectionEnd, 'end')
 		textarea.setSelectionRange(selectionStart + tabSpace.length, selectionStart + tabSpace.length)
@@ -127,25 +126,27 @@ const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>, command:
 	}
 }
 
-function PostCommentForm({ post }: { post: DevBlogPost | DocPost | InterestPost }) {
+function CommentEditor({
+	onSubmitcallback,
+}: {
+	onSubmitcallback: (data: z.infer<TPostCommentFromSchemaType>) => void
+}) {
 	const { isAuthenticated } = useStoreUserEffect()
+
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
-	const methods = useForm<z.infer<TGuestbookFromSchemaType>>({
-		resolver: zodResolver(guestbookFormSchema),
+	const methods = useForm<z.infer<TPostCommentFromSchemaType>>({
+		resolver: zodResolver(postCommentFormSchema),
 		defaultValues: {
 			message: '',
 		},
 	})
 
-	const onSubmit = (data: z.infer<TGuestbookFromSchemaType>) => {
-		console.log(data)
+	const onModEnter = () => {
+		methods.handleSubmit(onSubmit)()
 	}
 
-	const adjustHeight = () => {
-		if (textareaRef.current) {
-			textareaRef.current.style.height = 'auto'
-			textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`
-		}
+	const onSubmit = (data: z.infer<TPostCommentFromSchemaType>) => {
+		onSubmitcallback(data)
 	}
 
 	return (
@@ -159,13 +160,12 @@ function PostCommentForm({ post }: { post: DevBlogPost | DocPost | InterestPost 
 			<FormProvider {...methods}>
 				<form onSubmit={methods.handleSubmit(onSubmit)} className="w-full">
 					<RHFTextArea
-						// onKeyDown={(e) => {
-						// 	handleKeyDown(e, { onModEnter, onEscape })
-						// }}
-						onInput={adjustHeight}
+						onKeyDown={(e) => {
+							handleKeyDown(e, { onModEnter, onEscape: () => {} })
+						}}
 						ref={textareaRef}
 						name="message"
-						className="min-h-10 border-none focus-visible:ring-0 focus-visible:ring-offset-0"
+						className="min-h-10 resize-none border-none focus-visible:ring-0 focus-visible:ring-offset-0"
 					/>
 
 					<div className="flex flex-row items-center gap-0.5 px-1.5">
@@ -223,4 +223,4 @@ function PostCommentForm({ post }: { post: DevBlogPost | DocPost | InterestPost 
 	)
 }
 
-export default PostCommentForm
+export default CommentEditor
