@@ -67,14 +67,15 @@ const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
 		playConfetti()
 		setCurrentUserLikes((prev) => Math.min(prev + 1, 3))
 
+		// add anonymous user liked posts slug to localstorage
 		if (!isAuthenticated) {
 			addPostLikeBySlug(post.slugAsParams)
 		}
 
 		if (currentUserLikes < 3 && postData) {
-			const promise = likeMutation({ id: postData?._id })
 			if (currentUserLikes === 2) {
-				toast.promise(promise, { success: 'So grateful for your enthusiasm ❤️' })
+				const promise = likeMutation({ id: postData?._id })
+				toast.promise(promise, { success: 'So grateful for your enthusiasm 💖' })
 			} else {
 				likeMutation({ id: postData?._id })
 			}

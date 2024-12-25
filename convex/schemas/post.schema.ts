@@ -15,6 +15,7 @@ const post = defineTable({
 			parentId: v.optional(v.string()),
 			likes: v.number(),
 			disLikes: v.number(),
+			creationTime: v.string(),
 		})
 	),
 }).index('by_slug', ['slug'])

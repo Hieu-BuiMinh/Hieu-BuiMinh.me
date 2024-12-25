@@ -115,6 +115,7 @@ export const postComment = mutationGeneric({
 			parentId: args.parentId,
 			likes: 0,
 			disLikes: 0,
+			creationTime: new Date().toISOString(),
 		})
 
 		await ctx.db.patch(args.id, { comments: existPost.comments })

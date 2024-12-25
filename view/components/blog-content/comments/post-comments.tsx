@@ -11,7 +11,11 @@ function PostComments() {
 
 	const postBySlug = useQuery(api.services.post.getPostBySlug, { slug: post?.slugAsParams })
 
-	return <div>{postBySlug?.comments.map((comment) => <PostComment comment={comment} key={comment.commentId} />)}</div>
+	return (
+		<div className="space-y-4 rounded-lg border ">
+			{postBySlug?.comments.map((comment) => <PostComment comment={comment} key={comment.commentId} />)}
+		</div>
+	)
 }
 
 export default PostComments
