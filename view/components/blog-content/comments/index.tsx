@@ -26,19 +26,12 @@ function CommentSectionProvider({ post, children }: TCommentSectionContextValue 
 }
 
 const CommentSection = ({ post }: TCommentSectionContextValue) => {
-	// if (!post) {
-	// 	return (
-	// 		<div className="flex items-center justify-center gap-3">
-	// 			<Loader className="animate-spin" size={20} />
-	// 			<span className="text-sm text-muted-foreground">Loading comments...</span>
-	// 		</div>
-	// 	)
-	// }
-
 	return (
 		<CommentSectionProvider post={post}>
-			<PostCommentForm />
-			<PostComments />
+			<div className="mt-5">
+				<PostCommentForm />
+				<PostComments />
+			</div>
 		</CommentSectionProvider>
 	)
 }

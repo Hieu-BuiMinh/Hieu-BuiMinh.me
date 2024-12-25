@@ -1,6 +1,7 @@
 'use client'
 
 import { useMutation, useQuery } from 'convex/react'
+import DOMPurify from 'dompurify'
 import { toast } from 'sonner'
 import type { z } from 'zod'
 
@@ -18,19 +19,17 @@ function PostCommentForm() {
 	const mutatePostComment = useMutation(api.services.post.postComment)
 
 	const onSubmitcallback = (data: z.infer<TPostCommentFromSchemaType>) => {
-		console.log(data)
 		if (!isAuthenticated) {
 			toast.warning('You need to login to post this comment!')
 			return
 		}
 		if (!postBySlug?._id) return
 
-		const promise = mutatePostComment({ id: postBySlug._id, message: data.message })
-		toast.promise(promise, {
-			success: 'Comment posted!',
-			loading: 'Posting comment',
-			error: 'Failed to post comment',
-		})
+		const sanitizedMessage = DOMPurify.sanitize(data.message)
+
+		const promise = mutatePostComment({ id: postBySlug._id, message: sanitizedMessage })
+
+		return promise
 	}
 
 	return <CommentEditor onSubmitcallback={onSubmitcallback} />

@@ -9,18 +9,22 @@ const Markdown = memo((props: MarkdownProps) => {
 	const { children } = props
 
 	return (
-		<div className="prose my-3 text-foreground">
+		<div className="my-3 text-foreground">
 			<MarkdownToJSX
 				options={{
-					// overrides: {
-					// 	a: Link,
-					// 	pre: CommentCodeBlock,
-					// 	table: CommentTable,
-					// 	thead: TableHeader,
-					// 	tr: TableRow,
-					// 	th: TableHead,
-					// 	td: TableCell,
-					// },
+					overrides: {
+						p: ({ children, ...props }) => (
+							<p {...props} className="my-1">
+								{children}
+							</p>
+						),
+						// pre: CommentCodeBlock,
+						// table: CommentTable,
+						// thead: TableHeader,
+						// tr: TableRow,
+						// th: TableHead,
+						// td: TableCell,
+					},
 					wrapper: 'article',
 					disableParsingRawHTML: true,
 				}}

@@ -122,3 +122,34 @@ export const postComment = mutationGeneric({
 		return existPost
 	},
 })
+
+export const deletePostComment = mutationGeneric({
+	args: { postId: v.id('post'), commentId: v.string() },
+	handler: async (ctx, args) => {
+		const identity = await ctx.auth.getUserIdentity()
+
+		if (!identity) {
+			throw new Error('Not authenticated')
+		}
+
+		const userId = identity.subject
+
+		const existingPost: DocPost = await ctx.db.get(args.postId)
+
+		if (!existingPost) return
+
+		const existingCommentIndex = existingPost.comments.findIndex((c) => c.commentId === args.commentId)
+
+		if (existingCommentIndex === -1) return
+
+		if (existingPost.comments[existingCommentIndex].userId !== userId) {
+			throw new Error('Unauthorized')
+		}
+
+		existingPost.comments.splice(existingCommentIndex, 1)
+
+		await ctx.db.patch(existingPost._id, { comments: existingPost.comments })
+
+		return existingPost
+	},
+})

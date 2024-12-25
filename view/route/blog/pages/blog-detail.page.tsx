@@ -38,9 +38,6 @@ export default async function BlogDetailPageView({ params }: PostPageProps) {
 							Last updated:&nbsp;{formatDate(post.lastUpdated)}
 						</div>
 					)}
-
-					{/* User comments */}
-					<CommentSection post={post} />
 				</article>
 
 				<aside className="hidden lg:block lg:w-[220px]">
@@ -51,6 +48,8 @@ export default async function BlogDetailPageView({ params }: PostPageProps) {
 					</div>
 				</aside>
 			</div>
+			{/* User comments */}
+			<CommentSection post={post} />
 		</>
 	)
 }

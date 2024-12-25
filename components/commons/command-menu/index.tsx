@@ -2,6 +2,7 @@
 
 import { useClerk } from '@clerk/clerk-react'
 import { CodeIcon, CommandIcon, LinkIcon, LogInIcon, LogOutIcon } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import { SVGIcons } from '@/components/commons/icons/svg-icons'
@@ -21,6 +22,7 @@ import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
 import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
 
 function CommandMenu() {
+	const path = usePathname()
 	const [isOpen, setIsOpen] = useState(false)
 	const [copy] = useCopyToClipboard()
 
@@ -49,7 +51,7 @@ function CommandMenu() {
 						if (!isAuthenticated) {
 							clerk.openSignIn({})
 						} else if (isAuthenticated) {
-							clerk.signOut({})
+							clerk.signOut({ redirectUrl: path })
 						}
 					},
 				},
@@ -71,7 +73,7 @@ function CommandMenu() {
 					title: 'Source code',
 					icon: <CodeIcon className="mr-3 size-4" />,
 					onSelect: () => {
-						openLink('https://github.com/Hieu-BuiMinh')
+						openLink(SITE_CONFIG.links.github)
 					},
 				},
 			],

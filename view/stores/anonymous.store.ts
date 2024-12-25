@@ -46,7 +46,15 @@ const anonymousStore = create<AnonymousState & AnonymousStateActions>()(
 					return state
 				}),
 		}),
-		{ name: 'anonymous-store' }
+		{
+			name: 'anonymous-store',
+			onRehydrateStorage: () => (state) => {
+				if (!state) {
+					// if no persisted state is found, initialize to defaults
+					return anonymousInitialState
+				}
+			},
+		}
 	)
 )
 

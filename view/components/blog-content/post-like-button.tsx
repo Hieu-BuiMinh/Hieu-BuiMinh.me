@@ -68,7 +68,7 @@ const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
 		setCurrentUserLikes((prev) => Math.min(prev + 1, 3))
 
 		// add anonymous user liked posts slug to localstorage
-		if (!isAuthenticated) {
+		if (!isAuthenticated && currentUserLikes < 3) {
 			addPostLikeBySlug(post.slugAsParams)
 		}
 

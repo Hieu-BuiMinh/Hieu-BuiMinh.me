@@ -15,8 +15,10 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { api } from '@/convex/_generated/api'
 import type { Id } from '@/convex/_generated/dataModel'
 import { range } from '@/utils/range'
+// import { useCommentSectionContext } from '@/view/components/blog-content/comments'
 
 function GuestbookComments() {
+	// const { post } = useCommentSectionContext()
 	const allComments = useQuery(api.services.guestbookComment.getAllComments)
 	const deleteComment = useMutation(api.services.guestbookComment.deleteComment)
 

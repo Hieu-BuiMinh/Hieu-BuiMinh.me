@@ -1,15 +1,18 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import { BoldIcon, ItalicIcon, SendIcon, StrikethroughIcon } from 'lucide-react'
+import { BoldIcon, Info, ItalicIcon, SendIcon, StrikethroughIcon } from 'lucide-react'
 import { useRef } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 
 import RHFTextArea from '@/components/commons/form-input/RHF-text-area'
 import { Button } from '@/components/ui/button'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
 import { cn } from '@/lib/utils'
+import UnauthorizedOverlay from '@/view/components/blog-content/unauthorized-overlay'
 
 const postCommentFormSchema = z.object({
 	message: z.string().min(1, {
@@ -145,8 +148,23 @@ function CommentEditor({
 		methods.handleSubmit(onSubmit)()
 	}
 
-	const onSubmit = (data: z.infer<TPostCommentFromSchemaType>) => {
-		onSubmitcallback(data)
+	const onSubmit = async (data: z.infer<TPostCommentFromSchemaType>) => {
+		try {
+			const maliciousPattern = /<script.*?>.*?<\/script>|javascript:/gi
+			if (maliciousPattern.test(data.message)) {
+				toast.error('Your comment contains unsafe content!')
+				return
+			}
+
+			await onSubmitcallback(data) // await submission logic
+
+			// clear the form on success
+			methods.reset({ message: '' })
+			toast.success('Comment posted successfully!')
+		} catch (error) {
+			console.error('Failed to submit:', error)
+			toast.error('Failed to submit your comment.')
+		}
 	}
 
 	return (
@@ -157,6 +175,20 @@ function CommentEditor({
 				'aria-disabled:cursor-not-allowed aria-disabled:opacity-80'
 			)}
 		>
+			{!isAuthenticated ? <UnauthorizedOverlay /> : null}
+			<TooltipProvider>
+				<Tooltip>
+					<TooltipTrigger asChild className="absolute right-2 top-2">
+						<Info className="text-blue-700" size={15} />
+					</TooltipTrigger>
+					<TooltipContent>
+						<p className="w-32">
+							For the comment containing MDX content, you need to press Enter 2 times to go down the line
+							and don&apos;t put &#60;script / &#62; tags into it 🪬
+						</p>
+					</TooltipContent>
+				</Tooltip>
+			</TooltipProvider>
 			<FormProvider {...methods}>
 				<form onSubmit={methods.handleSubmit(onSubmit)} className="w-full">
 					<RHFTextArea
