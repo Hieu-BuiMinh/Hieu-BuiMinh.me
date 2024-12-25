@@ -25,11 +25,16 @@ function PostCommentForm() {
 		}
 		if (!postBySlug?._id) return
 
-		const sanitizedMessage = DOMPurify.sanitize(data.message)
+		const sanitizedMessage = DOMPurify.sanitize(data.message).trim()
+
+		if (!sanitizedMessage && sanitizedMessage === '') return
 
 		const promise = mutatePostComment({ id: postBySlug._id, message: sanitizedMessage })
-
-		return promise
+		toast.promise(promise, {
+			success: 'Comment posted!',
+			loading: 'Posting comment',
+			error: 'Failed to post comment',
+		})
 	}
 
 	return <CommentEditor onSubmitcallback={onSubmitcallback} />

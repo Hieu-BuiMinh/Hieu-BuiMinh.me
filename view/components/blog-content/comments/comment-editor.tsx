@@ -149,22 +149,16 @@ function CommentEditor({
 	}
 
 	const onSubmit = async (data: z.infer<TPostCommentFromSchemaType>) => {
-		try {
-			const maliciousPattern = /<script.*?>.*?<\/script>|javascript:/gi
-			if (maliciousPattern.test(data.message)) {
-				toast.error('Your comment contains unsafe content!')
-				return
-			}
-
-			await onSubmitcallback(data) // await submission logic
-
-			// clear the form on success
-			methods.reset({ message: '' })
-			toast.success('Comment posted successfully!')
-		} catch (error) {
-			console.error('Failed to submit:', error)
-			toast.error('Failed to submit your comment.')
+		const maliciousPattern = /<script[\s\S]*?>[\s\S]*?<\/script[\s\S]*?>|javascript:/gi
+		if (maliciousPattern.test(data.message)) {
+			toast.error('Your comment contains unsafe content!')
+			return
 		}
+
+		onSubmitcallback(data)
+		setTimeout(() => {
+			methods.reset({ message: '' })
+		}, 500)
 	}
 
 	return (
