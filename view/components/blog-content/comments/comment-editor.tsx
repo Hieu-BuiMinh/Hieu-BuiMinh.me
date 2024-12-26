@@ -131,10 +131,12 @@ const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>, command:
 
 function CommentEditor({
 	onSubmitcallback,
+	isAuthenticated = false,
 }: {
 	onSubmitcallback: (data: z.infer<TPostCommentFromSchemaType>) => void
+	isAuthenticated?: boolean
 }) {
-	const { isAuthenticated } = useStoreUserEffect()
+	// const { isAuthenticated } = useStoreUserEffect()
 
 	const textareaRef = useRef<HTMLTextAreaElement>(null)
 	const methods = useForm<z.infer<TPostCommentFromSchemaType>>({

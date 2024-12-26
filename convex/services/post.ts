@@ -94,7 +94,7 @@ export const updatePostLikes = mutationGeneric({
 })
 
 export const postComment = mutationGeneric({
-	args: { id: v.id('post'), message: v.string(), parentId: v.optional(v.id('post')) },
+	args: { id: v.id('post'), message: v.string(), parentId: v.optional(v.string()) },
 	handler: async (ctx, args): Promise<DocPost | null> => {
 		if (!args.id) return null
 

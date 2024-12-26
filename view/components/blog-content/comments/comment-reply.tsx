@@ -2,16 +2,18 @@
 
 import { useMutation, useQuery } from 'convex/react'
 import DOMPurify from 'dompurify'
+import React from 'react'
 import { toast } from 'sonner'
 import type { z } from 'zod'
 
 import { api } from '@/convex/_generated/api'
+import type { DocPost } from '@/convex/schemas/post.schema'
 import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
 import { useCommentSectionContext } from '@/view/components/blog-content/comments'
 import type { TPostCommentFromSchemaType } from '@/view/components/blog-content/comments/comment-editor'
 import CommentEditor from '@/view/components/blog-content/comments/comment-editor'
 
-function PostCommentForm() {
+function CommentReply({ comment }: { comment: DocPost['comments'][number] }) {
 	const { isAuthenticated } = useStoreUserEffect()
 	const { post } = useCommentSectionContext()
 
@@ -20,7 +22,7 @@ function PostCommentForm() {
 
 	const onSubmitcallback = (data: z.infer<TPostCommentFromSchemaType>) => {
 		if (!isAuthenticated) {
-			toast.warning('You need to login to post this comment!')
+			toast.warning('You need to login to reply this comment!')
 			return
 		}
 		if (!postBySlug?._id) return
@@ -29,15 +31,23 @@ function PostCommentForm() {
 
 		if (!sanitizedMessage && sanitizedMessage === '') return
 
-		const promise = mutatePostComment({ id: postBySlug._id, message: sanitizedMessage })
+		const promise = mutatePostComment({
+			id: postBySlug._id,
+			message: sanitizedMessage,
+			parentId: comment.commentId,
+		})
 		toast.promise(promise, {
-			success: 'Comment posted!',
-			loading: 'Posting comment',
-			error: 'Failed to post comment',
+			success: 'Reply posted!',
+			loading: 'Posting reply',
+			error: 'Failed to post your reply',
 		})
 	}
 
-	return <CommentEditor isAuthenticated={isAuthenticated} onSubmitcallback={onSubmitcallback} />
+	return (
+		<div className="ml-[14px] border-l border-dashed py-3 pl-[26px]">
+			<CommentEditor isAuthenticated={true} onSubmitcallback={onSubmitcallback} />
+		</div>
+	)
 }
 
-export default PostCommentForm
+export default CommentReply
