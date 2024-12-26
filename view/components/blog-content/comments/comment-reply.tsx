@@ -8,13 +8,13 @@ import type { z } from 'zod'
 
 import { api } from '@/convex/_generated/api'
 import type { DocPost } from '@/convex/schemas/post.schema'
-import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
+import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
 import { useCommentSectionContext } from '@/view/components/blog-content/comments'
 import type { TPostCommentFromSchemaType } from '@/view/components/blog-content/comments/comment-editor'
 import CommentEditor from '@/view/components/blog-content/comments/comment-editor'
 
 function CommentReply({ comment }: { comment: DocPost['comments'][number] }) {
-	const { isAuthenticated } = useStoreUserEffect()
+	const { isAuthenticated, isLoading } = useStoreUserEffect()
 	const { post } = useCommentSectionContext()
 
 	const postBySlug = useQuery(api.services.post.getPostBySlug, { slug: post?.slugAsParams })
@@ -25,6 +25,11 @@ function CommentReply({ comment }: { comment: DocPost['comments'][number] }) {
 			toast.warning('You need to login to reply this comment!')
 			return
 		}
+		if (isLoading) {
+			toast.warning(`We're authenticating, just wait amoment!`)
+			return
+		}
+
 		if (!postBySlug?._id) return
 
 		const sanitizedMessage = DOMPurify.sanitize(data.message).trim()

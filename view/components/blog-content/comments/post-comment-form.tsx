@@ -6,7 +6,7 @@ import { toast } from 'sonner'
 import type { z } from 'zod'
 
 import { api } from '@/convex/_generated/api'
-import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
+import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
 import { useCommentSectionContext } from '@/view/components/blog-content/comments'
 import type { TPostCommentFromSchemaType } from '@/view/components/blog-content/comments/comment-editor'
 import CommentEditor from '@/view/components/blog-content/comments/comment-editor'

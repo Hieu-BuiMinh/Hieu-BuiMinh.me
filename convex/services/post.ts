@@ -142,11 +142,29 @@ export const deletePostComment = mutationGeneric({
 
 		if (existingCommentIndex === -1) return
 
+		const commentToDelete = existingPost.comments[existingCommentIndex]
+
 		if (existingPost.comments[existingCommentIndex].userId !== userId) {
 			throw new Error('Unauthorized')
 		}
 
-		existingPost.comments.splice(existingCommentIndex, 1)
+		// Recursive function to collect all comments to delete
+		const collectChildComments = (commentId: string): DocPost['comments'] => {
+			const childComments = existingPost.comments.filter((comment) => comment.parentId === commentId)
+
+			return childComments.reduce<DocPost['comments']>(
+				(acc, child) => acc.concat(child, collectChildComments(child.commentId)),
+				[]
+			)
+		}
+
+		// Collect all comments to delete
+		const commentsToDelete = [commentToDelete, ...collectChildComments(args.commentId)]
+
+		// Filter out the comments to delete
+		existingPost.comments = existingPost.comments.filter(
+			(comment) => !commentsToDelete.some((delComment) => delComment.commentId === comment.commentId)
+		)
 
 		await ctx.db.patch(existingPost._id, { comments: existingPost.comments })
 

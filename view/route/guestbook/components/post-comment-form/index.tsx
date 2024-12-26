@@ -10,7 +10,7 @@ import { z } from 'zod'
 import RHFTextArea from '@/components/commons/form-input/RHF-text-area'
 import { Button } from '@/components/ui/button'
 import { api } from '@/convex/_generated/api'
-import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
+import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
 
 const guestbookFormSchema = z.object({
 	message: z.string().min(1, {

@@ -12,7 +12,7 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { api } from '@/convex/_generated/api'
-import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
+import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
 import useAnonymousStore from '@/view/stores/anonymous.store'
 
 type PostLikeButtonProps = {

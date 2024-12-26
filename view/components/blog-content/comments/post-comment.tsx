@@ -13,7 +13,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { api } from '@/convex/_generated/api'
 import type { Id } from '@/convex/_generated/dataModel'
 import type { DocPost } from '@/convex/schemas/post.schema'
-import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
+import useConfirmModal from '@/hooks/use-confirm-modal'
+import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
 import { useCommentSectionContext } from '@/view/components/blog-content/comments'
 import Markdown from '@/view/components/blog-content/comments/comment-markdown'
 import CommentReply from '@/view/components/blog-content/comments/comment-reply'
@@ -26,6 +27,8 @@ function PostComment({
 	const [isReplying, setIsReplying] = useState(false)
 
 	const { post } = useCommentSectionContext()
+	const { setModalOptions } = useConfirmModal()
+
 	const { user: currentUser } = useUser()
 	const users = useQuery(api.services.users.getAllUsers)
 	const commentUser = users?.find((user) => user.userId === comment.userId)
@@ -49,6 +52,15 @@ function PostComment({
 
 	const toggleAnswerSection = () => {
 		setIsReplying((prev) => !prev)
+	}
+
+	const handleOpenConfirmModal = (id?: Id<'post'>) => {
+		setModalOptions({
+			title: 'Delete your comment',
+			description: 'Are you sure you want to delete this comment? This action cannot be undone.',
+			buttons: { cancel: 'Cancel', confirm: 'Confirm' },
+			actions: { onConfirm: () => handleDeleteComment(id) },
+		})
 	}
 
 	return (
@@ -78,7 +90,7 @@ function PostComment({
 							<DropdownMenuItem
 								className="cursor-pointer"
 								onClick={() => {
-									handleDeleteComment(postBySlug?._id)
+									handleOpenConfirmModal(postBySlug?._id)
 								}}
 							>
 								<Trash className="mr-2 size-4" />

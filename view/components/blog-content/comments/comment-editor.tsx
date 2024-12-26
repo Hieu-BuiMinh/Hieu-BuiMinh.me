@@ -10,7 +10,7 @@ import { z } from 'zod'
 import RHFTextArea from '@/components/commons/form-input/RHF-text-area'
 import { Button } from '@/components/ui/button'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
-import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
+import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
 import { cn } from '@/lib/utils'
 import UnauthorizedOverlay from '@/view/components/blog-content/unauthorized-overlay'
 

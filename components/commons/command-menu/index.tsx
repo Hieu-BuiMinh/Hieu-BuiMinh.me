@@ -19,7 +19,7 @@ import {
 import { DialogTitle } from '@/components/ui/dialog'
 import { SITE_CONFIG } from '@/config/site'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
-import { useStoreUserEffect } from '@/hooks/useStoreUserEffect'
+import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
 
 function CommandMenu() {
 	const path = usePathname()
