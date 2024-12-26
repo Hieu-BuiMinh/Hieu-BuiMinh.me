@@ -71,7 +71,7 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 				</div>
 				<div className="flex flex-col gap-2 p-2 md:mx-auto">
 					<span className="text-muted-foreground">Comments</span>
-					<span>{100}</span>
+					<span>{postData?.comments.length || 0}</span>
 				</div>
 			</div>
 
