@@ -37,6 +37,10 @@ function PostCommentForm() {
 		})
 	}
 
+	if (!postBySlug) {
+		return null
+	}
+
 	return <CommentEditor isAuthenticated={isAuthenticated} onSubmitcallback={onSubmitcallback} />
 }
 

@@ -7,6 +7,7 @@ import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
 import { cn, formatDate } from '@/lib/utils'
 import CommentSection from '@/view/components/blog-content/comments'
+import PostLikeButton from '@/view/components/blog-content/post-like-button'
 import DocPostDetailHeader from '@/view/components/doc-content/doc-post-detail-header'
 import FooterNavigator from '@/view/components/doc-content/footer-navigator'
 
@@ -60,6 +61,8 @@ async function DocDetailPageView({ slug }: PostPageProps) {
 			<aside className="hidden lg:block lg:w-[220px]">
 				<div className="sticky top-24">
 					<TableOfContent post={post} />
+
+					<PostLikeButton className="mt-4" post={post} />
 				</div>
 			</aside>
 		</div>

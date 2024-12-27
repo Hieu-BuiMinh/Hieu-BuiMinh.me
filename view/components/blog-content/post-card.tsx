@@ -1,3 +1,6 @@
+'use client'
+
+import { useQuery } from 'convex/react'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 import pluralize from 'pluralize'
@@ -5,6 +8,7 @@ import pluralize from 'pluralize'
 import type { DevBlogPost, DocPost, InterestPost } from '@/.velite'
 import BlurImage from '@/components/commons/image/blur-image'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
+import { api } from '@/convex/_generated/api'
 import { formatDate } from '@/lib/utils'
 
 interface PostCardProps {
@@ -15,11 +19,13 @@ interface PostCardProps {
 export const PostCard = ({ post, root }: PostCardProps) => {
 	const { title, description, date, slugAsParams } = post
 
+	const postBySlug = useQuery(api.services.post.getPostBySlug, { slug: post?.slugAsParams })
+
 	const formattedDate = formatDate(date)
 
-	const viewsQuery = 100 // save in api here
+	const viewsQuery = postBySlug?.views || 0 // save in api here
 
-	const likesQuery = 100 // save in api here
+	const likesQuery = postBySlug?.likes?.reduce((acc, like) => acc + like.count, 0) || 0 // save in api here
 
 	return (
 		<Link

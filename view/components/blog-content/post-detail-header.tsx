@@ -1,7 +1,9 @@
 'use client'
 
+import { useUser } from '@clerk/clerk-react'
 import NumberFlow from '@number-flow/react'
 import { useMutation, useQuery } from 'convex/react'
+import { ShieldCheckIcon } from 'lucide-react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { useEffect, useRef } from 'react'
@@ -22,6 +24,9 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 	const updatePostView = useMutation(api.services.post.updatePostView)
 	const activatePost = useMutation(api.services.post.createPost)
 	const isViewUpdated = useRef<boolean>(false)
+
+	const { user } = useUser()
+	const currentUser = useQuery(api.services.users.getUserByUserId, { id: user?.id || '' })
 
 	if (!post || !post.published) {
 		notFound()
@@ -89,13 +94,24 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 				</div>
 			</div>
 
-			{!postData && postData !== undefined && (
-				<Button onClick={handleActivatePost} variant="secondary" className="my-2 w-full">
+			{!postData && postData !== undefined && currentUser?.role === 'AUTHOR' && (
+				<Button onClick={handleActivatePost} variant="default" className="my-2 w-full">
 					Activate
+					<ShieldCheckIcon />
 				</Button>
 			)}
 
 			<ImageZoom alt="title" src={post?.cover || ''} width={1200} height={630} />
+
+			{!postData && postData !== undefined && (
+				<div className="my-4 rounded border border-green-300/70 bg-green-500/20 p-2 text-sm text-foreground/90">
+					<p>Note: This blog is a work in progress 🧪</p>
+					<p>
+						Feel free to read and explore, but keep in mind that some sections might still be under
+						construction. Your patience is appreciated!
+					</p>
+				</div>
+			)}
 		</div>
 	)
 }

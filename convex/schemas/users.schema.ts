@@ -8,6 +8,7 @@ const users = defineTable({
 	name: v.string(),
 	avatar: v.string(),
 	userId: v.string(),
+	role: v.union(v.literal('AUTHOR'), v.literal('USER')),
 	tokenIdentifier: v.string(),
 })
 	.index('by_user_id', ['userId'])

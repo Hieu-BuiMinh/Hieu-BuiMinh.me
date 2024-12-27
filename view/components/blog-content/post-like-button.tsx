@@ -29,10 +29,10 @@ const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
 	const [currentUserLikes, setCurrentUserLikes] = useState<number>(0)
 	const confettiRef = useRef<HTMLButtonElement>(null)
 
-	const postData = useQuery(api.services.post.getPostBySlug, { slug: post.slugAsParams })
+	const postBySlug = useQuery(api.services.post.getPostBySlug, { slug: post.slugAsParams })
 	const likeMutation = useMutation(api.services.post.updatePostLikes)
 
-	const totalLikes = postData?.likes.reduce((acc, like) => acc + like.count, 0) || 0
+	const totalLikes = postBySlug?.likes.reduce((acc, like) => acc + like.count, 0) || 0
 	const currentPostAnonymousLikes = likes.find((like) => like.postSlug === post.slugAsParams)?.count || 0
 
 	const playConfetti = () => {
@@ -73,31 +73,35 @@ const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
 			addPostLikeBySlug(post.slugAsParams)
 		}
 
-		if (currentUserLikes < 3 && postData) {
+		if (currentUserLikes < 3 && postBySlug) {
 			if (currentUserLikes === 2) {
-				const promise = likeMutation({ id: postData?._id })
+				const promise = likeMutation({ id: postBySlug?._id })
 				toast.promise(promise, { success: 'So grateful for your enthusiasm 💖' })
 			} else {
-				likeMutation({ id: postData?._id })
+				likeMutation({ id: postBySlug?._id })
 			}
 		}
 	}, 1000)
 
 	useEffect(() => {
 		const userLikes = isAuthenticated
-			? postData?.likes.find((like) => like.userId === user?.id)?.count || 0
+			? postBySlug?.likes.find((like) => like.userId === user?.id)?.count || 0
 			: currentPostAnonymousLikes
 
 		setCurrentUserLikes(userLikes)
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isAuthenticated, likes])
 
+	if (!postBySlug) {
+		return null
+	}
+
 	return (
 		<div className={className}>
 			<TooltipProvider>
 				<Tooltip>
 					<TooltipTrigger asChild>
-						<Button disabled={!postData} ref={confettiRef} onClick={handleLike} variant="outline">
+						<Button disabled={!postBySlug} ref={confettiRef} onClick={handleLike} variant="outline">
 							<div className="relative size-4">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"

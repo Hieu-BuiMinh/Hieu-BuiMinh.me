@@ -1,4 +1,5 @@
 import { mutationGeneric, queryGeneric } from 'convex/server'
+import { v } from 'convex/values'
 
 import type { DocUsers } from '../schemas/users.schema'
 
@@ -32,6 +33,7 @@ export const store = mutationGeneric({
 			email: identity.email,
 			avatar: identity.pictureUrl,
 			userId: identity.subject,
+			role: 'USER',
 			tokenIdentifier: identity.tokenIdentifier,
 		})
 	},
@@ -39,9 +41,28 @@ export const store = mutationGeneric({
 
 export const getAllUsers = queryGeneric({
 	args: {},
-	handler: async (ctx, args): Promise<DocUsers[]> => {
+	handler: async (ctx): Promise<DocUsers[]> => {
 		const users: DocUsers[] = await ctx.db.query('users').collect()
 
 		return users
+	},
+})
+
+export const getUserByUserId = queryGeneric({
+	args: { id: v.string() },
+	handler: async (ctx, args): Promise<DocUsers | null> => {
+		if (!args.id) {
+			return null
+		}
+
+		const users: DocUsers[] = await ctx.db.query('users').collect()
+
+		const user = users.find((u) => u.userId === args.id)
+
+		if (!user) {
+			return null
+		}
+
+		return user
 	},
 })
