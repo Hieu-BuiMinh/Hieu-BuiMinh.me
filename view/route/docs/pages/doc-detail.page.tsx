@@ -6,6 +6,7 @@ import { docs } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
 import { cn, formatDate } from '@/lib/utils'
+import CommentSection from '@/view/components/blog-content/comments'
 import DocPostDetailHeader from '@/view/components/doc-content/doc-post-detail-header'
 import FooterNavigator from '@/view/components/doc-content/footer-navigator'
 
@@ -49,6 +50,11 @@ async function DocDetailPageView({ slug }: PostPageProps) {
 				)}
 
 				<FooterNavigator post={post} />
+
+				{/* User comments */}
+				<div className="mt-20">
+					<CommentSection post={post} />
+				</div>
 			</article>
 
 			<aside className="hidden lg:block lg:w-[220px]">

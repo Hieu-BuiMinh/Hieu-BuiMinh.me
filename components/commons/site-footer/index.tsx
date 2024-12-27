@@ -39,26 +39,6 @@ function SiteFooter() {
 				alt="footer-logo"
 			/>
 			<div className="flex justify-between">
-				<div className="flex gap-5">
-					{routes.map((route) => {
-						return (
-							<div key={route.title} className="flex flex-col gap-3">
-								<p className="font-semibold">{route.title}</p>
-								{route.links.map((link) => {
-									return (
-										<Link
-											key={link.lable}
-											href={link.href}
-											className="text-sm font-light text-muted-foreground hover:text-foreground"
-										>
-											{link.lable}
-										</Link>
-									)
-								})}
-							</div>
-						)
-					})}
-				</div>
 				<div className="flex flex-col gap-3">
 					<div className="flex flex-col gap-3">
 						<p className="font-semibold">Contact</p>
@@ -118,6 +98,26 @@ function SiteFooter() {
 							Ho Chi Minh City • Vietnam
 						</span>
 					</div>
+				</div>
+				<div className="flex gap-5">
+					{routes.map((route) => {
+						return (
+							<div key={route.title} className="flex flex-col gap-3">
+								<p className="font-semibold">{route.title}</p>
+								{route.links.map((link) => {
+									return (
+										<Link
+											key={link.lable}
+											href={link.href}
+											className="text-sm font-light text-muted-foreground hover:text-foreground"
+										>
+											{link.lable}
+										</Link>
+									)
+								})}
+							</div>
+						)
+					})}
 				</div>
 			</div>
 

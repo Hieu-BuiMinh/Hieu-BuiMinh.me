@@ -6,6 +6,7 @@ import { interests } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
 import { cn, formatDate } from '@/lib/utils'
+import CommentSection from '@/view/components/blog-content/comments'
 
 interface ICategoryDetailPageProps {
 	params: Promise<{ category: string; slug: string[] }>
@@ -50,6 +51,8 @@ export default async function CategoryDetailPage({ params }: ICategoryDetailPage
 					</div>
 				</aside>
 			</div>
+			{/* User comments */}
+			<CommentSection post={post} />
 		</>
 	)
 }

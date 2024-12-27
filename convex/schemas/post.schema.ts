@@ -13,8 +13,8 @@ const post = defineTable({
 			content: v.string(),
 			commentId: v.string(),
 			parentId: v.optional(v.string()),
-			likes: v.number(),
-			disLikes: v.number(),
+			likes: v.array(v.string()),
+			disLikes: v.array(v.string()),
 			creationTime: v.string(),
 		})
 	),

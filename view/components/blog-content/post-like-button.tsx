@@ -1,6 +1,7 @@
 'use client'
 
 import { useUser } from '@clerk/clerk-react'
+import NumberFlow from '@number-flow/react'
 import confetti from 'canvas-confetti'
 import { useMutation, useQuery } from 'convex/react'
 import { useEffect, useRef, useState } from 'react'
@@ -112,7 +113,12 @@ const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
 								</svg>
 							</div>
 							<Separator orientation="vertical" />
-							{totalLikes} 🎉
+							<NumberFlow
+								willChange
+								value={totalLikes}
+								format={{ trailingZeroDisplay: 'stripIfInteger' }}
+							/>
+							🎉
 						</Button>
 					</TooltipTrigger>
 					<TooltipContent>

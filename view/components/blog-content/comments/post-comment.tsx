@@ -1,6 +1,7 @@
 'use client'
 
 import { useUser } from '@clerk/clerk-react'
+import NumberFlow from '@number-flow/react'
 import { useMutation, useQuery } from 'convex/react'
 import { format } from 'date-fns'
 import { CircleX, Ellipsis, MessagesSquare, ThumbsDown, ThumbsUp, Trash } from 'lucide-react'
@@ -15,6 +16,7 @@ import type { Id } from '@/convex/_generated/dataModel'
 import type { DocPost } from '@/convex/schemas/post.schema'
 import useConfirmModal from '@/hooks/use-confirm-modal'
 import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
+import { cn } from '@/lib/utils'
 import { useCommentSectionContext } from '@/view/components/blog-content/comments'
 import Markdown from '@/view/components/blog-content/comments/comment-markdown'
 import CommentReply from '@/view/components/blog-content/comments/comment-reply'
@@ -37,6 +39,7 @@ function PostComment({
 
 	const postBySlug = useQuery(api.services.post.getPostBySlug, { slug: post?.slugAsParams })
 	const deleteComment = useMutation(api.services.post.deletePostComment)
+	const interactComment = useMutation(api.services.post.interactComment)
 
 	const formattedDate = format(comment.creationTime, 'dd MMM yyyy | HH:mm aa')
 
@@ -48,6 +51,10 @@ function PostComment({
 			success: 'Comment deleted',
 			error: 'Failed to delete comment',
 		})
+	}
+	const handleInteractComment = ({ id, type }: { id?: Id<'post'>; type: 'LIKE' | 'DISLIKE' }) => {
+		if (!id) return
+		interactComment({ postId: id, commentId: comment.commentId, type: type })
 	}
 
 	const toggleAnswerSection = () => {
@@ -102,16 +109,42 @@ function PostComment({
 			</div>
 			<Markdown>{comment.content || ''}</Markdown>
 
-			<div className="flex items-center gap-3 text-muted-foreground">
-				<Button className="flex h-8 gap-2 transition-colors hover:text-foreground" variant="outline">
-					<ThumbsUp size={16} />
-					<span>0</span>
-				</Button>
-				<Button className="flex h-8 gap-2 transition-colors hover:text-foreground" variant="outline">
-					<ThumbsDown />
-					<span>0</span>
-				</Button>
-				{isAuthenticated ? (
+			{isAuthenticated ? (
+				<div className="flex items-center gap-3 text-muted-foreground">
+					<Button
+						onClick={() => {
+							handleInteractComment({ id: postBySlug?._id, type: 'LIKE' })
+						}}
+						className={cn(
+							'flex h-8 gap-2 transition-colors hover:text-foreground',
+							comment.likes.includes(currentUser?.id || '') && 'border-foreground text-foreground'
+						)}
+						variant="outline"
+					>
+						<ThumbsUp size={16} />
+						<NumberFlow
+							willChange
+							value={comment.likes.length || 0}
+							format={{ trailingZeroDisplay: 'stripIfInteger' }}
+						/>
+					</Button>
+					<Button
+						onClick={() => {
+							handleInteractComment({ id: postBySlug?._id, type: 'DISLIKE' })
+						}}
+						className={cn(
+							'flex h-8 gap-2 transition-colors hover:text-foreground',
+							comment.disLikes.includes(currentUser?.id || '') && 'border-foreground text-foreground'
+						)}
+						variant="outline"
+					>
+						<ThumbsDown />
+						<NumberFlow
+							willChange
+							value={comment.disLikes.length || 0}
+							format={{ trailingZeroDisplay: 'stripIfInteger' }}
+						/>
+					</Button>
 					<Button
 						onClick={toggleAnswerSection}
 						className="flex h-8 gap-2 transition-colors hover:text-foreground"
@@ -120,10 +153,12 @@ function PostComment({
 						{isReplying ? <CircleX /> : <MessagesSquare />}
 						<span>{isReplying ? 'Cancel' : 'Reply'}</span>
 					</Button>
-				) : (
-					<p className="text-sm text-muted-foreground">You need to log in to reply to this comment.</p>
-				)}
-			</div>
+				</div>
+			) : (
+				<p className="text-sm text-muted-foreground">
+					Log in to interact or share your thoughts with a reply 🌵
+				</p>
+			)}
 
 			{isReplying && isAuthenticated && <CommentReply comment={comment} />}
 

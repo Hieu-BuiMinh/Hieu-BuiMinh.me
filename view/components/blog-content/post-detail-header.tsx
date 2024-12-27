@@ -1,5 +1,6 @@
 'use client'
 
+import NumberFlow from '@number-flow/react'
 import { useMutation, useQuery } from 'convex/react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
@@ -67,11 +68,24 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 				</div>
 				<div className="flex flex-col gap-2 p-2 md:mx-auto">
 					<span className="text-muted-foreground">Views</span>
-					<span>{postData?.views || 0}</span>
+					<span>
+						<NumberFlow
+							willChange
+							value={postData?.views || 0}
+							format={{ trailingZeroDisplay: 'stripIfInteger' }}
+						/>
+					</span>
 				</div>
 				<div className="flex flex-col gap-2 p-2 md:mx-auto">
 					<span className="text-muted-foreground">Comments</span>
-					<span>{postData?.comments.length || 0}</span>
+
+					<span>
+						<NumberFlow
+							willChange
+							value={postData?.comments.length || 0}
+							format={{ trailingZeroDisplay: 'stripIfInteger' }}
+						/>
+					</span>
 				</div>
 			</div>
 

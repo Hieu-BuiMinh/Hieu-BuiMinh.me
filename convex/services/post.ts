@@ -113,8 +113,8 @@ export const postComment = mutationGeneric({
 			content: args.message,
 			userId: userId,
 			parentId: args.parentId,
-			likes: 0,
-			disLikes: 0,
+			likes: [],
+			disLikes: [],
 			creationTime: new Date().toISOString(),
 		})
 
@@ -169,5 +169,58 @@ export const deletePostComment = mutationGeneric({
 		await ctx.db.patch(existingPost._id, { comments: existingPost.comments })
 
 		return existingPost
+	},
+})
+
+export const interactComment = mutationGeneric({
+	args: {
+		postId: v.id('post'),
+		commentId: v.string(),
+		type: v.union(v.literal('LIKE'), v.literal('DISLIKE')),
+	},
+	handler: async (ctx, args) => {
+		const identity = await ctx.auth.getUserIdentity()
+
+		if (!identity) {
+			throw new Error('Not authenticated')
+		}
+
+		const userId = identity.subject
+
+		const existingPost: DocPost = await ctx.db.get(args.postId)
+
+		if (!existingPost) return
+
+		const commentIndex = existingPost.comments.findIndex((comment) => comment.commentId === args.commentId)
+
+		if (commentIndex === -1) {
+			throw new Error('Comment not found')
+		}
+
+		const comment = existingPost.comments[commentIndex]
+
+		if (args.type === 'LIKE') {
+			if (comment.likes.includes(userId)) {
+				comment.likes = comment.likes.filter((id) => id !== userId)
+			} else {
+				comment.likes.push(userId)
+				comment.disLikes = comment.disLikes.filter((id) => id !== userId)
+			}
+		} else if (args.type === 'DISLIKE') {
+			if (comment.disLikes.includes(userId)) {
+				comment.disLikes = comment.disLikes.filter((id) => id !== userId)
+			} else {
+				comment.disLikes.push(userId)
+				comment.likes = comment.likes.filter((id) => id !== userId)
+			}
+		}
+
+		existingPost.comments[commentIndex] = comment
+
+		await ctx.db.patch(args.postId, {
+			comments: existingPost.comments,
+		})
+
+		return { success: true }
 	},
 })

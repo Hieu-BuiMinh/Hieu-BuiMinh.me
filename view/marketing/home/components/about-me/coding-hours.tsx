@@ -1,3 +1,4 @@
+import NumberFlow from '@number-flow/react'
 import { Hourglass } from 'lucide-react'
 import { Suspense } from 'react'
 
@@ -9,7 +10,14 @@ export function CodingHours() {
 				<span>Codding hours</span>
 			</span>
 			<p className="font-title flex w-full grow items-center justify-center truncate text-4xl font-semibold text-foreground md:text-3xl lg:text-4xl [@media(max-width:450px)]:py-8">
-				<Suspense fallback="-- hrs">3.250 hrs</Suspense>
+				<Suspense fallback="-- hrs">
+					<NumberFlow
+						willChange
+						value={3250}
+						suffix="hrs"
+						format={{ trailingZeroDisplay: 'stripIfInteger' }}
+					/>
+				</Suspense>
 			</p>
 			<span />
 		</div>
