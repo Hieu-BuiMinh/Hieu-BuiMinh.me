@@ -1,7 +1,6 @@
 'use client'
 
 import { useQuery } from 'convex/react'
-import { Loader } from 'lucide-react'
 
 import { api } from '@/convex/_generated/api'
 import type { DocPost } from '@/convex/schemas/post.schema'
