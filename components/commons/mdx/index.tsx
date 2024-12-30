@@ -5,6 +5,7 @@ import * as runtime from 'react/jsx-runtime'
 
 import ShowcaseGrid from '@/components/commons/grid/showcase-grid'
 import ImageZoom from '@/components/commons/image/image-zoom'
+import Audio from '@/components/commons/mdx/custom-components/audio'
 import BlockQuote from '@/components/commons/mdx/custom-components/block-quote'
 import { CodeBlock } from '@/components/commons/mdx/custom-components/code-block'
 import Heading from '@/components/commons/mdx/custom-components/heading'
@@ -67,6 +68,7 @@ const components = {
 	// 	return <>{props.children} 123</>
 	// },
 	// pre: CodeBlock,
+	Audio: Audio,
 	CodeBlock,
 	LinkCard,
 	TreeView,
