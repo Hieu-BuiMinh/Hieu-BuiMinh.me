@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { useEffect, useRef } from 'react'
 import { toast } from 'sonner'
+import { useDebounceCallback } from 'usehooks-ts'
 
 import type { DevBlogPost, InterestPost } from '@/.velite'
 import ImageZoom from '@/components/commons/image/image-zoom'
@@ -41,15 +42,20 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 		})
 	}
 
-	const handleUpdatePostView = async () => {
-		if (!postData || isViewUpdated.current) return
-		updatePostView({ id: postData._id }).then(() => {
-			isViewUpdated.current = true
-		})
-	}
+	const handleUpdatePostView = useDebounceCallback(async () => {
+		if (isViewUpdated.current || !postData) return
+		isViewUpdated.current = true
+		try {
+			await updatePostView({ id: postData._id })
+		} catch (error) {
+			console.error('Failed to update post view:', error)
+		}
+	}, 1000)
 
 	useEffect(() => {
-		handleUpdatePostView()
+		if (postData) {
+			handleUpdatePostView()
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps, @tanstack/query/no-unstable-deps
 	}, [postData])
 
