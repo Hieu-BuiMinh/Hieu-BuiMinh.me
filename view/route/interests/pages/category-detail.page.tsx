@@ -1,12 +1,12 @@
 import { Roboto } from 'next/font/google'
 import { notFound } from 'next/navigation'
-import React from 'react'
 
 import { interests } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
 import { cn, formatDate } from '@/lib/utils'
 import CommentSection from '@/view/components/blog-content/comments'
+import PostLikeButton from '@/view/components/blog-content/post-like-button'
 
 interface ICategoryDetailPageProps {
 	params: Promise<{ category: string; slug: string[] }>
@@ -48,6 +48,8 @@ export default async function CategoryDetailPage({ params }: ICategoryDetailPage
 				<aside className="hidden lg:block lg:w-[220px]">
 					<div className="sticky top-24">
 						<TableOfContent post={post} />
+
+						<PostLikeButton post={post} />
 					</div>
 				</aside>
 			</div>
