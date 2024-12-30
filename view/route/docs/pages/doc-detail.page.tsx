@@ -59,7 +59,7 @@ async function DocDetailPageView({ slug }: PostPageProps) {
 			</article>
 
 			<aside className="hidden lg:block lg:w-[220px]">
-				<div className="sticky top-24">
+				<div className=" flex flex-col gap-4">
 					<TableOfContent post={post} />
 
 					<PostLikeButton className="mt-4" post={post} />
