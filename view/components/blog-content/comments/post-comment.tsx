@@ -53,6 +53,10 @@ function PostComment({
 		})
 	}
 	const handleInteractComment = ({ id, type }: { id?: Id<'post'>; type: 'LIKE' | 'DISLIKE' }) => {
+		if (!isAuthenticated) {
+			toast.warning('You need to ligin to interact 🚧')
+			return
+		}
 		if (!id) return
 		interactComment({ postId: id, commentId: comment.commentId, type: type })
 	}
@@ -109,42 +113,44 @@ function PostComment({
 			</div>
 			<Markdown>{comment.content || ''}</Markdown>
 
-			{isAuthenticated ? (
-				<div className="flex items-center gap-3 text-muted-foreground">
-					<Button
-						onClick={() => {
-							handleInteractComment({ id: postBySlug?._id, type: 'LIKE' })
-						}}
-						className={cn(
-							'flex h-8 gap-2 transition-colors hover:text-foreground',
-							comment.likes.includes(currentUser?.id || '') && 'border-foreground text-foreground'
-						)}
-						variant="outline"
-					>
-						<ThumbsUp size={16} />
-						<NumberFlow
-							willChange
-							value={comment.likes.length || 0}
-							format={{ trailingZeroDisplay: 'stripIfInteger' }}
-						/>
-					</Button>
-					<Button
-						onClick={() => {
-							handleInteractComment({ id: postBySlug?._id, type: 'DISLIKE' })
-						}}
-						className={cn(
-							'flex h-8 gap-2 transition-colors hover:text-foreground',
-							comment.disLikes.includes(currentUser?.id || '') && 'border-foreground text-foreground'
-						)}
-						variant="outline"
-					>
-						<ThumbsDown />
-						<NumberFlow
-							willChange
-							value={comment.disLikes.length || 0}
-							format={{ trailingZeroDisplay: 'stripIfInteger' }}
-						/>
-					</Button>
+			<div className="flex items-center gap-3 text-muted-foreground">
+				<Button
+					disabled={!isAuthenticated}
+					onClick={() => {
+						handleInteractComment({ id: postBySlug?._id, type: 'LIKE' })
+					}}
+					className={cn(
+						'flex h-8 gap-2 transition-colors hover:text-foreground',
+						comment.likes.includes(currentUser?.id || '') && 'border-foreground text-foreground'
+					)}
+					variant="outline"
+				>
+					<ThumbsUp size={16} />
+					<NumberFlow
+						willChange
+						value={comment.likes.length || 0}
+						format={{ trailingZeroDisplay: 'stripIfInteger' }}
+					/>
+				</Button>
+				<Button
+					disabled={!isAuthenticated}
+					onClick={() => {
+						handleInteractComment({ id: postBySlug?._id, type: 'DISLIKE' })
+					}}
+					className={cn(
+						'flex h-8 gap-2 transition-colors hover:text-foreground',
+						comment.disLikes.includes(currentUser?.id || '') && 'border-foreground text-foreground'
+					)}
+					variant="outline"
+				>
+					<ThumbsDown />
+					<NumberFlow
+						willChange
+						value={comment.disLikes.length || 0}
+						format={{ trailingZeroDisplay: 'stripIfInteger' }}
+					/>
+				</Button>
+				{isAuthenticated && (
 					<Button
 						onClick={toggleAnswerSection}
 						className="flex h-8 gap-2 transition-colors hover:text-foreground"
@@ -153,12 +159,10 @@ function PostComment({
 						{isReplying ? <CircleX /> : <MessagesSquare />}
 						<span>{isReplying ? 'Cancel' : 'Reply'}</span>
 					</Button>
-				</div>
-			) : (
-				<p className="text-sm text-muted-foreground">
-					Log in to interact or share your thoughts with a reply 🌵
-				</p>
-			)}
+				)}
+			</div>
+
+			{!isAuthenticated && <p className="text-sm text-muted-foreground">Log in to interact or reply 🌵</p>}
 
 			{isReplying && isAuthenticated && <CommentReply comment={comment} />}
 
