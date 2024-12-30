@@ -41,7 +41,7 @@ export default async function BlogDetailPageView({ params }: PostPageProps) {
 				</article>
 
 				<aside className="hidden lg:block lg:w-[220px]">
-					<div className="sticky top-12 flex flex-col gap-4">
+					<div className="sticky top-16 flex flex-col gap-4">
 						<TableOfContent post={post} />
 
 						<PostLikeButton post={post} />
