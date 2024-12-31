@@ -1,8 +1,8 @@
 import { Table as UITable, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 type TableProps = {
-	headers: string[]
-	rows: string[][]
+	headers?: string[]
+	rows?: string[][]
 }
 
 const Table = (props: TableProps) => {
@@ -10,27 +10,31 @@ const Table = (props: TableProps) => {
 
 	return (
 		<UITable className="not-prose my-2">
-			<TableHeader>
-				<TableRow>
-					{headers.map((header, i) => (
-						<TableHead className="border" key={`${i}`}>
-							{header}
-						</TableHead>
-					))}
-				</TableRow>
-			</TableHeader>
-			<TableBody>
-				{rows.map((row, i) => (
-					// <TableRow className="odd:bg-muted/40" key={i}>
-					<TableRow key={i}>
-						{row.map((cell, j) => (
-							<TableCell className="border" key={j}>
-								{cell}
-							</TableCell>
+			{headers && (
+				<TableHeader>
+					<TableRow>
+						{headers.map((header, i) => (
+							<TableHead className="border" key={`${i}`}>
+								{header}
+							</TableHead>
 						))}
 					</TableRow>
-				))}
-			</TableBody>
+				</TableHeader>
+			)}
+			{rows && (
+				<TableBody>
+					{rows.map((row, i) => (
+						// <TableRow className="odd:bg-muted/40" key={i}>
+						<TableRow key={i}>
+							{row.map((cell, j) => (
+								<TableCell className="border" key={j}>
+									{cell}
+								</TableCell>
+							))}
+						</TableRow>
+					))}
+				</TableBody>
+			)}
 		</UITable>
 	)
 }
