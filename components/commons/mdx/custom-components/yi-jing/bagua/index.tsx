@@ -8,10 +8,11 @@ interface IBagua {
 	index?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 	actives?: number[]
 	className?: string
+	showLabel?: boolean
 	yinYangClassName?: string
 }
 
-function Bagua({ index = 1, actives, className, yinYangClassName }: IBagua) {
+function Bagua({ index = 1, actives, className, yinYangClassName, showLabel }: IBagua) {
 	const bagua: { value: (0 | 1)[]; label: string } = useMemo(() => {
 		switch (index) {
 			case 0 || 8:
@@ -47,7 +48,7 @@ function Bagua({ index = 1, actives, className, yinYangClassName }: IBagua) {
 					active={actives?.includes(index - 1)}
 				/>
 			))}
-			<span className="text-center text-xs">{bagua.label}</span>
+			{showLabel && <span className="text-center text-xs">{bagua.label}</span>}
 		</div>
 	)
 }
