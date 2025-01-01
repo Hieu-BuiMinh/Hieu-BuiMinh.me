@@ -40,12 +40,12 @@ function Bagua({ index = 1, actives, className, yinYangClassName, showLabel }: I
 
 	return (
 		<div className={cn('flex flex-col gap-2', className)}>
-			{bagua.value.map((item, index) => (
+			{bagua.value.map((item, i) => (
 				<YinYang
 					className={yinYangClassName}
 					type={item}
 					key={nanoid()}
-					active={actives?.includes(index - 1)}
+					active={actives?.includes(bagua.value.length - i)}
 				/>
 			))}
 			{showLabel && <span className="text-center text-xs">{bagua.label}</span>}

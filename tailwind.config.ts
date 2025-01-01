@@ -143,6 +143,8 @@ const config: Config = {
 			boxShadow: {
 				'feature-card': '0 -1px 3px 0 rgb(0 0 0 / 0.05)',
 				'feature-card-dark': '0 0 0 1px rgb(255 255 255 / 0.06), 0 -1px rgb(255 255 255 / 0.1)',
+				'yin-yang':
+					'rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -2.5px, rgba(0, 0, 0, 0.2) 0px -2.5px 0px inset',
 			},
 			backgroundImage: {
 				pinned: 'linear-gradient(45deg, #20f961 0%, #20f9ce 17%, #20b8f9 34%, #204bf9 51%, #6120f9 68%, #ce20f9 85%, #f920b8 102%)',

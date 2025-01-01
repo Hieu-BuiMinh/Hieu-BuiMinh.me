@@ -98,3 +98,9 @@ code[data-theme*=' '] span {
 .subheading-anchor {
 	@apply no-underline hover:underline;
 }
+
+.prose {
+	blockquote {
+		@apply my-6 rounded px-3 shadow-md bg-blue-100 dark:bg-blue-400 dark:bg-opacity-20 text-blue-900/80 dark:text-blue-100/80 border border-blue-400/40 leading-6 text-base font-normal;
+	}
+}

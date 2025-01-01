@@ -28,7 +28,7 @@ async function DocDetailPageView({ slug }: PostPageProps) {
 	}
 
 	return (
-		<div className="relative flex justify-between gap-10 p-3">
+		<div className="relative flex justify-between gap-5 p-3 max-sm:overflow-auto">
 			<div className="absolute inset-0 z-[-1] hidden h-[64rem] max-h-screen overflow-hidden bg-doc-header-gradient opacity-100 lg:block">
 				<Image
 					src="/assets/images/docs/docs-header-decor.svg"

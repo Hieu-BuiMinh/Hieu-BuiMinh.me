@@ -11,6 +11,8 @@ import { CodeBlock } from '@/components/commons/mdx/custom-components/code-block
 import Heading from '@/components/commons/mdx/custom-components/heading'
 import LinkCard from '@/components/commons/mdx/custom-components/link-card'
 import Table from '@/components/commons/mdx/custom-components/table'
+import Bagua from '@/components/commons/mdx/custom-components/yi-jing/bagua'
+import YinYang from '@/components/commons/mdx/custom-components/yi-jing/yin-yang'
 import TreeView from '@/components/commons/tree-view'
 import { cn } from '@/lib/utils'
 
@@ -76,6 +78,10 @@ const components = {
 	BlockQuote,
 	ShowcaseGrid,
 	Table,
+
+	// Iching here
+	YinYang,
+	Bagua,
 }
 
 interface MdxProps {
