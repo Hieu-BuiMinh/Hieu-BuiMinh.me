@@ -1,10 +1,11 @@
 import React from 'react'
 
 import { docs } from '@/.velite'
-import { sortPostsByDate } from '@/lib/content/posts'
+import { getAllTags, sortPostsByDate, sortTagsByCount } from '@/lib/content/posts'
 import PageTitle from '@/view/components/blog-content/page-title'
 import PostCards from '@/view/components/blog-content/post-cards'
 import PostPagination from '@/view/components/blog-content/post-pagination'
+import { Tag } from '@/view/components/blog-content/tag'
 
 interface IDocPageProps {
 	searchParams: Promise<{ page?: string }>
@@ -28,10 +29,18 @@ async function DocsPageView({ searchParams }: IDocPageProps) {
 
 	const displayPosts = sortedPosts.slice(POSTS_PER_PAGE * (currentPage - 1), POSTS_PER_PAGE * currentPage)
 
+	const tags = getAllTags(displayPosts)
+	const sortedTags = sortTagsByCount(tags)
+
 	return (
 		<div className="m-auto max-w-screen-lg p-3 md:px-10 md:py-6">
 			<div className="container flex max-w-4xl flex-col gap-3">
 				<PageTitle title={title} description={description} />
+
+				<div className="group flex flex-wrap gap-3 py-3">
+					{sortedTags?.map((tag) => <Tag tag={tag} key={tag} count={tags[tag]} />)}
+				</div>
+
 				{displayPosts?.length > 0 ? (
 					<PostCards posts={displayPosts} />
 				) : (

@@ -32,9 +32,11 @@ async function DevBlogPageView({ searchParams }: IBlogpageProps) {
 	return (
 		<div className="container flex max-w-4xl flex-col gap-3">
 			<PageTitle title={title} description={description} />
+
 			<div className="group flex flex-wrap gap-3 py-3">
 				{sortedTags?.map((tag) => <Tag tag={tag} key={tag} count={tags[tag]} />)}
 			</div>
+
 			{displayPosts?.length > 0 ? <PostCards posts={displayPosts} /> : <p>I have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>}
 			<PostPagination totalPages={totalPages} className="mt-4 justify-end" />
 		</div>

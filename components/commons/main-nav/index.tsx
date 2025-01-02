@@ -25,14 +25,14 @@ const blogItems: { title: string; href: string; description: string }[] = [
 		description: 'Re-usable components built using Radix UI and Tailwind CSS.',
 	},
 	{
-		title: 'Guestbook 🛸',
-		href: '/guestbook',
-		description: 'Sign my guestbook and share your idea. You can tell me anything here!',
-	},
-	{
 		title: 'Documents 🌵',
 		href: '/docs',
 		description: 'Styles for headings, paragraphs, lists...etc',
+	},
+	{
+		title: 'Guestbook 🛸',
+		href: '/guestbook',
+		description: 'Sign my guestbook and share your idea. You can tell me anything here!',
 	},
 ]
 
@@ -61,6 +61,11 @@ const aboutItems: { title: string; href: string; description: string }[] = [
 		title: 'Insanity 🤡',
 		href: '/about/insanity',
 		description: 'How far down the rabbit hole do you wanna go!?',
+	},
+	{
+		title: 'Tags 🏷️',
+		href: '/tags',
+		description: 'Organized chaos awaits! Browse tags and see what catches your eye.',
 	},
 ]
 
