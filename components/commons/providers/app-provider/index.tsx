@@ -1,3 +1,4 @@
+import { NuqsAdapter } from 'nuqs/adapters/next/app'
 import React from 'react'
 
 import Hello from '@/components/commons/intro/hello'
@@ -10,7 +11,7 @@ function AppProvider({ children }: { children: React.ReactNode }) {
 		<ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
 			<ConvexClientProvider>
 				<Hello />
-				{children}
+				<NuqsAdapter>{children}</NuqsAdapter>
 				<ConfirmModal />
 			</ConvexClientProvider>
 		</ThemeProvider>

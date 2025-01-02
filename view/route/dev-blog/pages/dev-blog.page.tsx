@@ -15,7 +15,7 @@ const description =
 
 const POSTS_PER_PAGE = 10
 
-async function BlogPageView({ searchParams }: IBlogpageProps) {
+async function DevBlogPageView({ searchParams }: IBlogpageProps) {
 	const resolvedSearchParams = await searchParams
 	const tags = getAllTags(devBlogPosts)
 	const sortedTags = sortTagsByCount(tags)
@@ -35,14 +35,10 @@ async function BlogPageView({ searchParams }: IBlogpageProps) {
 			<div className="group flex flex-wrap gap-3 py-3">
 				{sortedTags?.map((tag) => <Tag tag={tag} key={tag} count={tags[tag]} />)}
 			</div>
-			{displayPosts?.length > 0 ? (
-				<PostCards root="blog" posts={displayPosts} />
-			) : (
-				<p>I have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
-			)}
+			{displayPosts?.length > 0 ? <PostCards posts={displayPosts} /> : <p>I have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>}
 			<PostPagination totalPages={totalPages} className="mt-4 justify-end" />
 		</div>
 	)
 }
 
-export default BlogPageView
+export default DevBlogPageView

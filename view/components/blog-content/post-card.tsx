@@ -13,11 +13,10 @@ import { formatDate } from '@/lib/utils'
 
 interface PostCardProps {
 	post: DevBlogPost | InterestPost | DocPost
-	root: string
 }
 
-export const PostCard = ({ post, root }: PostCardProps) => {
-	const { title, description, date, slugAsParams } = post
+export const PostCard = ({ post }: PostCardProps) => {
+	const { title, description, date, slug } = post
 
 	const postBySlug = useQuery(api.services.post.getPostBySlug, { slug: post?.slugAsParams })
 
@@ -29,7 +28,7 @@ export const PostCard = ({ post, root }: PostCardProps) => {
 
 	return (
 		<Link
-			href={`/${root}/${slugAsParams}`}
+			href={`/${slug}`}
 			// className="group rounded-md px-2 py-4 shadow-feature-card dark:shadow-feature-card-dark"
 			className="group rounded-md border p-2 dark:border-none dark:p-0"
 		>

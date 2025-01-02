@@ -33,7 +33,7 @@ async function DocsPageView({ searchParams }: IDocPageProps) {
 			<div className="container flex max-w-4xl flex-col gap-3">
 				<PageTitle title={title} description={description} />
 				{displayPosts?.length > 0 ? (
-					<PostCards root="docs" posts={displayPosts} />
+					<PostCards posts={displayPosts} />
 				) : (
 					<p>I have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
 				)}

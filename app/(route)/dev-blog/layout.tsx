@@ -6,8 +6,8 @@ export const metadata: Metadata = {
 	description: `Explore my site to learn more about my Journey and discover some of the web development resources that have inspired me 😘`,
 }
 
-function BlogLayout({ children }: { children: React.ReactNode }) {
+function DevBlogLayout({ children }: { children: React.ReactNode }) {
 	return <div className="m-auto max-w-screen-lg p-3 md:px-10 md:py-6">{children}</div>
 }
 
-export default BlogLayout
+export default DevBlogLayout

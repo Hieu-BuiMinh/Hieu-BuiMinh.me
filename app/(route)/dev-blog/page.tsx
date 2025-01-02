@@ -1,11 +1,11 @@
-import BlogPageView from '@/view/route/blog/pages/blog.page'
+import DevBlogPageView from '@/view/route/dev-blog/pages/dev-blog.page'
 
 interface IBlogpageProps {
 	searchParams: Promise<{ page?: string }>
 }
 
 function BlogPage({ searchParams }: IBlogpageProps) {
-	return <BlogPageView searchParams={searchParams} />
+	return <DevBlogPageView searchParams={searchParams} />
 }
 
 export default BlogPage

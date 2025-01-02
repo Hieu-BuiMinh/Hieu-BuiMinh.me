@@ -17,12 +17,12 @@ function LatestArticles({ devBlogPosts }: TLatestArticles) {
 				{devBlogPosts
 					.filter((post) => post.published)
 					.map((post) => (
-						<PostCard key={post.slug} root="blog" post={post} />
+						<PostCard key={post.slug} post={post} />
 					))}
 			</div>
 			<div className="my-8 flex items-center justify-center">
 				<Link
-					href="/blog"
+					href="/dev-blog"
 					className={cn(
 						buttonVariants({
 							variant: 'outline',

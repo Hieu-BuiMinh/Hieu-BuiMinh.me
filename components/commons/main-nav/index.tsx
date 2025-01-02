@@ -21,7 +21,7 @@ import { cn } from '@/lib/utils'
 const blogItems: { title: string; href: string; description: string }[] = [
 	{
 		title: 'Dev Blog 🧑‍💻',
-		href: '/blog',
+		href: '/dev-blog',
 		description: 'Re-usable components built using Radix UI and Tailwind CSS.',
 	},
 	{

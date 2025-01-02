@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 	}
 }
 
-async function BlogDetailLayout({
+async function DevBlogDetailLayout({
 	children,
 	params,
 }: {
@@ -69,4 +69,4 @@ async function BlogDetailLayout({
 	)
 }
 
-export default BlogDetailLayout
+export default DevBlogDetailLayout

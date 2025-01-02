@@ -20,7 +20,7 @@ async function getPostFromParams(params: PostPageProps['params']) {
 	return post
 }
 
-export default async function BlogDetailPageView({ params }: PostPageProps) {
+export default async function DevBlogDetailPageView({ params }: PostPageProps) {
 	const post = await getPostFromParams(params)
 
 	if (!post || !post.published) {

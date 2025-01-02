@@ -8,7 +8,7 @@ import { SITE_CONFIG } from '@/config/site'
 const routes = [
 	{
 		title: 'Blogs',
-		links: [{ lable: 'Blog', href: '/blog' }],
+		links: [{ lable: 'Blog', href: '/dev-blog' }],
 	},
 	{
 		title: 'About',

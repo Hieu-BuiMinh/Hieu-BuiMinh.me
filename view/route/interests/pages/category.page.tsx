@@ -53,7 +53,7 @@ async function CategoryPageView({ params, searchParams }: ICategoryPageProps) {
 			{!hasTutor && (
 				<>
 					{postsBelongToThisCategory?.length > 0 ? (
-						<PostCards root="interests" posts={displayPosts} />
+						<PostCards posts={displayPosts} />
 					) : (
 						<p>I have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
 					)}
@@ -69,7 +69,7 @@ async function CategoryPageView({ params, searchParams }: ICategoryPageProps) {
 					</TabsList>
 					<TabsContent className="mt-5" value="posts">
 						{postsBelongToThisCategory?.length > 0 ? (
-							<PostCards root="interests" posts={displayPosts} />
+							<PostCards posts={displayPosts} />
 						) : (
 							<p>I have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
 						)}
@@ -77,7 +77,7 @@ async function CategoryPageView({ params, searchParams }: ICategoryPageProps) {
 					</TabsContent>
 					<TabsContent className="mt-5" value="docs">
 						{docsBelongToThisCategory?.length > 0 ? (
-							<PostCards root="docs" posts={docsBelongToThisCategory} />
+							<PostCards posts={docsBelongToThisCategory} />
 						) : (
 							<p>I have no posts yet... ㄟ( ▔, ▔ )ㄏ</p>
 						)}

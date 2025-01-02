@@ -5,7 +5,8 @@ import rehypePrettyCode from 'rehype-pretty-code'
 import rehypeSlug from 'rehype-slug'
 import { defineCollection, defineConfig, s } from 'velite'
 
-export const computedFields = <T extends { slug: string }>(data: T) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const computedFields: any = <T extends { slug: string }>(data: T) => {
 	return { ...data, slugAsParams: data.slug.split('/').slice(1).join('/') }
 	// blog/hello-world => ['blog', 'hello-world'] => ['hello-world] => '/hello-world'
 }
@@ -113,6 +114,7 @@ const interests = defineCollection({
 			metadata: s.metadata().optional(),
 			description: s.string().max(999).optional(),
 			published: s.boolean().default(true),
+			type: s.enum(['ROOT', 'CHILD']),
 			hashTags: s
 				.object({
 					category: s.string(),
@@ -149,12 +151,10 @@ const docs = defineCollection({
 			type: s.enum(['ROOT', 'CHILD']),
 			parent: s.string().optional(),
 			root: s.string().optional(),
-			hashTags: s
-				.object({
-					category: s.string(),
-					tags: s.array(s.string()),
-				})
-				.optional(),
+			hashTags: s.object({
+				category: s.string(),
+				tags: s.array(s.string()),
+			}),
 			body: s.mdx(),
 			author: s.object({
 				avatar: s.string(),
