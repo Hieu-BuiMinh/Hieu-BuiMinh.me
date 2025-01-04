@@ -60,43 +60,53 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 	}, [postData])
 
 	return (
-		<div className="py-10">
-			<h1 className="font-title bg-gradient-to-b from-black via-black/90 to-black/70 to-90% bg-clip-text text-center text-4xl font-bold text-transparent dark:from-white dark:via-white/90 dark:to-white/70 md:text-5xl md:leading-[64px]">
-				{post.title}
-			</h1>
+		<div className="py-5 md:py-10">
+			<ImageZoom
+				alt="title"
+				src={post?.cover || ''}
+				width={1200}
+				height={630}
+				className="dot-cover absolute left-1/2 top-14 hidden h-[630px] w-full max-w-[1900px] -translate-x-1/2 md:block"
+			/>
 
-			<div className="my-4 grid grid-cols-2 text-sm max-md:gap-4 md:grid-cols-4">
-				<div className="flex flex-col gap-2 p-2 md:mx-auto">
-					<span className="text-muted-foreground">Written by</span>
-					<div className="flex items-center gap-2">
-						<Image alt="auth-avt" width={20} height={20} src={post.author.avatar} />
-						{post.author.name}
+			<div className="relative z-10 mt-0 md:mt-[500px] md:rounded-md md:border md:bg-background/50 md:backdrop-blur-sm">
+				<h1 className="font-title z-10 bg-gradient-to-b from-black via-black/90 to-black/70 to-90% bg-clip-text text-center text-4xl font-bold text-transparent dark:from-white dark:via-white/90 dark:to-white/70 md:text-5xl md:leading-[64px]">
+					{post.title}
+				</h1>
+
+				<div className="my-4 grid grid-cols-2 text-sm max-md:gap-4 md:grid-cols-4">
+					<div className="flex flex-col gap-2 p-2 md:mx-auto">
+						<span className="text-muted-foreground">Written by</span>
+						<div className="flex items-center gap-2">
+							<Image alt="auth-avt" width={20} height={20} src={post.author.avatar} />
+							{post.author.name}
+						</div>
 					</div>
-				</div>
-				<div className="flex flex-col gap-2 p-2 md:mx-auto">
-					<span className="text-muted-foreground">Published on</span>
-					<span>{formatDate(post.date)}</span>
-				</div>
-				<div className="flex flex-col gap-2 p-2 md:mx-auto">
-					<span className="text-muted-foreground">Views</span>
-					<span>
-						<NumberFlow
-							willChange
-							value={postData?.views || 0}
-							format={{ trailingZeroDisplay: 'stripIfInteger' }}
-						/>
-					</span>
-				</div>
-				<div className="flex flex-col gap-2 p-2 md:mx-auto">
-					<span className="text-muted-foreground">Comments</span>
+					<div className="flex flex-col gap-2 p-2 md:mx-auto">
+						<span className="text-muted-foreground">Published on</span>
+						<span>{formatDate(post.date)}</span>
+					</div>
+					<div className="flex flex-col gap-2 p-2 md:mx-auto">
+						<span className="text-muted-foreground">Views</span>
+						<span>
+							<NumberFlow
+								willChange
+								value={postData?.views || 0}
+								format={{ trailingZeroDisplay: 'stripIfInteger' }}
+							/>
+						</span>
+					</div>
+					<div className="flex flex-col gap-2 p-2 md:mx-auto">
+						<span className="text-muted-foreground">Comments</span>
 
-					<span>
-						<NumberFlow
-							willChange
-							value={postData?.comments.length || 0}
-							format={{ trailingZeroDisplay: 'stripIfInteger' }}
-						/>
-					</span>
+						<span>
+							<NumberFlow
+								willChange
+								value={postData?.comments.length || 0}
+								format={{ trailingZeroDisplay: 'stripIfInteger' }}
+							/>
+						</span>
+					</div>
 				</div>
 			</div>
 
@@ -107,7 +117,13 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 				</Button>
 			)}
 
-			<ImageZoom alt="title" src={post?.cover || ''} width={1200} height={630} />
+			<ImageZoom
+				alt="title"
+				src={post?.cover || ''}
+				width={1200}
+				height={630}
+				className="block rounded-md md:hidden"
+			/>
 
 			{!postData && postData !== undefined && (
 				<div className="my-4 rounded border border-green-300/70 bg-green-500/20 p-2 text-sm text-foreground/90">

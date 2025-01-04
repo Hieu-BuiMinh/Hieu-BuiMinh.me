@@ -117,3 +117,17 @@ body {
 	);
 	background-size: 7.07px 7.07px;
 }
+
+.dot-cover {
+	&::before {
+		content: '';
+		@apply absolute left-0 right-0 bottom-0 top-0 bg-[url('/assets/images/background/dotted.png')] bg-repeat opacity-40 z-[1] pointer-events-none;
+	}
+
+	&::after {
+		content: '';
+		@apply absolute h-[200px] z-[3] left-0 right-0 bottom-0 bg-background pointer-events-none;
+
+		background: linear-gradient(0deg, hsl(var(--background)), rgba(25, 27, 36, 0));
+	}
+}

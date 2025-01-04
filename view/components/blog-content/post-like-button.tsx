@@ -65,7 +65,6 @@ const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
 	}
 
 	const handleLike = useDebounceCallback(() => {
-		playConfetti()
 		setCurrentUserLikes((prev) => Math.min(prev + 1, 3))
 
 		// add anonymous user liked posts slug to localstorage
@@ -101,7 +100,15 @@ const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
 			<TooltipProvider>
 				<Tooltip>
 					<TooltipTrigger asChild>
-						<Button disabled={!postBySlug} ref={confettiRef} onClick={handleLike} variant="outline">
+						<Button
+							disabled={!postBySlug}
+							ref={confettiRef}
+							onClick={() => {
+								handleLike()
+								playConfetti()
+							}}
+							variant="outline"
+						>
 							<div className="relative size-4">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"

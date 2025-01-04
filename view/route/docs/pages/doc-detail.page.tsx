@@ -39,7 +39,7 @@ async function DocDetailPageView({ slug }: PostPageProps) {
 			</div>
 			<article
 				className={cn(
-					'prose max-w-full text-muted-foreground dark:prose-invert lg:max-w-[calc(100%-220px)]',
+					'prose w-full text-muted-foreground dark:prose-invert lg:max-w-[calc(100%-220px)]',
 					roboto.className
 				)}
 			>

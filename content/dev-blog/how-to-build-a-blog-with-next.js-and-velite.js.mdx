@@ -156,7 +156,7 @@ yarn add velite -D
 
 #### 3. In `next.config.mjs`
 
-Config for Velite plugins wiht webpack
+Config for Velite plugins with webpack
 
 <CodeBlock fileName="next.config.mjs">
 
@@ -278,7 +278,9 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 </CodeBlock>
 
----
+After creating your content in hello-world.mdx, check your folder structured, you would see a folder named `.velite`, inside it you can see 2 files named `index.d.ts` and `blog.json`, that means ours `hello-world.mdx` have been parsed successfuly.
+
+Inside `components/mdx.tsx` you can dynamically renders MDX content in a Next.js application by customizing specific HTML elements such as headings (h2, h3, etc.) and links (a) using React components, providing enhanced styling and functionality.
 
 <CodeBlock fileName="components/mdx.tsx">
 
@@ -408,7 +410,9 @@ export default async function BlogDetailPageView({ params }: PostPageProps) {
 
 </CodeBlock>
 
----
+The `@tailwindcss/typography` plugin is a powerful tool in TailwindCSS that provides a set of pre-designed styles for rich text content. It's perfect for styling elements like blog posts, documentation, or any page with long-form content.
+
+When installed using:
 
 <CodeBlock fileName="bash">
 
@@ -417,6 +421,10 @@ npm i @tailwindcss/typography
 ```
 
 </CodeBlock>
+
+You integrate this plugin into your Tailwind configuration file (tailwind.config.js or tailwind.config.ts). This enables you to apply sophisticated typography styles with minimal effort.
+
+In the tailwind.config.ts file, you add the plugin:
 
 <CodeBlock fileName="tailwind.config.ts">
 
@@ -430,11 +438,9 @@ const config: Config = {
 
 <LinkCard href="https://www.npmjs.com/package/@tailwindcss/typography" hostname="tailwindcss" title="Tailwind" />
 
----
+After this, you can use the prose class to style your blog post content. For example:
 
-Now you can use the prose classes to add sensible typography styles to any vanilla HTML:
-
-<CodeBlock fileName="tailwind.config.ts">
+<CodeBlock fileName="app/blog/[...slug]/page.tsx">
 
 ```tsx showLineNumbers {10}
 export default async function BlogDetailPageView({ params }: PostPageProps) {
@@ -456,13 +462,16 @@ export default async function BlogDetailPageView({ params }: PostPageProps) {
 
 </CodeBlock>
 
-#### 6. Get all blogs
-
-After creating your first content .mdx, check your folder structured, you would see a folder named `.velite`, inside it you can see 2 files named `index.d.ts` and `blog.json`, that means ours `hello-world.mdx` have been parsed successfuly.
-
-Inside
-
 ## Final result
+
+Your blog should now:
+
+-   Dynamically render posts from .mdx files.
+-   Be fully responsive and styled using TailwindCSS.
+-   Include SEO-friendly metadata for better visibility on search engines.
+-   Support features like categories, tags, and pagination.
+
+Here's a preview of the final product:
 
 <Image
 	src="/assets/images/content/post/dev-blog/how-to-build-a-blog-with-next-js-and-velite-js/first-post.png"
@@ -481,10 +490,8 @@ Inside
 
 ## Conclusion
 
-Velite makes your projects easier to maintain and expand, especially for growing applications.
+With Next.js and Velite.js, building a feature-rich, SEO-friendly blog is simple and efficient. This guide covered everything from setting up the project to deploying it live, ensuring you have a strong foundation for future enhancements.
 
-By combining Next.js with Velite.js, you can efficiently build a fast, SEO-friendly blog with minimal configuration. This guide has covered the essential steps to get you started, from creating the Next.js project and installing Velite to defining blog content and rendering posts dynamically. The result is a streamlined, type-safe blog development experience that scales well for future projects.
-
-With Next.js and Velite.js, you gain full control over your content, ensuring a smooth development process and an optimized blog that ranks well on search engines.
+As your blog scales, the flexibility of Velite allows you to add new features like multilingual support, custom layouts, or advanced analytics with ease.
 
 Happy coding (づ￣3￣)づ╭❤️～
