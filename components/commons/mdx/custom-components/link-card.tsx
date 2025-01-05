@@ -21,7 +21,7 @@ const LinkCard = (props: LinkCardProps) => {
 			>
 				<BlurImage
 					src={`/assets/images/website-icons/${hostname}.png`}
-					className="rounded-lg"
+					className="size-12 rounded-lg"
 					width={48}
 					height={48}
 					alt={hostname}
