@@ -56,9 +56,9 @@ export const PostCard = ({ post }: PostCardProps) => {
 				<TooltipProvider>
 					<Tooltip>
 						<TooltipTrigger>
-							<p className="mt-2 line-clamp-2 text-left text-muted-foreground">{description}</p>
+							<p className="mt-2 line-clamp-2 text-left text-xs text-muted-foreground">{description}</p>
 						</TooltipTrigger>
-						<TooltipContent className="max-w-[250px] bg-secondary text-foreground shadow-md">
+						<TooltipContent className="max-w-[250px] bg-secondary text-xs text-foreground shadow-md">
 							<p>{description}</p>
 						</TooltipContent>
 					</Tooltip>
