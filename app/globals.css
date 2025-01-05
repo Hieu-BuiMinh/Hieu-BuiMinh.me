@@ -119,15 +119,30 @@ body {
 }
 
 .dot-cover {
+	/* mask-image: linear-gradient(
+		0deg,
+		transparent 0,
+		hsl(var(--background)) 20%,
+		hsl(var(--background)) 80%,
+		transparent
+	);
+	-webkit-mask-image: linear-gradient(
+		0deg,
+		transparent 0,
+		hsl(var(--background)) 20%,
+		hsl(var(--background)) 80%,
+		transparent
+	); */
+
 	&::before {
 		content: '';
-		@apply absolute left-0 right-0 bottom-0 top-0 bg-[url('/assets/images/background/dotted.png')] bg-repeat opacity-40 z-[1] pointer-events-none;
+		@apply absolute left-0 right-0 bottom-0 top-0 bg-[url('/assets/images/background/dotted.png')] bg-repeat opacity-50 z-[1] pointer-events-none;
 	}
 
 	&::after {
 		content: '';
-		@apply absolute h-[200px] z-[3] left-0 right-0 bottom-0 bg-background pointer-events-none;
+		@apply absolute h-[150px] z-[3] left-0 right-0 bottom-0 bg-background pointer-events-none;
 
-		background: linear-gradient(0deg, hsl(var(--background)), rgba(25, 27, 36, 0));
+		background: linear-gradient(0deg, hsl(var(--background)) 10%, transparent);
 	}
 }

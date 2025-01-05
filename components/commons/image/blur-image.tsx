@@ -46,6 +46,7 @@ const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 			data-description={props.description}
 		>
 			<Image
+				unoptimized
 				ref={ref}
 				className={cn(
 					'size-full object-cover',
