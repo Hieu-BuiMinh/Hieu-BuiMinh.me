@@ -1,9 +1,7 @@
 import { notFound } from 'next/navigation'
-import React from 'react'
 
 import { pages } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
-import { Element } from '@/components/commons/mdx/custom-components/yi-jing/element'
 import Hexagram from '@/components/commons/mdx/custom-components/yi-jing/hexagram'
 import { formatDate } from '@/lib/utils'
 import PageTitle from '@/view/components/blog-content/page-title'
@@ -21,8 +19,9 @@ export default function AboutPageView() {
 	return (
 		<div className="container flex max-w-4xl flex-col gap-3">
 			<PageTitle title={title} description={description} />
-			<Hexagram upper={8} lower={1} actives={[1, 2, 5]} />
-			<Element type={1} />
+
+			<Hexagram showBranches showElements showSixCreatures upper={8} lower={1} actives={[1, 2, 5]} />
+
 			<article className="container prose mx-auto max-w-3xl pb-6 dark:prose-invert">
 				<MDXContent code={post.body} />
 				{post.lastUpdated && (

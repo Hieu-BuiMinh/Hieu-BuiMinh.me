@@ -1,4 +1,5 @@
 import './style/code-block.css'
+import './style/yin-yang.css'
 
 import Link from 'next/link'
 import * as runtime from 'react/jsx-runtime'
@@ -12,6 +13,7 @@ import Heading from '@/components/commons/mdx/custom-components/heading'
 import LinkCard from '@/components/commons/mdx/custom-components/link-card'
 import Table from '@/components/commons/mdx/custom-components/table'
 import Bagua from '@/components/commons/mdx/custom-components/yi-jing/bagua'
+import Hexagram from '@/components/commons/mdx/custom-components/yi-jing/hexagram'
 import YinYang from '@/components/commons/mdx/custom-components/yi-jing/yin-yang'
 import TreeView from '@/components/commons/tree-view'
 import { cn } from '@/lib/utils'
@@ -82,6 +84,7 @@ const components = {
 	// Iching here
 	YinYang,
 	Bagua,
+	Hexagram,
 }
 
 interface MdxProps {

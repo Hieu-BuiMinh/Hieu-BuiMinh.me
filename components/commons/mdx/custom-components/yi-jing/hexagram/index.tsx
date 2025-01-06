@@ -2,6 +2,8 @@
 
 import { nanoid } from 'nanoid'
 
+import type { ElementDotsTypeName } from '@/components/commons/mdx/custom-components/yi-jing/element/element-dots'
+import ElementDot from '@/components/commons/mdx/custom-components/yi-jing/element/element-dots'
 import YinYang from '@/components/commons/mdx/custom-components/yi-jing/yin-yang'
 import { converToHexagrams } from '@/lib/content/docs/hexgrams-converter'
 import { cn } from '@/lib/utils'
@@ -11,8 +13,11 @@ interface IHexagram {
 	lower?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 	actives?: number[]
 	className?: string
+	showIndex?: boolean
 	showLabel?: boolean
+	showElements?: boolean
 	showSixRelatives?: boolean
+	showBranches?: boolean
 	showSixCreatures?: boolean
 	yinYangClassName?: string
 }
@@ -22,8 +27,11 @@ function Hexagram({
 	className,
 	lower,
 	showLabel,
-	showSixCreatures,
+	showIndex,
+	showElements,
 	showSixRelatives,
+	showBranches,
+	showSixCreatures,
 	upper,
 	yinYangClassName,
 }: IHexagram) {
@@ -31,8 +39,8 @@ function Hexagram({
 	const lowerCoverted = converToHexagrams({ type: 'LOWER', baguaIndex: lower || 1 })
 
 	return (
-		<div className={cn('flex flex-col gap-2', className)}>
-			<div className="flex flex-col gap-0.5">
+		<div className={cn('flex flex-col gap-3', className)}>
+			<div className="flex flex-col gap-1.5">
 				{upperCoverted?.value.map((item, i) => {
 					return (
 						<div className="flex items-center gap-2" key={nanoid()}>
@@ -42,15 +50,32 @@ function Hexagram({
 								key={nanoid()}
 								active={actives?.includes(upperCoverted.value.length - i + 3)}
 							/>
-							<span className="flex gap-1 text-xs">
-								<span className="text-muted-foreground">{upperCoverted?.branch}</span>
-								<span>{upperCoverted.creatures[i]}</span>
+							<span className="flex gap-1 text-xs leading-3">
+								{showIndex && (
+									<span className="flex w-2 items-center text-muted-foreground">{6 - i}</span>
+								)}
+								{showBranches && (
+									<span className="flex w-9 items-center text-muted-foreground">
+										{upperCoverted?.branch}
+									</span>
+								)}
+								{showSixCreatures && (
+									<span className="flex w-9 items-center">{upperCoverted.creatures[i]}</span>
+								)}
+								{showElements && (
+									<div className="flex w-9 items-center">
+										<ElementDot
+											className="size-3"
+											type={upperCoverted.elements[i] as ElementDotsTypeName}
+										/>
+									</div>
+								)}
 							</span>
 						</div>
 					)
 				})}
 			</div>
-			<div className="flex flex-col gap-0.5">
+			<div className="flex flex-col gap-1.5">
 				{lowerCoverted?.value.map((item, i) => {
 					return (
 						<div className="flex items-center gap-2" key={nanoid()}>
@@ -60,9 +85,24 @@ function Hexagram({
 								key={nanoid()}
 								active={actives?.includes(lowerCoverted.value.length - i)}
 							/>
-							<span className="flex gap-1 text-xs">
-								<span className="text-muted-foreground">{lowerCoverted?.branch}</span>
-								<span>{lowerCoverted.creatures[i]}</span>
+							<span className="flex gap-1 text-xs leading-3">
+								{showIndex && <span className="flex w-2 gap-1 text-muted-foreground">{3 - i}</span>}
+								{showBranches && (
+									<span className="flex w-9 gap-1 text-muted-foreground">
+										{lowerCoverted?.branch}
+									</span>
+								)}
+								{showSixCreatures && (
+									<span className="flex w-9 gap-1">{lowerCoverted.creatures[i]}</span>
+								)}
+								{showElements && (
+									<div className="flex w-9 gap-1">
+										<ElementDot
+											className="size-3"
+											type={lowerCoverted.elements[i] as ElementDotsTypeName}
+										/>
+									</div>
+								)}
 							</span>
 						</div>
 					)

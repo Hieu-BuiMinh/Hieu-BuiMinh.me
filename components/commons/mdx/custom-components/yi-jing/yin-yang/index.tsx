@@ -13,8 +13,8 @@ function YinYang({ type = 0, active, className }: IYingYang) {
 		return (
 			<div
 				className={cn(
-					'h-3 w-[52px] rounded-[2px] bg-foreground shadow-yin-yang',
-					active && 'bg-stripes border border-red-400 bg-[length:7.07px_7.07px]',
+					'h-3 w-[52px] overflow-hidden rounded-[2px] bg-foreground shadow-yin-yang',
+					active && 'active-yin-yang bg-stripes border border-red-400 bg-[length:7.07px_7.07px]',
 					className
 				)}
 			/>
@@ -24,15 +24,15 @@ function YinYang({ type = 0, active, className }: IYingYang) {
 		<div className="flex gap-2">
 			<div
 				className={cn(
-					'h-3 w-[22px] rounded-[2px] bg-foreground shadow-yin-yang',
-					active && 'bg-stripes border border-red-400 bg-[length:7.07px_7.07px]',
+					'h-3 w-[22px] overflow-hidden rounded-[2px] bg-foreground shadow-yin-yang',
+					active && 'active-yin-yang bg-stripes border border-red-400 bg-[length:7.07px_7.07px]',
 					className
 				)}
 			/>
 			<div
 				className={cn(
-					'h-3 w-[22px] rounded-[2px] bg-foreground shadow-yin-yang',
-					active && 'bg-stripes border border-red-400 bg-[length:7.07px_7.07px]',
+					'h-3 w-[22px] overflow-hidden rounded-[2px] bg-foreground shadow-yin-yang',
+					active && 'active-yin-yang bg-stripes border border-red-400 bg-[length:7.07px_7.07px]',
 					className
 				)}
 			/>
