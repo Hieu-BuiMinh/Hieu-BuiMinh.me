@@ -61,14 +61,16 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 
 	return (
 		<div className="py-5 md:py-10">
-			<ImageZoom
-				alt="title"
-				src={post?.cover || ''}
-				width={1200}
-				height={630}
-				// className="dot-cover absolute left-1/2 top-14 hidden h-[630px] w-full max-w-7xl -translate-x-1/2 md:block"
-				className="dot-cover absolute left-1/2 top-14 hidden h-[630px] w-full -translate-x-1/2 md:block"
-			/>
+			<div className="absolute left-1/2 top-14 hidden h-[630px] w-full -translate-x-1/2 md:block">
+				<ImageZoom
+					alt="title"
+					src={post?.cover || ''}
+					width={1200}
+					height={630}
+					// className="dot-cover absolute left-1/2 top-14 hidden h-[630px] w-full max-w-7xl -translate-x-1/2 md:block"
+					className="dot-cover relative h-[630px] w-full"
+				/>
+			</div>
 
 			<div className="relative z-10 mt-0 md:mt-[500px] md:rounded-md md:border md:bg-background/50 md:backdrop-blur-sm">
 				<h1 className="font-title z-10 bg-gradient-to-b from-black via-black/90 to-black/70 to-90% bg-clip-text py-2 text-center text-4xl font-bold text-transparent dark:from-white dark:via-white/90 dark:to-white/70 md:text-5xl md:leading-[64px]">

@@ -50,27 +50,29 @@ function Hexagram({
 								key={nanoid()}
 								active={actives?.includes(upperCoverted.value.length - i + 3)}
 							/>
-							<span className="flex gap-1 text-xs leading-3">
-								{showIndex && (
-									<span className="flex w-2 items-center text-muted-foreground">{6 - i}</span>
-								)}
-								{showBranches && (
-									<span className="flex w-9 items-center text-muted-foreground">
-										{upperCoverted?.branch}
-									</span>
-								)}
-								{showSixCreatures && (
-									<span className="flex w-9 items-center">{upperCoverted.creatures[i]}</span>
-								)}
-								{showElements && (
-									<div className="flex w-9 items-center">
-										<ElementDot
-											className="size-3"
-											type={upperCoverted.elements[i] as ElementDotsTypeName}
-										/>
-									</div>
-								)}
-							</span>
+							{(showIndex || showBranches || showSixCreatures || showElements) && (
+								<span className="flex gap-1 text-xs leading-3">
+									{showIndex && (
+										<span className="flex w-2 items-center text-muted-foreground">{6 - i}</span>
+									)}
+									{showBranches && (
+										<span className="flex w-9 items-center text-muted-foreground">
+											{upperCoverted?.branch}
+										</span>
+									)}
+									{showSixCreatures && (
+										<span className="flex w-9 items-center">{upperCoverted.creatures[i]}</span>
+									)}
+									{showElements && (
+										<div className="flex w-3 items-center">
+											<ElementDot
+												className="size-2"
+												type={upperCoverted.elements[i] as ElementDotsTypeName}
+											/>
+										</div>
+									)}
+								</span>
+							)}
 						</div>
 					)
 				})}
@@ -85,25 +87,27 @@ function Hexagram({
 								key={nanoid()}
 								active={actives?.includes(lowerCoverted.value.length - i)}
 							/>
-							<span className="flex gap-1 text-xs leading-3">
-								{showIndex && <span className="flex w-2 gap-1 text-muted-foreground">{3 - i}</span>}
-								{showBranches && (
-									<span className="flex w-9 gap-1 text-muted-foreground">
-										{lowerCoverted?.branch}
-									</span>
-								)}
-								{showSixCreatures && (
-									<span className="flex w-9 gap-1">{lowerCoverted.creatures[i]}</span>
-								)}
-								{showElements && (
-									<div className="flex w-9 gap-1">
-										<ElementDot
-											className="size-3"
-											type={lowerCoverted.elements[i] as ElementDotsTypeName}
-										/>
-									</div>
-								)}
-							</span>
+							{(showIndex || showBranches || showSixCreatures || showElements) && (
+								<span className="flex gap-1 text-xs leading-3">
+									{showIndex && <span className="flex w-2 gap-1 text-muted-foreground">{3 - i}</span>}
+									{showBranches && (
+										<span className="flex w-9 gap-1 text-muted-foreground">
+											{lowerCoverted?.branch}
+										</span>
+									)}
+									{showSixCreatures && (
+										<span className="flex w-9 gap-1">{lowerCoverted.creatures[i]}</span>
+									)}
+									{showElements && (
+										<div className="flex w-3 gap-1">
+											<ElementDot
+												className="size-2"
+												type={lowerCoverted.elements[i] as ElementDotsTypeName}
+											/>
+										</div>
+									)}
+								</span>
+							)}
 						</div>
 					)
 				})}
