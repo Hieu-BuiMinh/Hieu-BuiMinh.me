@@ -35,20 +35,22 @@ function Hexagram({
 	upper,
 	yinYangClassName,
 }: IHexagram) {
-	const upperCoverted = converToHexagrams({ type: 'UPPER', baguaIndex: upper || 1 })
-	const lowerCoverted = converToHexagrams({ type: 'LOWER', baguaIndex: lower || 1 })
+	const { upperBaguaCoverted, lowerBaguaCoverted } = converToHexagrams({
+		upper: upper || 1,
+		lower: lower || 1,
+	})
 
 	return (
 		<div className={cn('flex flex-col gap-3', className)}>
 			<div className="flex flex-col gap-1.5">
-				{upperCoverted?.value.map((item, i) => {
+				{upperBaguaCoverted?.value.map((item, i) => {
 					return (
 						<div className="flex items-center gap-2" key={nanoid()}>
 							<YinYang
 								className={yinYangClassName}
 								type={item as 0 | 1}
 								key={nanoid()}
-								active={actives?.includes(upperCoverted.value.length - i + 3)}
+								active={actives?.includes(upperBaguaCoverted.value.length - i + 3)}
 							/>
 							{(showIndex || showBranches || showSixCreatures || showElements) && (
 								<span className="flex gap-1 text-xs leading-3">
@@ -57,17 +59,17 @@ function Hexagram({
 									)}
 									{showBranches && (
 										<span className="flex w-9 items-center text-muted-foreground">
-											{upperCoverted?.branch}
+											{upperBaguaCoverted?.branch}
 										</span>
 									)}
 									{showSixCreatures && (
-										<span className="flex w-9 items-center">{upperCoverted.creatures[i]}</span>
+										<span className="flex w-9 items-center">{upperBaguaCoverted.creatures[i]}</span>
 									)}
 									{showElements && (
-										<div className="flex w-3 items-center">
+										<div className="flex w-3 items-center justify-center">
 											<ElementDot
 												className="size-2"
-												type={upperCoverted.elements[i] as ElementDotsTypeName}
+												type={upperBaguaCoverted.elements[i] as ElementDotsTypeName}
 											/>
 										</div>
 									)}
@@ -78,31 +80,31 @@ function Hexagram({
 				})}
 			</div>
 			<div className="flex flex-col gap-1.5">
-				{lowerCoverted?.value.map((item, i) => {
+				{lowerBaguaCoverted?.value.map((item, i) => {
 					return (
 						<div className="flex items-center gap-2" key={nanoid()}>
 							<YinYang
 								className={yinYangClassName}
 								type={item as 0 | 1}
 								key={nanoid()}
-								active={actives?.includes(lowerCoverted.value.length - i)}
+								active={actives?.includes(lowerBaguaCoverted.value.length - i)}
 							/>
 							{(showIndex || showBranches || showSixCreatures || showElements) && (
 								<span className="flex gap-1 text-xs leading-3">
 									{showIndex && <span className="flex w-2 gap-1 text-muted-foreground">{3 - i}</span>}
 									{showBranches && (
 										<span className="flex w-9 gap-1 text-muted-foreground">
-											{lowerCoverted?.branch}
+											{lowerBaguaCoverted?.branch}
 										</span>
 									)}
 									{showSixCreatures && (
-										<span className="flex w-9 gap-1">{lowerCoverted.creatures[i]}</span>
+										<span className="flex w-9 gap-1">{lowerBaguaCoverted.creatures[i]}</span>
 									)}
 									{showElements && (
-										<div className="flex w-3 gap-1">
+										<div className="flex w-3 items-center justify-center">
 											<ElementDot
 												className="size-2"
-												type={lowerCoverted.elements[i] as ElementDotsTypeName}
+												type={lowerBaguaCoverted.elements[i] as ElementDotsTypeName}
 											/>
 										</div>
 									)}
