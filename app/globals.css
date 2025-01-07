@@ -89,20 +89,7 @@ body {
 }
 
 .dot-cover {
-	/* mask-image: linear-gradient(
-		0deg,
-		transparent 0,
-		hsl(var(--background)) 20%,
-		hsl(var(--background)) 80%,
-		transparent
-	);
-	-webkit-mask-image: linear-gradient(
-		0deg,
-		transparent 0,
-		hsl(var(--background)) 20%,
-		hsl(var(--background)) 80%,
-		transparent
-	); */
+	@apply relative;
 
 	&::before {
 		content: '';
