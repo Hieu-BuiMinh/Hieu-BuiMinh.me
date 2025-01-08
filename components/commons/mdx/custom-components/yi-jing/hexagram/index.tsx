@@ -35,7 +35,7 @@ function Hexagram({
 	upper,
 	yinYangClassName,
 }: IHexagram) {
-	const { upperBaguaCoverted, lowerBaguaCoverted } = converToHexagrams({
+	const { upperBaguaCoverted, lowerBaguaCoverted, relatives } = converToHexagrams({
 		upper: upper || 1,
 		lower: lower || 1,
 	})
@@ -66,12 +66,15 @@ function Hexagram({
 										<span className="flex w-9 items-center">{upperBaguaCoverted.creatures[i]}</span>
 									)}
 									{showElements && (
-										<div className="flex w-3 items-center justify-center">
+										<div className="flex w-5 items-center justify-start">
 											<ElementDot
 												className="size-2"
 												type={upperBaguaCoverted.elements[i] as ElementDotsTypeName}
 											/>
 										</div>
+									)}
+									{showSixRelatives && (
+										<span className="flex w-14 items-center">{relatives.upper?.[i]}</span>
 									)}
 								</span>
 							)}
@@ -101,12 +104,15 @@ function Hexagram({
 										<span className="flex w-9 gap-1">{lowerBaguaCoverted.creatures[i]}</span>
 									)}
 									{showElements && (
-										<div className="flex w-3 items-center justify-center">
+										<div className="flex w-5 items-center justify-start">
 											<ElementDot
 												className="size-2"
 												type={lowerBaguaCoverted.elements[i] as ElementDotsTypeName}
 											/>
 										</div>
+									)}
+									{showSixRelatives && (
+										<span className="flex w-14 items-center">{relatives.lower?.[i]}</span>
 									)}
 								</span>
 							)}

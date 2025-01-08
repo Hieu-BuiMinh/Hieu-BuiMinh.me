@@ -72,7 +72,7 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 				/>
 			</div>
 
-			<div className="relative z-10 mt-0 md:mt-[500px] md:rounded-md md:border md:bg-background/50 md:backdrop-blur-sm">
+			<div className="relative z-10 mt-0 md:mt-[500px] md:rounded-md md:border md:bg-background/30 md:backdrop-blur-sm">
 				<h1 className="font-title z-10 bg-gradient-to-b from-black via-black/90 to-black/70 to-90% bg-clip-text py-2 text-center text-4xl font-bold text-transparent dark:from-white dark:via-white/90 dark:to-white/70 md:text-5xl md:leading-[64px]">
 					{post.title}
 				</h1>

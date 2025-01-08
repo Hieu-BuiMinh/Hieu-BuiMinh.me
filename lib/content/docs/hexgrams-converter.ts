@@ -1,14 +1,40 @@
 export const converToHexagrams = ({ upper, lower }: { upper: number; lower: number }) => {
+	// tìm 8 quái && tên riêng của 8 quái & ngũ hành của 3 hào trong mỗi quái
 	const upperBaguaCoverted = transformToBaguasData({
 		type: 'UPPER',
 		baguaIndex: upper || 1,
 	})
 	const lowerBaguaCoverted = transformToBaguasData({ type: 'LOWER', baguaIndex: lower || 1 })
 
-	return { upperBaguaCoverted, lowerBaguaCoverted }
+	// tìm 8 họ nhà quái
+	const family = hexagramFamily.find((f) => f.members.includes(`[${upper}, ${lower}]`))
+
+	const originElement = family!.originElement as ELEMENTS
+
+	// tìm lục thân
+	const upperRelative = upperBaguaCoverted?.elements.map((element) => {
+		return relativeConverter({ originElement, element })
+	})
+	const lowerRelative = lowerBaguaCoverted?.elements.map((element) => {
+		return relativeConverter({ originElement, element })
+	})
+
+	return { upperBaguaCoverted, lowerBaguaCoverted, family, relatives: { upper: upperRelative, lower: lowerRelative } }
 }
 
-const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; baguaIndex: number }) => {
+const transformToBaguasData = ({
+	type,
+	baguaIndex,
+}: {
+	type: 'UPPER' | 'LOWER'
+	baguaIndex: number
+}): {
+	creatures: string[]
+	branch: string
+	elements: ELEMENTS[]
+	value: number[]
+	label: string
+} | null => {
 	let bagua = null
 	let baguaWithData = null
 
@@ -51,7 +77,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Dậu', 'Hợi', 'Sửu'],
 					branch: 'Quý',
-					elements: ['Metal', 'Water', 'Earth'],
+					elements: ['Mental', 'Water', 'Earth'] as ELEMENTS[],
 				}
 				break
 			case 1:
@@ -60,7 +86,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Tuất', 'Thân', 'Ngọ'],
 					branch: 'Nhâm',
-					elements: ['Earth', 'Metal', 'Fire'],
+					elements: ['Earth', 'Mental', 'Fire'] as ELEMENTS[],
 				}
 				break
 			case 2:
@@ -68,7 +94,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Mùi', 'Dậu', 'Hợi'],
 					branch: 'Đinh',
-					elements: ['Earth', 'Metal', 'Water'],
+					elements: ['Earth', 'Mental', 'Water'] as ELEMENTS[],
 				}
 				break
 			case 3:
@@ -76,7 +102,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Tỵ', 'Mùi', 'Dậu'],
 					branch: 'Kỹ',
-					elements: ['Fire', 'Earth', 'Metal'],
+					elements: ['Fire', 'Earth', 'Mental'] as ELEMENTS[],
 				}
 				break
 			case 4:
@@ -84,7 +110,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Tuất', 'Thân', 'Ngọ'],
 					branch: 'Canh',
-					elements: ['Earth', 'Metal', 'Fire'],
+					elements: ['Earth', 'Mental', 'Fire'] as ELEMENTS[],
 				}
 				break
 			case 5:
@@ -92,7 +118,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Mão', 'Tỵ', 'Mùi'],
 					branch: 'Tân',
-					elements: ['Wood', 'Fire', 'Earth'],
+					elements: ['Wood', 'Fire', 'Earth'] as ELEMENTS[],
 				}
 				break
 			case 6:
@@ -100,7 +126,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Tý', 'Tuất', 'Thân'],
 					branch: 'Mậu',
-					elements: ['Water', 'Earth', 'Metal'],
+					elements: ['Water', 'Earth', 'Mental'] as ELEMENTS[],
 				}
 				break
 			case 7:
@@ -108,7 +134,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Dần', 'Tý', 'Tuất'],
 					branch: 'Bính',
-					elements: ['Wood', 'Water', 'Earth'],
+					elements: ['Wood', 'Water', 'Earth'] as ELEMENTS[],
 				}
 				break
 
@@ -117,7 +143,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Tuất', 'Thân', 'Ngọ'],
 					branch: 'Nhâm',
-					elements: ['Earth', 'Metal', 'Fire'],
+					elements: ['Earth', 'Mental', 'Fire'] as ELEMENTS[],
 				}
 				break
 		}
@@ -131,7 +157,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Mão', 'Tỵ', 'Mùi'],
 					branch: 'Ất',
-					elements: ['Wood', 'Fire', 'Earth'],
+					elements: ['Wood', 'Fire', 'Earth'] as ELEMENTS[],
 				}
 				break
 			case 1:
@@ -140,7 +166,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Thìn', 'Dần', 'Tý'],
 					branch: 'Giáp',
-					elements: ['Earth', 'Wood', 'Water'],
+					elements: ['Earth', 'Wood', 'Water'] as ELEMENTS[],
 				}
 				break
 			case 2:
@@ -148,7 +174,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Sửu', 'Mão', 'Tỵ'],
 					branch: 'Đinh',
-					elements: ['Earth', 'Wood', 'Fire'],
+					elements: ['Earth', 'Wood', 'Fire'] as ELEMENTS[],
 				}
 				break
 			case 3:
@@ -156,7 +182,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Hợi', 'Sửu', 'Mão'],
 					branch: 'Kỹ',
-					elements: ['Water', 'Earth', 'Wood'],
+					elements: ['Water', 'Earth', 'Wood'] as ELEMENTS[],
 				}
 				break
 			case 4:
@@ -164,7 +190,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Thìn', 'Dần', 'Tý'],
 					branch: 'Canh',
-					elements: ['Earth', 'Wood', 'Water'],
+					elements: ['Earth', 'Wood', 'Water'] as ELEMENTS[],
 				}
 				break
 			case 5:
@@ -172,7 +198,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Dậu', 'Hợi', 'Sửu'],
 					branch: 'Tân',
-					elements: ['Metal', 'Water', 'Earth'],
+					elements: ['Mental', 'Water', 'Earth'] as ELEMENTS[],
 				}
 				break
 			case 6:
@@ -180,7 +206,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Ngọ', 'Thìn', 'Dần'],
 					branch: 'Mậu',
-					elements: ['Fire', 'Earth', 'Wood'],
+					elements: ['Fire', 'Earth', 'Wood'] as ELEMENTS[],
 				}
 				break
 			case 7:
@@ -188,7 +214,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Thân', 'Ngọ', 'Thìn'],
 					branch: 'Bính',
-					elements: ['Metal', 'Fire', 'Earth'],
+					elements: ['Mental', 'Fire', 'Earth'] as ELEMENTS[],
 				}
 				break
 
@@ -197,7 +223,7 @@ const transformToBaguasData = ({ type, baguaIndex }: { type: 'UPPER' | 'LOWER'; 
 					...bagua,
 					creatures: ['Thìn', 'Dần', 'Tý'],
 					branch: 'Nhâm',
-					elements: ['Earth', 'Wood', 'Water'],
+					elements: ['Earth', 'Wood', 'Water'] as ELEMENTS[],
 				}
 				break
 		}
@@ -238,4 +264,175 @@ const transformToHexagramsData = ({ upper, lower }: { upper: number; lower: numb
 	}
 
 	return hexagramData
+}
+
+type ELEMENTS = 'Water' | 'Fire' | 'Wood' | 'Mental' | 'Earth'
+
+const hexagramFamily = [
+	{
+		family: 'Càn',
+		originElement: 'Mental',
+		members: ['[1, 1]', '[1, 5]', '[1, 7]', '[1, 8]', '[5, 8]', '[7, 8]', '[3, 8]', '[3, 1]'],
+	},
+	{
+		family: 'Đoài',
+		originElement: 'Mental',
+		members: ['[2, 2]', '[2, 6]', '[2, 8]', '[2, 7]', '[6, 7]', '[8, 7]', '[4, 7]', '[4, 2]'],
+	},
+	{
+		family: 'Ly',
+		originElement: 'Fire',
+		members: ['[3, 3]', '[3, 7]', '[3, 5]', '[3, 6]', '[7, 6]', '[5, 6]', '[1, 6]', '[1, 3]'],
+	},
+	{
+		family: 'Chấn',
+		originElement: 'Wood',
+		members: ['[4, 4]', '[4, 8]', '[4, 6]', '[4, 5]', '[8, 5]', '[6, 5]', '[2, 5]', '[2, 4]'],
+	},
+	{
+		family: 'Tốn',
+		originElement: 'Wood',
+		members: ['[5, 5]', '[5, 1]', '[5, 3]', '[5, 4]', '[1, 4]', '[3, 4]', '[7, 4]', '[7, 5]'],
+	},
+	{
+		family: 'Khảm',
+		originElement: 'Water',
+		members: ['[6, 6]', '[6, 2]', '[6, 4]', '[6, 3]', '[2, 3]', '[4, 3]', '[8, 3]', '[8, 6]'],
+	},
+	{
+		family: 'Cấn',
+		originElement: 'Earth',
+		members: ['[7, 7]', '[7, 3]', '[7, 1]', '[7, 2]', '[3, 2]', '[1, 2]', '[5, 2]', '[5, 7]'],
+	},
+	{
+		family: 'Khôn',
+		originElement: 'Earth',
+		members: ['[8, 8]', '[8, 4]', '[8, 2]', '[8, 1]', '[4, 1]', '[2, 1]', '[6, 1]', '[6, 8]'],
+	},
+]
+
+const relativeConverter = ({ originElement, element }: { originElement: ELEMENTS; element: ELEMENTS }) => {
+	let relative = null
+
+	switch (originElement) {
+		case 'Water':
+			switch (element) {
+				case 'Water':
+					relative = 'Huynh đệ'
+					break
+				case 'Fire':
+					relative = 'Thê tài'
+					break
+				case 'Wood':
+					relative = 'Tử tôn'
+					break
+				case 'Mental':
+					relative = 'Phụ mẫu'
+					break
+				case 'Earth':
+					relative = 'Quan quỷ'
+					break
+				default:
+					relative = 'Huynh đệ'
+					break
+			}
+			break
+
+		case 'Fire':
+			switch (element) {
+				case 'Water':
+					relative = 'Quan quỷ'
+					break
+				case 'Fire':
+					relative = 'Huynh đệ'
+					break
+				case 'Wood':
+					relative = 'Phụ mẫu'
+					break
+				case 'Mental':
+					relative = 'Thê tài'
+					break
+				case 'Earth':
+					relative = 'Tử tôn'
+					break
+				default:
+					relative = 'Huynh đệ'
+					break
+			}
+			break
+
+		case 'Wood':
+			switch (element) {
+				case 'Water':
+					relative = 'Phụ mẫu'
+					break
+				case 'Fire':
+					relative = 'Tử tôn'
+					break
+				case 'Wood':
+					relative = 'Huynh đệ'
+					break
+				case 'Mental':
+					relative = 'Quan quỷ'
+					break
+				case 'Earth':
+					relative = 'Thê tài'
+					break
+				default:
+					relative = 'Huynh đệ'
+					break
+			}
+			break
+
+		case 'Mental':
+			switch (element) {
+				case 'Water':
+					relative = 'Tử tôn'
+					break
+				case 'Fire':
+					relative = 'Quan quỷ'
+					break
+				case 'Wood':
+					relative = 'Thê tài'
+					break
+				case 'Mental':
+					relative = 'Huynh đệ'
+					break
+				case 'Earth':
+					relative = 'Phụ mẫu'
+					break
+				default:
+					relative = 'Huynh đệ'
+					break
+			}
+			break
+
+		case 'Earth':
+			switch (element) {
+				case 'Water':
+					relative = 'Thê tài'
+					break
+				case 'Fire':
+					relative = 'Phụ mẫu'
+					break
+				case 'Wood':
+					relative = 'Quan quỷ'
+					break
+				case 'Mental':
+					relative = 'Tử tôn'
+					break
+				case 'Earth':
+					relative = 'Huynh đệ'
+					break
+				default:
+					relative = 'Huynh đệ'
+					break
+			}
+			break
+
+		default:
+			break
+	}
+
+	return relative
 }
