@@ -1,15 +1,27 @@
-export const converToHexagrams = ({ upper, lower }: { upper: number; lower: number }) => {
-	// tìm 8 quái && tên riêng của 8 quái & ngũ hành của 3 hào trong mỗi quái
+export const converToHexagrams = ({
+	upper,
+	lower,
+	elementToCompareWith,
+}: {
+	upper: number
+	lower: number
+	elementToCompareWith?: ELEMENTS_TYPE
+}) => {
+	// tìm 8 quái + tên riêng của 8 quái + ngũ hành của 3 hào trong mỗi quái
 	const upperBaguaCoverted = transformToBaguasData({
 		type: 'UPPER',
-		baguaIndex: upper || 1,
+		baguaIndex: upper,
 	})
-	const lowerBaguaCoverted = transformToBaguasData({ type: 'LOWER', baguaIndex: lower || 1 })
+	const lowerBaguaCoverted = transformToBaguasData({ type: 'LOWER', baguaIndex: lower })
 
 	// tìm 8 họ nhà quái
 	const family = hexagramFamily.find((f) => f.members.includes(`[${upper}, ${lower}]`))
 
-	const originElement = family!.originElement as ELEMENTS
+	// originElement dùng để so sánh ngũ hành 6 hào với ngũ hành quẻ gốc
+	// nhằm an đúng lục thân cho quẻ gốc và quẻ biến
+	// nếu có `elementToCompareWith` chứng tỏ Hexagrams này là quẻ biến => so sánh 6 hào với ngũ hành của quẻ gốc biến ra nó
+	// nếu không có `elementToCompareWith` thì Hexagrams này là quẻ gốc => so sánh 6 hào với ngũ hành của quẻ gốc của chính nó
+	const originElement = elementToCompareWith ? elementToCompareWith : (family!.originElement as ELEMENTS_TYPE)
 
 	// tìm lục thân
 	const upperRelative = upperBaguaCoverted?.elements.map((element) => {
@@ -22,51 +34,59 @@ export const converToHexagrams = ({ upper, lower }: { upper: number; lower: numb
 	return { upperBaguaCoverted, lowerBaguaCoverted, family, relatives: { upper: upperRelative, lower: lowerRelative } }
 }
 
-const transformToBaguasData = ({
+export const transformToBaguasData = ({
 	type,
 	baguaIndex,
+	actives,
 }: {
 	type: 'UPPER' | 'LOWER'
 	baguaIndex: number
+	actives?: number[]
 }): {
 	creatures: string[]
 	branch: string
-	elements: ELEMENTS[]
+	elements: ELEMENTS_TYPE[]
 	value: number[]
 	label: string
+	index: number
 } | null => {
 	let bagua = null
 	let baguaWithData = null
 
 	switch (baguaIndex) {
 		case 0 || 8:
-			bagua = { value: [0, 0, 0], label: 'Địa' }
+			bagua = { value: [0, 0, 0], label: 'Địa', index: 8 }
 			break
 		case 1 || 9:
-			bagua = { value: [1, 1, 1], label: 'Thiên' }
+			bagua = { value: [1, 1, 1], label: 'Thiên', index: 1 }
 			break
 		case 2:
-			bagua = { value: [0, 1, 1], label: 'Trạch' }
+			bagua = { value: [0, 1, 1], label: 'Trạch', index: 2 }
 			break
 		case 3:
-			bagua = { value: [1, 0, 1], label: 'Hỏa' }
+			bagua = { value: [1, 0, 1], label: 'Hỏa', index: 3 }
 			break
 		case 4:
-			bagua = { value: [0, 0, 1], label: 'Lôi' }
+			bagua = { value: [0, 0, 1], label: 'Lôi', index: 4 }
 			break
 		case 5:
-			bagua = { value: [1, 1, 0], label: 'Phong' }
+			bagua = { value: [1, 1, 0], label: 'Phong', index: 5 }
 			break
 		case 6:
-			bagua = { value: [0, 1, 0], label: 'Thủy' }
+			bagua = { value: [0, 1, 0], label: 'Thủy', index: 6 }
 			break
 		case 7:
-			bagua = { value: [1, 0, 0], label: 'Sơn' }
+			bagua = { value: [1, 0, 0], label: 'Sơn', index: 7 }
 			break
 
 		default:
-			bagua = { value: [1, 1, 1], label: 'Thiên' }
+			bagua = { value: [1, 1, 1], label: 'Thiên', index: 1 }
 			break
+	}
+
+	if (actives?.length) {
+		const newValue = bagua.value.map((v, index) => (actives.includes(index) ? 1 - v : v))
+		bagua.value = newValue // hào động 1=> 0 và 0 => 1
 	}
 
 	if (type === 'UPPER') {
@@ -77,7 +97,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Dậu', 'Hợi', 'Sửu'],
 					branch: 'Quý',
-					elements: ['Mental', 'Water', 'Earth'] as ELEMENTS[],
+					elements: ['Mental', 'Water', 'Earth'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 1:
@@ -86,7 +106,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Tuất', 'Thân', 'Ngọ'],
 					branch: 'Nhâm',
-					elements: ['Earth', 'Mental', 'Fire'] as ELEMENTS[],
+					elements: ['Earth', 'Mental', 'Fire'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 2:
@@ -94,7 +114,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Mùi', 'Dậu', 'Hợi'],
 					branch: 'Đinh',
-					elements: ['Earth', 'Mental', 'Water'] as ELEMENTS[],
+					elements: ['Earth', 'Mental', 'Water'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 3:
@@ -102,7 +122,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Tỵ', 'Mùi', 'Dậu'],
 					branch: 'Kỹ',
-					elements: ['Fire', 'Earth', 'Mental'] as ELEMENTS[],
+					elements: ['Fire', 'Earth', 'Mental'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 4:
@@ -110,7 +130,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Tuất', 'Thân', 'Ngọ'],
 					branch: 'Canh',
-					elements: ['Earth', 'Mental', 'Fire'] as ELEMENTS[],
+					elements: ['Earth', 'Mental', 'Fire'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 5:
@@ -118,7 +138,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Mão', 'Tỵ', 'Mùi'],
 					branch: 'Tân',
-					elements: ['Wood', 'Fire', 'Earth'] as ELEMENTS[],
+					elements: ['Wood', 'Fire', 'Earth'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 6:
@@ -126,7 +146,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Tý', 'Tuất', 'Thân'],
 					branch: 'Mậu',
-					elements: ['Water', 'Earth', 'Mental'] as ELEMENTS[],
+					elements: ['Water', 'Earth', 'Mental'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 7:
@@ -134,7 +154,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Dần', 'Tý', 'Tuất'],
 					branch: 'Bính',
-					elements: ['Wood', 'Water', 'Earth'] as ELEMENTS[],
+					elements: ['Wood', 'Water', 'Earth'] as ELEMENTS_TYPE[],
 				}
 				break
 
@@ -143,7 +163,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Tuất', 'Thân', 'Ngọ'],
 					branch: 'Nhâm',
-					elements: ['Earth', 'Mental', 'Fire'] as ELEMENTS[],
+					elements: ['Earth', 'Mental', 'Fire'] as ELEMENTS_TYPE[],
 				}
 				break
 		}
@@ -157,7 +177,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Mão', 'Tỵ', 'Mùi'],
 					branch: 'Ất',
-					elements: ['Wood', 'Fire', 'Earth'] as ELEMENTS[],
+					elements: ['Wood', 'Fire', 'Earth'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 1:
@@ -166,7 +186,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Thìn', 'Dần', 'Tý'],
 					branch: 'Giáp',
-					elements: ['Earth', 'Wood', 'Water'] as ELEMENTS[],
+					elements: ['Earth', 'Wood', 'Water'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 2:
@@ -174,7 +194,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Sửu', 'Mão', 'Tỵ'],
 					branch: 'Đinh',
-					elements: ['Earth', 'Wood', 'Fire'] as ELEMENTS[],
+					elements: ['Earth', 'Wood', 'Fire'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 3:
@@ -182,7 +202,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Hợi', 'Sửu', 'Mão'],
 					branch: 'Kỹ',
-					elements: ['Water', 'Earth', 'Wood'] as ELEMENTS[],
+					elements: ['Water', 'Earth', 'Wood'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 4:
@@ -190,7 +210,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Thìn', 'Dần', 'Tý'],
 					branch: 'Canh',
-					elements: ['Earth', 'Wood', 'Water'] as ELEMENTS[],
+					elements: ['Earth', 'Wood', 'Water'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 5:
@@ -198,7 +218,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Dậu', 'Hợi', 'Sửu'],
 					branch: 'Tân',
-					elements: ['Mental', 'Water', 'Earth'] as ELEMENTS[],
+					elements: ['Mental', 'Water', 'Earth'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 6:
@@ -206,7 +226,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Ngọ', 'Thìn', 'Dần'],
 					branch: 'Mậu',
-					elements: ['Fire', 'Earth', 'Wood'] as ELEMENTS[],
+					elements: ['Fire', 'Earth', 'Wood'] as ELEMENTS_TYPE[],
 				}
 				break
 			case 7:
@@ -214,7 +234,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Thân', 'Ngọ', 'Thìn'],
 					branch: 'Bính',
-					elements: ['Mental', 'Fire', 'Earth'] as ELEMENTS[],
+					elements: ['Mental', 'Fire', 'Earth'] as ELEMENTS_TYPE[],
 				}
 				break
 
@@ -223,7 +243,7 @@ const transformToBaguasData = ({
 					...bagua,
 					creatures: ['Thìn', 'Dần', 'Tý'],
 					branch: 'Nhâm',
-					elements: ['Earth', 'Wood', 'Water'] as ELEMENTS[],
+					elements: ['Earth', 'Wood', 'Water'] as ELEMENTS_TYPE[],
 				}
 				break
 		}
@@ -266,7 +286,7 @@ const transformToHexagramsData = ({ upper, lower }: { upper: number; lower: numb
 	return hexagramData
 }
 
-type ELEMENTS = 'Water' | 'Fire' | 'Wood' | 'Mental' | 'Earth'
+export type ELEMENTS_TYPE = 'Water' | 'Fire' | 'Wood' | 'Mental' | 'Earth'
 
 const hexagramFamily = [
 	{
@@ -311,7 +331,7 @@ const hexagramFamily = [
 	},
 ]
 
-const relativeConverter = ({ originElement, element }: { originElement: ELEMENTS; element: ELEMENTS }) => {
+const relativeConverter = ({ originElement, element }: { originElement: ELEMENTS_TYPE; element: ELEMENTS_TYPE }) => {
 	let relative = null
 
 	switch (originElement) {

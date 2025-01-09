@@ -6,7 +6,7 @@ import { Toaster } from '@/components/commons/toaster'
 
 export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
 	return (
-		<NextThemesProvider {...props}>
+		<NextThemesProvider defaultTheme="dark" {...props}>
 			{children}
 			<Toaster />
 		</NextThemesProvider>

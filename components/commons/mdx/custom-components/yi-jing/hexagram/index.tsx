@@ -5,7 +5,8 @@ import { nanoid } from 'nanoid'
 import type { ElementDotsTypeName } from '@/components/commons/mdx/custom-components/yi-jing/element/element-dots'
 import ElementDot from '@/components/commons/mdx/custom-components/yi-jing/element/element-dots'
 import YinYang from '@/components/commons/mdx/custom-components/yi-jing/yin-yang'
-import { converToHexagrams } from '@/lib/content/docs/hexgrams-converter'
+import type { ELEMENTS_TYPE } from '@/lib/content/docs/hexgrams-converter'
+import { converToHexagrams, transformToBaguasData } from '@/lib/content/docs/hexgrams-converter'
 import { cn } from '@/lib/utils'
 
 interface IHexagram {
@@ -20,24 +21,32 @@ interface IHexagram {
 	showBranches?: boolean
 	showSixCreatures?: boolean
 	yinYangClassName?: string
+	sixRelativesCompareToElement?: ELEMENTS_TYPE
 }
 
 function Hexagram({
-	actives,
+	actives, // danh sách các hào động : từ [1 => 6]
 	className,
-	lower,
-	showLabel,
-	showIndex,
-	showElements,
-	showSixRelatives,
-	showBranches,
-	showSixCreatures,
-	upper,
-	yinYangClassName,
+	upper, // quẻ thượng
+	lower, // quẻ hạ
+	showLabel, // hiện tên quẻ
+	showIndex, // hiện thứ tự của từng hào
+	showElements, // hiện ngũ hành của từng hào
+	showBranches, // hiện thiên can
+	showSixRelatives, // hiện lục thân của từng hào
+	showSixCreatures, // hiện địa chi của từng hào
+	yinYangClassName, // className của yinyang component
+	sixRelativesCompareToElement, // dùng cho quẻ biến, so sánh ngũ hành của hào với ngũ hành của quẻ gốc
 }: IHexagram) {
-	const { upperBaguaCoverted, lowerBaguaCoverted, relatives } = converToHexagrams({
+	const aboveActiveList = actives?.filter((e) => e > 3)?.map((e) => e - 3) // vị trí hào động của quẻ thượng [1,2,3]
+	const belowActiveList = actives?.filter((e) => e < 4) // vị trí hào động của quẻ hạ [1,2,3]
+	const isAboveActive = aboveActiveList && aboveActiveList?.length > 0
+	const isBelowActive = belowActiveList && belowActiveList?.length > 0
+
+	const { upperBaguaCoverted, lowerBaguaCoverted, relatives, family } = converToHexagrams({
 		upper: upper || 1,
 		lower: lower || 1,
+		// elementToCompareWith: sixRelativesCompareToElement,
 	})
 
 	return (

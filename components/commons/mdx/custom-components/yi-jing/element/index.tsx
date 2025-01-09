@@ -60,7 +60,7 @@ export const ElementsIcon = {
 			<path d="M12 19v3"></path>
 		</svg>
 	),
-	Metal: (props: TSVGIconsProps) => (
+	Mental: (props: TSVGIconsProps) => (
 		<svg
 			xmlns="http://www.w3.org/2000/svg"
 			width="18"

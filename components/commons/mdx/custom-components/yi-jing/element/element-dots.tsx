@@ -23,7 +23,7 @@ const ElementDots = {
 	Wood: (props: any) => (
 		<div {...props} className={cn('size-3 rounded bg-green-300 dark:bg-green-500', props.className)} />
 	),
-	Metal: (props: any) => (
+	Mental: (props: any) => (
 		<div
 			{...props}
 			className={cn('size-3 rounded border border-foreground/60 dark:border-none dark:bg-white', props.className)}
