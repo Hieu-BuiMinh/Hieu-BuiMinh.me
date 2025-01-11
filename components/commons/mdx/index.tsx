@@ -73,7 +73,7 @@ const components = {
 	// 	return <>{props.children} 123</>
 	// },
 	// pre: CodeBlock,
-	Audio: Audio,
+	Audio,
 	CodeBlock,
 	LinkCard,
 	TreeView,

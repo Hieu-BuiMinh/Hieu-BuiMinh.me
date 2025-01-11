@@ -15,6 +15,10 @@ function Audio({ src }: IAudio) {
 		}
 	}, [])
 
+	if (!src) {
+		return null
+	}
+
 	return (
 		<figure className="sticky top-16 z-10 w-full">
 			<audio ref={audioRef} className="w-full" controls src={src}></audio>

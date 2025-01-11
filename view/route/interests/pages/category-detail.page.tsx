@@ -4,8 +4,9 @@ import { notFound } from 'next/navigation'
 import { interests } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
-import { cn, formatDate } from '@/lib/utils'
+import { cn } from '@/lib/utils'
 import CommentSection from '@/view/components/blog-content/comments'
+import PostLastUpdated from '@/view/components/blog-content/post-last-updated'
 import PostLikeButton from '@/view/components/blog-content/post-like-button'
 
 interface ICategoryDetailPageProps {
@@ -40,9 +41,7 @@ export default async function CategoryDetailPage({ params }: ICategoryDetailPage
 				>
 					<MDXContent code={post.body} />
 
-					{post.lastUpdated && (
-						<div className="text-right text-sm">Last updated:&nbsp;{formatDate(post.lastUpdated)}</div>
-					)}
+					{post.lastUpdated && <PostLastUpdated date={post.lastUpdated} />}
 				</article>
 
 				<aside className="hidden lg:block lg:w-[220px]">

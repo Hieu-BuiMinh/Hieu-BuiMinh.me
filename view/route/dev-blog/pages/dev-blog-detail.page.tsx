@@ -4,8 +4,8 @@ import type { DevBlogPost } from '@/.velite'
 import { devBlogPosts } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
 import TableOfContent from '@/components/commons/table-of-content'
-import { formatDate } from '@/lib/utils'
 import CommentSection from '@/view/components/blog-content/comments'
+import PostLastUpdated from '@/view/components/blog-content/post-last-updated'
 import PostLikeButton from '@/view/components/blog-content/post-like-button'
 
 interface PostPageProps {
@@ -33,11 +33,7 @@ export default async function DevBlogDetailPageView({ params }: PostPageProps) {
 				<article className="prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]">
 					<MDXContent code={post.body} />
 
-					{post.lastUpdated && (
-						<div className="py-10 text-right text-sm">
-							Last updated:&nbsp;{formatDate(post.lastUpdated)}
-						</div>
-					)}
+					{post.lastUpdated && <PostLastUpdated date={post.lastUpdated} />}
 				</article>
 
 				<aside className="hidden lg:block lg:w-[220px]">
