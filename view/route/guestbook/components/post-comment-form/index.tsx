@@ -11,6 +11,7 @@ import RHFTextArea from '@/components/commons/form-input/RHF-text-area'
 import { Button } from '@/components/ui/button'
 import { api } from '@/convex/_generated/api'
 import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
+import { cn } from '@/lib/utils'
 
 const guestbookFormSchema = z.object({
 	message: z.string().min(1, {
@@ -79,7 +80,20 @@ function GuestbookPostCommentForm() {
 
 					<FormProvider {...methods}>
 						<form onSubmit={methods.handleSubmit(onSubmit)} className="w-full">
-							<RHFTextArea name="message" errorMessage="Message cannot be empty" />
+							<div
+								className={cn(
+									'rounded-lg border bg-background pb-1 ring-offset-background focus-within:ring-ring',
+									'focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2',
+									'aria-disabled:cursor-not-allowed aria-disabled:opacity-80'
+								)}
+							>
+								<RHFTextArea
+									name="message"
+									className="min-h-10 resize-none border-none focus-visible:ring-0 focus-visible:ring-offset-0"
+									errorMessage="Message cannot be empty"
+									ref={null}
+								/>
+							</div>
 
 							<div className="mt-4 flex justify-end gap-2">
 								<SignOutButton redirectUrl="/guestbook">

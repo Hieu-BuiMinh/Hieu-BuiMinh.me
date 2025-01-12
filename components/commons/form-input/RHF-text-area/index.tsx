@@ -1,7 +1,7 @@
 // eslint-disable react/display-name
 'use client'
 
-import React, { forwardRef, useEffect } from 'react'
+import React, { forwardRef, useEffect, useRef } from 'react'
 import { useFormContext } from 'react-hook-form'
 
 import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
@@ -38,7 +38,7 @@ export const useAutosizeTextArea = ({
 	const [init, setInit] = React.useState(true)
 
 	React.useEffect(() => {
-		const offsetBorder = 20
+		const offsetBorder = 25
 
 		if (textAreaRef && 'current' in textAreaRef) {
 			const textAreaElement = textAreaRef.current
@@ -70,8 +70,10 @@ const RHFTextArea = forwardRef<HTMLTextAreaElement | null, TRHFTextAreaProps>(
 		const [triggerAutoSize, setTriggerAutoSize] = React.useState('')
 		const textareaRegisterName = watch(name)
 
+		const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+
 		useAutosizeTextArea({
-			textAreaRef: ref,
+			textAreaRef: ref || textareaRef,
 			triggerAutoSize: triggerAutoSize,
 			minHeight,
 			maxHeight,
@@ -79,6 +81,9 @@ const RHFTextArea = forwardRef<HTMLTextAreaElement | null, TRHFTextAreaProps>(
 
 		useEffect(() => {
 			if (ref && 'current' in ref) {
+				setTriggerAutoSize(textareaRegisterName)
+			}
+			if (textareaRef && 'current' in textareaRef) {
 				setTriggerAutoSize(textareaRegisterName)
 			}
 			// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,7 +106,7 @@ const RHFTextArea = forwardRef<HTMLTextAreaElement | null, TRHFTextAreaProps>(
 								placeholder={placeholder}
 								{...field}
 								onKeyDown={onKeyDown}
-								ref={ref}
+								ref={ref || textareaRef}
 							/>
 						</FormControl>
 						{description && <FormDescription>{description}</FormDescription>}

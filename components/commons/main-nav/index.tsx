@@ -57,14 +57,19 @@ const aboutItems: { title: string; href: string; description: string }[] = [
 		href: '/interests',
 		description: `A place to explore the things I'm passionate about and love sharing.`,
 	},
-	{
-		title: 'Insanity 🤡',
-		href: '/about/insanity',
-		description: 'How far down the rabbit hole do you wanna go!?',
-	},
+	// {
+	// 	title: 'Insanity 🤡',
+	// 	href: '/about/insanity',
+	// 	description: 'How far down the rabbit hole do you wanna go!?',
+	// },
 	{
 		title: 'Tags 🏷️',
 		href: '/tags',
+		description: 'Organized chaos awaits! Browse tags and see what catches your eye.',
+	},
+	{
+		title: 'Quotes 📝',
+		href: '/quotes',
 		description: 'Organized chaos awaits! Browse tags and see what catches your eye.',
 	},
 ]
