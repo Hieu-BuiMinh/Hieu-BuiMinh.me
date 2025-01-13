@@ -89,7 +89,7 @@ function GuestbookPostCommentForm() {
 							>
 								<RHFTextArea
 									name="message"
-									className="min-h-10 resize-none border-none focus-visible:ring-0 focus-visible:ring-offset-0"
+									textAreaClassName="min-h-10 resize-none border-none focus-visible:ring-0 focus-visible:ring-offset-0"
 									errorMessage="Message cannot be empty"
 									ref={null}
 								/>

@@ -174,7 +174,7 @@ function CommentEditor({
 			<TooltipProvider>
 				<Tooltip>
 					<TooltipTrigger asChild className="absolute right-2 top-2">
-						<Info className="text-blue-700" size={15} />
+						<Info className="text-green-500" size={15} />
 					</TooltipTrigger>
 					<TooltipContent>
 						<p className="w-32">
@@ -192,7 +192,7 @@ function CommentEditor({
 						}}
 						ref={textareaRef}
 						name="message"
-						className="min-h-10 resize-none border-none focus-visible:ring-0 focus-visible:ring-offset-0"
+						textAreaClassName="min-h-10 resize-none border-none focus-visible:ring-0 focus-visible:ring-offset-0"
 					/>
 
 					<div className="flex flex-row items-center gap-0.5 px-1.5">

@@ -15,6 +15,7 @@ type TRHFTextAreaProps = React.InputHTMLAttributes<HTMLTextAreaElement> & {
 	placeholder?: string
 	errorMessage?: string
 	className?: string
+	textAreaClassName?: string
 	maxHeight?: number
 	minHeight?: number
 	onKeyDown?: (event: React.KeyboardEvent<HTMLTextAreaElement>) => void
@@ -65,7 +66,21 @@ export const useAutosizeTextArea = ({
 }
 
 const RHFTextArea = forwardRef<HTMLTextAreaElement | null, TRHFTextAreaProps>(
-	({ name, description, label, placeholder, errorMessage, className, minHeight, maxHeight, onKeyDown }, ref) => {
+	(
+		{
+			name,
+			description,
+			label,
+			placeholder,
+			errorMessage,
+			className,
+			minHeight,
+			maxHeight,
+			onKeyDown,
+			textAreaClassName,
+		},
+		ref
+	) => {
 		const { control, watch } = useFormContext()
 		const [triggerAutoSize, setTriggerAutoSize] = React.useState('')
 		const textareaRegisterName = watch(name)
@@ -94,15 +109,15 @@ const RHFTextArea = forwardRef<HTMLTextAreaElement | null, TRHFTextAreaProps>(
 				control={control}
 				name={name}
 				render={({ field }) => (
-					<FormItem>
-						{label && <FormLabel>{label}</FormLabel>}
+					<FormItem className={cn('w-full', className)}>
+						{label && <FormLabel className="text-xs">{label}</FormLabel>}
 						<FormControl>
 							<Textarea
 								autoComplete="off"
 								autoCorrect="off"
 								autoCapitalize="off"
 								spellCheck="false"
-								className={cn(className)}
+								className={cn(textAreaClassName)}
 								placeholder={placeholder}
 								{...field}
 								onKeyDown={onKeyDown}

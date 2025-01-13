@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 }
 
 function DocLayout({ children }: { children: React.ReactNode }) {
-	return <div className="m-auto max-w-screen-2xl">{children}</div>
+	return <div className="m-auto max-w-screen-2xl border-b border-dashed">{children}</div>
 }
 
 export default DocLayout
