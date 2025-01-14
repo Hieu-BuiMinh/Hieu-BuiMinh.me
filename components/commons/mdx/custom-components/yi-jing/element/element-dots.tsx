@@ -15,7 +15,7 @@ export default ElementDot
 
 const ElementDots = {
 	Water: (props: any) => (
-		<div {...props} className={cn('size-3 rounded bg-cyan-500 dark:bg-cyan-700', props.className)} />
+		<div {...props} className={cn('size-3 rounded bg-cyan-500 dark:bg-cyan-400', props.className)} />
 	),
 	Fire: (props: any) => (
 		<div {...props} className={cn('size-3 rounded bg-red-500 dark:bg-red-700', props.className)} />

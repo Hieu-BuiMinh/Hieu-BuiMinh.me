@@ -1,7 +1,5 @@
-import { Info } from 'lucide-react'
 import { nanoid } from 'nanoid'
 import Link from 'next/link'
-import React from 'react'
 
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
@@ -65,8 +63,8 @@ function FooterRoutingSection() {
 													{/* <Info className="text-green-500" size={15} /> */}
 													<span>{link.lable}</span>
 												</TooltipTrigger>
-												<TooltipContent>
-													<p className="w-32">Incomming 😘</p>
+												<TooltipContent className="bg-black text-white">
+													<p className="w-32">Comming soon 🧪</p>
 												</TooltipContent>
 											</Tooltip>
 										</TooltipProvider>

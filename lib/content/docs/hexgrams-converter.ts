@@ -1,3 +1,12 @@
+export interface HexgramBagua {
+	creatures: string[]
+	branch: string
+	elements: ELEMENTS_TYPE[]
+	value: number[]
+	label: string
+	index: number
+}
+
 export const converToHexagrams = ({
 	upper,
 	lower,
@@ -37,19 +46,10 @@ export const converToHexagrams = ({
 export const transformToBaguasData = ({
 	type,
 	baguaIndex,
-	actives,
 }: {
 	type: 'UPPER' | 'LOWER'
 	baguaIndex: number
-	actives?: number[]
-}): {
-	creatures: string[]
-	branch: string
-	elements: ELEMENTS_TYPE[]
-	value: number[]
-	label: string
-	index: number
-} | null => {
+}): HexgramBagua | null => {
 	let bagua = null
 	let baguaWithData = null
 
@@ -82,11 +82,6 @@ export const transformToBaguasData = ({
 		default:
 			bagua = { value: [1, 1, 1], label: 'Thiên', index: 1 }
 			break
-	}
-
-	if (actives?.length) {
-		const newValue = bagua.value.map((v, index) => (actives.includes(index) ? 1 - v : v))
-		bagua.value = newValue // hào động 1=> 0 và 0 => 1
 	}
 
 	if (type === 'UPPER') {
@@ -252,6 +247,92 @@ export const transformToBaguasData = ({
 	return baguaWithData
 }
 
+export const transformActiveBaguaToNewBagua = ({
+	baguaIndex,
+	actives,
+}: {
+	baguaIndex: number
+	actives: number[]
+}): {
+	value: number[]
+	label: string
+	newIndex: number
+} => {
+	let bagua = null
+
+	switch (baguaIndex) {
+		case 0 || 8:
+			bagua = { value: [0, 0, 0], label: 'Địa', index: 8 }
+			break
+		case 1 || 9:
+			bagua = { value: [1, 1, 1], label: 'Thiên', index: 1 }
+			break
+		case 2:
+			bagua = { value: [0, 1, 1], label: 'Trạch', index: 2 }
+			break
+		case 3:
+			bagua = { value: [1, 0, 1], label: 'Hỏa', index: 3 }
+			break
+		case 4:
+			bagua = { value: [0, 0, 1], label: 'Lôi', index: 4 }
+			break
+		case 5:
+			bagua = { value: [1, 1, 0], label: 'Phong', index: 5 }
+			break
+		case 6:
+			bagua = { value: [0, 1, 0], label: 'Thủy', index: 6 }
+			break
+		case 7:
+			bagua = { value: [1, 0, 0], label: 'Sơn', index: 7 }
+			break
+
+		default:
+			bagua = { value: [1, 1, 1], label: 'Thiên', index: 1 }
+			break
+	}
+
+	if (actives.length > 0) {
+		const indicesSet = new Set(actives)
+		const newValue = bagua.value.map((value, index) => {
+			return indicesSet.has(3 - index) ? 1 - value : value
+		})
+
+		switch (JSON.stringify(newValue)) {
+			case '[0,0,0]':
+				bagua = { value: [0, 0, 0], label: 'Địa', index: 8 }
+				console.log(bagua)
+				break
+			case '[1,1,1]':
+				bagua = { value: [1, 1, 1], label: 'Thiên', index: 1 }
+				break
+			case '[0,1,1]':
+				bagua = { value: [0, 1, 1], label: 'Trạch', index: 2 }
+				break
+			case '[1,0,1]':
+				bagua = { value: [1, 0, 1], label: 'Hỏa', index: 3 }
+				break
+			case '[0,0,1]':
+				bagua = { value: [0, 0, 1], label: 'Lôi', index: 4 }
+				break
+			case '[1,1,0]':
+				bagua = { value: [1, 1, 0], label: 'Phong', index: 5 }
+				break
+			case '[0,1,0]':
+				bagua = { value: [0, 1, 0], label: 'Thủy', index: 6 }
+				break
+			case '[1,0,0]':
+				bagua = { value: [1, 0, 0], label: 'Sơn', index: 7 }
+				break
+
+			default:
+				bagua = { value: [1, 1, 1], label: 'Thiên', index: 1 }
+				break
+		}
+	}
+
+	return { ...bagua, newIndex: bagua.index }
+}
+
 /*
 const array = [
   [[1, 1], [1, 5], [1, 7], [1, 8], [5, 8], [7, 8], [3, 8], [3, 1]],
@@ -287,46 +368,53 @@ const transformToHexagramsData = ({ upper, lower }: { upper: number; lower: numb
 }
 
 export type ELEMENTS_TYPE = 'Water' | 'Fire' | 'Wood' | 'Mental' | 'Earth'
-
 const hexagramFamily = [
 	{
-		family: 'Càn',
+		baguaFamily: 'Càn',
 		originElement: 'Mental',
+		vietnameseElementName: 'Kim',
 		members: ['[1, 1]', '[1, 5]', '[1, 7]', '[1, 8]', '[5, 8]', '[7, 8]', '[3, 8]', '[3, 1]'],
 	},
 	{
-		family: 'Đoài',
+		baguaFamily: 'Đoài',
 		originElement: 'Mental',
+		vietnameseElementName: 'Kim',
 		members: ['[2, 2]', '[2, 6]', '[2, 8]', '[2, 7]', '[6, 7]', '[8, 7]', '[4, 7]', '[4, 2]'],
 	},
 	{
-		family: 'Ly',
+		baguaFamily: 'Ly',
 		originElement: 'Fire',
+		vietnameseElementName: 'Hỏa',
 		members: ['[3, 3]', '[3, 7]', '[3, 5]', '[3, 6]', '[7, 6]', '[5, 6]', '[1, 6]', '[1, 3]'],
 	},
 	{
-		family: 'Chấn',
+		baguaFamily: 'Chấn',
 		originElement: 'Wood',
+		vietnameseElementName: 'Mộc',
 		members: ['[4, 4]', '[4, 8]', '[4, 6]', '[4, 5]', '[8, 5]', '[6, 5]', '[2, 5]', '[2, 4]'],
 	},
 	{
-		family: 'Tốn',
+		baguaFamily: 'Tốn',
 		originElement: 'Wood',
+		vietnameseElementName: 'Mộc',
 		members: ['[5, 5]', '[5, 1]', '[5, 3]', '[5, 4]', '[1, 4]', '[3, 4]', '[7, 4]', '[7, 5]'],
 	},
 	{
-		family: 'Khảm',
+		baguaFamily: 'Khảm',
 		originElement: 'Water',
+		vietnameseElementName: 'Thủy',
 		members: ['[6, 6]', '[6, 2]', '[6, 4]', '[6, 3]', '[2, 3]', '[4, 3]', '[8, 3]', '[8, 6]'],
 	},
 	{
-		family: 'Cấn',
+		baguaFamily: 'Cấn',
 		originElement: 'Earth',
+		vietnameseElementName: 'Thổ',
 		members: ['[7, 7]', '[7, 3]', '[7, 1]', '[7, 2]', '[3, 2]', '[1, 2]', '[5, 2]', '[5, 7]'],
 	},
 	{
-		family: 'Khôn',
+		baguaFamily: 'Khôn',
 		originElement: 'Earth',
+		vietnameseElementName: 'Thổ',
 		members: ['[8, 8]', '[8, 4]', '[8, 2]', '[8, 1]', '[4, 1]', '[2, 1]', '[6, 1]', '[6, 8]'],
 	},
 ]

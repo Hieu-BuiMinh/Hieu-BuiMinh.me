@@ -20,7 +20,17 @@ export default function AboutPageView() {
 		<div className="container flex max-w-4xl flex-col gap-3">
 			<PageTitle title={title} description={description} />
 
-			<Hexagram showBranches showElements showSixCreatures upper={8} lower={1} actives={[1, 2, 5]} />
+			<Hexagram
+				showIndex
+				showSixRelatives
+				showElements
+				showBranches
+				showSixCreatures
+				upper={8}
+				lower={1}
+				showResultHexagram
+				actives={[1, 2]}
+			/>
 
 			<article className="container prose mx-auto max-w-3xl pb-6 dark:prose-invert">
 				<MDXContent code={post.body} />
