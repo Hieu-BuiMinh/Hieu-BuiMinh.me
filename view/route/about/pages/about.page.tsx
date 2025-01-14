@@ -20,7 +20,7 @@ export default function AboutPageView() {
 		<div className="container flex max-w-4xl flex-col gap-3">
 			<PageTitle title={title} description={description} />
 
-			<Hexagram
+			{/* <Hexagram
 				showIndex
 				showSixRelatives
 				showElements
@@ -28,9 +28,80 @@ export default function AboutPageView() {
 				showSixCreatures
 				upper={1}
 				lower={1}
+				showOriginFamily
 				showResultHexagram
+				showQuestionerAndQuestion
 				actives={[1, 2, 3, 4, 5, 6]}
-			/>
+			/> */}
+
+			<div className="flex flex-wrap items-center justify-center gap-4">
+				<Hexagram
+					showQuestionerAndQuestion
+					showSixRelatives
+					showReturningRelative
+					upper={1}
+					lower={1}
+					showIndex
+				/>
+				<Hexagram
+					showQuestionerAndQuestion
+					showSixRelatives
+					showReturningRelative
+					upper={1}
+					lower={5}
+					actives={[1]}
+				/>
+				<Hexagram
+					showQuestionerAndQuestion
+					showSixRelatives
+					showReturningRelative
+					upper={1}
+					lower={7}
+					actives={[2]}
+				/>
+				<Hexagram
+					showQuestionerAndQuestion
+					showSixRelatives
+					showReturningRelative
+					upper={1}
+					lower={8}
+					actives={[3]}
+				/>
+				<Hexagram
+					showQuestionerAndQuestion
+					showSixRelatives
+					showReturningRelative
+					upper={5}
+					lower={8}
+					actives={[4]}
+				/>
+				<Hexagram
+					showQuestionerAndQuestion
+					showSixRelatives
+					showReturningRelative
+					upper={7}
+					lower={8}
+					actives={[5]}
+				/>
+				<Hexagram
+					showQuestionerAndQuestion
+					showSixRelatives
+					showReturningRelative
+					upper={3}
+					lower={8}
+					actives={[4]}
+					className="rounded border border-dashed p-1"
+				/>
+				<Hexagram
+					showQuestionerAndQuestion
+					showSixRelatives
+					showReturningRelative
+					upper={3}
+					lower={1}
+					actives={[1, 2, 3]}
+					className="rounded border border-dashed p-1"
+				/>
+			</div>
 
 			<article className="container prose mx-auto max-w-3xl pb-6 dark:prose-invert">
 				<MDXContent code={post.body} />
@@ -39,3 +110,7 @@ export default function AboutPageView() {
 		</div>
 	)
 }
+/*
+i 0 1 2 3 4 5
+q 6 5 4 3 2 1
+*/

@@ -22,6 +22,8 @@ interface IHexagram {
 	showSixCreatures?: boolean
 	showOriginFamily?: boolean
 	showResultHexagram?: boolean
+	showQuestionerAndQuestion?: boolean
+	showReturningRelative?: boolean
 	yinYangClassName?: string
 }
 
@@ -38,14 +40,24 @@ function Hexagram({
 	showSixCreatures, // hiện địa chi của từng hào
 	showOriginFamily, // hiện ngũ hành quẻ gốc
 	showResultHexagram, // hiện kết quả sau khi động hào
+	showQuestionerAndQuestion, // hiện thế ứng
+	showReturningRelative, // hiện phục thần
 	yinYangClassName, // className của yinyang component
 }: IHexagram) {
+	const showInforSection =
+		showIndex ||
+		showBranches ||
+		showSixCreatures ||
+		showElements ||
+		showQuestionerAndQuestion ||
+		showReturningRelative
+
 	const aboveActiveList = actives?.filter((e) => e > 3)?.map((e) => e - 3) // vị trí hào động của quẻ thượng [6,5,4] => [3,2,1] => [1,2,3]
 	const belowActiveList = actives?.filter((e) => e < 4) // vị trí hào động của quẻ hạ [1,2,3]
 	const isAboveActive = aboveActiveList && aboveActiveList?.length > 0
 	const isBelowActive = belowActiveList && belowActiveList?.length > 0
 
-	const { upperBaguaCoverted, lowerBaguaCoverted, relatives, family } = converToHexagrams({
+	const { upperBaguaCoverted, lowerBaguaCoverted, relatives, family, member, returningRelative } = converToHexagrams({
 		upper: upper || 1,
 		lower: lower || 1,
 	})
@@ -68,9 +80,11 @@ function Hexagram({
 	})
 
 	return (
-		<div className="mx-auto my-9 flex gap-10">
+		<div className="mx-auto my-9 flex justify-between">
 			<div className={cn('relative flex flex-col gap-3', className)}>
-				<span className="absolute -top-7 left-0 text-sm">{family?.vietnameseElementName}</span>
+				{showOriginFamily && (
+					<span className="absolute -top-7 left-0 text-sm">Cung: {family?.baguaFamily}</span>
+				)}
 				<div className="flex flex-col gap-1.5">
 					{upperBaguaCoverted?.value.map((item, i) => {
 						return (
@@ -81,7 +95,7 @@ function Hexagram({
 									key={nanoid()}
 									active={actives?.includes(upperBaguaCoverted.value.length - i + 3)}
 								/>
-								{(showIndex || showBranches || showSixCreatures || showElements) && (
+								{showInforSection && (
 									<span className="flex gap-1 text-xs leading-3">
 										{showIndex && (
 											<span className="flex w-2 items-center text-muted-foreground">{6 - i}</span>
@@ -107,6 +121,29 @@ function Hexagram({
 										{showSixRelatives && (
 											<span className="flex w-14 items-center">{relatives.upper?.[i]}</span>
 										)}
+										{showQuestionerAndQuestion && (
+											<>
+												{6 - i === member?.questionerIndex && (
+													<span className="w-5 text-center">[T]</span>
+												)}
+												{6 - i === member?.questionIndex && (
+													<span className="w-5 text-center">[U]</span>
+												)}
+											</>
+										)}
+										{showReturningRelative && (
+											<>
+												{returningRelative.indexes.map((r) => {
+													if (i === r) {
+														return (
+															<span className="text-green-400" key={nanoid()}>
+																{returningRelative.returningMissingRelative}
+															</span>
+														)
+													}
+												})}
+											</>
+										)}
 									</span>
 								)}
 							</div>
@@ -123,7 +160,7 @@ function Hexagram({
 									key={nanoid()}
 									active={actives?.includes(lowerBaguaCoverted.value.length - i)}
 								/>
-								{(showIndex || showBranches || showSixCreatures || showElements) && (
+								{showInforSection && (
 									<span className="flex gap-1 text-xs leading-3">
 										{showIndex && (
 											<span className="flex w-2 gap-1 text-muted-foreground">{3 - i}</span>
@@ -146,6 +183,29 @@ function Hexagram({
 										)}
 										{showSixRelatives && (
 											<span className="flex w-14 items-center">{relatives.lower?.[i]}</span>
+										)}
+										{showQuestionerAndQuestion && (
+											<>
+												{3 - i === member?.questionerIndex && (
+													<span className="w-5 text-center">[T]</span>
+												)}
+												{3 - i === member?.questionIndex && (
+													<span className="w-5 text-center">[U]</span>
+												)}
+											</>
+										)}
+										{showReturningRelative && (
+											<>
+												{returningRelative.indexes.map((r) => {
+													if (i + 3 === r) {
+														return (
+															<span className="text-green-400" key={nanoid()}>
+																{returningRelative.returningMissingRelative}
+															</span>
+														)
+													}
+												})}
+											</>
 										)}
 									</span>
 								)}
