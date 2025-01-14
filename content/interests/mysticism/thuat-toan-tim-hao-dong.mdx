@@ -1,0 +1,85 @@
+---
+id: '92e18b0f-69f7-449e-9c85-4c95a165684f'
+title: 'Thuật toán xác định hào động'
+cover: '/assets/images/content/category/interests/mysticism/cach-nho-64-que-theo-bo-cover.png'
+date: '2025-01-14T10:09:35.134Z'
+lastUpdated: '2025-01-14T10:09:35.134Z'
+description: 'Thuật toán xác định hào động trong quẻ Dịch'
+author:
+    {
+        avatar: '/assets/images/logo/logo-circle-dark.svg',
+        name: 'Hieu.BuiMinh',
+        github: 'https://github.com/Hieu-BuiMinh',
+    }
+
+published: true
+type: 'CHILD'
+hashTags: { category: 'mysticism', tags: ['mysticism', 'kinh-dich'] }
+---
+
+Thuật toán này áp dụng xác suất để xác định xem mỗi hào trong quẻ có phải là hào động hay không, và nếu động thì đó sẽ là Âm động hoặc Dương động dựa trên xác suất truyền thống. Được thiết kế để giữ nguyên cấu trúc nhập mã quẻ, thuật toán này chỉ cần tính toán xác suất động của từng hào dựa trên tỷ lệ hợp lý theo phương pháp ba đồng xu trong Kinh Dịch.
+
+## Cơ sở lý thuyết
+
+Theo phương pháp gieo ba đồng xu truyền thống, mỗi lần gieo có 4 kết quả khả dĩ với xác suất cụ thể như sau:
+
+-   `Âm động`: 12.5% (ba đồng xu đều là mặt âm)
+-   `Dương động`: 12.5% (ba đồng xu đều là mặt dương)
+-   `Dương tĩnh`: 37.5% (hai mặt dương, một mặt âm)
+-   `Âm tĩnh`: 37.5% (hai mặt âm, một mặt dương)
+
+Do đó, xác suất động của mỗi hào trong một quẻ là tổng của hai xác suất 12.5%, tương đương 25%.
+
+## Thuật toán
+
+1. Nhập mã quẻ: Người dùng nhập mã quẻ Dịch, được sử dụng để xác định trạng thái ban đầu của từng hào (Dương hoặc Âm).
+2. Xác định hào động với xác suất 25%:
+    - Duyệt qua từng hào trong quẻ. Với mỗi hào:
+        - Gán xác suất động cho hào là 25%.
+        - Sử dụng một giá trị ngẫu nhiên để xác định xem hào có động không:
+            - Nếu hào không động, giữ nguyên trạng thái ban đầu (Dương hoặc Âm).
+            - Nếu hào động, chọn ngẫu nhiên để xác định là Âm động hoặc Dương động, mỗi loại với xác suất 50%.
+3. Tạo quẻ biến: Với mỗi hào động, thay đổi trạng thái ban đầu của hào:
+    - Âm động thành Dương trong quẻ biến.
+    - Dương động thành Âm trong quẻ biến.
+4. Hiển thị kết quả: Kết quả quẻ chính và quẻ biến được hiển thị kèm hình ảnh minh họa cho từng hào và trạng thái động.
+
+## Bảng xác suất cho số lượng hào động trong quẻ
+
+Công thức xác suất để có đúng k hào động trong n hào với xác suất động của mỗi hào là p được cho bởi công thức phân phối nhị thức:
+
+...
+
+## Ví dụ với giá trị cụ thể
+
+Nếu `n = 6` (6 hào trong một quẻ) và `p = 0.25` (xác suất động mỗi hào là 25%), công thức trở thành:
+
+Bảng dưới đây cho thấy xác suất có k hào động trong một quẻ gồm 6 hào:
+
+<Table
+	headers={['Số lượng hào động K', 'Xác suất P (X=K)']}
+	rows={[
+		['0', '17.8%'],
+		['1', '35.6%'],
+		['2', '29.7%'],
+		['3', '11.9%'],
+		['4', '03.0%'],
+		['5', '0.40%'],
+		['6', '0.02%'],
+	]}
+/>
+
+## Ý nghĩa của bảng xác suất
+
+-   Xác suất có 1 hoặc 2 hào động là cao nhất, chiếm gần 65% khả năng. Điều này phù hợp với thực tế là quẻ Dịch thường có từ 1 đến 2 hào động.
+-   Xác suất có 4 hào động trở lên là rất thấp, điều này phản ánh rằng quẻ với nhiều hào động là rất hiếm.
+
+## Đặc điểm nổi bật của thuật toán
+
+-   Đảm bảo tính ngẫu nhiên tự nhiên: Xác suất động của mỗi hào là 25%, dẫn đến một phân phối xác suất hợp lý cho số lượng hào động trong quẻ.
+-   Đơn giản trong triển khai: Bằng cách duyệt qua từng hào và sử dụng xác suất động, thuật toán dễ dàng xác định quẻ biến mà không làm thay đổi cách nhập quẻ.
+-   Phù hợp với truyền thống: Thuật toán dựa trên xác suất thực tế của phương pháp ba đồng xu, phù hợp với cách gieo quẻ truyền thống trong Kinh Dịch.
+
+## Kết luận
+
+Thuật toán này đơn giản và hiệu quả trong việc xác định hào động, đồng thời mang lại tính ngẫu nhiên phù hợp với xác suất truyền thống của phương pháp gieo ba đồng xu. Điều này đảm bảo rằng kết quả mỗi quẻ phản ánh xác suất tự nhiên và tạo ra các hào động với tần suất thực tế.

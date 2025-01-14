@@ -26,10 +26,10 @@ export default function AboutPageView() {
 				showElements
 				showBranches
 				showSixCreatures
-				upper={8}
+				upper={1}
 				lower={1}
 				showResultHexagram
-				actives={[1, 2]}
+				actives={[1, 2, 3, 4, 5, 6]}
 			/>
 
 			<article className="container prose mx-auto max-w-3xl pb-6 dark:prose-invert">
