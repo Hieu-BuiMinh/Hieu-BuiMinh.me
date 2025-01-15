@@ -16,7 +16,7 @@ export const converToHexagrams = ({
 	lower: number
 	elementToCompareWith?: ELEMENTS_TYPE
 }) => {
-	// tìm 8 quái + tên riêng của 8 quái + ngũ hành của 3 hào trong mỗi quái
+	// tìm 8 quái + tên riêng của 8 quái + ngũ hành của 3 hào trong mỗi quái + lục thú
 	const upperBaguaCoverted = transformToBaguasData({
 		type: 'UPPER',
 		baguaIndex: upper,
@@ -24,8 +24,16 @@ export const converToHexagrams = ({
 	const lowerBaguaCoverted = transformToBaguasData({ type: 'LOWER', baguaIndex: lower })
 
 	// tìm 8 họ nhà quái
-	const family = hexagramFamily.find((f) => f.members.map((item) => item.value === `[${upper}, ${lower}]`))
+	const family = hexagramFamily.find((f) => f.members.some((item) => item.value === `[${upper}, ${lower}]`))
 	const member = family?.members.find((mem) => mem.value === `[${upper}, ${lower}]`)
+	// tìm quẻ chủ đại diện cho họ nhà quẻ, để tìm phục thần
+	const originHexagramOfFamily = {
+		upperBaguaCoverted: transformToBaguasData({
+			type: 'UPPER',
+			baguaIndex: family!.id,
+		}),
+		lowerBaguaCoverted: transformToBaguasData({ type: 'LOWER', baguaIndex: family!.id }),
+	}
 
 	// originElement dùng để so sánh ngũ hành 6 hào với ngũ hành quẻ gốc
 	// nhằm an đúng lục thân cho quẻ gốc và quẻ biến
@@ -44,8 +52,22 @@ export const converToHexagrams = ({
 		}) || []
 
 	// tìm phục thần
-	const returningRelative = findReturningRelative({ allRelative: [...upperRelative, ...lowerRelative], family })
-	console.log('returningRelative', returningRelative)
+	const hiddenRelative = findHiddenRelative({
+		allRelative: [...upperRelative, ...lowerRelative],
+		family,
+		originHexagramOfFamilyRelatives: [
+			...originHexagramOfFamily!.upperBaguaCoverted!.elements,
+			...originHexagramOfFamily!.lowerBaguaCoverted!.elements,
+		],
+		sixCreatures: [
+			...originHexagramOfFamily!.upperBaguaCoverted!.creatures,
+			...originHexagramOfFamily!.lowerBaguaCoverted!.creatures,
+		],
+		tenBranches: [
+			...originHexagramOfFamily!.upperBaguaCoverted!.branch,
+			...originHexagramOfFamily!.lowerBaguaCoverted!.branch,
+		],
+	})
 
 	return {
 		upperBaguaCoverted,
@@ -53,7 +75,7 @@ export const converToHexagrams = ({
 		family,
 		member,
 		relatives: { upper: upperRelative, lower: lowerRelative },
-		returningRelative,
+		hiddenRelative,
 	}
 }
 
@@ -348,7 +370,7 @@ export const transformActiveBaguaToNewBagua = ({
 }
 
 /*
-const array = [
+const hexagramFamilyArray = [
   [[1, 1], [1, 5], [1, 7], [1, 8], [5, 8], [7, 8], [3, 8], [3, 1]],
   [[2, 2], [2, 6], [2, 8], [2, 7], [6, 7], [8, 7], [4, 7], [4, 2]],
   [[3, 3], [3, 7], [3, 5], [3, 6], [7, 6], [5, 6], [1, 6], [1, 3]],
@@ -386,147 +408,163 @@ export type ELEMENTS_TYPE = 'Water' | 'Fire' | 'Wood' | 'Mental' | 'Earth'
 
 const hexagramFamily = [
 	{
+		id: 1,
 		baguaFamily: 'Càn',
 		originElement: 'Mental',
 		vietnameseElementName: 'Kim',
 		members: [
-			{ value: '[1, 1]', questionerIndex: 6, questionIndex: 3 },
-			{ value: '[1, 5]', questionerIndex: 1, questionIndex: 4 },
-			{ value: '[1, 7]', questionerIndex: 2, questionIndex: 5 },
-			{ value: '[1, 8]', questionerIndex: 3, questionIndex: 6 },
-			{ value: '[5, 8]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[7, 8]', questionerIndex: 5, questionIndex: 2 },
-			{ value: '[3, 8]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[3, 1]', questionerIndex: 3, questionIndex: 6 },
+			{ value: '[1, 1]', questionerIndex: 6, questionIndex: 3, hexagramName: 'Thuần Càn' },
+			{ value: '[1, 5]', questionerIndex: 1, questionIndex: 4, hexagramName: 'Thiên Phong Cấu' },
+			{ value: '[1, 7]', questionerIndex: 2, questionIndex: 5, hexagramName: 'Thiên Sơn Độn' },
+			{ value: '[1, 8]', questionerIndex: 3, questionIndex: 6, hexagramName: 'Thiên Địa Bĩ' },
+			{ value: '[5, 8]', questionerIndex: 4, questionIndex: 1, hexagramName: 'Phong Địa Quan' },
+			{ value: '[7, 8]', questionerIndex: 5, questionIndex: 2, hexagramName: 'Sơn Địa Bác' },
+			{ value: '[3, 8]', questionerIndex: 4, questionIndex: 1, wanderer: true, hexagramName: 'Hỏa Địa Tấn' },
+			{
+				value: '[3, 1]',
+				questionerIndex: 3,
+				questionIndex: 6,
+				returner: true,
+				hexagramName: 'Hỏa Thiên Đại Hữu',
+			},
 		],
-		wandering: '[3, 8]',
-		returning: '[3, 1]',
 		originRelatives: ['Phụ mẫu', 'Huynh đệ', 'Quan quỷ', 'Phụ mẫu', 'Thê tài', 'Tử tôn'],
 	},
 	{
+		id: 2,
 		baguaFamily: 'Đoài',
 		originElement: 'Mental',
 		vietnameseElementName: 'Kim',
 		members: [
-			{ value: '[2, 2]', questionerIndex: 6, questionIndex: 3 },
-			{ value: '[2, 6]', questionerIndex: 1, questionIndex: 4 },
-			{ value: '[2, 8]', questionerIndex: 2, questionIndex: 5 },
-			{ value: '[2, 7]', questionerIndex: 3, questionIndex: 6 },
-			{ value: '[6, 7]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[8, 7]', questionerIndex: 5, questionIndex: 2 },
-			{ value: '[4, 7]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[4, 2]', questionerIndex: 3, questionIndex: 6 },
+			{ value: '[2, 2]', questionerIndex: 6, questionIndex: 3, hexagramName: 'Thuần Đoài' },
+			{ value: '[2, 6]', questionerIndex: 1, questionIndex: 4, hexagramName: 'Trạch Thủy Khốn' },
+			{ value: '[2, 8]', questionerIndex: 2, questionIndex: 5, hexagramName: 'Trạch Địa Tụy' },
+			{ value: '[2, 7]', questionerIndex: 3, questionIndex: 6, hexagramName: 'Trạch Sơn Hàm' },
+			{ value: '[6, 7]', questionerIndex: 4, questionIndex: 1, hexagramName: 'Thủy Sơn Kiển' },
+			{ value: '[8, 7]', questionerIndex: 5, questionIndex: 2, hexagramName: 'Địa Sơn Khiêm' },
+			{ value: '[4, 7]', questionerIndex: 4, questionIndex: 1, wanderer: true, hexagramName: 'Lôi Sơn Tiểu Quá' },
+			{
+				value: '[4, 2]',
+				questionerIndex: 3,
+				questionIndex: 6,
+				returner: true,
+				hexagramName: 'Lôi Trạch Quy Muội',
+			},
 		],
-		wandering: '[4, 7]',
-		returning: '[4, 2]',
 		originRelatives: ['Phụ mẫu', 'Huynh đệ', 'Tử tôn', 'Phụ mẫu', 'Thê tài', 'Quan quỷ'],
 	},
 	{
+		id: 3,
 		baguaFamily: 'Ly',
 		originElement: 'Fire',
 		vietnameseElementName: 'Hỏa',
 		members: [
-			{ value: '[3, 3]', questionerIndex: 6, questionIndex: 3 },
-			{ value: '[3, 7]', questionerIndex: 1, questionIndex: 4 },
-			{ value: '[3, 5]', questionerIndex: 2, questionIndex: 5 },
-			{ value: '[3, 6]', questionerIndex: 3, questionIndex: 6 },
-			{ value: '[7, 6]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[5, 6]', questionerIndex: 5, questionIndex: 2 },
-			{ value: '[1, 6]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[1, 3]', questionerIndex: 3, questionIndex: 6 },
+			{ value: '[3, 3]', questionerIndex: 6, questionIndex: 3, hexagramName: 'Hỏa Hỏa' },
+			{ value: '[3, 7]', questionerIndex: 1, questionIndex: 4, hexagramName: 'Hỏa Sơn' },
+			{ value: '[3, 5]', questionerIndex: 2, questionIndex: 5, hexagramName: 'Hỏa Phong' },
+			{ value: '[3, 6]', questionerIndex: 3, questionIndex: 6, hexagramName: 'Hỏa Thủy' },
+			{ value: '[7, 6]', questionerIndex: 4, questionIndex: 1, hexagramName: 'Sơn Thủy' },
+			{ value: '[5, 6]', questionerIndex: 5, questionIndex: 2, hexagramName: 'Phong Thủy' },
+			{ value: '[1, 6]', questionerIndex: 4, questionIndex: 1, wanderer: true, hexagramName: 'Thiên Thủy' },
+			{ value: '[1, 3]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Thiên Hỏa' },
 		],
-		wandering: '[1, 6]',
-		returning: '[1, 3]',
 		originRelatives: ['Quan quỷ', 'Phụ mẫu', 'Huynh đệ', 'Tử tôn', 'Phụ mẫu', 'Thê tài'],
 	},
 	{
+		id: 4,
 		baguaFamily: 'Chấn',
 		originElement: 'Wood',
 		vietnameseElementName: 'Mộc',
 		members: [
-			{ value: '[4, 4]', questionerIndex: 6, questionIndex: 3 },
-			{ value: '[4, 8]', questionerIndex: 1, questionIndex: 4 },
-			{ value: '[4, 6]', questionerIndex: 2, questionIndex: 5 },
-			{ value: '[4, 5]', questionerIndex: 3, questionIndex: 6 },
-			{ value: '[8, 5]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[6, 5]', questionerIndex: 5, questionIndex: 2 },
-			{ value: '[2, 5]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[2, 4]', questionerIndex: 3, questionIndex: 6 },
+			{ value: '[4, 4]', questionerIndex: 6, questionIndex: 3, hexagramName: 'Thuần Chấn' },
+			{ value: '[4, 8]', questionerIndex: 1, questionIndex: 4, hexagramName: 'Lôi Địa Dự' },
+			{ value: '[4, 6]', questionerIndex: 2, questionIndex: 5, hexagramName: 'Lôi Thủy Giải' },
+			{ value: '[4, 5]', questionerIndex: 3, questionIndex: 6, hexagramName: 'Lôi Phong Hằng' },
+			{ value: '[8, 5]', questionerIndex: 4, questionIndex: 1, hexagramName: 'Địa Phong Thăng' },
+			{ value: '[6, 5]', questionerIndex: 5, questionIndex: 2, hexagramName: 'Thủy Phong Tỉnh' },
+			{
+				value: '[2, 5]',
+				questionerIndex: 4,
+				questionIndex: 1,
+				wanderer: true,
+				hexagramName: 'Trạch Phong Đại Quá',
+			},
+			{ value: '[2, 4]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Trạch Lôi Tùy' },
 		],
-		wandering: '[2, 5]',
-		returning: '[2, 4]',
 		originRelatives: ['Phụ mẫu', 'Huynh đệ', 'Quan quỷ', 'Phụ mẫu', 'Thê tài', 'Tử tôn'],
 	},
 	{
+		id: 5,
 		baguaFamily: 'Tốn',
 		originElement: 'Wood',
 		vietnameseElementName: 'Mộc',
 		members: [
-			{ value: '[5, 5]', questionerIndex: 6, questionIndex: 3 },
-			{ value: '[5, 1]', questionerIndex: 1, questionIndex: 4 },
-			{ value: '[5, 3]', questionerIndex: 2, questionIndex: 5 },
-			{ value: '[5, 4]', questionerIndex: 3, questionIndex: 6 },
-			{ value: '[1, 4]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[3, 4]', questionerIndex: 5, questionIndex: 2 },
-			{ value: '[7, 4]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[7, 5]', questionerIndex: 3, questionIndex: 6 },
+			{ value: '[5, 5]', questionerIndex: 6, questionIndex: 3, hexagramName: 'Thuần Tốn' },
+			{ value: '[5, 1]', questionerIndex: 1, questionIndex: 4, hexagramName: 'Phong Thiên Tiểu Súc' },
+			{ value: '[5, 3]', questionerIndex: 2, questionIndex: 5, hexagramName: 'Phong Hỏa Gia Nhân' },
+			{ value: '[5, 4]', questionerIndex: 3, questionIndex: 6, hexagramName: 'Phong Lôi Ích' },
+			{ value: '[1, 4]', questionerIndex: 4, questionIndex: 1, hexagramName: 'Thiên Lôi Vô Vọng' },
+			{ value: '[3, 4]', questionerIndex: 5, questionIndex: 2, hexagramName: 'Hỏa Lôi Phệ Hạp' },
+			{ value: '[7, 4]', questionerIndex: 4, questionIndex: 1, wanderer: true, hexagramName: 'Sơn Lôi Di' },
+			{ value: '[7, 5]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Sơn Phong Cổ' },
 		],
-		wandering: '[7, 4]',
-		returning: '[7, 5]',
 		originRelatives: ['Thê tài', 'Quan quỷ', 'Phụ mẫu', 'Huynh đệ', 'Tử tôn', 'Phụ mẫu'],
 	},
 	{
+		id: 6,
 		baguaFamily: 'Khảm',
 		originElement: 'Water',
 		vietnameseElementName: 'Thủy',
 		members: [
-			{ value: '[6, 6]', questionerIndex: 6, questionIndex: 3 },
-			{ value: '[6, 2]', questionerIndex: 1, questionIndex: 4 },
-			{ value: '[6, 4]', questionerIndex: 2, questionIndex: 5 },
-			{ value: '[6, 3]', questionerIndex: 3, questionIndex: 6 },
-			{ value: '[2, 3]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[4, 3]', questionerIndex: 5, questionIndex: 2 },
-			{ value: '[8, 3]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[8, 6]', questionerIndex: 3, questionIndex: 6 },
+			{ value: '[6, 6]', questionerIndex: 6, questionIndex: 3, hexagramName: 'Thuần Khảm' },
+			{ value: '[6, 2]', questionerIndex: 1, questionIndex: 4, hexagramName: 'Thủy Trạch Tiết' },
+			{ value: '[6, 4]', questionerIndex: 2, questionIndex: 5, hexagramName: 'Thủy Lôi Truân' },
+			{ value: '[6, 3]', questionerIndex: 3, questionIndex: 6, hexagramName: 'Thủy Hỏa Ký Tế' },
+			{ value: '[2, 3]', questionerIndex: 4, questionIndex: 1, hexagramName: 'Trạch Hỏa Cách' },
+			{ value: '[4, 3]', questionerIndex: 5, questionIndex: 2, hexagramName: 'Lôi Hỏa Phong' },
+			{ value: '[8, 3]', questionerIndex: 4, questionIndex: 1, wanderer: true, hexagramName: 'Địa Hỏa Minh Di' },
+			{ value: '[8, 6]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Địa Thủy Sư' },
 		],
-		wandering: '[8, 3]',
-		returning: '[8, 6]',
 		originRelatives: ['Tử tôn', 'Phụ mẫu', 'Huynh đệ', 'Quan quỷ', 'Phụ mẫu', 'Thê tài'],
 	},
 	{
+		id: 7,
 		baguaFamily: 'Cấn',
 		originElement: 'Earth',
 		vietnameseElementName: 'Thổ',
 		members: [
-			{ value: '[7, 7]', questionerIndex: 6, questionIndex: 3 },
-			{ value: '[7, 3]', questionerIndex: 1, questionIndex: 4 },
-			{ value: '[7, 1]', questionerIndex: 2, questionIndex: 5 },
-			{ value: '[7, 2]', questionerIndex: 3, questionIndex: 6 },
-			{ value: '[3, 2]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[1, 2]', questionerIndex: 5, questionIndex: 2 },
-			{ value: '[5, 2]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[5, 7]', questionerIndex: 3, questionIndex: 6 },
+			{ value: '[7, 7]', questionerIndex: 6, questionIndex: 3, hexagramName: 'Thuần Cấn' },
+			{ value: '[7, 3]', questionerIndex: 1, questionIndex: 4, hexagramName: 'Sơn Hỏa Bí' },
+			{ value: '[7, 1]', questionerIndex: 2, questionIndex: 5, hexagramName: 'Sơn Thiên Đại Súc' },
+			{ value: '[7, 2]', questionerIndex: 3, questionIndex: 6, hexagramName: 'Sơn Trạch Tổn' },
+			{ value: '[3, 2]', questionerIndex: 4, questionIndex: 1, hexagramName: 'Hỏa Trạch Khuê' },
+			{ value: '[1, 2]', questionerIndex: 5, questionIndex: 2, hexagramName: 'Thiên Trạch Cách' },
+			{
+				value: '[5, 2]',
+				questionerIndex: 4,
+				questionIndex: 1,
+				wanderer: true,
+				hexagramName: 'Phong Trạch Trung Phu',
+			},
+			{ value: '[5, 7]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Phong Sơn Tiệm' },
 		],
-		wandering: '[5, 2]',
-		returning: '[5, 7]',
 		originRelatives: ['Thê tài', 'Tử tôn', 'Phụ mẫu', 'Huynh đệ', 'Quan quỷ', 'Phụ mẫu'],
 	},
 	{
+		id: 8,
 		baguaFamily: 'Khôn',
 		originElement: 'Earth',
 		vietnameseElementName: 'Thổ',
 		members: [
-			{ value: '[8, 8]', questionerIndex: 6, questionIndex: 3 },
-			{ value: '[8, 4]', questionerIndex: 1, questionIndex: 4 },
-			{ value: '[8, 2]', questionerIndex: 2, questionIndex: 5 },
-			{ value: '[8, 1]', questionerIndex: 3, questionIndex: 6 },
-			{ value: '[4, 1]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[2, 1]', questionerIndex: 5, questionIndex: 2 },
-			{ value: '[6, 1]', questionerIndex: 4, questionIndex: 1 },
-			{ value: '[6, 8]', questionerIndex: 3, questionIndex: 6 },
+			{ value: '[8, 8]', questionerIndex: 6, questionIndex: 3, hexagramName: 'Thuần Khôn' },
+			{ value: '[8, 4]', questionerIndex: 1, questionIndex: 4, hexagramName: 'Địa Lôi Phục' },
+			{ value: '[8, 2]', questionerIndex: 2, questionIndex: 5, hexagramName: 'Địa Trạch Lâm' },
+			{ value: '[8, 1]', questionerIndex: 3, questionIndex: 6, hexagramName: 'Địa Thiên Thái' },
+			{ value: '[4, 1]', questionerIndex: 4, questionIndex: 1, hexagramName: 'Lôi Thiên Đại Tráng' },
+			{ value: '[2, 1]', questionerIndex: 5, questionIndex: 2, hexagramName: 'Trạch Thiên Quải' },
+			{ value: '[6, 1]', questionerIndex: 4, questionIndex: 1, wanderer: true, hexagramName: 'Thủy Thiên Nhu' },
+			{ value: '[6, 8]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Thủy Địa Tỷ' },
 		],
-		wandering: '[6, 1]',
-		returning: '[6, 8]',
 		originRelatives: ['Huynh đệ', 'Tử tôn', 'Phụ mẫu', 'Thê tài', 'Quan quỷ', 'Phụ mẫu'],
 	},
 ]
@@ -657,12 +695,18 @@ const relativeConverter = ({ originElement, element }: { originElement: ELEMENTS
 	return relative
 }
 
-const findReturningRelative = ({
+const findHiddenRelative = ({
 	allRelative,
 	family,
+	originHexagramOfFamilyRelatives,
+	sixCreatures,
+	tenBranches,
 }: {
 	allRelative: (string | null)[]
 	family: (typeof hexagramFamily)[number] | undefined
+	originHexagramOfFamilyRelatives: (string | null)[]
+	sixCreatures: (string | null)[]
+	tenBranches: (string | null)[]
 }) => {
 	let parent = false
 	let wife = false
@@ -670,8 +714,11 @@ const findReturningRelative = ({
 	let brother = false
 	let job = false
 
-	let returningMissingRelative = ''
+	let hiddenRelative = ''
 	const indexes: number[] = []
+	const elements: string[] = []
+	const creatures: string[] = []
+	const branches: string[] = []
 
 	switch (true) {
 		case !allRelative.some((r) => r === 'Phụ mẫu'):
@@ -697,43 +744,58 @@ const findReturningRelative = ({
 	if (parent) {
 		family?.originRelatives.map((r, i) => {
 			if (r === 'Phụ mẫu') {
-				returningMissingRelative = r
+				hiddenRelative = r
 				indexes.push(i)
+				elements.push(originHexagramOfFamilyRelatives[i] || '')
+				creatures.push(sixCreatures[i] || '')
+				branches.push(tenBranches[i] || '')
 			}
 		})
 	}
 	if (wife) {
 		family?.originRelatives.map((r, i) => {
 			if (r === 'Thê tài') {
-				returningMissingRelative = r
+				hiddenRelative = r
 				indexes.push(i)
+				elements.push(originHexagramOfFamilyRelatives[i] || '')
+				creatures.push(sixCreatures[i] || '')
+				branches.push(tenBranches[i] || '')
 			}
 		})
 	}
 	if (child) {
 		family?.originRelatives.map((r, i) => {
 			if (r === 'Tử tôn') {
-				returningMissingRelative = r
+				hiddenRelative = r
 				indexes.push(i)
+				elements.push(originHexagramOfFamilyRelatives[i] || '')
+				creatures.push(sixCreatures[i] || '')
+				branches.push(tenBranches[i] || '')
 			}
 		})
 	}
 	if (brother) {
 		family?.originRelatives.map((r, i) => {
 			if (r === 'Huynh đệ') {
-				returningMissingRelative = r
+				hiddenRelative = r
 				indexes.push(i)
+				elements.push(originHexagramOfFamilyRelatives[i] || '')
+				creatures.push(sixCreatures[i] || '')
+				branches.push(tenBranches[i] || '')
 			}
 		})
 	}
 	if (job) {
 		family?.originRelatives.map((r, i) => {
 			if (r === 'Quan quỷ') {
-				returningMissingRelative = r
+				hiddenRelative = r
 				indexes.push(i)
+				elements.push(originHexagramOfFamilyRelatives[i] || '')
+				creatures.push(sixCreatures[i] || '')
+				branches.push(tenBranches[i] || '')
 			}
 		})
 	}
 
-	return { indexes, returningMissingRelative }
+	return { indexes, hiddenRelative, elements, creatures, branches }
 }

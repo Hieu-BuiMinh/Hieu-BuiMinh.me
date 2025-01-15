@@ -35,72 +35,149 @@ export default function AboutPageView() {
 			/> */}
 
 			<div className="flex flex-wrap items-center justify-center gap-4">
-				<Hexagram
+				{/* <Hexagram
+					showOriginFamily
+					showHexagramName
+					showBranches
+					showElements
+					showIndex
+					showLabel
 					showQuestionerAndQuestion
+					showResultHexagram
+					showHiddenRelative
+					showSixCreatures
 					showSixRelatives
-					showReturningRelative
+					upper={4}
+					lower={2}
+					actives={[6]}
+				/> */}
+				<Hexagram
+					showOriginFamily
+					showHexagramName
+					showBranches
+					showElements
+					showIndex
+					showLabel
+					showQuestionerAndQuestion
+					showResultHexagram
+					showHiddenRelative
+					showSixCreatures
+					showSixRelatives
 					upper={1}
 					lower={1}
-					showIndex
 				/>
-				<Hexagram
+				{/* <Hexagram
+					showOriginFamily
+					showHexagramName
+					showBranches
+					showElements
+					showIndex
+					showLabel
 					showQuestionerAndQuestion
+					showResultHexagram
+					showHiddenRelative
+					showSixCreatures
 					showSixRelatives
-					showReturningRelative
 					upper={1}
 					lower={5}
 					actives={[1]}
-				/>
+				/> */}
 				<Hexagram
+					showOriginFamily
+					showHexagramName
+					showBranches
+					showElements
+					showIndex
+					showLabel
 					showQuestionerAndQuestion
+					showResultHexagram
+					showHiddenRelative
+					showSixCreatures
 					showSixRelatives
-					showReturningRelative
 					upper={1}
 					lower={7}
 					actives={[2]}
 				/>
-				<Hexagram
+				{/* <Hexagram
+					showOriginFamily
+					showHexagramName
+					showBranches
+					showElements
+					showIndex
+					showLabel
 					showQuestionerAndQuestion
+					showResultHexagram
+					showHiddenRelative
+					showSixCreatures
 					showSixRelatives
-					showReturningRelative
 					upper={1}
 					lower={8}
 					actives={[3]}
 				/>
 				<Hexagram
+					showOriginFamily
+					showHexagramName
+					showBranches
+					showElements
+					showIndex
+					showLabel
 					showQuestionerAndQuestion
+					showResultHexagram
+					showHiddenRelative
+					showSixCreatures
 					showSixRelatives
-					showReturningRelative
 					upper={5}
 					lower={8}
 					actives={[4]}
 				/>
 				<Hexagram
+					showOriginFamily
+					showHexagramName
+					showBranches
+					showElements
+					showIndex
+					showLabel
 					showQuestionerAndQuestion
+					showResultHexagram
+					showHiddenRelative
+					showSixCreatures
 					showSixRelatives
-					showReturningRelative
 					upper={7}
 					lower={8}
 					actives={[5]}
 				/>
 				<Hexagram
+					showOriginFamily
+					showHexagramName
+					showBranches
+					showElements
+					showIndex
+					showLabel
 					showQuestionerAndQuestion
+					showResultHexagram
+					showHiddenRelative
+					showSixCreatures
 					showSixRelatives
-					showReturningRelative
 					upper={3}
 					lower={8}
 					actives={[4]}
-					className="rounded border border-dashed p-1"
 				/>
 				<Hexagram
+					showOriginFamily
+					showHexagramName
+					showBranches
+					showElements
+					showIndex
+					showLabel
 					showQuestionerAndQuestion
+					showResultHexagram
+					showHiddenRelative
+					showSixCreatures
 					showSixRelatives
-					showReturningRelative
 					upper={3}
 					lower={1}
 					actives={[1, 2, 3]}
-					className="rounded border border-dashed p-1"
-				/>
+				/> */}
 			</div>
 
 			<article className="container prose mx-auto max-w-3xl pb-6 dark:prose-invert">

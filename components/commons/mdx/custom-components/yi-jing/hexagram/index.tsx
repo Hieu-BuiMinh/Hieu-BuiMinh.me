@@ -23,7 +23,8 @@ interface IHexagram {
 	showOriginFamily?: boolean
 	showResultHexagram?: boolean
 	showQuestionerAndQuestion?: boolean
-	showReturningRelative?: boolean
+	showHiddenRelative?: boolean
+	showHexagramName?: boolean
 	yinYangClassName?: string
 }
 
@@ -41,26 +42,23 @@ function Hexagram({
 	showOriginFamily, // hiện ngũ hành quẻ gốc
 	showResultHexagram, // hiện kết quả sau khi động hào
 	showQuestionerAndQuestion, // hiện thế ứng
-	showReturningRelative, // hiện phục thần
+	showHiddenRelative, // hiện phục thần
+	showHexagramName, //  hiện tên quẻ
 	yinYangClassName, // className của yinyang component
 }: IHexagram) {
 	const showInforSection =
-		showIndex ||
-		showBranches ||
-		showSixCreatures ||
-		showElements ||
-		showQuestionerAndQuestion ||
-		showReturningRelative
+		showIndex || showBranches || showSixCreatures || showElements || showQuestionerAndQuestion || showHiddenRelative
 
 	const aboveActiveList = actives?.filter((e) => e > 3)?.map((e) => e - 3) // vị trí hào động của quẻ thượng [6,5,4] => [3,2,1] => [1,2,3]
 	const belowActiveList = actives?.filter((e) => e < 4) // vị trí hào động của quẻ hạ [1,2,3]
 	const isAboveActive = aboveActiveList && aboveActiveList?.length > 0
 	const isBelowActive = belowActiveList && belowActiveList?.length > 0
 
-	const { upperBaguaCoverted, lowerBaguaCoverted, relatives, family, member, returningRelative } = converToHexagrams({
+	const { upperBaguaCoverted, lowerBaguaCoverted, relatives, family, member, hiddenRelative } = converToHexagrams({
 		upper: upper || 1,
 		lower: lower || 1,
 	})
+	console.log('hiddenRelative', hiddenRelative.elements)
 
 	const newUpper = isAboveActive
 		? transformActiveBaguaToNewBagua({ baguaIndex: upper || 1, actives: aboveActiveList }).newIndex
@@ -73,6 +71,8 @@ function Hexagram({
 		upperBaguaCoverted: newUpperBaguaCoverted,
 		lowerBaguaCoverted: newLowerBaguaCoverted,
 		relatives: newRelatives,
+		family: newFamily,
+		member: newMember,
 	} = converToHexagrams({
 		upper: newUpper || 1,
 		lower: newlower || 1,
@@ -80,11 +80,8 @@ function Hexagram({
 	})
 
 	return (
-		<div className="mx-auto my-9 flex justify-between">
+		<div className="mx-auto my-9 flex justify-between gap-20">
 			<div className={cn('relative flex flex-col gap-3', className)}>
-				{showOriginFamily && (
-					<span className="absolute -top-7 left-0 text-sm">Cung: {family?.baguaFamily}</span>
-				)}
 				<div className="flex flex-col gap-1.5">
 					{upperBaguaCoverted?.value.map((item, i) => {
 						return (
@@ -122,23 +119,35 @@ function Hexagram({
 											<span className="flex w-14 items-center">{relatives.upper?.[i]}</span>
 										)}
 										{showQuestionerAndQuestion && (
-											<>
+											<div className="w-5">
 												{6 - i === member?.questionerIndex && (
-													<span className="w-5 text-center">[T]</span>
+													<span className="text-center">[T]</span>
 												)}
 												{6 - i === member?.questionIndex && (
-													<span className="w-5 text-center">[U]</span>
+													<span className="text-center">[U]</span>
 												)}
-											</>
+											</div>
 										)}
-										{showReturningRelative && (
+										{showHiddenRelative && (
 											<>
-												{returningRelative.indexes.map((r) => {
+												{hiddenRelative.indexes.map((r, j) => {
 													if (i === r) {
 														return (
-															<span className="text-green-400" key={nanoid()}>
-																{returningRelative.returningMissingRelative}
-															</span>
+															<div key={nanoid()} className="flex items-center gap-1">
+																<ElementDot
+																	className="size-2"
+																	type={hiddenRelative.elements[j] as ELEMENTS_TYPE}
+																/>
+																<span className="italic text-foreground/80">
+																	{hiddenRelative.branches[j]}
+																</span>
+																<span className="italic text-foreground/80">
+																	{hiddenRelative.creatures}
+																</span>
+																<span className="italic text-foreground/80">
+																	{hiddenRelative.hiddenRelative}
+																</span>
+															</div>
 														)
 													}
 												})}
@@ -185,23 +194,35 @@ function Hexagram({
 											<span className="flex w-14 items-center">{relatives.lower?.[i]}</span>
 										)}
 										{showQuestionerAndQuestion && (
-											<>
+											<div className="w-5">
 												{3 - i === member?.questionerIndex && (
-													<span className="w-5 text-center">[T]</span>
+													<span className="text-center">[T]</span>
 												)}
 												{3 - i === member?.questionIndex && (
-													<span className="w-5 text-center">[U]</span>
+													<span className="text-center">[U]</span>
 												)}
-											</>
+											</div>
 										)}
-										{showReturningRelative && (
+										{showHiddenRelative && (
 											<>
-												{returningRelative.indexes.map((r) => {
+												{hiddenRelative.indexes.map((r, j) => {
 													if (i + 3 === r) {
 														return (
-															<span className="text-green-400" key={nanoid()}>
-																{returningRelative.returningMissingRelative}
-															</span>
+															<div key={nanoid()} className="flex items-center gap-2">
+																<ElementDot
+																	className="size-2"
+																	type={hiddenRelative.elements[j] as ELEMENTS_TYPE}
+																/>
+																<span className="italic text-foreground/80">
+																	{hiddenRelative.branches[j]}
+																</span>
+																<span className="italic text-foreground/80">
+																	{hiddenRelative.creatures[j]}
+																</span>
+																<span className="italic text-foreground/80">
+																	{hiddenRelative.hiddenRelative}
+																</span>
+															</div>
 														)
 													}
 												})}
@@ -213,10 +234,14 @@ function Hexagram({
 						)
 					})}
 				</div>
+				{showOriginFamily && <span className="text-sm">Cung: {family?.baguaFamily}</span>}
+				{showHexagramName && <span className="font-semibold">{member?.hexagramName}</span>}
+				{!!member?.wanderer && <span className="text-sm">Du hồn</span>}
+				{!!member?.returner && <span className="text-sm">Quy hồn</span>}
 			</div>
 
 			{showResultHexagram && (
-				<div className={cn('flex flex-col gap-3', className)}>
+				<div className={cn('relative flex flex-col gap-3', className)}>
 					<div className="flex flex-col gap-1.5">
 						{newUpperBaguaCoverted?.value.map((item, i) => {
 							return (
@@ -307,6 +332,12 @@ function Hexagram({
 							)
 						})}
 					</div>
+					{showOriginFamily && (
+						<span className="text-sm text-muted-foreground/70">Cung: {newFamily?.baguaFamily}</span>
+					)}
+					{showHexagramName && <span className="font-semibold">{newMember?.hexagramName}</span>}
+					{!!newMember?.wanderer && <span className="text-sm">Du hồn</span>}
+					{!!newMember?.returner && <span className="text-sm">Quy hồn</span>}
 				</div>
 			)}
 		</div>
