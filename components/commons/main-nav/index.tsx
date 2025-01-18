@@ -57,20 +57,28 @@ const aboutItems: { title: string; href: string; description: string }[] = [
 		href: '/interests',
 		description: `A place to explore the things I'm passionate about and love sharing.`,
 	},
-	// {
-	// 	title: 'Insanity 🤡',
-	// 	href: '/about/insanity',
-	// 	description: 'How far down the rabbit hole do you wanna go!?',
-	// },
 	{
 		title: 'Tags 🏷️',
 		href: '/tags',
 		description: 'Organized chaos awaits! Browse tags and see what catches your eye.',
 	},
+]
+
+const inspiration: { title: string; href: string; description: string }[] = [
 	{
-		title: 'Quotes 📝',
+		title: 'Short Sparks 🌟',
+		href: '/docs',
+		description: 'Styles for headings, paragraphs, lists...etc',
+	},
+	{
+		title: 'Quotes 🌱',
 		href: '/quotes',
 		description: 'Organized chaos awaits! Browse tags and see what catches your eye.',
+	},
+	{
+		title: 'Insanity 🤡',
+		href: '/about/insanity',
+		description: 'How far down the rabbit hole do you wanna go!?',
 	},
 ]
 
@@ -151,6 +159,18 @@ export function MainNav() {
 						</ul>
 					</NavigationMenuContent>
 				</NavigationMenuItem>
+				<NavigationMenuItem className="hidden sm:inline-flex">
+					<NavigationMenuTrigger className="bg-transparent">Inspiration</NavigationMenuTrigger>
+					<NavigationMenuContent className="bg-background">
+						<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+							{inspiration.map((item) => (
+								<ListItem key={item.title} title={item.title} href={item.href}>
+									{item.description}
+								</ListItem>
+							))}
+						</ul>
+					</NavigationMenuContent>
+				</NavigationMenuItem>
 			</NavigationMenuList>
 		</NavigationMenu>
 	)
@@ -224,6 +244,27 @@ export const MobileNav = () => {
 						</AccordionTrigger>
 						<AccordionContent className="flex flex-col gap-4 border-l pl-3">
 							{aboutItems.map((item) => (
+								<Link
+									onClick={() => {
+										setOpen(false)
+									}}
+									key={item.title}
+									href={item.href}
+								>
+									{item.title}
+								</Link>
+							))}
+						</AccordionContent>
+					</AccordionItem>
+					<AccordionItem className="border-none" value="item-3">
+						<AccordionTrigger>
+							<div className="flex items-center gap-3">
+								<UserSearch size={20} />
+								Inspiration
+							</div>
+						</AccordionTrigger>
+						<AccordionContent className="flex flex-col gap-4 border-l pl-3">
+							{inspiration.map((item) => (
 								<Link
 									onClick={() => {
 										setOpen(false)
