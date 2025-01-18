@@ -16,6 +16,8 @@ import Bagua from '@/components/commons/mdx/custom-components/yi-jing/bagua'
 import Hexagram from '@/components/commons/mdx/custom-components/yi-jing/hexagram'
 import YinYang from '@/components/commons/mdx/custom-components/yi-jing/yin-yang'
 import TreeView from '@/components/commons/tree-view'
+import Video from '@/components/commons/video'
+import VideoZoom from '@/components/commons/video/video-zoom'
 import { cn } from '@/lib/utils'
 
 const useMDXComponent = (code: string) => {
@@ -74,6 +76,8 @@ const components = {
 	// },
 	// pre: CodeBlock,
 	Audio,
+	Video,
+	VideoZoom,
 	CodeBlock,
 	LinkCard,
 	TreeView,
