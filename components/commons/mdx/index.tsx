@@ -98,7 +98,7 @@ interface MdxProps {
 export function MDXContent({ code }: MdxProps) {
 	const Component = useMDXComponent(code)
 	if (!code) {
-		return <p className="py-5">This post is on updating 🧪...</p>
+		return <p className="py-5">The content is on updating 🧪...</p>
 	}
 	return <Component components={components} />
 }

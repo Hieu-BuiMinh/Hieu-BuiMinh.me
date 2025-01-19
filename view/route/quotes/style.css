@@ -1,0 +1,28 @@
+/* Masonry layout for Comments */
+.quotes-masonry {
+	column-count: 1;
+	column-gap: 0.5rem; /* Spacing between columns */
+}
+
+@media (min-width: 640px) {
+	.quotes-masonry {
+		column-count: 1; /* 1 columns on small screens */
+	}
+}
+
+@media (min-width: 1024px) {
+	.quotes-masonry {
+		column-count: 2; /* 2 columns on large screens */
+	}
+}
+
+@media (min-width: 1280px) {
+	.quotes-masonry {
+		column-count: 2; /* 2 columns on extra-large screens */
+	}
+}
+
+.quotes-masonry-item {
+	break-inside: avoid; /* Prevent items from breaking across columns */
+	margin-bottom: 1rem; /* Spacing below each item */
+}

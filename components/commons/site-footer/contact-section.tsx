@@ -42,7 +42,9 @@ function FooterContactSection() {
 
 			<span className="text-sm font-semibold">Keep up to date</span>
 			<span className="text-xs text-muted-foreground">
-				Join our newsletter for regular updates. No spam ever.
+				<span>Got questions or just want to say hello? Feel free to reach out</span>
+				<br />
+				<span>I&apos;d love to hear from you!</span>
 			</span>
 
 			<FormProvider {...methods}>

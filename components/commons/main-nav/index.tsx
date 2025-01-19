@@ -67,7 +67,7 @@ const aboutItems: { title: string; href: string; description: string }[] = [
 const inspiration: { title: string; href: string; description: string }[] = [
 	{
 		title: 'Short Sparks 🌟',
-		href: '/docs',
+		href: '/short-sparks',
 		description: 'Styles for headings, paragraphs, lists...etc',
 	},
 	{

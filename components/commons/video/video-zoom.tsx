@@ -13,31 +13,34 @@ type TVideoZoom = {
 	width: number
 	height: number
 	videoClassName?: string
-	previewimage?: string
-	previewimageClassName?: string
-}
+	previewImage?: string
+	description?: string
+	previewImageClassName?: string
+} & React.ComponentPropsWithoutRef<'video'>
 
 const VideoZoom = forwardRef<HTMLVideoElement, TVideoZoom>((props, ref) => {
+	const { previewImage, previewImageClassName, ...rest } = props
 	return (
 		<>
 			<Dialog>
-				<DialogTitle />
+				<DialogTitle className="hidden" />
 				<DialogTrigger asChild role="button">
 					<div className="not-prose group/trigger relative">
 						<BlurImage
 							className="rounded-md border"
-							imageClassName={cn('aspect-video object-contain', props.previewimageClassName)}
+							imageClassName={cn('aspect-video object-contain', previewImageClassName)}
 							quality={100}
 							alt=""
-							{...props}
-							src={props.previewimage || ''}
-							description="Work harder on yourself ❤️"
+							src={previewImage || ''}
+							description={props.description}
+							width={100}
+							height={100}
 						/>
-						<PlayCircle className="absolute left-2 top-2 text-foreground/50 transition-colors group-hover/trigger:text-foreground" />
+						<PlayCircle className="absolute left-2 top-2 size-5 text-foreground/50 transition-colors group-hover/trigger:text-foreground" />
 					</div>
 				</DialogTrigger>
-				<DialogContent className="h-[75vh] max-w-screen-sm overflow-hidden md:max-w-screen-md md:p-0 lg:max-w-screen-xl">
-					<Video ref={ref} {...props} className={cn('size-full', props.videoClassName)} />
+				<DialogContent className="h-[75vh] max-w-screen-sm overflow-hidden p-1 md:max-w-screen-md md:p-0 lg:max-w-screen-xl">
+					<Video ref={ref} className={cn('size-full', props.videoClassName)} {...rest} />
 				</DialogContent>
 			</Dialog>
 		</>

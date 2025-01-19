@@ -2,6 +2,7 @@ import { QuoteIcon } from 'lucide-react'
 import React from 'react'
 
 import BlurImage from '@/components/commons/image/blur-image'
+import { cn } from '@/lib/utils'
 
 interface IBlockQuote {
 	data: {
@@ -11,29 +12,40 @@ interface IBlockQuote {
 			url?: string
 		}
 		quote?: string
+		description?: string
 	}
+	className?: string
 }
 
-function BlockQuote({ data }: IBlockQuote) {
+function BlockQuote({ data, className }: IBlockQuote) {
 	return (
-		<div className="not-prose relative my-5 flex flex-col gap-4 pl-5">
-			<span className="absolute left-0 top-0 h-full w-1 rounded-md bg-green-600 dark:bg-green-400" />
+		<div
+			className={cn(
+				'not-prose relative flex flex-col gap-4 overflow-hidden rounded-md border hover:border-green-600/50 p-2 pl-5',
+				className
+			)}
+		>
 			<QuoteIcon className="absolute bottom-4 right-4 text-muted-foreground" size={35} />
 
-			<p className="text-gray-800 dark:text-white sm:text-base">
-				<em>`{data.quote}`</em>
-			</p>
+			<p className="text-sm text-gray-800 dark:text-white">{data.quote}</p>
 
 			{data?.author && (
 				<div className="flex items-center gap-3">
-					<BlurImage
-						className="size-[40px] rounded-full"
-						width={50}
-						height={50}
-						alt={data.author.avatar || ''}
-						src={data.author.avatar || ''}
-					/>
-					<p className="text-sm italic text-muted-foreground">-{data.author.name}-</p>
+					<div className="rounded-full border border-green-600 bg-green-600/20 p-1">
+						<BlurImage
+							className="size-[35px] rounded-full"
+							width={50}
+							height={50}
+							alt={data.author.avatar || ''}
+							src={data.author.avatar || ''}
+						/>
+					</div>
+					<div className="flex flex-col gap-1">
+						<p className="text-sm font-semibold">{data.author.name}</p>
+						{data.description && (
+							<p className="text-xs italic text-muted-foreground">-{data.description}-</p>
+						)}
+					</div>
 				</div>
 			)}
 		</div>
