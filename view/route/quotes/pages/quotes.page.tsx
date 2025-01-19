@@ -7,42 +7,13 @@ import { MDXContent } from '@/components/commons/mdx'
 import BlockQuote from '@/components/commons/mdx/custom-components/block-quote'
 import PageTitle from '@/view/components/blog-content/page-title'
 import PostLastUpdated from '@/view/components/blog-content/post-last-updated'
+import { allQuotes } from '@/view/route/quotes/data/quotes-data'
 
 const title = 'Quotes'
 const description = `Welcome to the Quotes. Where I share some of the saying that have inspired me along the way. I hope these words can offer a bit of reflection, encouragement, and positivity, just as they've done for me.`
 
 export default async function QuotesPageview() {
 	const post = pages.find((post) => post.slugAsParams === 'quotes')
-
-	const quotes = [
-		{
-			author: {
-				name: 'Captain Jack Sparrow 🐦',
-				avatar: 'https://i.imgur.com/QMdUKB7.jpeg',
-				url: '',
-			},
-			quote: 'The problem is not the problem. The problem is your attitude about the problem',
-			description: 'Pirates of the Caribbean',
-		},
-		{
-			author: {
-				name: 'Tyrion Lannister',
-				avatar: 'https://i.imgur.com/HcZuIfM.jpeg',
-				url: '',
-			},
-			quote: 'A mind needs books like a sword needs a whetstone',
-			description: 'Game of Thrones',
-		},
-		{
-			author: {
-				name: 'Captain Jack Sparrow 🐦',
-				avatar: 'https://i.imgur.com/QMdUKB7.jpeg',
-				url: '',
-			},
-			quote: 'The problem is not the problem. The problem is your attitude about the problem. The problem is not the problem. The problem is your attitude about the problem.',
-			description: 'Pirates of the Caribbean',
-		},
-	]
 
 	if (!post || !post.published) {
 		notFound()
@@ -55,7 +26,7 @@ export default async function QuotesPageview() {
 			<article className="container prose mx-auto max-w-full pb-6 dark:prose-invert">
 				<MDXContent code={post.body} />
 				<div className="not-prose quotes-masonry">
-					{quotes.map((quote) => {
+					{allQuotes.map((quote) => {
 						return <BlockQuote key={quote.quote} data={quote} className="quotes-masonry-item" />
 					})}
 				</div>

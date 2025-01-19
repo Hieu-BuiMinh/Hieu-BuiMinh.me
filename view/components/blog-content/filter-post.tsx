@@ -13,6 +13,7 @@ function FilterPosts(props: FilteredPostsProps) {
 	const { posts } = props
 	const [searchValue, setSearchValue] = useState('')
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const filteredPosts = posts.filter((post) => post.title.toLowerCase().includes(searchValue.toLowerCase()))
 
 	return (

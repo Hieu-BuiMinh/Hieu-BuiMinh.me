@@ -12,13 +12,13 @@
 
 @media (min-width: 1024px) {
 	.short-sparks-masonry {
-		column-count: 4; /* 4 columns on large screens */
+		column-count: 3; /* 3 columns on large screens */
 	}
 }
 
 @media (min-width: 1280px) {
 	.short-sparks-masonry {
-		column-count: 4; /* 4 columns on extra-large screens */
+		column-count: 3; /* 3 columns on extra-large screens */
 	}
 }
 
