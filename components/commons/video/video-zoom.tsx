@@ -17,6 +17,7 @@ type TVideoZoom = {
 	previewImage?: string
 	description?: string
 	previewImageClassName?: string
+	className?: string
 	open?: boolean
 	allowSharing?: boolean
 	onOpenChangeCallback?: (value: boolean) => void
@@ -29,6 +30,7 @@ const VideoZoom = forwardRef<HTMLVideoElement, TVideoZoom>((props, ref) => {
 		onOpenChangeCallback,
 		open: dialogIsOpen,
 		allowSharing,
+		className,
 		...rest
 	} = props
 
@@ -63,9 +65,9 @@ const VideoZoom = forwardRef<HTMLVideoElement, TVideoZoom>((props, ref) => {
 			>
 				<DialogTitle className="hidden" />
 				<DialogTrigger asChild role="button">
-					<div className="not-prose group/trigger relative">
+					<div className={cn('not-prose group/trigger relative', className)}>
 						<BlurImage
-							className="rounded-md border"
+							className="h-full rounded-md border"
 							imageClassName={cn('aspect-video object-contain', previewImageClassName)}
 							quality={100}
 							alt=""

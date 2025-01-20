@@ -24,5 +24,6 @@
 
 .short-sparks-masonry-item {
 	break-inside: avoid; /* Prevent items from breaking across columns */
-	margin-bottom: 1rem; /* Spacing below each item */
+	margin-bottom: 0.5rem;
+	/* Spacing below each item */
 }

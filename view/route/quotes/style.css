@@ -1,7 +1,7 @@
 /* Masonry layout for Comments */
 .quotes-masonry {
 	column-count: 1;
-	column-gap: 0.5rem; /* Spacing between columns */
+	column-gap: 1rem; /* Spacing between columns */
 }
 
 @media (min-width: 640px) {

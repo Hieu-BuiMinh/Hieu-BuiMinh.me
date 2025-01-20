@@ -22,7 +22,6 @@ function BlockQuote({ data, className }: IBlockQuote) {
 		<div
 			className={cn(
 				'not-prose relative flex flex-col gap-4 overflow-hidden rounded-md border p-2 pl-5 transition-all',
-				// 'hover:shadow-[rgba(0,_0,_0,_0.4)_0px_2px_4px,_rgba(0,_0,_0,_0.3)_0px_7px_13px_-3px,_rgba(0,_0,_0,_0.2)_0px_-3px_0px_inset]',
 				className
 			)}
 		>
