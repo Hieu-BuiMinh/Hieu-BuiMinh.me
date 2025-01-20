@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { Suspense } from 'react'
 
 import ShortSparksPageView from '@/view/route/short-sparks/pages/short-sparks.page'
 
@@ -8,7 +9,11 @@ export const metadata: Metadata = {
 }
 
 function ShortSparksPage() {
-	return <ShortSparksPageView />
+	return (
+		<Suspense fallback={<div>Loading...</div>}>
+			<ShortSparksPageView />
+		</Suspense>
+	)
 }
 
 export default ShortSparksPage
