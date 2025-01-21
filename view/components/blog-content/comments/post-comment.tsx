@@ -5,6 +5,7 @@ import NumberFlow from '@number-flow/react'
 import { useMutation, useQuery } from 'convex/react'
 import { format } from 'date-fns'
 import { CircleX, Ellipsis, MessagesSquare, ThumbsDown, ThumbsUp, Trash } from 'lucide-react'
+import { Roboto } from 'next/font/google'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -21,6 +22,11 @@ import { useCommentSectionContext } from '@/view/components/blog-content/comment
 import Markdown from '@/view/components/blog-content/comments/comment-markdown'
 import CommentReply from '@/view/components/blog-content/comments/comment-reply'
 
+const roboto = Roboto({
+	subsets: ['latin'],
+	weight: ['100', '300', '400', '500', '700', '900'],
+})
+
 function PostComment({
 	comment,
 }: {
@@ -35,7 +41,7 @@ function PostComment({
 	const users = useQuery(api.services.users.getAllUsers)
 	const commentUser = users?.find((user) => user.userId === comment.userId)
 
-	const { isAuthenticated } = useStoreUserEffect()
+	const { isAuthenticated, isAuthor } = useStoreUserEffect()
 
 	const postBySlug = useQuery(api.services.post.getPostBySlug, { slug: post?.slugAsParams })
 	const deleteComment = useMutation(api.services.post.deletePostComment)
@@ -79,17 +85,24 @@ function PostComment({
 			<div className="flex items-center justify-between">
 				<div className="flex items-center gap-2 text-xs">
 					<Avatar className="size-8">
-						<AvatarImage className="m-0" src={commentUser?.avatar} />
+						<AvatarImage
+							className={cn(
+								'm-0 rounded-full',
+								comment.userId === currentUser?.id &&
+									'border border-dashed border-foreground/70 p-0.5 dark:bg-foreground/30'
+							)}
+							src={commentUser?.avatar}
+						/>
 						<AvatarFallback>{commentUser?.name || '?'}</AvatarFallback>
 					</Avatar>
 
-					<div className="flex flex-col items-start gap-2 md:flex-row md:items-center md:gap-3">
+					<div className="flex flex-col items-start gap-1 md:flex-row md:items-center md:gap-3">
 						<span className="text-sm font-semibold">{commentUser?.name}</span>
 						<span className="text-muted-foreground">on {formattedDate}</span>
 					</div>
 				</div>
 
-				{isAuthenticated && currentUser?.id === comment.userId ? (
+				{(isAuthenticated && currentUser?.id === comment.userId) || isAuthor ? (
 					<DropdownMenu>
 						<DropdownMenuTrigger asChild>
 							<Button className="size-5" size="icon" variant="ghost">
@@ -111,7 +124,19 @@ function PostComment({
 					</DropdownMenu>
 				) : null}
 			</div>
-			<Markdown>{comment.content || ''}</Markdown>
+
+			<div
+				className={cn(
+					'relative ml-[14px] border-l border-dashed py-3 pl-[26px] text-sm text-foreground',
+					comment.userId === currentUser?.id && 'border-foreground/70',
+					roboto.className
+				)}
+			>
+				{comment.userId === currentUser?.id && (
+					<span className="absolute bottom-0 left-[-2.2px] h-2/5 w-1 bg-gradient-to-t from-background" />
+				)}
+				<Markdown>{comment.content || ''}</Markdown>
+			</div>
 
 			<div className="flex items-center gap-3 text-muted-foreground">
 				<Button
@@ -125,7 +150,9 @@ function PostComment({
 					)}
 					variant="outline"
 				>
-					<ThumbsUp size={16} />
+					<ThumbsUp
+						className={cn(comment.likes.includes(currentUser?.id || '') && 'dark:fill-foreground/50')}
+					/>
 					<NumberFlow
 						willChange
 						value={comment.likes.length || 0}
@@ -143,7 +170,9 @@ function PostComment({
 					)}
 					variant="outline"
 				>
-					<ThumbsDown />
+					<ThumbsDown
+						className={cn(comment.disLikes.includes(currentUser?.id || '') && 'dark:fill-foreground/50')}
+					/>
 					<NumberFlow
 						willChange
 						value={comment.disLikes.length || 0}
@@ -164,10 +193,27 @@ function PostComment({
 
 			{!isAuthenticated && <p className="text-sm text-muted-foreground">Log in to interact or reply 🌵</p>}
 
-			{isReplying && isAuthenticated && <CommentReply comment={comment} />}
+			{isReplying && isAuthenticated && (
+				<div
+					className={cn(
+						'ml-[14px] border-l border-dashed pl-[26px] pt-3',
+						comment.userId === currentUser?.id && 'border-foreground/70'
+					)}
+				>
+					<CommentReply comment={comment} />
+				</div>
+			)}
 
 			{comment.children && comment.children.length > 0 && (
-				<div className="ml-[14px] border-l border-dashed pl-[26px] pt-4">
+				<div
+					className={cn(
+						'relative ml-[14px] border-l border-dashed pl-[26px] pt-2',
+						comment.userId === currentUser?.id && 'border-foreground/70'
+					)}
+				>
+					{comment.userId === currentUser?.id && (
+						<span className="absolute bottom-0 left-[-2.2px] h-2/5 w-1 bg-gradient-to-t from-background" />
+					)}
 					{comment.children.map((child) => (
 						<PostComment comment={child} key={child.commentId} />
 					))}

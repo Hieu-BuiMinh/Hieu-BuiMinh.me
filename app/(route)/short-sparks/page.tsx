@@ -1,3 +1,4 @@
+import { Loader } from 'lucide-react'
 import type { Metadata } from 'next'
 import { Suspense } from 'react'
 
@@ -10,7 +11,13 @@ export const metadata: Metadata = {
 
 function ShortSparksPage() {
 	return (
-		<Suspense fallback={<div>Loading...</div>}>
+		<Suspense
+			fallback={
+				<div className="flex w-full items-center justify-center">
+					<Loader size={20} className="animate-spin" />
+				</div>
+			}
+		>
 			<ShortSparksPageView />
 		</Suspense>
 	)

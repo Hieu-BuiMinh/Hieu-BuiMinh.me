@@ -48,11 +48,7 @@ function CommentReply({ comment }: { comment: DocPost['comments'][number] }) {
 		})
 	}
 
-	return (
-		<div className="ml-[14px] border-l border-dashed py-3 pl-[26px]">
-			<CommentEditor isAuthenticated={true} onSubmitcallback={onSubmitcallback} />
-		</div>
-	)
+	return <CommentEditor isAuthenticated={true} onSubmitcallback={onSubmitcallback} />
 }
 
 export default CommentReply

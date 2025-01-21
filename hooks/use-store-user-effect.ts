@@ -1,5 +1,5 @@
 import { useUser } from '@clerk/clerk-react'
-import { useConvexAuth } from 'convex/react'
+import { useConvexAuth, useQuery } from 'convex/react'
 import { useMutation } from 'convex/react'
 import { useEffect, useState } from 'react'
 
@@ -9,28 +9,23 @@ import type { Id } from '../convex/_generated/dataModel'
 export function useStoreUserEffect() {
 	const { isLoading, isAuthenticated } = useConvexAuth()
 	const { user } = useUser()
+	const users = useQuery(api.services.users.getAllUsers)
+	const adminIds = users?.filter((u) => u.role === 'AUTHOR').map((u) => u.userId)
+	const isAuthor = adminIds?.includes(user?.id || '')
 	// When this state is set we know the server
 	// has stored the user.
 	const [userId, setUserId] = useState<Id<'users'> | null>(null)
 	const storeUser = useMutation(api.services.users.store)
-	// Call the `storeUser` mutation function to store
-	// the current user in the `users` table and return the `Id` value.
 	useEffect(() => {
-		// If the user is not logged in don't do anything
 		if (!isAuthenticated) {
 			return
 		}
-		// Store the user in the database.
-		// Recall that `storeUser` gets the user information via the `auth`
-		// object on the server. You don't need to pass anything manually here.
 		async function createUser() {
 			const id = await storeUser()
 			setUserId(id)
 		}
 		createUser()
 		return () => setUserId(null)
-		// Make sure the effect reruns if the user logs in with
-		// a different identity
 
 		// eslint-disable-next-line @tanstack/query/no-unstable-deps
 	}, [isAuthenticated, storeUser, user?.id])
@@ -38,5 +33,6 @@ export function useStoreUserEffect() {
 	return {
 		isLoading: isLoading || (isAuthenticated && userId === null),
 		isAuthenticated: isAuthenticated && userId !== null,
+		isAuthor: !!isAuthor,
 	}
 }

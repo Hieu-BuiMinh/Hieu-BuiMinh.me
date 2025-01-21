@@ -4,7 +4,6 @@ import '../style.css'
 
 import { notFound, useSearchParams } from 'next/navigation'
 import { useQueryState } from 'nuqs'
-import { Suspense } from 'react'
 
 import { pages } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
@@ -41,31 +40,29 @@ export default function ShortSparksPageView() {
 		<div className="container flex max-w-4xl flex-col gap-3">
 			<PageTitle title={title} description={description} />
 
-			<Suspense fallback={<div>Loading...</div>}>
-				<article className="container prose mx-auto max-w-full pb-6 dark:prose-invert">
-					<MDXContent code={post.body} />
-					<div className="not-prose short-sparks-masonry">
-						{shortSparksList.map((video) => (
-							<VideoZoom
-								key={video.id}
-								height={video.height}
-								width={200}
-								previewImage={video.previewImage}
-								src={video.src}
-								description={video.description}
-								className={`short-sparks-masonry-item h-[${video.height || 100}px]`}
-								previewImageClassName={`h-[${video.height || 100}px]`}
-								onOpenChangeCallback={(_open: boolean) =>
-									handleUpdateSearchParam({ isOpen: _open, videoId: video.id })
-								}
-								open={video.id === searchParams.get('spark')}
-								allowSharing
-							/>
-						))}
-					</div>
-					{post.lastUpdated && <PostLastUpdated date={post.lastUpdated} />}
-				</article>
-			</Suspense>
+			<article className="container prose mx-auto max-w-full pb-6 dark:prose-invert">
+				<MDXContent code={post.body} />
+				<div className="not-prose short-sparks-masonry">
+					{shortSparksList.map((video) => (
+						<VideoZoom
+							key={video.id}
+							height={video.height}
+							width={200}
+							previewImage={video.previewImage}
+							src={video.src}
+							description={video.description}
+							className={`short-sparks-masonry-item h-[${video.height || 100}px]`}
+							previewImageClassName={`h-[${video.height || 100}px]`}
+							onOpenChangeCallback={(_open: boolean) =>
+								handleUpdateSearchParam({ isOpen: _open, videoId: video.id })
+							}
+							open={video.id === searchParams.get('spark')}
+							allowSharing
+						/>
+					))}
+				</div>
+				{post.lastUpdated && <PostLastUpdated date={post.lastUpdated} />}
+			</article>
 		</div>
 	)
 }
