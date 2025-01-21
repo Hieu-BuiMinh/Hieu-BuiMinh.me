@@ -133,6 +133,10 @@ export const deletePostComment = mutationGeneric({
 		}
 
 		const userId = identity.subject
+		const user = await ctx.db
+			.query('users')
+			.withIndex('by_user_id', (q) => q.eq('userId', identity.subject)) // subject === userId
+			.unique()
 
 		const existingPost: DocPost = await ctx.db.get(args.postId)
 
@@ -144,7 +148,7 @@ export const deletePostComment = mutationGeneric({
 
 		const commentToDelete = existingPost.comments[existingCommentIndex]
 
-		if (existingPost.comments[existingCommentIndex].userId !== userId) {
+		if (user.role !== 'AUTHOR' && existingPost.comments[existingCommentIndex].userId !== userId) {
 			throw new Error('Unauthorized')
 		}
 
