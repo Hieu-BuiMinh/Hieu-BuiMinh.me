@@ -130,7 +130,7 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 
 			{!postData && postData !== undefined && (
 				<div className="my-4 rounded border border-green-300/70 bg-green-500/20 p-2 text-sm text-foreground/90">
-					<p>Note: This blog is a work in progress 🧪</p>
+					<p>Note: This post is a work in progress 🧪</p>
 					<p>
 						Feel free to read and explore, but keep in mind that some sections might still be under
 						construction. Your patience is appreciated!

@@ -191,7 +191,9 @@ function PostComment({
 				)}
 			</div>
 
-			{!isAuthenticated && <p className="text-sm text-muted-foreground">Log in to interact or reply 🌵</p>}
+			{!isAuthenticated && (
+				<p className="mt-1.5 text-xs italic text-muted-foreground">Log in to interact or reply 🌵</p>
+			)}
 
 			{isReplying && isAuthenticated && (
 				<div

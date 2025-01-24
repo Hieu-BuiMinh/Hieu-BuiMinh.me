@@ -13,7 +13,7 @@ import PostLastUpdated from '@/view/components/blog-content/post-last-updated'
 import { shortSparksList } from '@/view/route/short-sparks/data'
 
 const title = 'Short Sparks'
-const description = `Some videos that I really enjoy and find inspiring. This is is where I share these little bursts motivation, hoping they'll spark something in you too 🌟.`
+const description = `Some videos that I really enjoy and find inspiring. This is where I share these little bursts motivation, hoping they'll spark something in you too 🌟.`
 
 export default function ShortSparksPageView() {
 	const searchParams = useSearchParams()

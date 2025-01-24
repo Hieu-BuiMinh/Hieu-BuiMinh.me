@@ -43,6 +43,15 @@ export const allQuotes = [
 	},
 	{
 		author: {
+			name: 'Jerry Selbee',
+			avatar: 'https://i.imgur.com/35QSYIp.png',
+			url: '',
+		},
+		quote: `If you take a coin and you flip it a thousand times you might still get 60% heads. But if you flipped it 5,000 times the probability gets closer to 50%. The sample has to be large enough to take luck out of the equation.`,
+		description: 'Jerry & Marge Go Large',
+	},
+	{
+		author: {
 			name: 'Peter Bishop',
 			avatar: 'https://i.imgur.com/btAqcc9.jpeg',
 			url: '',

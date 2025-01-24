@@ -91,7 +91,7 @@ const VideoZoom = forwardRef<HTMLVideoElement, TVideoZoom>((props, ref) => {
 							variant="ghost"
 						>
 							{isCopied ? <CheckIcon className="size-4" /> : <LinkIcon className="size-4" />}
-							Copy url
+							Copy link
 						</Button>
 					)}
 

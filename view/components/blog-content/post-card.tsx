@@ -35,10 +35,11 @@ export const PostCard = ({ post }: PostCardProps) => {
 			<BlurImage
 				src={post.cover || ''}
 				className="h-[220px] rounded-md object-cover"
-				width={1200}
-				height={220}
+				width={450}
+				height={450}
 				imageClassName="transition-transform group-hover:scale-105 object-cover"
 				alt={title}
+				unoptimized={false}
 			/>
 			<div className="flex items-center justify-between gap-2 pt-4 text-xs text-zinc-500">{formattedDate}</div>
 
