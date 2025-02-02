@@ -16,6 +16,14 @@ export const shortSparksList = [
 		description: 'Why not?',
 	},
 	{
+		name: 'Man up',
+		id: 'man-up',
+		src: '/assets/videos/motivation/man-up.mp4',
+		height: 450,
+		previewImage: 'https://i.imgur.com/9u9MK5V.png',
+		description: 'Man up!!!',
+	},
+	{
 		name: 'You Are What You Think About',
 		id: 'luke-belmar-you-are-what-you-think-about',
 		src: '/assets/videos/motivation/luke-belmar/you-are-what-are-you-think-about.mp4',

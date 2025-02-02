@@ -61,6 +61,14 @@ export const allQuotes = [
 	},
 	{
 		author: {
+			name: 'Chazz Palminteri',
+			avatar: 'https://i.imgur.com/mxjFLv2.jpeg',
+			url: '',
+		},
+		quote: `Best way to fight the demons that chase you in the night is to stop and turn around. Turn around. Face it. Man up.`,
+	},
+	{
+		author: {
 			name: 'William Bell',
 			avatar: 'https://i.imgur.com/gAn3xGg.jpeg',
 			url: '',
