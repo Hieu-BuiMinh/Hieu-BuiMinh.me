@@ -1,6 +1,3 @@
-'use client'
-
-import { LunarDate, SolarDate } from 'lunar-date-vn'
 import { notFound } from 'next/navigation'
 
 import { pages } from '@/.velite'
@@ -12,16 +9,8 @@ import PostLastUpdated from '@/view/components/blog-content/post-last-updated'
 const title = 'About'
 const description = '👋 Hi there! I am Hieu, a learner who loves web development.'
 
-export default function AboutPageView() {
+export default async function AboutPageView() {
 	const post = pages.find((post) => post.slugAsParams === 'about')
-
-	const solar_date = new SolarDate(new Date())
-	console.log(solar_date)
-	console.log(solar_date.toLunarDate())
-
-	const lunar_date = new LunarDate({ day: 6, month: 1, year: 2025 })
-	lunar_date.init() // initialize lunar_date before using
-	console.log('toSolarDate', lunar_date.toSolarDate())
 
 	if (!post || !post.published) {
 		notFound()
