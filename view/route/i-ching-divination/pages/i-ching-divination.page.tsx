@@ -31,7 +31,7 @@ function IChingDivinationPageView() {
 				onClick={() => {
 					onDivinationChange('by-time')
 				}}
-				description="..."
+				description="Chọn Ngày giờ trước khi lập quẻ 🌞"
 				icon={CalendarClock}
 			/>
 			<Card
@@ -39,7 +39,7 @@ function IChingDivinationPageView() {
 				onClick={() => {
 					onDivinationChange('by-fipping-coints')
 				}}
-				description="..."
+				description="Cứ vào và tung xu 6 lần thôi, còn lại cứ để vũ trụ lo hết. Blink blink 🪙✨"
 				icon={Dices}
 			/>
 			<Card
@@ -67,7 +67,7 @@ const Card = (props: { icon: LucideIcon; title: string; description: string; onC
 				<Icon />
 			</div>
 			<h3 className="not-prose mb-1 text-sm font-medium capitalize">{title}</h3>
-			<div className="prose-no-margin text-sm text-muted-foreground">
+			<div className="prose-no-margin mt-2 text-sm text-muted-foreground">
 				<p>{description}</p>
 			</div>
 		</div>

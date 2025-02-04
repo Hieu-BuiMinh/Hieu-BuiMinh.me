@@ -14,7 +14,7 @@ import { cn } from '@/lib/utils'
 
 type IDateTimePicker24h = {
 	dateValue?: Date | undefined
-	setDateValue?: (value: SetStateAction<Date | undefined>) => void
+	setDateValue?: (value: SetStateAction<Date>) => void
 	width?: number
 } & CalendarProps
 
