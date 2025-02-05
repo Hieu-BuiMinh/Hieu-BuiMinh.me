@@ -6,6 +6,7 @@ import { SolarDate } from 'lunar-date-vn'
 import { useState } from 'react'
 
 import { DateTimePicker24h } from '@/components/commons/date-time-picker'
+import Hexagram from '@/components/commons/mdx/custom-components/yi-jing/hexagram'
 import { Button } from '@/components/ui/button'
 import Note from '@/view/route/i-ching-divination/components/note'
 // import { SolarDate } from '@/lib/lunar-date'
@@ -18,13 +19,16 @@ function DivinationByTimePageView({ resetDivinationType }: IDivinationByTimePage
 	const [date, setDate] = useState<Date>(new Date())
 
 	const solar_date = new SolarDate(date)
-	console.log('solar_date', solar_date)
 
 	const lunar_date = solar_date.toLunarDate()
-	console.log(lunar_date)
-	const lunar_date_day = lunar_date?.get().day
-	const lunar_date_month = lunar_date?.get().month
+
+	const lunar_date_day = lunar_date?.get().day || 0
+	const lunar_date_month = lunar_date?.get().month || 0
 	const lunar_date_year = lunar_date?.get().year
+	const lunar_date_yearIndex = lunar_date?.getYearIndex() || 0
+	const lunar_date_hour = lunar_date?.get().hour || 0
+
+	console.log('lunar_date_hour', lunar_date_hour)
 
 	const lunar_date_day_name = lunar_date?.getDayName()
 	const lunar_date_month_name = lunar_date?.getMonthName()
@@ -32,6 +36,10 @@ function DivinationByTimePageView({ resetDivinationType }: IDivinationByTimePage
 	const lunar_date_solar_tearm = lunar_date?.getSolarTerm()
 	const lunar_date_first_hour_name = lunar_date?.getFirstHourNameOfTheDay()
 	const lunar_date_real_hour_name = lunar_date?.getRealHourName()
+
+	const upper = (lunar_date_yearIndex + lunar_date_month + lunar_date_day) % 8
+	const lower = (lunar_date_yearIndex + lunar_date_month + lunar_date_day + lunar_date_hour) % 8
+	const active = (lunar_date_yearIndex + lunar_date_month + lunar_date_day + lunar_date_hour) % 6
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -62,6 +70,23 @@ function DivinationByTimePageView({ resetDivinationType }: IDivinationByTimePage
 					{`Giờ: ${lunar_date_real_hour_name} - Ngày: ${lunar_date_day_name} - Tháng: ${lunar_date_month_name} - Năm: ${lunar_date_year_name} - Tiết: ${lunar_date_solar_tearm}`}
 				</div>
 			</div>
+
+			<Hexagram
+				upper={upper}
+				lower={lower}
+				actives={[active || 6]}
+				showBranches
+				showElements
+				showHexagramName
+				showHiddenRelative
+				showIndex
+				showLabel
+				showOriginFamily
+				showQuestionerAndQuestion
+				showResultHexagram
+				showSixCreatures
+				showSixRelatives
+			/>
 		</div>
 	)
 }

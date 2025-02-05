@@ -1,24 +1,18 @@
 import { Button } from '@/components/ui/button'
-import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 
 function Note() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button variant="secondary">Lưu ý</Button>
+				<Button variant="outline">Lưu ý</Button>
 			</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>
 					<DialogTitle>⚠️ Một số lưu ý trước khi gieo quẻ</DialogTitle>
-					<DialogDescription>
-						<div className="flex flex-col gap-2 pr-4 pt-2">
+
+					<div className="text-sm">
+						<div className="flex flex-col gap-2 pr-4 pt-2 text-foreground/80">
 							<div>
 								1. Hạn chế xem đi xem lại nhiều lần cho một vấn đề, gây loạn quẻ, thông tin không còn
 								chính xác nữa
@@ -39,7 +33,7 @@ function Note() {
 							nghi vấn, kính xin thần linh cho biết cát hung được mất, một quẻ là đúng không dám nghi
 							ngờ.&quot;
 						</div>
-					</DialogDescription>
+					</div>
 				</DialogHeader>
 			</DialogContent>
 		</Dialog>

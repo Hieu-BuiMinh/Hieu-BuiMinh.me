@@ -10,8 +10,8 @@ import { converToHexagrams, transformActiveBaguaToNewBagua } from '@/lib/content
 import { cn } from '@/lib/utils'
 
 interface IHexagram {
-	upper?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
-	lower?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+	upper?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | number
+	lower?: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | number
 	actives?: number[]
 	className?: string
 	showIndex?: boolean
