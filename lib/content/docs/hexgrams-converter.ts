@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 export interface HexgramBagua {
 	creatures: string[]
 	branch: string
@@ -34,6 +35,12 @@ export const converToHexagrams = ({
 		}),
 		lowerBaguaCoverted: transformToBaguasData({ type: 'LOWER', baguaIndex: family!.id }),
 	}
+	const originHexagramOfFamilyOriginLement = hexagramFamily.find((f) => f.id === family!.id)?.originRelatives
+
+	const elementOfOriginHexagramOfFamily = [
+		...(originHexagramOfFamily?.upperBaguaCoverted?.elements as ELEMENTS_TYPE[]),
+		...(originHexagramOfFamily?.lowerBaguaCoverted?.elements as ELEMENTS_TYPE[]),
+	]
 
 	// originElement dùng để so sánh ngũ hành 6 hào với ngũ hành quẻ gốc
 	// nhằm an đúng lục thân cho quẻ gốc và quẻ biến
@@ -55,17 +62,15 @@ export const converToHexagrams = ({
 	const hiddenRelative = findHiddenRelative({
 		allRelative: [...upperRelative, ...lowerRelative],
 		family,
-		originHexagramOfFamilyRelatives: [
-			...originHexagramOfFamily!.upperBaguaCoverted!.elements,
-			...originHexagramOfFamily!.lowerBaguaCoverted!.elements,
-		],
+		originHexagramOfFamilyRelatives: originHexagramOfFamilyOriginLement!,
+		originHexagramOfFamilyElements: elementOfOriginHexagramOfFamily,
 		sixCreatures: [
 			...originHexagramOfFamily!.upperBaguaCoverted!.creatures,
 			...originHexagramOfFamily!.lowerBaguaCoverted!.creatures,
 		],
 		tenBranches: [
-			...originHexagramOfFamily!.upperBaguaCoverted!.branch,
-			...originHexagramOfFamily!.lowerBaguaCoverted!.branch,
+			...(Array.from({ length: 3 }, (_) => originHexagramOfFamily!.upperBaguaCoverted!.branch) as string[]),
+			...(Array.from({ length: 3 }, (_) => originHexagramOfFamily!.lowerBaguaCoverted!.branch) as string[]),
 		],
 	})
 
@@ -75,7 +80,7 @@ export const converToHexagrams = ({
 		family,
 		member,
 		relatives: { upper: upperRelative, lower: lowerRelative },
-		hiddenRelative,
+		hiddenRelative: !elementToCompareWith ? hiddenRelative : null,
 	}
 }
 
@@ -336,7 +341,6 @@ export const transformActiveBaguaToNewBagua = ({
 		switch (JSON.stringify(newValue)) {
 			case '[0,0,0]':
 				bagua = { value: [0, 0, 0], label: 'Địa', index: 8 }
-				console.log(bagua)
 				break
 			case '[1,1,1]':
 				bagua = { value: [1, 1, 1], label: 'Thiên', index: 1 }
@@ -464,11 +468,11 @@ const hexagramFamily = [
 			{ value: '[3, 5]', questionerIndex: 2, questionIndex: 5, hexagramName: 'Hỏa Phong' },
 			{ value: '[3, 6]', questionerIndex: 3, questionIndex: 6, hexagramName: 'Hỏa Thủy' },
 			{ value: '[7, 6]', questionerIndex: 4, questionIndex: 1, hexagramName: 'Sơn Thủy' },
-			{ value: '[5, 6]', questionerIndex: 5, questionIndex: 2, hexagramName: 'Phong Thủy' },
+			{ value: '[5, 6]', questionerIndex: 5, questionIndex: 2, hexagramName: 'Phong Thủy Hoán' },
 			{ value: '[1, 6]', questionerIndex: 4, questionIndex: 1, wanderer: true, hexagramName: 'Thiên Thủy' },
 			{ value: '[1, 3]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Thiên Hỏa' },
 		],
-		originRelatives: ['Quan quỷ', 'Phụ mẫu', 'Huynh đệ', 'Tử tôn', 'Phụ mẫu', 'Thê tài'],
+		originRelatives: ['Huynh đệ', 'Tử tôn', 'Thê tài', 'Quan quỷ', 'Tử tôn', 'Phụ mẫu'],
 	},
 	{
 		id: 4,
@@ -491,7 +495,7 @@ const hexagramFamily = [
 			},
 			{ value: '[2, 4]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Trạch Lôi Tùy' },
 		],
-		originRelatives: ['Phụ mẫu', 'Huynh đệ', 'Quan quỷ', 'Phụ mẫu', 'Thê tài', 'Tử tôn'],
+		originRelatives: ['Thê tài', 'Quan quỷ', 'Tử tôn', 'Thê tài', 'Huynh đệ', 'Phụ mẫu'],
 	},
 	{
 		id: 5,
@@ -508,7 +512,7 @@ const hexagramFamily = [
 			{ value: '[7, 4]', questionerIndex: 4, questionIndex: 1, wanderer: true, hexagramName: 'Sơn Lôi Di' },
 			{ value: '[7, 5]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Sơn Phong Cổ' },
 		],
-		originRelatives: ['Thê tài', 'Quan quỷ', 'Phụ mẫu', 'Huynh đệ', 'Tử tôn', 'Phụ mẫu'],
+		originRelatives: ['Huynh đệ', 'Tử tôn', 'Thê tài', 'Quan quỷ', 'Phụ mẫu', 'Thê tài'],
 	},
 	{
 		id: 6,
@@ -525,7 +529,7 @@ const hexagramFamily = [
 			{ value: '[8, 3]', questionerIndex: 4, questionIndex: 1, wanderer: true, hexagramName: 'Địa Hỏa Minh Di' },
 			{ value: '[8, 6]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Địa Thủy Sư' },
 		],
-		originRelatives: ['Tử tôn', 'Phụ mẫu', 'Huynh đệ', 'Quan quỷ', 'Phụ mẫu', 'Thê tài'],
+		originRelatives: ['Huynh đệ', 'Quan quỷ', 'Phụ mẫu', 'Thê tài', 'Quan quỷ', 'Tử tôn'],
 	},
 	{
 		id: 7,
@@ -548,7 +552,7 @@ const hexagramFamily = [
 			},
 			{ value: '[5, 7]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Phong Sơn Tiệm' },
 		],
-		originRelatives: ['Thê tài', 'Tử tôn', 'Phụ mẫu', 'Huynh đệ', 'Quan quỷ', 'Phụ mẫu'],
+		originRelatives: ['Quan quỷ', 'Thê tài', 'Huynh đệ', 'Tử tôn', 'Phụ mẫu', 'Huynh đệ'],
 	},
 	{
 		id: 8,
@@ -565,7 +569,7 @@ const hexagramFamily = [
 			{ value: '[6, 1]', questionerIndex: 4, questionIndex: 1, wanderer: true, hexagramName: 'Thủy Thiên Nhu' },
 			{ value: '[6, 8]', questionerIndex: 3, questionIndex: 6, returner: true, hexagramName: 'Thủy Địa Tỷ' },
 		],
-		originRelatives: ['Huynh đệ', 'Tử tôn', 'Phụ mẫu', 'Thê tài', 'Quan quỷ', 'Phụ mẫu'],
+		originRelatives: ['Tử tôn', 'Thê tài', 'Huynh đệ', 'Quan quỷ', 'Phụ mẫu', 'Huynh đệ'],
 	},
 ]
 
@@ -699,98 +703,73 @@ const findHiddenRelative = ({
 	allRelative,
 	family,
 	originHexagramOfFamilyRelatives,
+	originHexagramOfFamilyElements,
 	sixCreatures,
 	tenBranches,
 }: {
 	allRelative: (string | null)[]
 	family: (typeof hexagramFamily)[number] | undefined
 	originHexagramOfFamilyRelatives: (string | null)[]
+	originHexagramOfFamilyElements: ELEMENTS_TYPE[]
 	sixCreatures: (string | null)[]
 	tenBranches: (string | null)[]
 }) => {
-	let parent = false
-	let wife = false
-	let child = false
-	let brother = false
-	let job = false
-
-	let hiddenRelative = ''
+	const hiddenRelative: string[] = []
 	const indexes: number[] = []
 	const elements: string[] = []
 	const creatures: string[] = []
 	const branches: string[] = []
 
-	switch (true) {
-		case !allRelative.some((r) => r === 'Phụ mẫu'):
-			parent = true
-			break
-		case !allRelative.some((r) => r === 'Thê tài'):
-			wife = true
-			break
-		case !allRelative.some((r) => r === 'Tử tôn'):
-			child = true
-			break
-		case !allRelative.some((r) => r === 'Huynh đệ'):
-			brother = true
-			break
-		case !allRelative.some((r) => r === 'Quan quỷ'):
-			job = true
-			break
-
-		default:
-			break
-	}
-
-	if (parent) {
+	if (!allRelative.some((r) => r === 'Phụ mẫu')) {
 		family?.originRelatives.map((r, i) => {
 			if (r === 'Phụ mẫu') {
-				hiddenRelative = r
+				hiddenRelative.push(r)
 				indexes.push(i)
-				elements.push(originHexagramOfFamilyRelatives[i] || '')
+				elements.push(originHexagramOfFamilyElements[i] || '')
 				creatures.push(sixCreatures[i] || '')
 				branches.push(tenBranches[i] || '')
 			}
 		})
 	}
-	if (wife) {
+	if (!allRelative.some((r) => r === 'Thê tài')) {
 		family?.originRelatives.map((r, i) => {
 			if (r === 'Thê tài') {
-				hiddenRelative = r
+				hiddenRelative.push(r)
 				indexes.push(i)
-				elements.push(originHexagramOfFamilyRelatives[i] || '')
+				elements.push(originHexagramOfFamilyElements[i] || '')
 				creatures.push(sixCreatures[i] || '')
 				branches.push(tenBranches[i] || '')
 			}
 		})
 	}
-	if (child) {
+	if (!allRelative.some((r) => r === 'Tử tôn')) {
 		family?.originRelatives.map((r, i) => {
 			if (r === 'Tử tôn') {
-				hiddenRelative = r
+				hiddenRelative.push(r)
 				indexes.push(i)
-				elements.push(originHexagramOfFamilyRelatives[i] || '')
+				elements.push(originHexagramOfFamilyElements[i] || '')
 				creatures.push(sixCreatures[i] || '')
 				branches.push(tenBranches[i] || '')
 			}
 		})
 	}
-	if (brother) {
+	if (!allRelative.some((r) => r === 'Huynh đệ')) {
 		family?.originRelatives.map((r, i) => {
 			if (r === 'Huynh đệ') {
-				hiddenRelative = r
+				hiddenRelative.push(r)
 				indexes.push(i)
-				elements.push(originHexagramOfFamilyRelatives[i] || '')
+				elements.push(originHexagramOfFamilyElements[i] || '')
 				creatures.push(sixCreatures[i] || '')
 				branches.push(tenBranches[i] || '')
 			}
 		})
 	}
-	if (job) {
+	if (!allRelative.some((r) => r === 'Quan quỷ')) {
 		family?.originRelatives.map((r, i) => {
 			if (r === 'Quan quỷ') {
-				hiddenRelative = r
+				hiddenRelative.push(r)
 				indexes.push(i)
-				elements.push(originHexagramOfFamilyRelatives[i] || '')
+				elements.push(originHexagramOfFamilyElements[i] || '')
 				creatures.push(sixCreatures[i] || '')
 				branches.push(tenBranches[i] || '')
 			}
