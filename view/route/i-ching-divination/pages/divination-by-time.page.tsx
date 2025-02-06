@@ -3,6 +3,7 @@
 import { format } from 'date-fns'
 import { ChevronLeft } from 'lucide-react'
 import { SolarDate } from 'lunar-date-vn'
+import type { SetStateAction } from 'react'
 import { useState } from 'react'
 
 import { DateTimePicker24h } from '@/components/commons/date-time-picker'
@@ -16,6 +17,7 @@ interface IDivinationByTimePageView {
 }
 
 function DivinationByTimePageView({ resetDivinationType }: IDivinationByTimePageView) {
+	const [hexagramData, setHexagramData] = useState<{ upper: number; lower: number; active: number } | null>(null)
 	const [date, setDate] = useState<Date>(new Date())
 
 	const solar_date = new SolarDate(date)
@@ -28,8 +30,6 @@ function DivinationByTimePageView({ resetDivinationType }: IDivinationByTimePage
 	const lunar_date_yearIndex = lunar_date?.getYearIndex() || 0
 	const lunar_date_hour = lunar_date?.get().hour || 0
 
-	console.log('lunar_date_hour', lunar_date_hour)
-
 	const lunar_date_day_name = lunar_date?.getDayName()
 	const lunar_date_month_name = lunar_date?.getMonthName()
 	const lunar_date_year_name = lunar_date?.getYearName()
@@ -37,9 +37,22 @@ function DivinationByTimePageView({ resetDivinationType }: IDivinationByTimePage
 	const lunar_date_first_hour_name = lunar_date?.getFirstHourNameOfTheDay()
 	const lunar_date_real_hour_name = lunar_date?.getRealHourName()
 
-	const upper = (lunar_date_yearIndex + lunar_date_month + lunar_date_day) % 8
-	const lower = (lunar_date_yearIndex + lunar_date_month + lunar_date_day + lunar_date_hour) % 8
-	const active = (lunar_date_yearIndex + lunar_date_month + lunar_date_day + lunar_date_hour) % 6
+	const handleDateChange = (date: SetStateAction<Date>) => {
+		setDate(date)
+		setHexagramData(null)
+	}
+
+	const handleCalculatingHexagramData = () => {
+		const upper = (lunar_date_yearIndex + lunar_date_month + lunar_date_day) % 8
+		const lower = (lunar_date_yearIndex + lunar_date_month + lunar_date_day + lunar_date_hour) % 8
+		const active = (lunar_date_yearIndex + lunar_date_month + lunar_date_day + lunar_date_hour) % 6
+
+		setHexagramData({ upper, lower, active })
+	}
+
+	const handleResetHexagramData = () => {
+		setHexagramData(null)
+	}
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -52,8 +65,13 @@ function DivinationByTimePageView({ resetDivinationType }: IDivinationByTimePage
 
 			<div className="flex justify-between">
 				<div className="flex gap-3">
-					<DateTimePicker24h width={240} dateValue={date} setDateValue={setDate} />
-					<Button>Lập quẻ</Button>
+					<DateTimePicker24h width={240} dateValue={date} setDateValue={handleDateChange} />
+					{!hexagramData && <Button onClick={handleCalculatingHexagramData}>Lập quẻ</Button>}
+					{hexagramData && (
+						<Button onClick={handleResetHexagramData} variant="destructive">
+							Reset
+						</Button>
+					)}
 				</div>
 				<Note />
 			</div>
@@ -71,22 +89,26 @@ function DivinationByTimePageView({ resetDivinationType }: IDivinationByTimePage
 				</div>
 			</div>
 
-			<Hexagram
-				upper={upper}
-				lower={lower}
-				actives={[active || 6]}
-				showBranches
-				showElements
-				showHexagramName
-				showHiddenRelative
-				showIndex
-				showLabel
-				showOriginFamily
-				showQuestionerAndQuestion
-				showResultHexagram
-				showSixCreatures
-				showSixRelatives
-			/>
+			{/* <Hexagram upper={7} lower={7} showSixRelatives showElements showSixCreatures showBranches /> */}
+
+			{hexagramData && (
+				<Hexagram
+					upper={hexagramData.upper}
+					lower={hexagramData.lower}
+					actives={[hexagramData.active || 6]}
+					showBranches
+					showElements
+					showHexagramName
+					showHiddenRelative
+					showIndex
+					showLabel
+					showOriginFamily
+					showQuestionerAndQuestion
+					showResultHexagram
+					showSixCreatures
+					showSixRelatives
+				/>
+			)}
 		</div>
 	)
 }

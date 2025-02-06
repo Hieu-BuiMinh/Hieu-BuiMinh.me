@@ -47,7 +47,13 @@ function Hexagram({
 	yinYangClassName, // className của yinyang component
 }: IHexagram) {
 	const showInforSection =
-		showIndex || showBranches || showSixCreatures || showElements || showQuestionerAndQuestion || showHiddenRelative
+		showIndex ||
+		showBranches ||
+		showSixCreatures ||
+		showElements ||
+		showQuestionerAndQuestion ||
+		showHiddenRelative ||
+		showSixRelatives
 
 	const aboveActiveList = actives?.filter((e) => e > 3)?.map((e) => e - 3) // vị trí hào động của quẻ thượng [6,5,4] => [3,2,1] => [1,2,3]
 	const belowActiveList = actives?.filter((e) => e < 4) // vị trí hào động của quẻ hạ [1,2,3]
@@ -58,7 +64,7 @@ function Hexagram({
 		upper: upper || 1,
 		lower: lower || 1,
 	})
-	console.log('hiddenRelative', hiddenRelative.elements)
+	console.log('hiddenRelative', hiddenRelative)
 
 	const newUpper = isAboveActive
 		? transformActiveBaguaToNewBagua({ baguaIndex: upper || 1, actives: aboveActiveList }).newIndex
@@ -130,22 +136,22 @@ function Hexagram({
 										)}
 										{showHiddenRelative && (
 											<>
-												{hiddenRelative.indexes.map((r, j) => {
+												{hiddenRelative?.indexes.map((r, j) => {
 													if (i === r) {
 														return (
 															<div key={nanoid()} className="flex items-center gap-1">
 																<ElementDot
 																	className="size-2"
-																	type={hiddenRelative.elements[j] as ELEMENTS_TYPE}
+																	type={hiddenRelative?.elements[j] as ELEMENTS_TYPE}
 																/>
 																<span className="italic text-foreground/80">
-																	{hiddenRelative.branches[j]}
+																	{hiddenRelative?.branches[j]}
 																</span>
 																<span className="italic text-foreground/80">
-																	{hiddenRelative.creatures}
+																	{hiddenRelative?.creatures[j]}
 																</span>
 																<span className="italic text-foreground/80">
-																	{hiddenRelative.hiddenRelative}
+																	{hiddenRelative?.hiddenRelative[j]}
 																</span>
 															</div>
 														)
@@ -205,22 +211,22 @@ function Hexagram({
 										)}
 										{showHiddenRelative && (
 											<>
-												{hiddenRelative.indexes.map((r, j) => {
+												{hiddenRelative?.indexes.map((r, j) => {
 													if (i + 3 === r) {
 														return (
 															<div key={nanoid()} className="flex items-center gap-2">
 																<ElementDot
 																	className="size-2"
-																	type={hiddenRelative.elements[j] as ELEMENTS_TYPE}
+																	type={hiddenRelative?.elements[j] as ELEMENTS_TYPE}
 																/>
 																<span className="italic text-foreground/80">
-																	{hiddenRelative.branches[j]}
+																	{hiddenRelative?.branches[j]}
 																</span>
 																<span className="italic text-foreground/80">
-																	{hiddenRelative.creatures[j]}
+																	{hiddenRelative?.creatures[j]}
 																</span>
 																<span className="italic text-foreground/80">
-																	{hiddenRelative.hiddenRelative}
+																	{hiddenRelative?.hiddenRelative[j]}
 																</span>
 															</div>
 														)

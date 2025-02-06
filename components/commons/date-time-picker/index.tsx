@@ -23,6 +23,7 @@ export function DateTimePicker24h({ dateValue, setDateValue, width, ...props }: 
 	const [isOpen, setIsOpen] = useState(false)
 
 	const hours = Array.from({ length: 24 }, (_, i) => i)
+
 	const handleDateSelect = (selectedDate: Date | undefined) => {
 		if (selectedDate) {
 			setDate(selectedDate)
