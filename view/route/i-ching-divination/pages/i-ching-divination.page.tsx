@@ -61,7 +61,7 @@ const Card = (props: { icon: LucideIcon; title: string; description: string; onC
 	return (
 		<div
 			onClick={onClick}
-			className="col-span-1 cursor-pointer rounded-lg border bg-background p-4 text-foreground shadow-md transition-colors hover:bg-muted-foreground/5"
+			className="bg-[linear-gradient(180deg,#ffffff,#fbfbfb 65.62%)] col-span-1 cursor-pointer rounded-lg border p-4 text-foreground shadow transition-colors hover:bg-muted-foreground/5 dark:bg-[linear-gradient(180deg,#1e1e1e,#121212)]"
 		>
 			<div className="not-prose mb-2 w-fit rounded-md border bg-muted p-1.5 text-muted-foreground">
 				<Icon />
