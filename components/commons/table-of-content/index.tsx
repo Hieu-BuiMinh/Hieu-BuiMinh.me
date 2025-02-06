@@ -4,7 +4,7 @@ import { Text } from 'lucide-react'
 import Link from 'next/link'
 import { useMemo } from 'react'
 
-import type { DevBlogPost, DocPost, InterestPost } from '@/.velite'
+import type { DevBlogPost, DocPost, InterestPost, ProjectPost } from '@/.velite'
 import { ScrollArea } from '@/components/ui/scroll-area'
 
 type Header = {
@@ -13,13 +13,13 @@ type Header = {
 	items?: Header[]
 }
 
-function TableOfContent({ post }: { post: DevBlogPost | DocPost | InterestPost }) {
+function TableOfContent({ post }: { post: DevBlogPost | DocPost | InterestPost | ProjectPost }) {
 	const TOC = post.toc
 
 	const flatTocArray = useMemo(() => {
 		const flat: { url: string; title: string; level: number }[] = []
 		const flatten = (headers: Header[], level: number = 0) => {
-			headers.forEach((header) => {
+			headers?.forEach((header) => {
 				flat.push({ url: header.url, title: header.title, level })
 				if (header.items && header.items.length > 0) {
 					flatten(header.items, level + 1)

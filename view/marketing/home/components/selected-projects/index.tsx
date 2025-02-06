@@ -4,6 +4,7 @@ import Link from 'next/link'
 import type { ProjectPost } from '@/.velite'
 import BlurImage from '@/components/commons/image/blur-image'
 import { buttonVariants } from '@/components/ui/button'
+import { sortPostsByDate } from '@/lib/content/posts'
 import { cn } from '@/lib/utils'
 
 type ProjectsProps = {
@@ -15,7 +16,7 @@ function SelectedProjects({ projects }: ProjectsProps) {
 		<div className="relative my-24">
 			<div className="font-title text-center text-3xl font-bold sm:text-4xl">Selected Projects</div>
 			<div className="mt-12 grid gap-4 md:grid-cols-2">
-				{projects
+				{sortPostsByDate(projects, 'desc')
 					.filter((project) => project.shown)
 					.map((project) => (
 						<Card key={project.slug} project={project} />
@@ -58,7 +59,7 @@ const Card = (props: CardProps) => {
 				</div>
 				<ArrowUpRightIcon className="size-[18px] opacity-0 transition-opacity group-hover:opacity-100" />
 			</div>
-			<BlurImage width={1280} height={832} src={cover || ''} alt={title} className="rounded-lg" />
+			<BlurImage width={1280} height={832} src={cover || ''} alt={title} className="h-[280px] rounded-lg" />
 			<div className="absolute left-0 top-0 flex size-full flex-col justify-end rounded-xl bg-gradient-to-b from-transparent to-black p-3">
 				<div className="transition-all ease-out group-hover:mb-6">
 					<h3 className="font-title text-md line-clamp-1 font-bold text-white sm:text-2xl">{title}</h3>

@@ -89,11 +89,13 @@ const projects = defineCollection({
 			shown: s.boolean().default(false),
 			tags: s.array(s.string()).optional(),
 			body: s.mdx(),
+			links: s.object({ repoUrl: s.string(), demoUrl: s.string() }).optional(),
 			author: s.object({
 				avatar: s.string(),
 				name: s.string(),
 				github: s.string(),
 			}),
+			toc: s.toc({ tight: true, ordered: true, maxDepth: 6 }),
 			//slugAsParams <=> needed transform
 		})
 		.transform(computedFields),
