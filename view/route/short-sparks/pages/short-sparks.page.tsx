@@ -6,10 +6,10 @@ import { notFound, useSearchParams } from 'next/navigation'
 import { useQueryState } from 'nuqs'
 
 import { pages } from '@/.velite'
-import { MDXContent } from '@/components/commons/mdx'
+// import { MDXContent } from '@/components/commons/mdx'
 import VideoZoom from '@/components/commons/video/video-zoom'
 import PageTitle from '@/view/components/blog-content/page-title'
-import PostLastUpdated from '@/view/components/blog-content/post-last-updated'
+// import PostLastUpdated from '@/view/components/blog-content/post-last-updated'
 import { shortSparksList } from '@/view/route/short-sparks/data'
 
 const title = 'Short Sparks'
@@ -41,8 +41,8 @@ export default function ShortSparksPageView() {
 			<PageTitle title={title} description={description} />
 
 			<article className="container prose mx-auto max-w-full pb-6 dark:prose-invert">
-				<MDXContent code={post.body} />
-				<div className="not-prose short-sparks-masonry">
+				{/* <MDXContent code={post.body} /> */}
+				<div className="not-prose short-sparks-masonry mt-3">
 					{shortSparksList.map((video) => (
 						<VideoZoom
 							key={video.id}
@@ -61,7 +61,7 @@ export default function ShortSparksPageView() {
 						/>
 					))}
 				</div>
-				{post.lastUpdated && <PostLastUpdated date={post.lastUpdated} />}
+				{/* {post.lastUpdated && <PostLastUpdated date={post.lastUpdated} />} */}
 			</article>
 		</div>
 	)

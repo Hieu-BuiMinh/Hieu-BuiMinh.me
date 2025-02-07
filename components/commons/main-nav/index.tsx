@@ -48,12 +48,12 @@ const aboutItems: { title: string; href: string; description: string }[] = [
 		description: `A glimpse into my coding adventures and projects.`,
 	},
 	{
-		title: 'Me & my Crew 🤌',
-		href: '/about/me-and-my-friends',
-		description: 'A fun progress tracker that shows how far my team and I have come on a project.',
+		title: 'Projects',
+		href: '/projects',
+		description: 'The list of my projects. Everything was made with ❤️.',
 	},
 	{
-		title: 'Some topics I like ❤️',
+		title: 'Some topics I like 🔥',
 		href: '/interests',
 		description: `A place to explore the things I'm passionate about and love sharing.`,
 	},
