@@ -16,6 +16,8 @@ type Header = {
 function TableOfContent({ post }: { post: DevBlogPost | DocPost | InterestPost | ProjectPost }) {
 	const TOC = post.toc
 
+	console.log(TOC)
+
 	const flatTocArray = useMemo(() => {
 		const flat: { url: string; title: string; level: number }[] = []
 		const flatten = (headers: Header[], level: number = 0) => {

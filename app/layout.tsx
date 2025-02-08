@@ -1,17 +1,23 @@
 import './globals.css'
 
 import type { Metadata, Viewport } from 'next'
-import localFont from 'next/font/local'
+import { Rethink_Sans } from 'next/font/google'
 
+// import localFont from 'next/font/local'
 import AppProvider from '@/components/commons/providers/app-provider'
 import SiteFooter from '@/components/commons/site-footer'
 import SiteHeader from '@/components/commons/site-header'
 import { SITE_CONFIG } from '@/config/site'
 
-const geistSans = localFont({
-	src: './fonts/GeistVF.woff',
-	variable: '--font-geist-sans',
-	weight: '100 900',
+// const geistSans = localFont({
+// 	src: './fonts/GeistVF.woff',
+// 	variable: '--font-geist-sans',
+// 	weight: '100 900',
+// })
+
+const rethink_Sans = Rethink_Sans({
+	subsets: ['latin'],
+	weight: ['400', '500', '700', '800'],
 })
 
 export const metadata: Metadata = {
@@ -132,7 +138,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<html className="scroll-smooth" suppressHydrationWarning lang="en">
-			<body suppressHydrationWarning className={`${geistSans.variable} ${geistSans.className} antialiased`}>
+			<body suppressHydrationWarning className={`${rethink_Sans.className} antialiased`}>
 				<AppProvider>
 					<SiteHeader />
 					<main role="main">{children}</main>

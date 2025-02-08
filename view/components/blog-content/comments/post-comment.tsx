@@ -5,7 +5,7 @@ import NumberFlow from '@number-flow/react'
 import { useMutation, useQuery } from 'convex/react'
 import { format } from 'date-fns'
 import { CircleX, Ellipsis, MessagesSquare, ThumbsDown, ThumbsUp, Trash } from 'lucide-react'
-import { Roboto } from 'next/font/google'
+import { Rethink_Sans } from 'next/font/google'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -22,9 +22,9 @@ import { useCommentSectionContext } from '@/view/components/blog-content/comment
 import Markdown from '@/view/components/blog-content/comments/comment-markdown'
 import CommentReply from '@/view/components/blog-content/comments/comment-reply'
 
-const roboto = Roboto({
+const rethink_Sans = Rethink_Sans({
 	subsets: ['latin'],
-	weight: ['100', '300', '400', '500', '700', '900'],
+	weight: ['400', '500', '700', '800'],
 })
 
 function PostComment({
@@ -129,7 +129,7 @@ function PostComment({
 				className={cn(
 					'relative ml-[14px] border-l border-dashed py-3 pl-[26px] text-sm text-foreground',
 					comment.userId === currentUser?.id && 'border-foreground/70',
-					roboto.className
+					rethink_Sans.className
 				)}
 			>
 				{comment.userId === currentUser?.id && (

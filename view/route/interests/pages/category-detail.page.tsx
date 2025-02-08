@@ -1,4 +1,4 @@
-import { Roboto } from 'next/font/google'
+import { Rethink_Sans } from 'next/font/google'
 import { notFound } from 'next/navigation'
 
 import { interests } from '@/.velite'
@@ -21,9 +21,9 @@ async function getPostFromParams(params: ICategoryDetailPageProps['params']) {
 	return post
 }
 
-const roboto = Roboto({
+const rethink_Sans = Rethink_Sans({
 	subsets: ['latin'],
-	weight: ['100', '300', '400', '500', '700', '900'],
+	weight: ['400', '500', '700', '800'],
 })
 
 export default async function CategoryDetailPage({ params }: ICategoryDetailPageProps) {
@@ -37,7 +37,10 @@ export default async function CategoryDetailPage({ params }: ICategoryDetailPage
 		<>
 			<div className="relative flex justify-between gap-10">
 				<article
-					className={cn('prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]', roboto.className)}
+					className={cn(
+						'prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]',
+						rethink_Sans.className
+					)}
 				>
 					<MDXContent code={post.body} />
 

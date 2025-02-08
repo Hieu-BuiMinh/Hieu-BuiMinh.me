@@ -18,11 +18,11 @@ function HeroSection() {
 						</span>
 						Available for work
 					</BadgeAnimated>
-					<h1 className="hero-auth-name">I&apos;m Hieu</h1>
-					<h1 className="bg-gradient-to-b from-foreground via-foreground/90 to-foreground/70 to-90% bg-clip-text text-2xl font-bold text-transparent sm:text-5xl">
+					<h1 className="hero-auth-name font-black">I&apos;m Hieu</h1>
+					<h1 className="bg-gradient-to-b from-foreground via-foreground/90 to-foreground/70 to-90% bg-clip-text text-2xl font-black text-transparent sm:text-5xl">
 						A Frontend Developer
 					</h1>
-					<h2 className="bg-gradient-to-b from-foreground via-foreground/90 to-foreground/70 to-90% bg-clip-text text-2xl font-bold text-transparent sm:text-5xl sm:!leading-loose">
+					<h2 className="bg-gradient-to-b from-foreground via-foreground/90 to-foreground/70 to-90% bg-clip-text text-2xl font-black text-transparent sm:text-5xl sm:!leading-loose">
 						Creating websites using
 					</h2>
 					<span className="hero-stack-name">React</span>

@@ -1,4 +1,4 @@
-import { Roboto } from 'next/font/google'
+import { Rethink_Sans } from 'next/font/google'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 
@@ -16,9 +16,9 @@ interface PostPageProps {
 	slug: string
 }
 
-const roboto = Roboto({
+const rethink_Sans = Rethink_Sans({
 	subsets: ['latin'],
-	weight: ['100', '300', '400', '500', '700', '900'],
+	weight: ['400', '500', '700', '800'],
 })
 
 async function DocDetailPageView({ slug }: PostPageProps) {
@@ -41,7 +41,7 @@ async function DocDetailPageView({ slug }: PostPageProps) {
 			<article
 				className={cn(
 					'prose w-full text-muted-foreground dark:prose-invert lg:max-w-[calc(100%-220px)]',
-					roboto.className
+					rethink_Sans.className
 				)}
 			>
 				<DocPostDetailHeader post={post} className="not-prose" />
