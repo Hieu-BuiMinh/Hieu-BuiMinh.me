@@ -2,7 +2,7 @@
   <h1>My personal website and blog.</h1>
 
   <a target="_blank" href="[https://honghong.me](https://hieu-buiminh.vercel.app/)">
-    <img alt="Project Cover" src="/assets/images/content/post/project-blog/personal-website/cover.png">
+    <img alt="Project Cover" src="https://hieu-buiminh.vercel.app/assets/images/content/post/project-blog/personal-website/cover.png">
   </a>
 </div>
 
@@ -30,7 +30,7 @@ After a year of learning, I expanded my skills to include React.js and Next.js. 
 
 ## Performance
 
-<img alt="Project Cover" src="/assets/images/content/post/project-blog/personal-website/hieu-buiminh.vercel.app-light-house.png">
+<img alt="Project Cover" src="https://hieu-buiminh.vercel.app/assets/images/content/post/project-blog/personal-website/hieu-buiminh.vercel.app-light-house.png">
 
 ## UI/UX
 
