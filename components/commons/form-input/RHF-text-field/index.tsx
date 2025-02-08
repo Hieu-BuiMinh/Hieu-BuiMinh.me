@@ -14,9 +14,18 @@ type TRHFTextFieldProps = React.InputHTMLAttributes<HTMLInputElement> & {
 	placeholder?: string
 	className?: string
 	inputClassName?: string
+	autoComplete?: string
 }
 
-function RHFTextField({ name, description, label, placeholder, className, inputClassName }: TRHFTextFieldProps) {
+function RHFTextField({
+	name,
+	description,
+	label,
+	placeholder,
+	className,
+	inputClassName,
+	autoComplete,
+}: TRHFTextFieldProps) {
 	const { control } = useFormContext()
 
 	return (
@@ -27,7 +36,12 @@ function RHFTextField({ name, description, label, placeholder, className, inputC
 				<FormItem className={cn('w-full', className)}>
 					{label && <FormLabel className="text-xs">{label}</FormLabel>}
 					<FormControl>
-						<Input className={cn('', inputClassName)} placeholder={placeholder} {...field} />
+						<Input
+							className={cn('', inputClassName)}
+							placeholder={placeholder}
+							autoComplete={autoComplete}
+							{...field}
+						/>
 					</FormControl>
 					{description && <FormDescription>{description}</FormDescription>}
 					<FormMessage className="text-red-500" />

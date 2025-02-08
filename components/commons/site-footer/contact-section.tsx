@@ -49,7 +49,13 @@ function FooterContactSection() {
 
 			<FormProvider {...methods}>
 				<div className="flex flex-col items-end gap-3 md:w-80 md:flex-row">
-					<RHFTextField placeholder="example@email.com" className="w-full" name="email" type="email" />
+					<RHFTextField
+						placeholder="example@email.com"
+						className="w-full"
+						name="email"
+						type="email"
+						autoComplete="email"
+					/>
 
 					<Button className="w-full md:w-auto" variant="secondary">
 						Subscribe
