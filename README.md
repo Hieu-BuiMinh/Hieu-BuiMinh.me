@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <h1>My personal website and blog.</h1>
 
-## Getting Started
+  <a target="_blank" href="[https://honghong.me](https://hieu-buiminh.vercel.app/)">
+    <img alt="Project Cover" src="/assets/images/content/post/project-blog/personal-website/cover.png">
+  </a>
+</div>
 
-First, run the development server:
+I've come across countless blogs on the Internet, and I've always dreamed of creating my own—where I can write about anything, whether it's tutorials, notes, or personal reflections. That's why I decided to start learning web development in December 2020. I began with the basics: HTML, CSS, and JavaScript, and quickly realized that creating a static website wasn't enough for me. I wanted more flexibility and interactivity.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+After a year of learning, I expanded my skills to include React.js and Next.js. These technologies allowed me to build dynamic, scalable websites and gave me the tools to create a blog that could evolve alongside my ideas. I'm excited to continue this journey, exploring new technologies and creating content that reflects my growth as both a developer and a creator.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Core Technologies
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-   Next.js 15 with App Router 🚦
+-   TypeScript with strict configuration 🚧
+-   Tailwind CSS for styling ✨
+-   Velite - MDX for content ✏️
+-   Real-time database 🔗
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+![NextJS](https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white)
+![Shadcn-ui](https://img.shields.io/badge/shadcn/ui-000000.svg?style=for-the-badge&logo=shadcn/ui&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6.svg?style=for-the-badge&logo=TypeScript&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC.svg?style=for-the-badge&logo=Tailwind-CSS&logoColor=white)
+![MDX](https://img.shields.io/badge/Velite-black.svg?style=for-the-badge&logo=MDX&logoColor=d7a928&labelColor=000000)
+![Clerk](https://img.shields.io/badge/Clerk-6C47FF.svg?style=for-the-badge&logo=Clerk&logoColor=white)
+![Convex](https://img.shields.io/badge/Convex-ee342f.svg?style=for-the-badge&logo=Convex&logoColor=white)
+![Edgestore](https://img.shields.io/badge/Edgestore-a57fff.svg?style=for-the-badge&logo=Edgestore&logoColor=white)
+![Blocknote](https://img.shields.io/badge/Blocknote-ff8c00.svg?style=for-the-badge&logo=Blocknote&logoColor=white)
 
-## Learn More
+## Performance
 
-To learn more about Next.js, take a look at the following resources:
+<img alt="Project Cover" src="/assets/images/content/post/project-blog/personal-website/hieu-buiminh.vercel.app-light-house.png">
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## UI/UX
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+-   Shadcn UI for accessible UI components 💋
+-   Responsive design 💻📲
+-   Light/Dark mode 🌓
+-   Image zoom in blog posts 📸
+-   rehype-pretty for code syntax highlighting 🔦
+-   Table of contents for blog posts 🧱
 
-## Deploy on Vercel
+## Blog Features
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-   Comments system 🗨️
+-   Like functionality 👍
+-   Post view counter 🔢
+-   Blog / Document post search 📚
+-   Tags 🏷️
+-   Sitemap 🗺️
+-   Velite - MDX for blog post 📄
+-   Guestbook comments 💬
+-   Personal projects 🦾
+-   Hobbies page 🔥
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Performance & SEO
+
+-   Lighthouse score of nearly 100 🏗️
+-   SEO optimized with meta tags and JSON-LD 🔍
+-   Open graph images using `next/og` 📸
+
+## Development Experience
+
+-   ESLint configuration 🔨
+-   Prettier code formatting 💄
+-   Simple-git-hooks & lint-staged ⚓
+-   Conventional commit lint [husky] 🐶
+-   Auto refresh for MDX 📄
+
+## Authentication & Data
+
+-   Clerk authentication 🥸
+-   Convex for user store 💾
+
+## Credits
+
+This project wouldn't have been possible without the incredible open-source community. A special thanks to [Timothy](https://www.timlrx.com/) for the [Tailwind nextjs starter blog template](https://github.com/timlrx/tailwind-nextjs-starter-blog), and to [HongHong](https://honghong.me/) for the inspiration ❤️.
+
+Without them, this project would not have been possible:
+
+- Comment System - from [fuma-comment](https://github.com/fuma-nama/fuma-comment)
+- UI - from [shadcn/ui](https://github.com/shadcn-ui/ui)
+- ESLint config - from [@antfu/eslint-config](https://github.com/antfu/eslint-config)
+- Admin UI - from [shadcn-admin](https://github.com/satnaing/shadcn-admin)
+
+Referenced the following projects for inspiration:
+
+- [fumadocs](https://fumadocs.vercel.app/)
+- [leerob.io](https://leerob.io/)
+- [nerdfish.be](https://www.nerdfish.be/)
+- [nextra.site](https://nextra.site/)
+- [theodorusclarence.com](https://theodorusclarence.com/)
+- [ped.ro](https://ped.ro/)
+- [delba.dev](https://delba.dev/)
+- [joshwcomeau.com](https://www.joshwcomeau.com/)
+- [blog.maximeheckel.com](https://blog.maximeheckel.com/)
+- [zenorocha.com](https://zenorocha.com/)
+- [jahir.dev](https://jahir.dev/)
+- [anishde.dev](https://anishde.dev/)
+- [nikolovlazar.com](https://nikolovlazar.com/)
+- [samuelkraft.com](https://samuelkraft.com/)
+- [bentogrids.com](https://bentogrids.com/)
+- [ui.aceternity.com](https://ui.aceternity.com/)
+- [hover.dev](https://www.hover.dev/)
+- [vocs.dev](https://vocs.dev/)
+
+and more but I can't remember them all
+
+
+## Author
+
+- [@hieu-buiminh](https://github.com/Hieu-BuiMinh)
