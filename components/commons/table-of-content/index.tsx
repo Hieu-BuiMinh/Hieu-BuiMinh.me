@@ -6,6 +6,8 @@ import { useMemo } from 'react'
 
 import type { DevBlogPost, DocPost, InterestPost, ProjectPost } from '@/.velite'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { useScrollspy } from '@/hooks/use-scrollspy'
+import { cn } from '@/lib/utils'
 
 type Header = {
 	title: string
@@ -16,7 +18,10 @@ type Header = {
 function TableOfContent({ post }: { post: DevBlogPost | DocPost | InterestPost | ProjectPost }) {
 	const TOC = post.toc
 
-	console.log(TOC)
+	const activeId = useScrollspy(
+		TOC.map((item: { title: string; url: string; items: [] }) => item.url.slice(1)),
+		{ rootMargin: '0% 0% -80% 0%' }
+	)
 
 	const flatTocArray = useMemo(() => {
 		const flat: { url: string; title: string; level: number }[] = []
@@ -51,7 +56,10 @@ function TableOfContent({ post }: { post: DevBlogPost | DocPost | InterestPost |
 						style={{ paddingLeft: toc.level * 15 }}
 					>
 						<Link
-							className="line-clamp-1 text-sm leading-[1.2] text-muted-foreground no-underline transition-colors hover:text-foreground"
+							className={cn(
+								'line-clamp-1 text-sm leading-[1.2] text-muted-foreground no-underline transition-colors hover:text-foreground',
+								toc.url.slice(1) === activeId && 'font-semibold text-foreground'
+							)}
 							href={toc.url}
 						>
 							{toc.title}
