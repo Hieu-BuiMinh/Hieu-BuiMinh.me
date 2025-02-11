@@ -24,6 +24,14 @@ export const shortSparksList = [
 		description: 'Man up!!!',
 	},
 	{
+		name: 'Ever tried, ever failed',
+		id: 'ever-tried-ever-failed',
+		src: '/assets/videos/motivation/ever-tried-ever-failed.mp4',
+		height: 450,
+		previewImage: 'https://i.imgur.com/9346IPr.png',
+		description: 'Ever tried, ever failed',
+	},
+	{
 		name: 'You Are What You Think About',
 		id: 'luke-belmar-you-are-what-you-think-about',
 		src: '/assets/videos/motivation/luke-belmar/you-are-what-are-you-think-about.mp4',
