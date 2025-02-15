@@ -30,7 +30,7 @@ export const PostCard = ({ post }: PostCardProps) => {
 		<Link
 			href={`/${slug}`}
 			// className="group rounded-md px-2 py-4 shadow-feature-card dark:shadow-feature-card-dark"
-			className="group rounded-md border p-2 dark:border-none dark:p-0"
+			className="group flex flex-col justify-between rounded-md border p-2 dark:border-none dark:p-0"
 		>
 			<BlurImage
 				src={post.cover || ''}

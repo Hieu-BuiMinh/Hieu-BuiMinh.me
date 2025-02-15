@@ -1,6 +1,7 @@
 'use client'
 
-import { BookUser, Menu, UserSearch } from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
+import { BookUser, FileUser, Flame, Hash, Heart, Menu, Quote, Rocket, Snail, Sparkles, UserSearch } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
@@ -18,7 +19,7 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { cn } from '@/lib/utils'
 
-const blogItems: { title: string; href: string; description: string }[] = [
+const blogItems: { title: string; href: string; description: string; icon?: LucideIcon }[] = [
 	{
 		title: 'Dev Blog 🧑‍💻',
 		href: '/dev-blog',
@@ -36,49 +37,57 @@ const blogItems: { title: string; href: string; description: string }[] = [
 	},
 ]
 
-const aboutItems: { title: string; href: string; description: string }[] = [
+const aboutItems: { title: string; href: string; description: string; icon?: LucideIcon }[] = [
 	{
 		title: 'About me 😃',
 		href: '/about',
 		description: 'A place where you can learn some fun facts and important details about me!',
+		icon: FileUser,
 	},
 	{
-		title: 'My dev journey 🚀',
+		title: 'My dev journey',
 		href: '/about/my-journey',
 		description: `A glimpse into my coding adventures and projects.`,
+		icon: Rocket,
 	},
 	{
 		title: 'Projects',
 		href: '/projects',
-		description: 'The list of my projects. Everything was made with ❤️.',
+		description: 'The list of my projects. Everything was made with.',
+		icon: Heart,
 	},
 	{
-		title: 'Some topics I like 🔥',
+		title: 'Some topics I like',
 		href: '/interests',
 		description: `A place to explore the things I'm passionate about and love sharing.`,
+		icon: Flame,
 	},
 	{
-		title: 'Tags 🏷️',
+		title: 'Tags',
 		href: '/tags',
 		description: 'Organized chaos awaits! Browse tags and see what catches your eye.',
+		icon: Hash,
 	},
 ]
 
-const inspiration: { title: string; href: string; description: string }[] = [
+const inspiration: { title: string; href: string; description: string; icon?: LucideIcon }[] = [
 	{
 		title: 'Short Sparks 🌟',
 		href: '/short-sparks',
 		description: 'Styles for headings, paragraphs, lists...etc',
+		icon: Sparkles,
 	},
 	{
 		title: 'Quotes 🌱',
 		href: '/quotes',
 		description: 'Organized chaos awaits! Browse tags and see what catches your eye.',
+		icon: Quote,
 	},
 	{
 		title: 'Insanity 🤡',
 		href: '/about/insanity',
 		description: 'How far down the rabbit hole do you wanna go!?',
+		icon: Snail,
 	},
 ]
 
@@ -140,7 +149,7 @@ export function MainNav() {
 								</NavigationMenuLink>
 							</li>
 							{blogItems.map((item) => (
-								<ListItem key={item.title} title={item.title} href={item.href}>
+								<ListItem key={item.title} icon={item.icon} title={item.title} href={item.href}>
 									{item.description}
 								</ListItem>
 							))}
@@ -150,9 +159,9 @@ export function MainNav() {
 				<NavigationMenuItem className="hidden sm:inline-flex">
 					<NavigationMenuTrigger className="bg-transparent">About</NavigationMenuTrigger>
 					<NavigationMenuContent className="bg-background">
-						<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+						<ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
 							{aboutItems.map((item) => (
-								<ListItem key={item.title} title={item.title} href={item.href}>
+								<ListItem key={item.title} icon={item.icon} title={item.title} href={item.href}>
 									{item.description}
 								</ListItem>
 							))}
@@ -162,9 +171,9 @@ export function MainNav() {
 				<NavigationMenuItem className="hidden sm:inline-flex">
 					<NavigationMenuTrigger className="bg-transparent">Inspiration</NavigationMenuTrigger>
 					<NavigationMenuContent className="bg-background">
-						<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
+						<ul className="grid w-[400px] gap-2 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
 							{inspiration.map((item) => (
-								<ListItem key={item.title} title={item.title} href={item.href}>
+								<ListItem key={item.title} icon={item.icon} title={item.title} href={item.href}>
 									{item.description}
 								</ListItem>
 							))}
@@ -176,7 +185,7 @@ export function MainNav() {
 	)
 }
 
-const ListItem = React.forwardRef<React.ElementRef<'a'>, React.ComponentPropsWithoutRef<'a'>>(
+const ListItem = React.forwardRef<React.ElementRef<'a'>, React.ComponentPropsWithoutRef<'a'> & { icon?: LucideIcon }>(
 	({ className, title, children, ...props }, ref) => {
 		return (
 			<li>
@@ -184,13 +193,20 @@ const ListItem = React.forwardRef<React.ElementRef<'a'>, React.ComponentPropsWit
 					<Link
 						ref={ref}
 						className={cn(
-							'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+							'flex select-none items-center gap-3 space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-neutral-900/70 hover:text-accent-foreground focus:bg-neutral-900/70 focus:text-accent-foreground',
 							className
 						)}
 						href={props.href || ''}
 					>
-						<div className="text-sm font-medium leading-none">{title}</div>
-						<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">{children}</p>
+						{props.icon && (
+							<div className="rounded-lg border bg-neutral-900 p-2">
+								{<props.icon size={16} className="text-foreground/60" />}
+							</div>
+						)}
+						<div className="flex flex-col gap-2">
+							<div className="text-sm font-medium leading-none">{title}</div>
+							<p className="line-clamp-2 text-sm leading-snug text-muted-foreground">{children}</p>
+						</div>
 					</Link>
 				</NavigationMenuLink>
 			</li>

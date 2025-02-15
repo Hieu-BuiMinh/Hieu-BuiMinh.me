@@ -12,14 +12,15 @@ interface TagProps {
 export function Tag({ tag, current, count }: TagProps) {
 	return (
 		<Link
-			className={cn('flex items-center gap-2 rounded border p-1 text-xs no-underline', {
+			className={cn('not-prose flex items-center gap-2 rounded border p-1 text-xs no-underline', {
 				'bg-foreground dark:bg-green-400 text-muted': current,
 			})}
 			href={`/tags/${slug(tag)}`}
 		>
 			<Hash size={15} />
-			<span>
-				{tag} {count ? `(${count})` : null}
+			<span className="flex gap-2">
+				<span>{tag}</span>
+				<span>{count ? `[${count}]` : null}</span>
 			</span>
 		</Link>
 	)

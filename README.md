@@ -79,35 +79,34 @@ This project wouldn't have been possible without the incredible open-source comm
 
 Without them, this project would not have been possible:
 
-- Comment System - from [fuma-comment](https://github.com/fuma-nama/fuma-comment)
-- UI - from [shadcn/ui](https://github.com/shadcn-ui/ui)
-- ESLint config - from [@antfu/eslint-config](https://github.com/antfu/eslint-config)
-- Admin UI - from [shadcn-admin](https://github.com/satnaing/shadcn-admin)
+-   Comment System - from [fuma-comment](https://github.com/fuma-nama/fuma-comment)
+-   UI - from [shadcn/ui](https://github.com/shadcn-ui/ui)
+-   ESLint config - from [@antfu/eslint-config](https://github.com/antfu/eslint-config)
+-   Admin UI - from [shadcn-admin](https://github.com/satnaing/shadcn-admin)
 
 Referenced the following projects for inspiration:
 
-- [fumadocs](https://fumadocs.vercel.app/)
-- [leerob.io](https://leerob.io/)
-- [nerdfish.be](https://www.nerdfish.be/)
-- [nextra.site](https://nextra.site/)
-- [theodorusclarence.com](https://theodorusclarence.com/)
-- [ped.ro](https://ped.ro/)
-- [delba.dev](https://delba.dev/)
-- [joshwcomeau.com](https://www.joshwcomeau.com/)
-- [blog.maximeheckel.com](https://blog.maximeheckel.com/)
-- [zenorocha.com](https://zenorocha.com/)
-- [jahir.dev](https://jahir.dev/)
-- [anishde.dev](https://anishde.dev/)
-- [nikolovlazar.com](https://nikolovlazar.com/)
-- [samuelkraft.com](https://samuelkraft.com/)
-- [bentogrids.com](https://bentogrids.com/)
-- [ui.aceternity.com](https://ui.aceternity.com/)
-- [hover.dev](https://www.hover.dev/)
-- [vocs.dev](https://vocs.dev/)
+-   [fumadocs](https://fumadocs.vercel.app/)
+-   [leerob.io](https://leerob.io/)
+-   [nerdfish.be](https://www.nerdfish.be/)
+-   [nextra.site](https://nextra.site/)
+-   [theodorusclarence.com](https://theodorusclarence.com/)
+-   [ped.ro](https://ped.ro/)
+-   [delba.dev](https://delba.dev/)
+-   [joshwcomeau.com](https://www.joshwcomeau.com/)
+-   [blog.maximeheckel.com](https://blog.maximeheckel.com/)
+-   [zenorocha.com](https://zenorocha.com/)
+-   [jahir.dev](https://jahir.dev/)
+-   [anishde.dev](https://anishde.dev/)
+-   [nikolovlazar.com](https://nikolovlazar.com/)
+-   [samuelkraft.com](https://samuelkraft.com/)
+-   [bentogrids.com](https://bentogrids.com/)
+-   [ui.aceternity.com](https://ui.aceternity.com/)
+-   [hover.dev](https://www.hover.dev/)
+-   [vocs.dev](https://vocs.dev/)
 
 and more but I can't remember them all
 
-
 ## Author
 
-- [@hieu-buiminh](https://github.com/Hieu-BuiMinh)
+-   [@hieu-buiminh](https://github.com/Hieu-BuiMinh)
