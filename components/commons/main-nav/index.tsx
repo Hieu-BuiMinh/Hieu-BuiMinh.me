@@ -1,7 +1,22 @@
 'use client'
 
 import type { LucideIcon } from 'lucide-react'
-import { BookUser, FileUser, Flame, Hash, Heart, Menu, Quote, Rocket, Snail, Sparkles, UserSearch } from 'lucide-react'
+import {
+	BookUser,
+	FileUser,
+	Flame,
+	Hash,
+	Heart,
+	Library,
+	Menu,
+	MessageCircleHeart,
+	NotebookText,
+	Quote,
+	Rocket,
+	Snail,
+	Sparkles,
+	UserSearch,
+} from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import * as React from 'react'
@@ -21,19 +36,22 @@ import { cn } from '@/lib/utils'
 
 const blogItems: { title: string; href: string; description: string; icon?: LucideIcon }[] = [
 	{
-		title: 'Dev Blog 🧑‍💻',
+		title: 'Dev Blog ',
 		href: '/dev-blog',
 		description: 'Re-usable components built using Radix UI and Tailwind CSS.',
+		icon: NotebookText,
 	},
 	{
-		title: 'Documents 🌵',
+		title: 'Documents',
 		href: '/docs',
 		description: 'Styles for headings, paragraphs, lists...etc',
+		icon: Library,
 	},
 	{
-		title: 'Guestbook 🛸',
+		title: 'Guestbook',
 		href: '/guestbook',
 		description: 'Sign my guestbook and share your idea. You can tell me anything here!',
+		icon: MessageCircleHeart,
 	},
 ]
 
@@ -46,7 +64,7 @@ const aboutItems: { title: string; href: string; description: string; icon?: Luc
 	},
 	{
 		title: 'My dev journey',
-		href: '/about/my-journey',
+		href: '/experiences',
 		description: `A glimpse into my coding adventures and projects.`,
 		icon: Rocket,
 	},
@@ -193,13 +211,13 @@ const ListItem = React.forwardRef<React.ElementRef<'a'>, React.ComponentPropsWit
 					<Link
 						ref={ref}
 						className={cn(
-							'flex select-none items-center gap-3 space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-neutral-900/70 hover:text-accent-foreground focus:bg-neutral-900/70 focus:text-accent-foreground',
+							'flex select-none items-center gap-3 space-y-1 rounded-md p-2 leading-none no-underline outline-none transition-colors hover:bg-neutral-300/70 hover:text-accent-foreground focus:bg-neutral-300/70 focus:text-accent-foreground dark:hover:bg-neutral-900/70 dark:focus:bg-neutral-900/70',
 							className
 						)}
 						href={props.href || ''}
 					>
 						{props.icon && (
-							<div className="rounded-lg border bg-neutral-900 p-2">
+							<div className="rounded-lg border bg-neutral-300 p-2 dark:bg-neutral-900">
 								{<props.icon size={16} className="text-foreground/60" />}
 							</div>
 						)}

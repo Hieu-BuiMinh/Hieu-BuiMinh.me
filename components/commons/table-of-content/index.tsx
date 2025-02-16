@@ -48,7 +48,7 @@ function TableOfContent({ post }: { post: DevBlogPost | DocPost | InterestPost |
 				On this page
 			</p>
 
-			<ScrollArea className="flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto rounded-md">
+			<ScrollArea className="flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto">
 				{flatTocArray.map((toc, index) => (
 					<div
 						key={`${toc.title}-${index}`}

@@ -3,7 +3,7 @@ import React from 'react'
 
 export const metadata: Metadata = {
 	title: 'Projects',
-	description: `The list of my projects. Everything was made with ❤️.`,
+	description: `The list of my projects. Everything was made with LOVE.`,
 }
 
 function ProjectsLayout({ children }: { children: React.ReactNode }) {

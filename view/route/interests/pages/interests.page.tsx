@@ -6,7 +6,7 @@ import CategoryCards from '@/view/components/blog-content/category-cards'
 import PageTitle from '@/view/components/blog-content/page-title'
 
 const title = 'Interest'
-const description = `Welcome to Interest, a blog dedicated to exploring the things that inspire curiosity and spark creativity! Whether it's religious, books, hobbies, or everyday discoveries, this is a space to dive deep into the fascinating world around us. Join me on this journey of learning and sharing ideas that make life interesting 😎`
+const description = `Welcome to Interest, a blog dedicated to exploring the things that inspire curiosity and spark creativity! Whether it's religious, books, hobbies, or everyday discoveries, this is a space to dive deep into the fascinating world around us. Join me on this journey of learning and sharing ideas that make life interesting`
 
 async function InterestsPageView() {
 	const rootCategories: InterestPost[] = interests.filter((post) => post.type === 'ROOT')

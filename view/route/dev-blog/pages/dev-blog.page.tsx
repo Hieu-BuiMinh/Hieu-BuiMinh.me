@@ -11,7 +11,7 @@ interface IBlogpageProps {
 
 const title = 'Blog'
 const description =
-	'My personal website and blog where I share my thoughts on various topics including tutorials, notes, and personal experiences. As a frontend developer from Vietnam, I started learning web development as a hobby in December 2020. I use Next.js for building websites, GitHub for code hosting, and Vercel for deployment. Explore my site to learn more about my Journey and discover some of the web development resources that have inspired me 😘'
+	'My personal website and blog where I share my thoughts on various topics including tutorials, notes, and personal experiences.'
 
 const POSTS_PER_PAGE = 10
 

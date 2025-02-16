@@ -12,7 +12,7 @@ interface IProjectsPageProps {
 }
 
 const title = 'Projects'
-const description = 'The list of my projects. Everything was made with ❤️.'
+const description = 'The list of my projects. Everything was made with LOVE.'
 
 const POSTS_PER_PAGE = 10
 

@@ -2,7 +2,7 @@ export const shortSparksList = [
 	{
 		name: 'Life Changing Advice',
 		id: 'jim-rohn-life-changing-advice',
-		src: '/assets/videos/motivation/jim-rohn/life-changing-advice.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739699034/life-changing-advice_wofrnn.mp4',
 		height: 350,
 		previewImage: 'https://i.imgur.com/bS1Y4A9.png',
 		description: 'Work harder on yourself ❤️',
@@ -10,7 +10,7 @@ export const shortSparksList = [
 	{
 		name: 'Why Not?',
 		id: 'jim-rohn-why-not',
-		src: '/assets/videos/motivation/jim-rohn/why-not.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739699161/why-not_lrx5yf.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/DlOd62I.png',
 		description: 'Why not?',
@@ -18,7 +18,7 @@ export const shortSparksList = [
 	{
 		name: 'Man up',
 		id: 'man-up',
-		src: '/assets/videos/motivation/man-up.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739699016/man-up_kmsdys.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/9u9MK5V.png',
 		description: 'Man up!!!',
@@ -26,7 +26,7 @@ export const shortSparksList = [
 	{
 		name: 'Ever tried, ever failed',
 		id: 'ever-tried-ever-failed',
-		src: '/assets/videos/motivation/ever-tried-ever-failed.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739698989/ever-tried-ever-failed_bvzzvy.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/9346IPr.png',
 		description: 'Ever tried, ever failed',
@@ -34,7 +34,7 @@ export const shortSparksList = [
 	{
 		name: 'You Are What You Think About',
 		id: 'luke-belmar-you-are-what-you-think-about',
-		src: '/assets/videos/motivation/luke-belmar/you-are-what-are-you-think-about.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739699646/you-are-what-are-you-think-about_qfv9k4.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/1rCkZWY.png',
 		description: 'You are what you think about',
@@ -42,7 +42,7 @@ export const shortSparksList = [
 	{
 		name: 'Discipline for start & Consistency for finish',
 		id: 'discipline-start-consistency-finish',
-		src: '/assets/videos/motivation/discipline-start-consistency-finish.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739698987/discipline-start-consistency-finish_lmknup.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/X5IBNTR.png',
 		description: 'Discipline for start & Consistency for finish',
@@ -50,7 +50,7 @@ export const shortSparksList = [
 	{
 		name: `I'am unbeatable`,
 		id: 'i-am-unbeatable',
-		src: '/assets/videos/motivation/i-am-unbeatable.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739698986/i-am-unbeatable_ougisd.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/1MtydeA.png',
 		description: `I'am unbeatable`,
@@ -58,7 +58,7 @@ export const shortSparksList = [
 	{
 		name: `In order to be successful`,
 		id: 'in-order-to-be-successful',
-		src: '/assets/videos/motivation/in-order-to-be-successful.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739699000/in-order-to-be-successful_lb9yzc.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/7pKaYDv.png',
 		description: 'In order to be successful',
@@ -66,7 +66,7 @@ export const shortSparksList = [
 	{
 		name: `Pain`,
 		id: 'pain',
-		src: '/assets/videos/motivation/pain.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739698990/pain_y5fkw9.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/QHQPTVT.png',
 		description: 'Pain',
@@ -74,7 +74,7 @@ export const shortSparksList = [
 	{
 		name: `The more you try the luckier you will be`,
 		id: 'the-more-you-try-the-luckier-you-will-be',
-		src: '/assets/videos/motivation/the-more-you-try-the-luckier-you-will-be.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739698991/the-more-you-try-the-luckier-you-will-be_ogtl5d.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/SG200Or.png',
 		description: 'The more you try the luckier you will be ',
@@ -82,7 +82,7 @@ export const shortSparksList = [
 	{
 		name: 'brainwashed',
 		id: 'brainwashed',
-		src: '/assets/videos/motivation/robert-kiyosaki/brainwashed.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739699660/brainwashed_k4yfsw.mp4',
 		height: 350,
 		previewImage: 'https://i.imgur.com/WOqLqdI.png',
 		description: '🧠🚿',
@@ -90,7 +90,7 @@ export const shortSparksList = [
 	{
 		name: 'make-mistakes-to-learn',
 		id: 'make-mistakes-to-learn',
-		src: '/assets/videos/motivation/robert-kiyosaki/make-mistakes-to-learn.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739699646/make-mistakes-to-learn_xcvuaw.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/pd0RjsC.png',
 		description: 'You have to make mistakes to learn',
@@ -98,7 +98,7 @@ export const shortSparksList = [
 	{
 		name: 'save-money',
 		id: 'save-money',
-		src: '/assets/videos/motivation/robert-kiyosaki/save-money.mp4',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739699673/save-money_lpnvtl.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/nOzhDzC.png',
 		description: 'Why would you save money?',

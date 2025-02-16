@@ -122,6 +122,10 @@ See the section on [`code`](#code).
 
 <Image src="/assets/images/content/post/dev-blog/common-copmponents-compilation/cover.png" alt="image-alt" />
 
+### Cloudinary image
+
+<CloudinaryImage className="h-[510px] max-w-full m-auto" publicId="GecleE7W0AAflq5_ijisax" />
+
 ## Tree view:
 
 <TreeView
@@ -280,6 +284,28 @@ See the section on [`code`](#code).
 			className: 'lg:col-span-2',
 		},
 	]}
+/>
+
+## Video
+
+<VideoZoom
+	height={350}
+	width={200}
+	previewImage="https://i.imgur.com/bS1Y4A9.png"
+	src="https://res.cloudinary.com/hieu-buiminh/video/upload/v1739699034/life-changing-advice_wofrnn.mp4"
+	description="Work harder on yourself ❤️"
+	className={`short-sparks-masonry-item h-[350px]`}
+	previewImageClassName={`h-[350px]`}
+/>
+### Cloudinary video
+
+<CloudinaryVideo
+	publicId="why-not_lrx5yf"
+	height={350}
+	width={200}
+	previewImage="https://i.imgur.com/DlOd62I.png"
+	description="Why not?"
+	className={`short-sparks-masonry-item h-[350px]`}
 />
 
 ## Task list:

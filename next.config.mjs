@@ -5,7 +5,7 @@ import { build } from 'velite'
 export default {
 	reactStrictMode: false,
 	images: {
-		domains: ['img.clerk.com', 'i.imgur.com'],
+		domains: ['img.clerk.com', 'i.imgur.com', 'res.cloudinary.com'],
 	},
 	webpack: (config) => {
 		config.plugins.push(new VeliteWebpackPlugin())

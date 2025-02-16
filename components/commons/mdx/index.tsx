@@ -5,6 +5,7 @@ import Link from 'next/link'
 import * as runtime from 'react/jsx-runtime'
 
 import ShowcaseGrid from '@/components/commons/grid/showcase-grid'
+import CloudinaryImage from '@/components/commons/image/cloudinary-image'
 import ImageZoom from '@/components/commons/image/image-zoom'
 import Audio from '@/components/commons/mdx/custom-components/audio'
 import BlockQuote from '@/components/commons/mdx/custom-components/block-quote'
@@ -17,6 +18,7 @@ import Hexagram from '@/components/commons/mdx/custom-components/yi-jing/hexagra
 import YinYang from '@/components/commons/mdx/custom-components/yi-jing/yin-yang'
 import TreeView from '@/components/commons/tree-view'
 import Video from '@/components/commons/video'
+import CloudinaryVideo from '@/components/commons/video/cloudinary-video'
 import VideoZoom from '@/components/commons/video/video-zoom'
 import { cn } from '@/lib/utils'
 
@@ -71,10 +73,8 @@ const components = {
 			</>
 		)
 	},
-	// code: (props) => {
-	// 	return <>{props.children} 123</>
-	// },
-	// pre: CodeBlock,
+	CloudinaryImage,
+	CloudinaryVideo,
 	Audio,
 	Video,
 	VideoZoom,

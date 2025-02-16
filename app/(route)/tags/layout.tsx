@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 }
 
 const title = '# Tags'
-const description = `Explore a world of inspiration through my tags! From blogs and hobbies to daily discoveries, find content that sparks curiosity and creativity. Dive in and enjoy the journey! 🗿`
+const description = `Explore a world of inspiration through my tags!`
 
 function TagsLayout({ children }: { children: React.ReactNode }) {
 	return (
