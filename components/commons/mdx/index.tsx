@@ -21,6 +21,7 @@ import Video from '@/components/commons/video'
 import CloudinaryVideo from '@/components/commons/video/cloudinary-video'
 import VideoZoom from '@/components/commons/video/video-zoom'
 import { cn } from '@/lib/utils'
+import ExperienceBlock from '@/view/route/experiences/components/experience-block'
 
 const useMDXComponent = (code: string) => {
 	if (!code) {
@@ -73,6 +74,7 @@ const components = {
 			</>
 		)
 	},
+	ExperienceBlock,
 	CloudinaryImage,
 	CloudinaryVideo,
 	Audio,

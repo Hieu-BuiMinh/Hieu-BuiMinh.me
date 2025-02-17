@@ -2,7 +2,6 @@ import { notFound } from 'next/navigation'
 
 import { pages } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
-// import Hexagram from '@/components/commons/mdx/custom-components/yi-jing/hexagram'
 import PageTitle from '@/view/components/blog-content/page-title'
 import PostLastUpdated from '@/view/components/blog-content/post-last-updated'
 
