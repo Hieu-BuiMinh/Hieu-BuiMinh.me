@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useRef, useState } from 'react'
 
 export const useScrollspy = (ids: string[], options: IntersectionObserverInit): string | undefined => {
@@ -5,7 +7,7 @@ export const useScrollspy = (ids: string[], options: IntersectionObserverInit): 
 	const observer = useRef<IntersectionObserver | null>(null)
 
 	useEffect(() => {
-		const elements = ids.map((id) => document.querySelector(`#${id}`))
+		const elements = ids.map((id) => document?.querySelector(`#${CSS.escape(id)}`))
 
 		if (observer.current) {
 			observer.current.disconnect()
