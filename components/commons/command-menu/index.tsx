@@ -19,6 +19,7 @@ import {
 import { DialogTitle } from '@/components/ui/dialog'
 import { SITE_CONFIG } from '@/config/site'
 import { useCopyToClipboard } from '@/hooks/use-copy-to-clipboard'
+import useLoginModal from '@/hooks/use-login-modal'
 import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
 
 function CommandMenu() {
@@ -27,6 +28,7 @@ function CommandMenu() {
 	const [copy] = useCopyToClipboard()
 
 	const clerk = useClerk()
+	const { open } = useLoginModal()
 
 	const { isAuthenticated } = useStoreUserEffect()
 
@@ -49,7 +51,8 @@ function CommandMenu() {
 					onSelect: () => {
 						setIsOpen(false)
 						if (!isAuthenticated) {
-							clerk.openSignIn({})
+							// clerk.openSignIn({})
+							open()
 						} else if (isAuthenticated) {
 							clerk.signOut({ redirectUrl: path })
 						}

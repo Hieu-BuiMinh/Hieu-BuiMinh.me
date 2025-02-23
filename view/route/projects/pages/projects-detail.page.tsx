@@ -31,8 +31,8 @@ export default async function ProjectsDetailPageView({ params }: PostPageProps) 
 	return (
 		<>
 			<div className="flex gap-3 pb-4">
-				<ProjectLink title="Demo" url={post?.links?.repoUrl} />
-				<ProjectLink title="Repo" url={post?.links?.demoUrl} />
+				<ProjectLink title="Demo" url={post?.links?.demoUrl} />
+				<ProjectLink title="Repo" url={post?.links?.repoUrl} />
 			</div>
 			<div className="relative flex justify-between gap-10">
 				<article className="prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]">

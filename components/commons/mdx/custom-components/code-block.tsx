@@ -40,7 +40,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref)
 			)}
 		>
 			{fileName ? (
-				<div className="flex flex-row items-center gap-2 border-b bg-muted/50 px-4 py-1.5">
+				<div className="flex flex-row items-center gap-2 border-b bg-muted/50 px-3 py-1 text-xs">
 					<div className="text-muted-foreground">
 						<LangIcons fileName={fileName} />
 					</div>
@@ -51,7 +51,7 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>((props, ref)
 				<CopyButton className="absolute right-4 top-3 z-10" onCopy={onCopy} />
 			)}
 
-			<ScrollArea>
+			<ScrollArea className="!rounded-none">
 				<pre ref={textInput} className={cn(JetBrainsMono.className, className)} {...rest}>
 					{children}
 				</pre>
@@ -81,7 +81,7 @@ const CopyButton = (props: CopyButtonProps) => {
 
 	return (
 		<Button
-			className={cn('size-8 p-0 opacity-0 transition-opacity group-hover:opacity-100', className)}
+			className={cn('size-6 p-0 opacity-0 transition-opacity group-hover:opacity-100', className)}
 			variant="outline"
 			onClick={() => {
 				onCopy()
@@ -91,7 +91,7 @@ const CopyButton = (props: CopyButtonProps) => {
 			aria-label="Copy code to clipboard"
 			{...rest}
 		>
-			{isCopied ? <CheckIcon className="size-4" /> : <CopyIcon className="size-4" />}
+			{isCopied ? <CheckIcon className="size-1" size={10} /> : <CopyIcon className="size-1" size={10} />}
 		</Button>
 	)
 }

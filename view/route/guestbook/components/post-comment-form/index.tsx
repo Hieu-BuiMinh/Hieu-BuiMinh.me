@@ -1,6 +1,6 @@
 'use client'
 
-import { SignInButton, SignOutButton, UserButton, useUser } from '@clerk/clerk-react'
+import { SignOutButton, useUser } from '@clerk/clerk-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Authenticated, Unauthenticated, useMutation } from 'convex/react'
 import { Loader } from 'lucide-react'
@@ -8,8 +8,10 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import RHFTextArea from '@/components/commons/form-input/RHF-text-area'
+import BlurImage from '@/components/commons/image/blur-image'
 import { Button } from '@/components/ui/button'
 import { api } from '@/convex/_generated/api'
+import useLoginModal from '@/hooks/use-login-modal'
 import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
 import { cn } from '@/lib/utils'
 
@@ -24,6 +26,7 @@ type TGuestbookFromSchemaType = typeof guestbookFormSchema
 function GuestbookPostCommentForm() {
 	const { isLoading } = useStoreUserEffect()
 	const { user } = useUser()
+	const { open } = useLoginModal()
 
 	const createComment = useMutation(api.services.guestbookComment.createComment)
 
@@ -52,24 +55,34 @@ function GuestbookPostCommentForm() {
 	return (
 		<div>
 			<Unauthenticated>
-				<SignInButton fallbackRedirectUrl="/guestbook" signUpFallbackRedirectUrl="/guestbook" mode="modal">
-					<Button
-						variant="ghost"
-						className="bg-foreground text-white dark:bg-gradient-to-br dark:from-yellow-500 dark:to-red-500"
-					>
-						{isLoading && <Loader className="animate-spin" />} Login
-					</Button>
-				</SignInButton>
+				{/* <SignInButton fallbackRedirectUrl="/guestbook" signUpFallbackRedirectUrl="/guestbook" mode="modal">
+				</SignInButton> */}
+				<Button
+					onClick={open}
+					variant="ghost"
+					className="bg-foreground text-white dark:bg-gradient-to-br dark:from-yellow-500 dark:to-red-500"
+				>
+					{isLoading && <Loader className="animate-spin" />} Login
+				</Button>
 				<span className="ml-3">to continue leaving a message</span>
 			</Unauthenticated>
 			<Authenticated>
 				<div className="flex flex-col gap-3">
 					<div className="flex gap-3">
-						<div className="shrink-0">
-							<UserButton
+						<div className="flex size-9 shrink-0 items-center justify-center rounded-full border border-dashed border-foreground/70 p-0.5 dark:bg-foreground/30">
+							{/* <UserButton
 								afterSignOutUrl="/guestbook"
 								signInUrl="/gusetbook"
 								afterSwitchSessionUrl="/guestbook"
+							/> */}
+
+							<BlurImage
+								width={40}
+								height={40}
+								className="size-8 rounded-full"
+								alt="user-avt"
+								src={user?.imageUrl || ''}
+								unoptimized={false}
 							/>
 						</div>
 						<div className="flex flex-col gap-1">

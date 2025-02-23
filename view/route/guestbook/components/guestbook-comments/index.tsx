@@ -14,6 +14,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Skeleton } from '@/components/ui/skeleton'
 import { api } from '@/convex/_generated/api'
 import type { Id } from '@/convex/_generated/dataModel'
+import useConfirmModal from '@/hooks/use-confirm-modal'
+import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
 import { range } from '@/utils/range'
 // import { useCommentSectionContext } from '@/view/components/blog-content/comments'
 
@@ -21,8 +23,19 @@ function GuestbookComments() {
 	// const { post } = useCommentSectionContext()
 	const allComments = useQuery(api.services.guestbookComment.getAllComments)
 	const deleteComment = useMutation(api.services.guestbookComment.deleteComment)
+	const { isAuthenticated, isAuthor } = useStoreUserEffect()
+	const { setModalOptions } = useConfirmModal()
 
 	const { user } = useUser()
+
+	const handleOpenConfirmModal = (id: Id<'guestbookComment'>) => {
+		setModalOptions({
+			title: 'Delete your comment',
+			description: 'Are you sure you want to delete this comment? This action cannot be undone.',
+			buttons: { cancel: 'Cancel', confirm: 'Confirm' },
+			actions: { onConfirm: () => handleDeleteComment(id) },
+		})
+	}
 
 	const handleDeleteComment = (id: Id<'guestbookComment'>) => {
 		const promise = deleteComment({ id })
@@ -73,7 +86,7 @@ function GuestbookComments() {
 								</div>
 							</div>
 
-							{user && user.id === comment.userId ? (
+							{(isAuthenticated && user && user.id === comment.userId) || isAuthor ? (
 								<DropdownMenu>
 									<DropdownMenuTrigger asChild>
 										<Button className="size-5" size="icon" variant="ghost">
@@ -85,7 +98,7 @@ function GuestbookComments() {
 										<DropdownMenuItem
 											className="cursor-pointer"
 											onClick={() => {
-												handleDeleteComment(comment._id)
+												handleOpenConfirmModal(comment._id)
 											}}
 										>
 											<Trash className="mr-2 size-4" />
