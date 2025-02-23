@@ -1,3 +1,4 @@
+import { CircleUserRound } from 'lucide-react'
 import { notFound } from 'next/navigation'
 
 import { pages } from '@/.velite'
@@ -17,7 +18,12 @@ export default async function AboutPageView() {
 
 	return (
 		<div className="container flex max-w-4xl flex-col gap-3">
-			<PageTitle title={title} description={description} />
+			<PageTitle
+				title={title}
+				description={description}
+				blurImageSrc="/assets/images/background/about-header-blur-bg.svg"
+				icon={CircleUserRound}
+			/>
 
 			<article className="container prose mx-auto max-w-full pb-6 dark:prose-invert">
 				<MDXContent code={post.body} />

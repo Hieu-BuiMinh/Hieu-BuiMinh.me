@@ -126,7 +126,7 @@ const RHFTextArea = forwardRef<HTMLTextAreaElement | null, TRHFTextAreaProps>(
 						</FormControl>
 						{description && <FormDescription>{description}</FormDescription>}
 						{errorMessage && control._formState.errors[name]?.message && (
-							<FormMessage className="text-red-500">
+							<FormMessage className="pl-2 text-red-500">
 								{control._formState.errors[name].message as string}
 							</FormMessage>
 						)}

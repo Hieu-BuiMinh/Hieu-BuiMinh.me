@@ -1,3 +1,4 @@
+import { Octagon } from 'lucide-react'
 import React from 'react'
 
 import { docs } from '@/.velite'
@@ -35,7 +36,7 @@ async function DocsPageView({ searchParams }: IDocPageProps) {
 	return (
 		<div className="m-auto max-w-screen-lg p-3 md:px-10 md:py-6">
 			<div className="container flex max-w-4xl flex-col gap-3">
-				<PageTitle title={title} description={description} />
+				<PageTitle title={title} description={description} icon={Octagon} />
 
 				<div className="group flex flex-wrap gap-3 py-3">
 					{sortedTags?.map((tag) => <Tag tag={tag} key={tag} count={tags[tag]} />)}

@@ -1,3 +1,5 @@
+import { NotebookText } from 'lucide-react'
+
 import { getAllTags, sortPostsByDate, sortTagsByCount } from '@/lib/content/posts'
 import PageTitle from '@/view/components/blog-content/page-title'
 import PostCards from '@/view/components/blog-content/post-cards'
@@ -11,7 +13,7 @@ interface IBlogpageProps {
 
 const title = 'Blog'
 const description =
-	'My personal website and blog where I share my thoughts on various topics including tutorials, notes, and personal experiences.'
+	'My personal website and blog where I share my thoughts on various topics about personal experiences.'
 
 const POSTS_PER_PAGE = 10
 
@@ -31,7 +33,12 @@ async function DevBlogPageView({ searchParams }: IBlogpageProps) {
 
 	return (
 		<div className="container flex max-w-4xl flex-col gap-3">
-			<PageTitle title={title} description={description} />
+			<PageTitle
+				title={title}
+				description={description}
+				blurImageSrc="/assets/images/background/blog-header-blur-bg.svg"
+				icon={NotebookText}
+			/>
 
 			<div className="group flex flex-wrap gap-3 py-3">
 				{sortedTags?.map((tag) => <Tag tag={tag} key={tag} count={tags[tag]} />)}
