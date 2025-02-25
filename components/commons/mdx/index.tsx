@@ -4,7 +4,9 @@ import './style/yin-yang.css'
 import Link from 'next/link'
 import * as runtime from 'react/jsx-runtime'
 
+import CarouselSlice from '@/components/commons/carousel'
 import ShowcaseGrid from '@/components/commons/grid/showcase-grid'
+import { SVGIcons } from '@/components/commons/icons/svg-icons'
 import CloudinaryImage from '@/components/commons/image/cloudinary-image'
 import ImageZoom from '@/components/commons/image/image-zoom'
 import Audio from '@/components/commons/mdx/custom-components/audio'
@@ -70,7 +72,7 @@ const components = {
 					height={630}
 					{...rest}
 				/>
-				<figcaption className="mt-4 text-center">{alt}</figcaption>
+				{alt && <figcaption className="mt-4 text-center">{alt}</figcaption>}
 			</>
 		)
 	},
@@ -86,6 +88,8 @@ const components = {
 	BlockQuote,
 	ShowcaseGrid,
 	Table,
+	SVGIcons,
+	CarouselSlice,
 
 	// Iching here
 	YinYang,
