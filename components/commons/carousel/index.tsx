@@ -11,11 +11,12 @@ import { cn } from '@/lib/utils'
 interface ICarouselSlice {
 	carouselChildren?: React.ReactNode[]
 	itemClassName?: string
+	className?: string
 }
 
 const AUTOPLAY_INTERVAL = 2500
 
-function CarouselSlice({ carouselChildren, itemClassName }: ICarouselSlice) {
+function CarouselSlice({ carouselChildren, itemClassName, className }: ICarouselSlice) {
 	const [emblaApi, setEmblaApi] = useState<CarouselApi>()
 	const [state, setState] = useMergeState({ autoplay: true })
 
@@ -40,7 +41,11 @@ function CarouselSlice({ carouselChildren, itemClassName }: ICarouselSlice) {
 	}, [emblaApi, state.autoplay])
 
 	return (
-		<div className="mx-auto max-w-xs" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+		<div
+			className={cn('mx-auto max-w-xs', className)}
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+		>
 			<Carousel
 				setApi={setEmblaApi}
 				className="w-full max-w-xs"

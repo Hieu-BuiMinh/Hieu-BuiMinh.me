@@ -15,13 +15,32 @@ type Header = {
 	items?: Header[]
 }
 
+type TTOC = {
+	title: string
+	url: string
+	items: TTOC[]
+}
+
 function TableOfContent({ post }: { post: DevBlogPost | DocPost | InterestPost | ProjectPost }) {
 	const TOC = post.toc
 
-	const activeId = useScrollspy(
-		TOC.map((item: { title: string; url: string; items: [] }) => item.url.slice(1)),
-		{ rootMargin: '0% 0% -80% 0%' }
-	)
+	function extractUrls(Toc?: TTOC[]): string[] {
+		const urls: string[] = []
+
+		function traverse(items?: TTOC[]) {
+			items?.forEach((item) => {
+				urls.push(item.url.slice(1)) // remove the "#" from the URL
+				if (item.items && item.items.length > 0) {
+					traverse(item.items)
+				}
+			})
+		}
+
+		traverse(Toc)
+		return urls
+	}
+
+	const activeId = useScrollspy(extractUrls(TOC), { rootMargin: '0% 0% -80% 0%' })
 
 	const flatTocArray = useMemo(() => {
 		const flat: { url: string; title: string; level: number }[] = []

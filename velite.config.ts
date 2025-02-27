@@ -169,6 +169,37 @@ const docs = defineCollection({
 		.transform(computedFields),
 })
 
+const retros = defineCollection({
+	name: 'RetroPost',
+	pattern: 'retros/**/*.mdx',
+	schema: s
+		.object({
+			id: s.string(),
+			slug: s.path(),
+			title: s.string().max(999),
+			year: s.string(),
+			date: s.isodate(),
+			lastUpdated: s.isodate().optional(),
+			cover: s.string().optional(),
+			video: s.file().optional(),
+			metadata: s.metadata().optional(),
+			description: s.string().max(999).optional(),
+			published: s.boolean().default(true),
+			shown: s.boolean().default(false),
+			tags: s.array(s.string()).optional(),
+			body: s.mdx(),
+			links: s.object({ repoUrl: s.string(), demoUrl: s.string() }).optional(),
+			author: s.object({
+				avatar: s.string(),
+				name: s.string(),
+				github: s.string(),
+			}),
+			toc: s.toc({ tight: true, ordered: true, maxDepth: 6 }),
+			//slugAsParams <=> needed transform
+		})
+		.transform(computedFields),
+})
+
 export default defineConfig({
 	root: 'content',
 	output: {
@@ -178,7 +209,7 @@ export default defineConfig({
 		name: '[name]-[hash:6].[ext]',
 		clean: true,
 	},
-	collections: { devBlogPosts, pages, projects, interests, docs },
+	collections: { devBlogPosts, pages, projects, interests, docs, retros },
 	mdx: {
 		rehypePlugins: [
 			rehypeSlug,

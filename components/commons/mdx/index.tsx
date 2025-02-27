@@ -14,6 +14,7 @@ import BlockQuote from '@/components/commons/mdx/custom-components/block-quote'
 import { CodeBlock } from '@/components/commons/mdx/custom-components/code-block'
 import Heading from '@/components/commons/mdx/custom-components/heading'
 import LinkCard from '@/components/commons/mdx/custom-components/link-card'
+import RetroList from '@/components/commons/mdx/custom-components/retro/retro-list'
 import Table from '@/components/commons/mdx/custom-components/table'
 import Bagua from '@/components/commons/mdx/custom-components/yi-jing/bagua'
 import Hexagram from '@/components/commons/mdx/custom-components/yi-jing/hexagram'
@@ -90,6 +91,7 @@ const components = {
 	Table,
 	SVGIcons,
 	CarouselSlice,
+	RetroList,
 
 	// Iching here
 	YinYang,

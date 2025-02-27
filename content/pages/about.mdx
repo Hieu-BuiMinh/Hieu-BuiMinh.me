@@ -15,26 +15,50 @@ published: true
 hashTags: { category: 'about', tags: ['about'] }
 ---
 
-<div className="text-4xl font-bold pt-3">Hieu-buiminh</div>
+<div className="text-2xl text-center font-bold pt-3 md:text-4xl md:text-left">Hieu-buiminh</div>
 
-<span className="text-base text-muted-foreground">-Walter Cipher ⟁-</span>
+<div className="text-sm text-center text-muted-foreground md:text-left">-Walter Cipher ⟁-</div>
 
-<div className="relative pb-12 pt-10 md:pt-10 flex items-center justify-start gap-5 flex-col md:flex-row">
+<div className="not-prose text-center text-sm text-muted-foreground mt-3 md:text-left">
+	A self-taught Front-End Engineer in Vietnam
+</div>
+
+<div className="relative pb-12 flex items-center justify-start gap-5 flex-col md:flex-row text-justify">
 
     <CarouselSlice itemClassName="basic-1/3 md:basic" carouselChildren={[
-            <Image width={500} height={500} unoptimized={false} src="/assets/images/avt/avatar_01.jpg" alt="" className="size-64 flex-shrink-0" />,
-            <Image width={500} height={500} unoptimized={false} src="/assets/images/avt/avatar_01.jpg" alt="" className="size-64 flex-shrink-0" />,
-            <Image width={500} height={500} unoptimized={false} src="/assets/images/avt/avatar_01.jpg" alt="" className="size-64 flex-shrink-0" />,
+            <Image
+                width={500}
+                height={500}
+                unoptimized={false}
+                src="/assets/images/avt/carousel_01.png"
+                alt=""
+                className="w-full h-64 md:size-64 flex-shrink-0 saturate-100"
+            />,
+            <Image
+                width={500}
+                height={500}
+                unoptimized={false}
+                src="/assets/images/avt/carousel_02.png"
+                alt=""
+                className="w-full h-64 md:size-64 flex-shrink-0 saturate-100"
+            />,
+            <Image
+                width={500}
+                height={500}
+                unoptimized={false}
+                src="/assets/images/avt/carousel_03.png"
+                alt=""
+                className="w-full h-64 md:size-64 flex-shrink-0 saturate-100"
+            />,
         ]}
     />
 
-
     <div>
-        Hello! You can call me <b>Walter Cipher</b>. I am a 25-year-old Software Engineer from Vietnam, born in 2000. I specialize in the React ecosystem and have experience working with TypeScript, Next.js, React.js, Node.js, and database management. Currently, I am passionate about learning UI/UX design.
+        <p className="not-prose">Hello! You can call me <b>Walter Cipher</b>. I am a 25-year-old Front-End Engineer from Vietnam, born in 2000. I specialize in the React ecosystem and have experience working with TypeScript, Next.js, React.js, Node.js, and database management. Currently, I am passionate about learning UI/UX design.</p>
 
         I started learning web development on December 5, 2020 (I was 20 years old). It's a big challenge because it's just one of my hobbies, and I have yet to take any courses. I am self-learning on YouTube. Some of my favorite YouTube channels are [The Net Ninja](https://www.youtube.com/@NetNinja), [Code With Antonio](https://www.youtube.com/@codewithantonio), [Cosden Solutions](https://www.youtube.com/@cosdensolutions). I learned a lot of web development skills from them.
 
-        I love using [Next.js](https://nextjs.org/) to create a website. Then use [GitHub](https://github.com) to host my codebase. After that, I use [Vercel](https://vercel.com) to deploy it.
+        I love using [Next.js](https://nextjs.org/) to create a website. Then use [GitHub](https://github.com) to host my codebase. After that, I use [Vercel](https://vercel.com) to deploy it. Here are my current favorite tech stack
 
         <div className="mt-6 flex gap-4 flex-wrap">
             <span className="flex items-center size-8"><SVGIcons.NextJS className="border border-foreground/50 rounded-full" /></span>
@@ -61,14 +85,24 @@ The advice and motivation I've found from `Jim Rohn` have been a big help in kee
 	description="Work harder on yourself ❤️"
 />
 
+<div className="relative py-20 flex flex-col lg:flex-row lg:gap-10 gap-5">
+
+    <div>
+        <span className="text-4xl mt-8 font-bold">Learn about my growth</span>
+        <p className="text-sm text-muted-foreground mt-6 max-w-lg md:text-base">Every year, I share my progress both in career and personal life. Here's how it's going</p>
+    </div>
+
+
+    <RetroList />
+
+</div>
+
 ## About this site
 
 -   Framework: [Next.js](https://nextjs.org/)
--   Database: [PostgreSQL](https://www.postgresql.org/)
--   Authentication: [NextAuth.js](https://next-auth.js.org/)
+-   Authentication: [Clerk](https://clerk.com/)
 -   Deployment: [Vercel](https://vercel.com)
--   Content: [MDX](https://velite.js.org/)
--   Analytics: [Umami](https://github.com/umami-software/umami)
+-   Content: [Velite + MDX](https://velite.js.org/)
 -   Styling: [Tailwindcss](https://tailwindcss.com)
 -   Code syntax highlighting: [Shiki](https://github.com/shikijs/shiki)
 
@@ -80,6 +114,7 @@ Thanks to **Timothy Lin** for the
 Here are some websites that inspired me a lot to build a fantastic website.
 
 -   HongHong: [honghong.me](https://honghong.me/)
+-   theodorusclarence: [theodorusclarence.com](https://theodorusclarence.com/)
 -   Cuberto: [cuberto.com](https://cuberto.com/)
 -   Fuma-Nama: [fuma-nama.vercel.app](https://fuma-nama.vercel.app/)
 -   Fellipe-Utaka: [fellipeutaka.vercel.app](https://fellipeutaka.vercel.app)

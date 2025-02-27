@@ -6,6 +6,8 @@ export const useScrollspy = (ids: string[], options: IntersectionObserverInit): 
 	const [activeId, setActiveId] = useState<string>()
 	const observer = useRef<IntersectionObserver | null>(null)
 
+	console.log('ids', ids)
+
 	useEffect(() => {
 		const elements = ids.map((id) => document?.querySelector(`#${CSS.escape(id)}`))
 
