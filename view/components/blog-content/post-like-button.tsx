@@ -6,7 +6,7 @@ import confetti from 'canvas-confetti'
 import { useMutation, useQuery } from 'convex/react'
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
-import { useDebounceCallback } from 'usehooks-ts'
+import { useDebounceCallback, useMediaQuery } from 'usehooks-ts'
 
 import type { DevBlogPost, DocPost, InterestPost } from '@/.velite'
 import { Button } from '@/components/ui/button'
@@ -14,6 +14,7 @@ import { Separator } from '@/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { api } from '@/convex/_generated/api'
 import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
+import { cn } from '@/lib/utils'
 import useAnonymousStore from '@/view/stores/anonymous.store'
 
 type PostLikeButtonProps = {
@@ -108,6 +109,7 @@ const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
 								playConfetti()
 							}}
 							variant="outline"
+							className={className}
 						>
 							<div className="relative size-4">
 								<svg

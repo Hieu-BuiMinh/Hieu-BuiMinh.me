@@ -1,11 +1,14 @@
 'use client'
 
-import { Text } from 'lucide-react'
+import { ListTree, Text } from 'lucide-react'
 import Link from 'next/link'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
+import { useMediaQuery } from 'usehooks-ts'
 
 import type { DevBlogPost, DocPost, InterestPost, ProjectPost } from '@/.velite'
-import { ScrollArea } from '@/components/ui/scroll-area'
+import { Button } from '@/components/ui/button'
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle, DrawerTrigger } from '@/components/ui/drawer'
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { useScrollspy } from '@/hooks/use-scrollspy'
 import { cn } from '@/lib/utils'
 
@@ -23,6 +26,9 @@ type TTOC = {
 
 function TableOfContent({ post }: { post: DevBlogPost | DocPost | InterestPost | ProjectPost }) {
 	const TOC = post.toc
+
+	const [open, setOpen] = useState(false)
+	const isDesktop = useMediaQuery('(min-width: 1024px)')
 
 	function extractUrls(Toc?: TTOC[]): string[] {
 		const urls: string[] = []
@@ -57,36 +63,81 @@ function TableOfContent({ post }: { post: DevBlogPost | DocPost | InterestPost |
 	}, [TOC])
 
 	if (flatTocArray.length === 0) {
-		return <p className="text-muted-foreground">No table of contents available.</p>
+		return <>{isDesktop ? <p className="text-muted-foreground">No table of contents available.</p> : null}</>
+	}
+
+	if (isDesktop) {
+		return (
+			<nav aria-label="Table of Contents" className="relative flex-col gap-3">
+				<p className="flex gap-1 text-sm font-bold text-muted-foreground">
+					<Text size={20} />
+					On this page
+				</p>
+
+				<ScrollArea className="flex max-h-[calc(100vh-20rem)] flex-col overflow-auto pt-3">
+					{flatTocArray.map((toc, index) => (
+						<div
+							key={`${toc.title}-${index}`}
+							className={`pt-5 first:pt-0`}
+							style={{ paddingLeft: toc.level * 15 }}
+						>
+							<Link
+								className={cn(
+									'line-clamp-1 text-sm leading-[1.2] text-muted-foreground no-underline transition-colors hover:text-foreground',
+									toc.url.slice(1) === activeId && 'font-semibold text-foreground'
+								)}
+								href={toc.url}
+							>
+								{toc.title}
+							</Link>
+						</div>
+					))}
+				</ScrollArea>
+			</nav>
+		)
 	}
 
 	return (
-		<nav aria-label="Table of Contents" className="relative flex flex-col gap-3">
-			<p className="flex gap-1 text-sm font-bold text-muted-foreground">
-				<Text size={20} />
-				On this page
-			</p>
+		<Drawer open={open} onOpenChange={setOpen}>
+			<DrawerTrigger asChild>
+				<Button className="opacity-1 flex bg-transparent backdrop-blur-[2px]" variant="outline">
+					<ListTree size={30} />
+					Table of Contents
+				</Button>
+			</DrawerTrigger>
+			<DrawerContent className="max-h-[90vh]">
+				<DrawerHeader className="pb-0 text-left">
+					<DrawerTitle>
+						<p className="flex gap-1 p-1 pb-0 text-sm font-bold text-muted-foreground">
+							<Text size={20} />
+							On this page
+						</p>
+					</DrawerTitle>
+				</DrawerHeader>
 
-			<ScrollArea className="flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto">
-				{flatTocArray.map((toc, index) => (
-					<div
-						key={`${toc.title}-${index}`}
-						className={`pt-5 first:pt-0`}
-						style={{ paddingLeft: toc.level * 15 }}
-					>
-						<Link
-							className={cn(
-								'line-clamp-1 text-sm leading-[1.2] text-muted-foreground no-underline transition-colors hover:text-foreground',
-								toc.url.slice(1) === activeId && 'font-semibold text-foreground'
-							)}
-							href={toc.url}
+				<ScrollArea className="flex max-h-[calc(100vh)] w-full flex-col overflow-y-auto p-5">
+					{flatTocArray.map((toc, index) => (
+						<div
+							key={`${toc.title}-${index}`}
+							className={`pt-5 first:pt-0`}
+							style={{ paddingLeft: toc.level * 15 }}
 						>
-							{toc.title}
-						</Link>
-					</div>
-				))}
-			</ScrollArea>
-		</nav>
+							<Link
+								className={cn(
+									'line-clamp-1 text-sm leading-[1.2] text-muted-foreground no-underline transition-colors hover:text-foreground',
+									toc.url.slice(1) === activeId && 'font-semibold text-foreground'
+								)}
+								href={toc.url}
+							>
+								{toc.title}
+							</Link>
+						</div>
+					))}
+					<ScrollBar orientation="vertical" className="sm:hidden" />
+					<ScrollBar orientation="horizontal" className="sm:hidden" />
+				</ScrollArea>
+			</DrawerContent>
+		</Drawer>
 	)
 }
 

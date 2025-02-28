@@ -76,7 +76,7 @@ const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 				<div
 					className={cn('absolute left-0 top-0 flex size-full items-center justify-center backdrop-blur-md')}
 				>
-					<Spinner size={'lg'} />
+					<Spinner size={'default'} />
 				</div>
 			)}
 		</div>

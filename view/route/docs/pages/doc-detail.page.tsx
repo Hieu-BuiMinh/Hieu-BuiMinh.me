@@ -29,7 +29,7 @@ async function DocDetailPageView({ slug }: PostPageProps) {
 	}
 
 	return (
-		<div className="relative flex justify-between gap-5 p-3 max-sm:overflow-auto">
+		<div className="relative flex justify-center gap-0 p-3 max-sm:overflow-auto lg:justify-between lg:gap-5">
 			<div className="absolute inset-0 z-[-1] hidden h-[64rem] max-h-screen overflow-hidden bg-doc-header-gradient opacity-100 lg:block">
 				<Image
 					src="/assets/images/docs/docs-header-decor.svg"
@@ -58,12 +58,18 @@ async function DocDetailPageView({ slug }: PostPageProps) {
 			</article>
 
 			<aside className="hidden lg:block lg:w-[220px]">
-				<div className="sticky top-16 flex flex-col gap-4">
+				<div className="sticky top-16 z-10 flex flex-col gap-4">
 					<TableOfContent post={post} />
-
-					<PostLikeButton className="mt-4" post={post} />
+					<PostLikeButton post={post} />
 				</div>
 			</aside>
+
+			<div className="fixed bottom-12 right-2 z-20 lg:hidden">
+				<div className="flex flex-col items-end gap-2">
+					<PostLikeButton post={post} />
+					<TableOfContent post={post} />
+				</div>
+			</div>
 		</div>
 	)
 }

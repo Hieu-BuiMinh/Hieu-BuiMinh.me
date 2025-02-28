@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import React from 'react'
 
-import type { ProjectPost } from '@/.velite'
-import { projects } from '@/.velite'
+import type { RetroPost } from '@/.velite'
+import { retros } from '@/.velite'
 import { SITE_CONFIG } from '@/config/site'
 import { PostDetailHeader } from '@/view/components/blog-content/post-detail-header'
 
@@ -14,9 +14,9 @@ interface PostPageProps {
 async function getPostFromParams(params: PostPageProps['params']) {
 	const resolvedParams = await params
 	const slug = resolvedParams.slug.join('/')
-	const post = projects.find((post) => post.slugAsParams === slug)
+	const post = retros.find((post) => post.slugAsParams === slug)
 
-	return post as ProjectPost
+	return post as RetroPost
 }
 
 export async function generateMetadata({ params }: PostPageProps): Promise<Metadata> {
@@ -53,7 +53,7 @@ export async function generateMetadata({ params }: PostPageProps): Promise<Metad
 	}
 }
 
-async function DevProjectcDetailLayout({
+async function DevRetroDetailLayout({
 	children,
 	params,
 }: {
@@ -69,4 +69,4 @@ async function DevProjectcDetailLayout({
 	)
 }
 
-export default DevProjectcDetailLayout
+export default DevRetroDetailLayout

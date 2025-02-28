@@ -177,7 +177,7 @@ const retros = defineCollection({
 			id: s.string(),
 			slug: s.path(),
 			title: s.string().max(999),
-			year: s.string(),
+			year: s.number(),
 			date: s.isodate(),
 			lastUpdated: s.isodate().optional(),
 			cover: s.string().optional(),

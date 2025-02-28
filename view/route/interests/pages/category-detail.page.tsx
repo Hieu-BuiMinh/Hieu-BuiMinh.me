@@ -48,12 +48,18 @@ export default async function CategoryDetailPage({ params }: ICategoryDetailPage
 				</article>
 
 				<aside className="hidden lg:block lg:w-[220px]">
-					<div className="sticky top-16 flex flex-col gap-4">
+					<div className="sticky top-16 z-10 flex flex-col gap-4">
 						<TableOfContent post={post} />
-
 						<PostLikeButton post={post} />
 					</div>
 				</aside>
+
+				<div className="fixed bottom-12 right-2 z-20 md:hidden">
+					<div className="flex flex-col items-end gap-2">
+						<PostLikeButton post={post} />
+						<TableOfContent post={post} />
+					</div>
+				</div>
 			</div>
 			{/* User comments */}
 			<CommentSection post={post} />

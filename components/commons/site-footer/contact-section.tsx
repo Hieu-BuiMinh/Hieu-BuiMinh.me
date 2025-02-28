@@ -7,6 +7,7 @@ import { z } from 'zod'
 
 import RHFTextField from '@/components/commons/form-input/RHF-text-field'
 import BlurImage from '@/components/commons/image/blur-image'
+import MusicSection from '@/components/commons/site-footer/music-section'
 import { Button } from '@/components/ui/button'
 
 const postCommentFormSchema = z.object({
@@ -44,6 +45,8 @@ function FooterContactSection() {
 			<span className="text-xs text-muted-foreground">
 				Don&apos;t miss out 😉. Get an email whenever I post, no spam.
 			</span>
+
+			<MusicSection />
 
 			<FormProvider {...methods}>
 				<div className="flex flex-col items-end gap-3 md:w-80 md:flex-row">
