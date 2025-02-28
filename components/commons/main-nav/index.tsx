@@ -63,9 +63,9 @@ const aboutItems: { title: string; href: string; description: string; icon?: Luc
 		icon: FileUser,
 	},
 	{
-		title: 'My dev journey',
-		href: '/experiences',
-		description: `A glimpse into my coding adventures and projects.`,
+		title: 'My journey',
+		href: '/retros',
+		description: `Every year, I share my progress both in career and personal life. Here's how it's going`,
 		icon: Rocket,
 	},
 	{

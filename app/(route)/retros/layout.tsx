@@ -2,8 +2,8 @@ import type { Metadata } from 'next'
 import React from 'react'
 
 export const metadata: Metadata = {
-	title: 'Retros',
-	description: `The list of my retros. Everything was made with LOVE.`,
+	title: 'Retrospective',
+	description: `Every year, I share my progress both in career and personal life. Here's how it's going`,
 }
 
 function RetrosLayout({ children }: { children: React.ReactNode }) {

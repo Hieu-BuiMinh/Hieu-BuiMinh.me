@@ -23,7 +23,7 @@ function FooterRoutingSection() {
 			name: 'About',
 			links: [
 				{ lable: 'About me', href: '/about' },
-				{ lable: 'My dev journey', href: '/' },
+				{ lable: 'My journey', href: '/retros' },
 				{ lable: 'Me & my crew', href: '/' },
 			],
 		},

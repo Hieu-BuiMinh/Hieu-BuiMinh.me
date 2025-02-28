@@ -11,8 +11,8 @@ interface IRetrosPageProps {
 	searchParams: Promise<{ page?: string }>
 }
 
-const title = 'Retros'
-const description = 'The list of my retros. Everything was made with LOVE.'
+const title = 'Retrospective'
+const description = `Every year, I share my progress both in career and personal life. Here's how it's going`
 
 const POSTS_PER_PAGE = 10
 
