@@ -17,7 +17,7 @@ export default async function AboutPageView() {
 	}
 
 	return (
-		<div className="container flex max-w-4xl flex-col gap-3">
+		<div className="container m-auto flex max-w-4xl flex-col gap-3">
 			<PageTitle
 				title={title}
 				description={description}

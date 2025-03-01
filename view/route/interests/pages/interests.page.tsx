@@ -1,3 +1,4 @@
+import { Flame } from 'lucide-react'
 import { notFound } from 'next/navigation'
 
 import type { InterestPost } from '@/.velite'
@@ -26,7 +27,12 @@ async function InterestsPageView() {
 
 	return (
 		<div className="m-auto flex max-w-screen-lg flex-col gap-8 p-3 md:px-10 md:py-6">
-			<PageTitle title={title} description={description} />
+			<PageTitle
+				title={title}
+				description={description}
+				icon={Flame}
+				blurImageSrc="/assets/images/background/interest-header-blur-bg.svg"
+			/>
 
 			<CategoryCards categories={categoriesIntro} />
 		</div>

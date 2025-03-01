@@ -1,4 +1,4 @@
-import React from 'react'
+import { FolderOpen } from 'lucide-react'
 
 import { projects } from '@/.velite'
 import { getAllTags, sortPostsByDate, sortTagsByCount } from '@/lib/content/posts'
@@ -31,8 +31,14 @@ async function ProjectsPageView({ searchParams }: IProjectsPageProps) {
 	const displayPosts = sortedPosts.slice(POSTS_PER_PAGE * (currentPage - 1), POSTS_PER_PAGE * currentPage)
 
 	return (
-		<div className="container flex max-w-4xl flex-col gap-3">
-			<PageTitle title={title} description={description} />
+		<div className="container m-auto flex max-w-4xl flex-col gap-3">
+			<PageTitle
+				title={title}
+				description={description}
+				blurImageSrc="/assets/images/background/projects-header-blur-bg.svg"
+				icon={FolderOpen}
+				gradientOn={false}
+			/>
 
 			<div className="group flex flex-wrap gap-3 py-3">
 				{sortedTags?.map((tag) => <Tag tag={tag} key={tag} count={tags[tag]} />)}

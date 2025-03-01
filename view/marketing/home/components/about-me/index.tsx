@@ -1,4 +1,5 @@
 import { MapPinCheckInside } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import { buttonVariants } from '@/components/ui/button'
@@ -54,6 +55,14 @@ function AboutMe() {
 					Know more about me
 				</Link>
 			</div>
+
+			<Image
+				alt=""
+				src="/assets/images/background/landing-page/about-section.svg"
+				className="absolute -top-20 right-0 -z-10 w-full opacity-40 md:w-[740px]"
+				width={1200}
+				height={1200}
+			/>
 		</div>
 	)
 }

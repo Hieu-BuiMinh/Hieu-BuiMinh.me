@@ -1,4 +1,5 @@
 import { ArrowUpRightIcon, LightbulbIcon } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 
 import type { ProjectPost } from '@/.velite'
@@ -13,7 +14,7 @@ type ProjectsProps = {
 
 function SelectedProjects({ projects }: ProjectsProps) {
 	return (
-		<div className="relative my-24">
+		<div className="relative my-32">
 			<div className="font-title text-center text-3xl font-bold sm:text-4xl">Selected Projects</div>
 			<div className="mt-12 grid gap-4 md:grid-cols-2">
 				{sortPostsByDate(projects, 'desc')
@@ -34,6 +35,14 @@ function SelectedProjects({ projects }: ProjectsProps) {
 					See all project
 				</Link>
 			</div>
+
+			<Image
+				alt=""
+				src="/assets/images/background/landing-page/selected-project-section.svg"
+				className="absolute -top-20 -z-10 w-full opacity-40 md:w-[740px]"
+				width={100}
+				height={100}
+			/>
 		</div>
 	)
 }
