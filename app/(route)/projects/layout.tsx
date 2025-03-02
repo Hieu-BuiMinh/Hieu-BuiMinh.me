@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 }
 
 function ProjectsLayout({ children }: { children: React.ReactNode }) {
-	return <div className="m-auto max-w-screen-lg p-3 md:px-10 md:py-6">{children}</div>
+	return <div className="m-auto max-w-screen-xl p-3 md:px-10 md:py-6">{children}</div>
 }
 
 export default ProjectsLayout

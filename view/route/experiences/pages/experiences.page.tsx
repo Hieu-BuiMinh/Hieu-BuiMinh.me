@@ -17,7 +17,7 @@ function ExperiencesPage() {
 	}
 
 	return (
-		<div className="container m-auto flex max-w-4xl flex-col gap-3">
+		<div className="container m-auto flex max-w-screen-lg flex-col gap-3">
 			<PageTitle title={title} description={description} />
 
 			<article className="container prose mx-auto max-w-full pb-6 dark:prose-invert">

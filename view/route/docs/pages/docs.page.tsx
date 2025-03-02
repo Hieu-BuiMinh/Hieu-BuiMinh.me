@@ -34,8 +34,8 @@ async function DocsPageView({ searchParams }: IDocPageProps) {
 	const sortedTags = sortTagsByCount(tags)
 
 	return (
-		<div className="m-auto max-w-screen-lg p-3 md:px-10 md:py-6">
-			<div className="container m-auto flex max-w-4xl flex-col gap-3">
+		<div className="m-auto max-w-screen-xl p-3 md:px-10 md:py-6">
+			<div className="container m-auto flex max-w-screen-lg flex-col gap-3">
 				<PageTitle title={title} description={description} icon={Octagon} />
 
 				<div className="group flex flex-wrap gap-3 py-3">

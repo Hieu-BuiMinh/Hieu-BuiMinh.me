@@ -31,7 +31,7 @@ async function RetrosPageView({ searchParams }: IRetrosPageProps) {
 	const displayPosts = sortedPosts.slice(POSTS_PER_PAGE * (currentPage - 1), POSTS_PER_PAGE * currentPage)
 
 	return (
-		<div className="container m-auto flex max-w-4xl flex-col gap-3">
+		<div className="container m-auto flex max-w-screen-lg flex-col gap-3">
 			<PageTitle title={title} description={description} />
 
 			<div className="group flex flex-wrap gap-3 py-3">

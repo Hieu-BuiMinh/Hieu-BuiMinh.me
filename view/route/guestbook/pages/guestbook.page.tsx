@@ -10,7 +10,7 @@ const description = 'Sign my guestbook and share your idea. You can tell me anyt
 
 function GuestbookPageView() {
 	return (
-		<div className="container m-auto flex max-w-4xl flex-col gap-3">
+		<div className="container m-auto flex max-w-screen-lg flex-col gap-3">
 			<PageTitle title={title} description={description} icon={MessageCircleHeart} />
 
 			<Pinned />
