@@ -1,14 +1,17 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod'
-import React from 'react'
+import dynamic from 'next/dynamic'
 import { FormProvider, useForm } from 'react-hook-form'
 import { z } from 'zod'
 
 import RHFTextField from '@/components/commons/form-input/RHF-text-field'
 import BlurImage from '@/components/commons/image/blur-image'
-import MusicSection from '@/components/commons/site-footer/music-section'
 import { Button } from '@/components/ui/button'
+
+const MusicSection = dynamic(() => import('@/components/commons/site-footer/music-section'), {
+	ssr: false,
+})
 
 const postCommentFormSchema = z.object({
 	email: z.string().min(1, {

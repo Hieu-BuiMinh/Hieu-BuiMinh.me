@@ -42,7 +42,7 @@ function GuestbookLayout({ children }: { children: React.ReactNode }) {
 				className="absolute left-1/2 top-0 h-1/2 w-full -translate-x-1/2 -translate-y-0 object-cover opacity-10"
 			/>
 			<div className="absolute left-1/2 top-0 h-1/2 w-full -translate-x-1/2 -translate-y-0 bg-gradient-to-t from-background to-transparent" />
-			<div className="relative z-10 m-auto min-h-[50vh] max-w-screen-lg p-3 md:px-10 md:py-6">{children}</div>
+			<div className="relative z-10 m-auto min-h-[50vh] max-w-screen-xl p-3 md:px-10 md:py-6">{children}</div>
 		</>
 	)
 }

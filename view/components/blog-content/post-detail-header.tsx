@@ -63,7 +63,7 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 		<div className="py-5 md:py-10">
 			<div className="absolute left-1/2 top-14 hidden h-[630px] w-full -translate-x-1/2 md:block">
 				<ImageZoom
-					alt="title"
+					alt="cover"
 					src={post?.cover || ''}
 					width={1200}
 					height={630}
@@ -72,7 +72,7 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 				/>
 			</div>
 
-			<div className="relative z-10 mt-0 md:mt-[500px] md:rounded-md md:border md:bg-background/30 md:backdrop-blur-sm">
+			<div className="relative z-10 m-auto mt-0 max-w-screen-lg p-2 md:mt-[500px] md:rounded-md md:border md:bg-background/30 md:backdrop-blur-sm">
 				<h1 className="font-title z-10 bg-gradient-to-b from-black via-black/90 to-black/70 to-90% bg-clip-text py-2 text-center text-4xl font-bold text-transparent dark:from-white dark:via-white/90 dark:to-white/70 md:text-5xl md:leading-[64px]">
 					{post.title}
 				</h1>
@@ -121,7 +121,7 @@ export function PostDetailHeader({ post }: IPostDetailHeaderProps) {
 			)}
 
 			<ImageZoom
-				alt="title"
+				alt="cover"
 				src={post?.cover || ''}
 				width={1200}
 				height={630}

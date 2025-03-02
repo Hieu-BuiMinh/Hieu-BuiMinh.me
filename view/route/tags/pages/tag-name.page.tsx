@@ -5,7 +5,7 @@ import { useQueryState } from 'nuqs'
 import type { ChangeEvent } from 'react'
 
 import type { DevBlogPost, DocPost, InterestPost } from '@/.velite'
-import { devBlogPosts, docs, interests } from '@/.velite'
+import { devBlogPosts, docs, interests, retros } from '@/.velite'
 import { Input } from '@/components/ui/input'
 import { sortPostsByDate } from '@/lib/content/posts'
 import PostCards from '@/view/components/blog-content/post-cards'
@@ -15,8 +15,9 @@ const allTagsFormPosts = (): (DevBlogPost & DocPost & InterestPost)[] => {
 	const devPosts = devBlogPosts
 	const docPosts = docs.filter((p) => p.type !== 'ROOT')
 	const interestPosts = interests.filter((p) => p.type !== 'ROOT')
+	const retroPosts = retros
 
-	return [...devPosts, ...docPosts, ...interestPosts]
+	return [...devPosts, ...docPosts, ...interestPosts, ...retroPosts]
 }
 
 const POSTS_PER_PAGE = 12

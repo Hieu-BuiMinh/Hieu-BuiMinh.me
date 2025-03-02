@@ -52,6 +52,7 @@ function MusicSection() {
 				ref={audioRef}
 				className="hidden w-full"
 				controls
+				loop
 				src="/assets/audios/background/far-from-any-road.mp3"
 			/>
 		</div>

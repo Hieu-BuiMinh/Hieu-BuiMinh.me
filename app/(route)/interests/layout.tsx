@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 }
 
 function InterestsLayout({ children }: { children: React.ReactNode }) {
-	return <div className="m-auto min-h-[50vh] max-w-screen-lg p-3 md:px-10 md:py-6">{children}</div>
+	return <div className="m-auto min-h-[50vh] max-w-screen-xl p-3 md:px-10 md:py-6">{children}</div>
 }
 
 export default InterestsLayout

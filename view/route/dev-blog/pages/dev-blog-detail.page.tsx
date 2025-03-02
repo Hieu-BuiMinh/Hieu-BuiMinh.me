@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation'
 import type { DevBlogPost } from '@/.velite'
 import { devBlogPosts } from '@/.velite'
 import { MDXContent } from '@/components/commons/mdx'
-import TableOfContent from '@/components/commons/table-of-content'
+import { DesktopTableOfContent, MobileTableOfContent } from '@/components/commons/table-of-content'
 import CommentSection from '@/view/components/blog-content/comments'
 import PostLastUpdated from '@/view/components/blog-content/post-last-updated'
 import PostLikeButton from '@/view/components/blog-content/post-like-button'
@@ -38,7 +38,7 @@ export default async function DevBlogDetailPageView({ params }: PostPageProps) {
 
 				<aside className="hidden lg:block lg:w-[220px]">
 					<div className="sticky top-16 z-10 flex flex-col gap-4">
-						<TableOfContent post={post} />
+						<DesktopTableOfContent post={post} />
 						<PostLikeButton post={post} />
 					</div>
 				</aside>
@@ -46,7 +46,7 @@ export default async function DevBlogDetailPageView({ params }: PostPageProps) {
 				<div className="fixed bottom-12 right-2 z-20 lg:hidden">
 					<div className="flex flex-col items-end gap-2">
 						<PostLikeButton post={post} />
-						<TableOfContent post={post} />
+						<MobileTableOfContent post={post} />
 					</div>
 				</div>
 			</div>

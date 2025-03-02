@@ -1,18 +1,19 @@
-import { devBlogPosts, docs, interests } from '@/.velite'
+import { devBlogPosts, docs, interests, retros } from '@/.velite'
 import { Tag } from '@/view/components/blog-content/tag'
 
 const findAllTagsFormPosts = () => {
 	const devPosts = devBlogPosts
 	const docPosts = docs.filter((p) => p.type !== 'ROOT')
 	const interestPosts = interests.filter((p) => p.type !== 'ROOT')
+	const retroPosts = retros
 
-	return [...devPosts, ...docPosts, ...interestPosts]
+	return [...devPosts, ...docPosts, ...interestPosts, ...retroPosts]
 }
 const getAllTagsFromPosts = (hashTagsList: { hashTags: { category: string; tags: string[] } }[]) => {
 	const categoryTagCounts: Record<string, Record<string, number>> = {}
 
 	hashTagsList.forEach((entry) => {
-		const { category, tags } = entry.hashTags
+		const { category, tags } = entry?.hashTags
 		if (!categoryTagCounts[category]) {
 			categoryTagCounts[category] = {}
 		}

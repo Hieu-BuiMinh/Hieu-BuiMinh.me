@@ -186,7 +186,10 @@ const retros = defineCollection({
 			description: s.string().max(999).optional(),
 			published: s.boolean().default(true),
 			shown: s.boolean().default(false),
-			tags: s.array(s.string()).optional(),
+			hashTags: s.object({
+				category: s.string(),
+				tags: s.array(s.string()),
+			}),
 			body: s.mdx(),
 			links: s.object({ repoUrl: s.string(), demoUrl: s.string() }).optional(),
 			author: s.object({

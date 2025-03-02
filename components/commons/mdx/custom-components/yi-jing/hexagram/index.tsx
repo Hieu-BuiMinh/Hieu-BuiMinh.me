@@ -33,6 +33,7 @@ function Hexagram({
 	className,
 	upper, // quẻ thượng
 	lower, // quẻ hạ
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	showLabel, // hiện tên quẻ
 	showIndex, // hiện thứ tự của từng hào
 	showElements, // hiện ngũ hành của từng hào

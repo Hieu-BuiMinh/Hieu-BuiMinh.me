@@ -2,10 +2,8 @@ import '../style.css'
 
 // import { notFound } from 'next/navigation'
 // import { pages } from '@/.velite'
-import { MDXContent } from '@/components/commons/mdx'
 import BlockQuote from '@/components/commons/mdx/custom-components/block-quote'
 import PageTitle from '@/view/components/blog-content/page-title'
-import PostLastUpdated from '@/view/components/blog-content/post-last-updated'
 import { allQuotes } from '@/view/route/quotes/data/quotes-data'
 
 const title = 'Quotes'

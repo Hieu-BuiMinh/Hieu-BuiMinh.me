@@ -14,7 +14,7 @@ const description = `Explore a world of inspiration through my tags!`
 
 function TagsLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<div className="m-auto min-h-[50vh] max-w-screen-lg p-3 md:px-10 md:py-6">
+		<div className="m-auto min-h-[50vh] max-w-screen-xl p-3 md:px-10 md:py-6">
 			<PageTitle
 				title={title}
 				description={description}
