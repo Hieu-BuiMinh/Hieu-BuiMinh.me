@@ -6,7 +6,12 @@ function RetroList() {
 	const retroPosts = sortPostsByDate(retros, 'asc')
 
 	return (
-		<div>
+		<div className="relative flex flex-col gap-6">
+			<div
+				data-orientation="vertical"
+				role="none"
+				className="absolute left-8 top-0 h-full w-px shrink-0 bg-muted"
+			/>
 			{retroPosts.map((post) => {
 				return <RetroCard key={post.id} post={post} />
 			})}

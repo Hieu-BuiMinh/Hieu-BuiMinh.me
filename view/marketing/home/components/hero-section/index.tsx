@@ -45,7 +45,7 @@ function HeroSection() {
 						alt="Hieu"
 						lazy={false}
 					/>
-					<div className="absolute inset-0 -z-10 animate-pulse bg-foreground opacity-50 blur-2xl transition" />
+					<div className="absolute inset-0 -z-10 animate-pulse bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-50 blur-2xl transition" />
 				</div>
 			</div>
 			<DownLoadResumeButton />

@@ -18,7 +18,7 @@
 
 @media (min-width: 1280px) {
 	.quotes-masonry {
-		column-count: 2; /* 2 columns on extra-large screens */
+		column-count: 3; /* 2 columns on extra-large screens */
 	}
 }
 

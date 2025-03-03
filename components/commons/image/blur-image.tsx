@@ -11,7 +11,7 @@ import Spinner from '@/components/commons/spinner'
 import { cn } from '@/lib/utils'
 
 type ImageProps = {
-	description?: string
+	description?: string | React.ReactNode
 	imageClassName?: string
 	lazy?: boolean
 } & React.ComponentPropsWithoutRef<typeof Image>
@@ -35,7 +35,7 @@ const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 	return (
 		<div
 			className={cn(
-				'relative flex items-center justify-center overflow-hidden',
+				'group relative flex items-center justify-center overflow-hidden',
 				isLoading && 'animate-pulse',
 				className
 			)}
@@ -67,8 +67,9 @@ const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 			/>
 
 			{rest?.description && (
-				<div className="pointer-events-none absolute inset-0 flex flex-col items-start justify-end bg-gradient-to-b from-transparent to-black p-3 text-xs font-semibold italic">
-					<p className="line-clamp-2">{rest?.description}</p>
+				<div className="pointer-events-none absolute inset-0 flex flex-col items-start justify-end bg-gradient-to-b from-transparent to-black p-3 text-xs font-semibold italic opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+					{/* <div className="line-clamp-2">{rest?.description}</div> */}
+					{rest?.description}
 				</div>
 			)}
 
