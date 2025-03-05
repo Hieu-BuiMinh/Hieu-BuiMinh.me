@@ -38,13 +38,13 @@ const blogItems: { title: string; href: string; description: string; icon?: Luci
 	{
 		title: 'Dev Blog ',
 		href: '/dev-blog',
-		description: 'Re-usable components built using Radix UI and Tailwind CSS.',
+		description: 'My personal website and blog ',
 		icon: NotebookText,
 	},
 	{
 		title: 'Documents',
 		href: '/docs',
-		description: 'Styles for headings, paragraphs, lists...etc',
+		description: 'Here, I delve into the timeless teachings of the Yi Jing',
 		icon: Library,
 	},
 	{
