@@ -24,6 +24,14 @@ export const shortSparksList = [
 		description: 'Man up!!!',
 	},
 	{
+		name: `what you are not changing you're choosing`,
+		id: 'what-you-are-not-changing-you_re-choosing',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1741191413/what-you-are-not-changing-you_re-choosing_euagjy.mp4',
+		height: 450,
+		previewImage: 'https://i.imgur.com/jkMndX8.png',
+		description: `what you are not changing you're choosing`,
+	},
+	{
 		name: 'Ever tried, ever failed',
 		id: 'ever-tried-ever-failed',
 		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739698989/ever-tried-ever-failed_bvzzvy.mp4',
@@ -83,7 +91,7 @@ export const shortSparksList = [
 		name: 'brainwashed',
 		id: 'brainwashed',
 		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739699660/brainwashed_k4yfsw.mp4',
-		height: 350,
+		height: 450,
 		previewImage: 'https://i.imgur.com/WOqLqdI.png',
 		description: '🧠🚿',
 	},
