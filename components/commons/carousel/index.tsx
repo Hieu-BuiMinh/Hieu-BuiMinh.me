@@ -57,8 +57,8 @@ function CarouselSlice({ carouselChildren, itemClassName, className }: ICarousel
 				<CarouselContent>
 					{carouselChildren?.map((child, index) => (
 						<CarouselItem
-							className={cn('flex size-auto items-center justify-center overflow-hidden', itemClassName)}
 							key={index}
+							className={cn('flex size-auto items-center justify-center overflow-hidden', itemClassName)}
 						>
 							{child}
 						</CarouselItem>
