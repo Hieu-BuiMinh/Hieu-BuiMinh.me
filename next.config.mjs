@@ -5,7 +5,21 @@ import { build } from 'velite'
 export default {
 	reactStrictMode: false,
 	images: {
-		domains: ['img.clerk.com', 'i.imgur.com', 'res.cloudinary.com'],
+		// domains: ['img.clerk.com', 'i.imgur.com', 'res.cloudinary.com'],
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'img.clerk.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'i.imgur.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'res.cloudinary.com',
+			},
+		],
 	},
 	webpack: (config) => {
 		config.plugins.push(new VeliteWebpackPlugin())

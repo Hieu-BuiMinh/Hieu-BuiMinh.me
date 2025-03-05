@@ -1,6 +1,9 @@
+'use client'
+
 import './style/code-block.css'
 import './style/yin-yang.css'
 
+import { nanoid } from 'nanoid'
 import Link from 'next/link'
 import * as runtime from 'react/jsx-runtime'
 
@@ -108,5 +111,5 @@ export function MDXContent({ code }: MdxProps) {
 	if (!code) {
 		return <p className="py-5">The content is on updating 🧪...</p>
 	}
-	return <Component components={components} />
+	return <Component components={components} key={nanoid()} />
 }
