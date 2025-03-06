@@ -51,7 +51,7 @@ function DownLoadResumeButton({ innerText }: Readonly<IDownLoadResumeButton>) {
 	}
 
 	return (
-		<a href="/assets/files/pdf/[Junior-Frontend]_[BuiMinhHieu].pdf" download>
+		<a href="/assets/files/pdf/[Junior-Frontend]_[BuiMinhHieu]_[2025].pdf" download>
 			<Button
 				className={cn('bg-muted text-foreground', {
 					'text-foreground dark:bg-gradient-to-r dark:from-yellow-500 dark:to-red-500 bg-foreground text-white':
