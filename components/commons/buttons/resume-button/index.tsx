@@ -10,9 +10,10 @@ import { cn } from '@/lib/utils'
 
 interface IDownLoadResumeButton {
 	innerText?: string
+	className?: string
 }
 
-function DownLoadResumeButton({ innerText }: Readonly<IDownLoadResumeButton>) {
+function DownLoadResumeButton({ innerText, className }: Readonly<IDownLoadResumeButton>) {
 	const [loading, setLoading] = useState(false)
 
 	const explodeConfetti = () => {
@@ -51,21 +52,21 @@ function DownLoadResumeButton({ innerText }: Readonly<IDownLoadResumeButton>) {
 	}
 
 	return (
-		<a href="/assets/files/pdf/[Junior-Frontend]_[BuiMinhHieu]_[2025].pdf" download>
+		<a href="/assets/files/pdf/[Junior-Frontend]_[BuiMinhHieu]_[2025].pdf" className={className} download>
 			<Button
-				className={cn('bg-muted text-foreground', {
+				className={cn('w-full bg-muted text-foreground', {
 					'text-foreground dark:bg-gradient-to-r dark:from-yellow-500 dark:to-red-500 bg-foreground text-white':
 						!loading,
 				})}
 				onClick={handleloading}
 				disabled={loading}
 			>
+				{innerText ?? 'know more about me!'}
 				{loading ? (
 					<Loader size={20} className="animate-spin" />
 				) : (
-					<ArrowDownToLine size={20} className="animate-bounce" />
+					<ArrowDownToLine size={20} className="hidden animate-bounce md:block" />
 				)}
-				{innerText ?? 'know more about me!'}
 			</Button>
 		</a>
 	)

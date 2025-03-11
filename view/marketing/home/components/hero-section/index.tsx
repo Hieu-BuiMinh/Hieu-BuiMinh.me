@@ -1,9 +1,13 @@
 'use client'
 
-import React from 'react'
+import { SquareArrowOutUpRight } from 'lucide-react'
+import Link from 'next/link'
 
 import DownLoadResumeButton from '@/components/commons/buttons/resume-button'
 import BlurImage from '@/components/commons/image/blur-image'
+import { buttonVariants } from '@/components/ui/button'
+import { SITE_CONFIG } from '@/config/site'
+import { cn } from '@/lib/utils'
 import { BadgeAnimated } from '@/view/marketing/home/components/badge-animated'
 
 function HeroSection() {
@@ -48,7 +52,17 @@ function HeroSection() {
 					<div className="absolute inset-0 -z-10 animate-pulse bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-50 blur-2xl transition" />
 				</div>
 			</div>
-			<DownLoadResumeButton />
+			<div className="flex flex-col items-start gap-2 md:flex-row md:items-center">
+				<DownLoadResumeButton className="w-full md:w-auto" />
+				<Link
+					href={SITE_CONFIG.resume}
+					target="_blank"
+					className={cn(buttonVariants({ variant: 'default' }), 'w-full md:w-auto')}
+				>
+					See for Yourself
+					<SquareArrowOutUpRight className="hidden md:block" />
+				</Link>
+			</div>
 		</section>
 	)
 }
