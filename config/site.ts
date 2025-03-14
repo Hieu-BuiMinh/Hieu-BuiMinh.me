@@ -6,8 +6,8 @@ export const isProduction = process.env.NODE_ENV === 'production'
 export const SITE_CONFIG = {
 	name: 'Hieu.BuiMinh',
 	shortName: 'Hieu.BM',
-	url: isProduction ? 'https://hieu-buiminh.vercel.app/' : 'http://localhost:3000',
-	resume: 'https://hieu-buiminh-resume.vercel.app/',
+	url: isProduction ? 'https://hieu-buiminh.io.vn/' : 'http://localhost:3000',
+	resume: 'https://hieu-buiminh-resume.io.vn/',
 	description: 'Next js 15 blog using velite, tailwind and shadcn',
 	siteKeywords: ['hieu.buiminh', 'next.js', 'react', 'typeScript', 'node.js', 'tailwind', 'shadcn'],
 	og: '/assets/images/og.png',
