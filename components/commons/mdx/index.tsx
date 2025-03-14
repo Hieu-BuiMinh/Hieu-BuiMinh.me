@@ -27,6 +27,7 @@ import Video from '@/components/commons/video'
 import CloudinaryVideo from '@/components/commons/video/cloudinary-video'
 import VideoZoom from '@/components/commons/video/video-zoom'
 import { cn } from '@/lib/utils'
+import AboutTheName from '@/view/route/about/components/about-the-name'
 import ExperienceBlock from '@/view/route/experiences/components/experience-block'
 
 const useMDXComponent = (code: string) => {
@@ -95,6 +96,7 @@ const components = {
 	SVGIcons,
 	CarouselSlice,
 	RetroList,
+	AboutTheName,
 
 	// Iching here
 	YinYang,

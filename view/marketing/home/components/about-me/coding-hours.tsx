@@ -7,7 +7,7 @@ export function CodingHours() {
 		<div className="group flex size-full flex-col justify-between p-4 lg:p-6">
 			<span className="flex items-center gap-2 text-xs text-foreground md:text-base">
 				<Hourglass size={20} />
-				<span>Codding hours</span>
+				<span>Coding hours</span>
 			</span>
 			<p className="font-title flex w-full grow items-center justify-center truncate text-4xl font-semibold text-foreground md:text-3xl lg:text-4xl [@media(max-width:450px)]:py-8">
 				<Suspense fallback="-- hrs">

@@ -38,7 +38,7 @@ function AboutMe() {
 
 					<div className="col-span-full grid grid-cols-1 gap-4 md:grid-cols-4 [@media(min-width:450px)]:grid-cols-2">
 						<div className="col-span-full rounded-lg shadow-feature-card dark:shadow-feature-card-dark md:col-span-2 [@media(min-width:450px)]:col-span-1">
-							{/* Codding hours section */}
+							{/* Coding hours section */}
 							<CodingHours />
 						</div>
 
