@@ -17,7 +17,7 @@ const ImageZoom = forwardRef<HTMLImageElement, IImageZoomProps>((props, ref) => 
 
 	return (
 		<Dialog>
-			<DialogTitle />
+			<DialogTitle className="hidden" />
 			<DialogTrigger asChild role="button">
 				<BlurImage
 					ref={ref}
@@ -38,6 +38,7 @@ const ImageZoom = forwardRef<HTMLImageElement, IImageZoomProps>((props, ref) => 
 					imageClassName="object-contain"
 					quality={100}
 					description=""
+					unoptimized={true}
 				/>
 			</DialogContent>
 		</Dialog>
