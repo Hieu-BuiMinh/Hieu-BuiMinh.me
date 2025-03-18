@@ -6,7 +6,8 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/comp
 interface LinkItem {
 	lable: string
 	href: string
-	disable?: boolean // Make disable optional
+	disable?: boolean
+	target?: string
 }
 
 function FooterRoutingSection() {
@@ -33,6 +34,11 @@ function FooterRoutingSection() {
 				{ lable: 'Tags', href: '/tags' },
 				{ lable: 'Quotes', href: '/quotes' },
 				{ lable: 'Other Topics', href: '/interests' },
+				{
+					lable: 'Analytics',
+					href: 'https://cloud.umami.is/share/QwvOixl3mNQ8N4nm/hieu-buiminh.io.vn',
+					target: '_blank',
+				},
 			],
 		},
 		{
@@ -73,6 +79,7 @@ function FooterRoutingSection() {
 							}
 							return (
 								<Link
+									target={link?.target === '_blank' ? '_blank' : '_self'}
 									className="text-muted-foreground hover:text-foreground"
 									key={link.lable}
 									href={link.href}

@@ -40,6 +40,22 @@ export const shortSparksList = [
 		description: 'Man up!!!',
 	},
 	{
+		name: 'Where attention goes, energy flows',
+		id: 'where-attention-goes-energy-flows',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1742270836/where-attention-goes-energy_flows_posrgp.mp4',
+		height: 450,
+		previewImage: 'https://i.imgur.com/UwRnY7w.png',
+		description: 'Where attention goes, energy flows',
+	},
+	{
+		name: 'Choose yourself',
+		id: 'chooseyourself',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1742270838/choose-yourself_g1n2uk.mp4',
+		height: 450,
+		previewImage: 'https://i.imgur.com/rR8EoX2.png',
+		description: 'Choose yourself',
+	},
+	{
 		name: 'Ever tried, ever failed',
 		id: 'ever-tried-ever-failed',
 		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1739698989/ever-tried-ever-failed_bvzzvy.mp4',
