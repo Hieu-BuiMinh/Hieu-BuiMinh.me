@@ -67,7 +67,7 @@ const BlurImage = forwardRef<HTMLImageElement, ImageProps>((props, ref) => {
 			/>
 
 			{rest?.description && (
-				<div className="pointer-events-none absolute inset-0 flex flex-col items-start justify-end bg-gradient-to-b from-transparent to-black p-3 text-xs font-semibold italic opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
+				<div className="pointer-events-none absolute inset-0 flex flex-col items-start justify-end bg-gradient-to-b from-transparent to-black p-3 text-xs font-semibold italic text-white opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100">
 					{/* <div className="line-clamp-2">{rest?.description}</div> */}
 					{rest?.description}
 				</div>

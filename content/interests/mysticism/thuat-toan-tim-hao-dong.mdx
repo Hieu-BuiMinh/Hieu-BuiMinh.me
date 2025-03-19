@@ -23,10 +23,10 @@ Thuật toán này áp dụng xác suất để xác định xem mỗi hào tron
 
 Theo phương pháp gieo ba đồng xu truyền thống, mỗi lần gieo có 4 kết quả khả dĩ với xác suất cụ thể như sau:
 
-- `Âm động`: 12.5% (ba đồng xu đều là mặt âm)
-- `Dương động`: 12.5% (ba đồng xu đều là mặt dương)
-- `Dương tĩnh`: 37.5% (hai mặt dương, một mặt âm)
-- `Âm tĩnh`: 37.5% (hai mặt âm, một mặt dương)
+-   `Âm động`: 12.5% (ba đồng xu đều là mặt âm)
+-   `Dương động`: 12.5% (ba đồng xu đều là mặt dương)
+-   `Dương tĩnh`: 37.5% (hai mặt dương, một mặt âm)
+-   `Âm tĩnh`: 37.5% (hai mặt âm, một mặt dương)
 
 Do đó, xác suất động của mỗi hào trong một quẻ là tổng của hai xác suất 12.5%, tương đương 25%.
 
@@ -71,14 +71,14 @@ Bảng dưới đây cho thấy xác suất có k hào động trong một quẻ
 
 ## Ý nghĩa của bảng xác suất
 
-- Xác suất có 1 hoặc 2 hào động là cao nhất, chiếm gần 65% khả năng. Điều này phù hợp với thực tế là quẻ Dịch thường có từ 1 đến 2 hào động.
-- Xác suất có 4 hào động trở lên là rất thấp, điều này phản ánh rằng quẻ với nhiều hào động là rất hiếm.
+-   Xác suất có 1 hoặc 2 hào động là cao nhất, chiếm gần 65% khả năng. Điều này phù hợp với thực tế là quẻ Dịch thường có từ 1 đến 2 hào động.
+-   Xác suất có 4 hào động trở lên là rất thấp, điều này phản ánh rằng quẻ với nhiều hào động là rất hiếm.
 
 ## Đặc điểm nổi bật của thuật toán
 
-- Đảm bảo tính ngẫu nhiên tự nhiên: Xác suất động của mỗi hào là 25%, dẫn đến một phân phối xác suất hợp lý cho số lượng hào động trong quẻ.
-- Đơn giản trong triển khai: Bằng cách duyệt qua từng hào và sử dụng xác suất động, thuật toán dễ dàng xác định quẻ biến mà không làm thay đổi cách nhập quẻ.
-- Phù hợp với truyền thống: Thuật toán dựa trên xác suất thực tế của phương pháp ba đồng xu, phù hợp với cách gieo quẻ truyền thống trong Kinh Dịch.
+-   Đảm bảo tính ngẫu nhiên tự nhiên: Xác suất động của mỗi hào là 25%, dẫn đến một phân phối xác suất hợp lý cho số lượng hào động trong quẻ.
+-   Đơn giản trong triển khai: Bằng cách duyệt qua từng hào và sử dụng xác suất động, thuật toán dễ dàng xác định quẻ biến mà không làm thay đổi cách nhập quẻ.
+-   Phù hợp với truyền thống: Thuật toán dựa trên xác suất thực tế của phương pháp ba đồng xu, phù hợp với cách gieo quẻ truyền thống trong Kinh Dịch.
 
 ## Kết luận
 
