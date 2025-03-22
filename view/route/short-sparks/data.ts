@@ -16,6 +16,14 @@ export const shortSparksList = [
 		description: 'Why not?',
 	},
 	{
+		name: 'You can do anything',
+		id: 'jim-rohn-why-not',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1742654072/you-can-do-anything_uealig.mp4',
+		height: 450,
+		previewImage: 'https://i.imgur.com/tuXGxon.png',
+		description: 'You can do anything',
+	},
+	{
 		name: `what you are not changing you're choosing`,
 		id: 'what-you-are-not-changing-you_re-choosing',
 		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1741191413/what-you-are-not-changing-you_re-choosing_euagjy.mp4',
