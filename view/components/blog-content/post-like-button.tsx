@@ -4,7 +4,7 @@ import { useUser } from '@clerk/clerk-react'
 import NumberFlow from '@number-flow/react'
 import confetti from 'canvas-confetti'
 import { useMutation, useQuery } from 'convex/react'
-import { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 import { useDebounceCallback } from 'usehooks-ts'
 
@@ -13,6 +13,7 @@ import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 import { api } from '@/convex/_generated/api'
+import { useDeviceType } from '@/hooks/use-devices'
 import { useStoreUserEffect } from '@/hooks/use-store-user-effect'
 import useAnonymousStore from '@/view/stores/anonymous.store'
 
@@ -22,6 +23,8 @@ type PostLikeButtonProps = {
 }
 
 const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
+	const device = useDeviceType()
+	console.log('device', device)
 	const { isAuthenticated } = useStoreUserEffect()
 	const { user } = useUser()
 	const { likes, addPostLikeBySlug } = useAnonymousStore()
@@ -109,6 +112,7 @@ const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
 							}}
 							variant="outline"
 							className={className}
+							size={device === 'desktop' ? 'default' : 'icon'}
 						>
 							<div className="relative size-4">
 								<svg
@@ -124,13 +128,15 @@ const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
 									/>
 								</svg>
 							</div>
-							<Separator orientation="vertical" />
-							<NumberFlow
-								willChange
-								value={totalLikes}
-								format={{ trailingZeroDisplay: 'stripIfInteger' }}
-							/>
-							🎉
+							<Separator orientation="vertical" className="hidden lg:block" />
+							<span className="hidden gap-2 lg:flex">
+								<NumberFlow
+									willChange
+									value={totalLikes}
+									format={{ trailingZeroDisplay: 'stripIfInteger' }}
+								/>
+								🎉
+							</span>
 						</Button>
 					</TooltipTrigger>
 					<TooltipContent>
