@@ -36,7 +36,7 @@ function FooterRoutingSection() {
 				{ lable: 'Other Topics', href: '/interests' },
 				{
 					lable: 'Analytics',
-					href: 'https://cloud.umami.is/share/QwvOixl3mNQ8N4nm/hieu-buiminh.io.vn',
+					href: 'https://cloud.umami.is/share/JEvvDKOMKBwOFYWE/hieu-buiminh.io.vn',
 					target: '_blank',
 				},
 			],
