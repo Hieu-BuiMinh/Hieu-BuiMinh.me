@@ -69,9 +69,8 @@ function MobileTableOfContent({ post }: { post: DevBlogPost | DocPost | Interest
 	return (
 		<Drawer open={open} onOpenChange={setOpen}>
 			<DrawerTrigger asChild>
-				<Button className="opacity-1 flex bg-transparent backdrop-blur-[2px]" variant="outline">
+				<Button size="icon" className="opacity-1 flex bg-transparent backdrop-blur-[2px]" variant="outline">
 					<ListTree size={30} />
-					Table of Contents
 				</Button>
 			</DrawerTrigger>
 			<DrawerContent className="max-h-[90vh]">
