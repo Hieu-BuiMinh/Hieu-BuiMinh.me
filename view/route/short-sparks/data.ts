@@ -17,7 +17,7 @@ export const shortSparksList = [
 	},
 	{
 		name: 'You can do anything',
-		id: 'jim-rohn-why-not',
+		id: 'you-can-do-anything',
 		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1742654072/you-can-do-anything_uealig.mp4',
 		height: 450,
 		previewImage: 'https://i.imgur.com/tuXGxon.png',
