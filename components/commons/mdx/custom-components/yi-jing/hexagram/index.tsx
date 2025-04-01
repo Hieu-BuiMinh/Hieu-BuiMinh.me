@@ -65,7 +65,7 @@ function Hexagram({
 		upper: upper || 1,
 		lower: lower || 1,
 	})
-	console.log('hiddenRelative', hiddenRelative)
+	// console.log('hiddenRelative', hiddenRelative)
 
 	const newUpper = isAboveActive
 		? transformActiveBaguaToNewBagua({ baguaIndex: upper || 1, actives: aboveActiveList }).newIndex

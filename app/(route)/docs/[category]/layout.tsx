@@ -5,7 +5,6 @@ import React from 'react'
 import type { DocPost } from '@/.velite'
 import { docs } from '@/.velite'
 import { SITE_CONFIG } from '@/config/site'
-import { docPostsHierarchy } from '@/lib/content/docs'
 import DocSidebar from '@/view/components/doc-content/sidebar'
 
 interface IDocsCategoryLayoutProps {
@@ -55,6 +54,7 @@ export async function generateMetadata({ params }: IDocsCategoryLayoutProps): Pr
 }
 
 async function DocsCategoryLayout({ params, children }: IDocsCategoryLayoutProps) {
+	let rootPost: DocPost
 	const resolveCategory = await params
 
 	const currentPost = docs.find((p) => p.slugAsParams === resolveCategory.category)
@@ -64,15 +64,17 @@ async function DocsCategoryLayout({ params, children }: IDocsCategoryLayoutProps
 		notFound()
 	}
 
-	const childPosts = currentPostIsRoot
-		? docs.filter((p) => p.root === currentPost?.id && p.published)
-		: docs.filter((p) => p.root === currentPost?.root && p.published)
-
-	const sidebarData = docPostsHierarchy([currentPost, ...childPosts], resolveCategory.category)
+	if (currentPost) {
+		if (currentPostIsRoot) {
+			rootPost = currentPost
+		} else {
+			rootPost = docs.find((p) => p.id === p.root)
+		}
+	}
 
 	return (
 		<div className="grid border-none md:grid-cols-[220px_minmax(0,1fr)] lg:grid-cols-[240px_minmax(0,1fr)] 2xl:border-x 2xl:border-dashed">
-			<DocSidebar sidebarData={sidebarData} />
+			<DocSidebar sidebarTree={rootPost?.meta || []} />
 			{children}
 		</div>
 	)

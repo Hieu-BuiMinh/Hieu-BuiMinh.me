@@ -11,6 +11,25 @@ export const computedFields: any = <T extends { slug: string }>(data: T) => {
 	// blog/hello-world => ['blog', 'hello-world'] => ['hello-world] => '/hello-world'
 }
 
+export type VeliteMetaItem = {
+	id?: string
+	title: string
+	slug: string
+	url?: string
+	type: 'ROOT' | 'CHILD'
+	children?: VeliteMetaItem[]
+}
+const metaItem: ReturnType<typeof s.lazy> = s.lazy(() =>
+	s.object({
+		id: s.string().optional(),
+		title: s.string(),
+		slug: s.string(),
+		url: s.string().optional(),
+		type: s.enum(['ROOT', 'CHILD']),
+		children: s.array(metaItem).optional(),
+	})
+)
+
 const devBlogPosts = defineCollection({
 	name: 'DevBlogPost',
 	pattern: 'dev-blog/**/*.mdx',
@@ -164,6 +183,7 @@ const docs = defineCollection({
 				github: s.string(),
 			}),
 			toc: s.toc({ tight: true, ordered: true, maxDepth: 6 }),
+			meta: s.array(metaItem).optional(), // only root have meta
 			//slugAsParams <=> needed transform
 		})
 		.transform(computedFields),

@@ -24,7 +24,6 @@ type PostLikeButtonProps = {
 
 const PostLikeButton = ({ post, className }: PostLikeButtonProps) => {
 	const device = useDeviceType()
-	console.log('device', device)
 	const { isAuthenticated } = useStoreUserEffect()
 	const { user } = useUser()
 	const { likes, addPostLikeBySlug } = useAnonymousStore()
