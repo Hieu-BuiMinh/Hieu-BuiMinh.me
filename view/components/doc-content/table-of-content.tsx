@@ -5,9 +5,10 @@ import Link from 'next/link'
 import { redirect, usePathname } from 'next/navigation'
 import React, { memo, useEffect, useState } from 'react'
 
+import type { DocPost } from '@/.velite'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 import { cn } from '@/lib/utils'
-import type { VeliteMetaItem } from '@/velite.config'
+import type { VeliteOrder } from '@/velite.config'
 
 type TreeItem = {
 	id: string
@@ -19,7 +20,7 @@ type TreeItem = {
 
 interface ITableOfContent {
 	className?: string
-	sidebarTree: VeliteMetaItem[]
+	sidebarTree: VeliteOrder[]
 }
 
 function TableOfContent({ className, sidebarTree }: ITableOfContent) {
@@ -32,27 +33,27 @@ function TableOfContent({ className, sidebarTree }: ITableOfContent) {
 
 export default memo(TableOfContent)
 
-function TreeItem({ item }: { item: VeliteMetaItem }) {
+function TreeItem({ item }: { item: DocPost & { childen: DocPost } }) {
 	const path = usePathname()
 	const [isOpen, setIsOpen] = useState(false)
-	const isActive = `/${item.url}` === path
+	const isActive = `/${item.slug}` === path
 	const hasChildren = item.children && item.children.length > 0
 
-	const handleRedirect = (url: string) => {
+	const handleRedirect = (slug: string) => {
 		// setIsOpen((prev) => !prev)
-		redirect(url)
+		redirect(slug)
 	}
 
-	const shouldOpen = ({ item }: { item: VeliteMetaItem }) => {
+	const shouldOpen = ({ item }: { item: DocPost & { childen: DocPost } }) => {
 		if (item.children && item.children.length > 0) {
-			if (`/${item.url}` === path) {
+			if (`/${item.slug}` === path) {
 				setIsOpen(true)
 				return
 			}
-			item.children.map((child) => {
+			item.children.map((child: DocPost) => {
 				shouldOpen({ item: child })
 			})
-		} else if (`/${item.url}` === path) {
+		} else if (`/${item.slug}` === path) {
 			setIsOpen(true)
 			return
 		}
@@ -76,17 +77,16 @@ function TreeItem({ item }: { item: VeliteMetaItem }) {
 				<AccordionItem value={item.slug || ''} className="mt-1 border-none">
 					<AccordionTrigger
 						onClick={() => {
-							// eslint-disable-next-line @typescript-eslint/no-unused-expressions
-							!!item.url && handleRedirect(`/${item.url}`)
+							handleRedirect(`/${item.slug}`)
 						}}
 						className={cn(
 							'rounded px-2 py-1 text-muted-foreground transition-colors duration-100 [overflow-wrap:anywhere] hover:bg-primary/10 hover:text-accent-foreground/80 hover:no-underline hover:transition-none',
 							isActive && 'bg-primary/10 font-semibold text-primary dark:text-green-400'
 						)}
 					>
-						{item.url ? (
+						{item.slug ? (
 							<Link
-								href={`/${item.url}` || ''}
+								href={`/${item.slug}` || ''}
 								className={cn('flex min-w-[1/2] items-center gap-2 text-sm font-medium')}
 							>
 								{item.type === 'ROOT' && <BookMarked size={16} />}
@@ -106,7 +106,7 @@ function TreeItem({ item }: { item: VeliteMetaItem }) {
 						className="pb-0"
 					>
 						<div className="ml-2.5 border-l pl-2 pt-2">
-							{item.children?.map((item) => {
+							{item.children?.map((item: DocPost) => {
 								return <TreeItem item={item} key={item.id} />
 							})}
 						</div>
@@ -118,9 +118,9 @@ function TreeItem({ item }: { item: VeliteMetaItem }) {
 
 	return (
 		<>
-			{item.url ? (
+			{item.slug ? (
 				<Link
-					href={`/${item.url}` || ''}
+					href={`/${item.slug}` || ''}
 					className={cn(
 						'mb-2 flex w-full items-center gap-2 rounded px-2 py-1 text-sm font-medium text-muted-foreground transition-colors duration-100 [overflow-wrap:anywhere] hover:bg-primary/10 hover:text-accent-foreground',
 						isActive && 'bg-primary/10 font-semibold text-primary dark:text-green-400'

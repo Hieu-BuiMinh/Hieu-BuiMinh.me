@@ -19,6 +19,10 @@ export type VeliteMetaItem = {
 	type: 'ROOT' | 'CHILD'
 	children?: VeliteMetaItem[]
 }
+export type VeliteOrder = {
+	id: string
+	children?: VeliteOrder[]
+}
 const metaItem: ReturnType<typeof s.lazy> = s.lazy(() =>
 	s.object({
 		id: s.string().optional(),
@@ -27,6 +31,12 @@ const metaItem: ReturnType<typeof s.lazy> = s.lazy(() =>
 		url: s.string().optional(),
 		type: s.enum(['ROOT', 'CHILD']),
 		children: s.array(metaItem).optional(),
+	})
+)
+const order: ReturnType<typeof s.lazy> = s.lazy(() =>
+	s.object({
+		id: s.string(),
+		children: s.array(order).optional(),
 	})
 )
 
@@ -183,7 +193,7 @@ const docs = defineCollection({
 				github: s.string(),
 			}),
 			toc: s.toc({ tight: true, ordered: true, maxDepth: 6 }),
-			meta: s.array(metaItem).optional(), // only root have meta
+			order: s.array(order).optional(), // only root have order
 			//slugAsParams <=> needed transform
 		})
 		.transform(computedFields),
