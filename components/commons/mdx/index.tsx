@@ -3,10 +3,12 @@
 import './style/code-block.css'
 import './style/yin-yang.css'
 
+import * as LucideIcons from 'lucide-react'
 import { nanoid } from 'nanoid'
 import Link from 'next/link'
 import * as runtime from 'react/jsx-runtime'
 
+import AlertBadge from '@/components/commons/alert/alert-badge'
 import CarouselSlice from '@/components/commons/carousel'
 import ShowcaseGrid from '@/components/commons/grid/showcase-grid'
 import { SVGIcons } from '@/components/commons/icons/svg-icons'
@@ -93,10 +95,12 @@ const components = {
 	BlockQuote,
 	ShowcaseGrid,
 	Table,
+	LucideIcons,
 	SVGIcons,
 	CarouselSlice,
 	RetroList,
 	AboutTheName,
+	AlertBadge,
 
 	// Iching here
 	YinYang,

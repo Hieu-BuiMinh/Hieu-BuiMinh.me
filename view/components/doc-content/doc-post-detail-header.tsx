@@ -10,6 +10,7 @@ import { useEffect, useRef } from 'react'
 import { toast } from 'sonner'
 
 import type { DocPost } from '@/.velite'
+import AlertBadge from '@/components/commons/alert/alert-badge'
 import { Button } from '@/components/ui/button'
 import { api } from '@/convex/_generated/api'
 import { cn, formatDate } from '@/lib/utils'
@@ -100,13 +101,13 @@ function DocPostDetailHeader({ post, className }: IDocPostDetailHeaderProps) {
 				</Button>
 			)}
 			{!postData && postData !== undefined && (
-				<div className="my-4 rounded border border-green-300/70 bg-green-500/20 p-2 text-sm text-foreground/90">
+				<AlertBadge>
 					<p>Note: This post is a work in progress 🧪</p>
 					<p>
 						Feel free to read and explore, but keep in mind that some sections might still be under
 						construction. Your patience is appreciated!
 					</p>
-				</div>
+				</AlertBadge>
 			)}
 		</div>
 	)
