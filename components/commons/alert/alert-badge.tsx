@@ -10,9 +10,10 @@ interface IAlertBadge {
 	type?: 'info' | 'success' | 'warning' | 'error'
 	icon?: LucideIcon
 	className?: string
+	fill?: boolean
 }
 
-const AlertBadge = ({ children, title, type, icon, className }: IAlertBadge) => {
+const AlertBadge = ({ children, title, type, icon, className, fill }: IAlertBadge) => {
 	let typeColor = ''
 	let Icon = Info
 
@@ -41,8 +42,11 @@ const AlertBadge = ({ children, title, type, icon, className }: IAlertBadge) => 
 	}
 	return (
 		<div
-			style={{ borderColor: `rgba(${typeColor})`, backgroundColor: `rgba(${typeColor}, 0.15)` }}
-			className={cn(`not-prose w-full rounded-md border p-2`, className)}
+			style={{
+				borderColor: `rgba(${typeColor})`,
+				backgroundColor: `rgba(${typeColor}, ${fill ? '0.3' : '0.15'})`,
+			}}
+			className={cn(`not-prose w-full rounded-md border p-2`, fill && 'border-none', className)}
 		>
 			{title && (
 				<div className="flex items-center gap-3">
