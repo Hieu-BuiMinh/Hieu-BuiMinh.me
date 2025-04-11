@@ -99,7 +99,9 @@ If using jsDelivr
 
 these following codes converts from solar to lunar (above) and lunar to solar (below).
 
-> **Note** When initializing a LunarDate instance, always call the function `init()`
+<AlertBadge type="info" title="Note:" className="mb-3" fill>
+	When initializing a LunarDate instance, always call the function `init()`
+</AlertBadge>
 
 <CodeBlock fileName="index.ts">
 
@@ -254,7 +256,9 @@ interface ILuckyHour {
 
 Creating instance [**`SolarDate`**](#solardate) from [**`ISolarDate`**](#isolardate).
 
-> **Note** If you enter an incorrect date, it will return an error `Invalid date`. For details on valid dates, see [here](https://github.com/Hieu-BuiMinh/lunar-date-vn/wiki/Valid-date)
+<AlertBadge type="info" title="Note:" className="mb-3" fill>
+	If you enter an incorrect date, it will return an error `Invalid date`. For details on valid dates, see [here](https://github.com/Hieu-BuiMinh/lunar-date-vn/wiki/Valid-date)
+</AlertBadge>
 
 <CodeBlock fileName="index.ts">
 
@@ -280,7 +284,9 @@ new SolarDate({ day: 1, month: 1, year: 2023 })
 
 Creating instance [**`SolarDate`**](#solardate) from `Date` object.
 
-> **Note** If the date is entered incorrectly, the `Date` object will automatically correct it. If the date entered is between **05-14/10/1582**, it will return an error `Invalid date`. Details about valid dates see [here](https://github.com/Hieu-BuiMinh/lunar-date-vn/wiki/Valid-date)
+<AlertBadge type="info" title="Note:" className="mb-3" fill>
+	If the date is entered incorrectly, the `Date` object will automatically correct it. If the date entered is between **05-14/10/1582**, it will return an error `Invalid date`. Details about valid dates see [here](https://github.com/Hieu-BuiMinh/lunar-date-vn/wiki/Valid-date)
+</AlertBadge>
 
 <CodeBlock fileName="index.ts">
 
@@ -532,11 +538,17 @@ console.log(dl.get())
 
 Create the entity [**`LunarDate`**](#lunardate) from [**`ILunarDate`**](#ilunardate)
 
-> **Note** To enter a leap month, use the additional attr `leap_month = true`. If you use `leap_month = true` for a non-leap month, it will automatically revert to `leap_month = false`.
+<AlertBadge type="info" title="Note:" className="mb-3" fill>
+	To enter a leap month, use the additional attr `leap_month = true`. If you use `leap_month = true` for a non-leap
+	month, it will automatically revert to `leap_month = false`.
+</AlertBadge>
 
-> **Note** If the date is entered incorrectly, an error will be returned. [**`Invalid date`**](https://github.com/Hieu-BuiMinh/lunar-date-vn/wiki/Error-message)
-
-> **Note** When initializing, you need to fill in `day`, `month`, `year`. If you do not fill in other information (`leap_year`, ...) then the default is `undefined`. After initializing, you can use the function [**`lunar.init()`**](#lunarinit) to automatically fill in the missing information. If the information (`leap_year`, `jd`, ...) is `undefined` then other functions in the entity cannot be used.
+<AlertBadge type="info" title="Note:" className="mb-3" fill>
+	When initializing, you need to fill in `day`, `month`, `year`. If you do not fill in other information (`leap_year`,
+	...) then the default is `undefined`. After initializing, you can use the function [**`lunar.init()`**](#lunarinit)
+	to automatically fill in the missing information. If the information (`leap_year`, `jd`, ...) is `undefined` then
+	other functions in the entity cannot be used.
+</AlertBadge>
 
 <CodeBlock fileName="index.ts">
 
@@ -545,6 +557,11 @@ constructor(date: ILunarDate)
 ```
 
 </CodeBlock>
+
+<AlertBadge type="warning" className="mt-3" fill>
+	If the date is entered incorrectly, an error will be returned. [**`Invalid
+	date`**](https://github.com/Hieu-BuiMinh/lunar-date-vn/wiki/Error-message)
+</AlertBadge>
 
 **Example:**
 
@@ -884,7 +901,9 @@ console.log(al.toSolarDate())
 
 Change the time of the entity [**`LunarDate`**](#lunardate)
 
-> **Note** This function does not standardize input data.
+<AlertBadge type="info" title="Note:" className="mb-3" fill>
+	This function does not standardize input data.
+</AlertBadge>
 
 <CodeBlock fileName="index.ts">
 

@@ -49,15 +49,15 @@ const AlertBadge = ({ children, title, type, icon, className, fill }: IAlertBadg
 			className={cn(`not-prose w-full rounded-md border p-2`, fill && 'border-none', className)}
 		>
 			{title && (
-				<div className="flex items-center gap-3">
+				<div className="mb-0.5 flex items-center gap-3">
 					<Icon size={18} stroke={`rgba(${typeColor})`} />
-					<div className="text-base font-medium text-foreground">{title}</div>
+					<div className="text-sm font-medium text-foreground underline">{title}</div>
 				</div>
 			)}
 
 			<div className="flex gap-3 text-sm text-foreground">
 				{!title && <Icon size={18} stroke={`rgba(${typeColor})`} />}
-				<div className="my-2 flex-1">{children}</div>
+				<div className="flex-1">{children}</div>
 			</div>
 		</div>
 	)
