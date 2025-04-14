@@ -38,7 +38,7 @@ export default async function CategoryDetailPage({ params }: ICategoryDetailPage
 			<div className="relative flex justify-between gap-10">
 				<article
 					className={cn(
-						'prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]',
+						'prose w-full max-w-full dark:prose-invert lg:max-w-[calc(100%-260px)]',
 						rethink_Sans.className
 					)}
 				>

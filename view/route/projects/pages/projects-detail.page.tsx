@@ -35,7 +35,7 @@ export default async function ProjectsDetailPageView({ params }: PostPageProps) 
 				<ProjectLink title="Repo" url={post?.links?.repoUrl} />
 			</div>
 			<div className="relative flex justify-between gap-10">
-				<article className="prose max-w-full dark:prose-invert lg:max-w-[calc(100%-220px)]">
+				<article className="prose w-full max-w-full dark:prose-invert lg:max-w-[calc(100%-260px)]">
 					<MDXContent code={post.body} />
 
 					{post.lastUpdated && <PostLastUpdated date={post.lastUpdated} />}

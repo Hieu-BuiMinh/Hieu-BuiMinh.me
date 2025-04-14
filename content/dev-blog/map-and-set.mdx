@@ -1,0 +1,239 @@
+---
+id: '847c336b-230d-4de6-b2ed-d7c3b911b0d9'
+title: 'Map and Set in JavaScript'
+cover: '/assets/images/content/post/dev-blog/map-and-set/cover.png'
+date: '2025-04-14T02:29:24.112Z'
+lastUpdated: '2025-04-14T02:29:24.112Z'
+description: 'Map and Set - From Basics to Pro Level'
+author:
+    {
+        avatar: '/assets/images/logo/logo-circle-dark.svg',
+        name: 'Hieu.BuiMinh',
+        github: 'https://github.com/Hieu-BuiMinh',
+    }
+
+published: true
+hashTags: { category: 'blog', tags: ['coding', 'js'] }
+---
+
+## 🔸 Part 1: `Set` - The Unique Value Hero
+
+### What is a `Set`?
+
+-   A `Set` is a collection of **unique values** (no duplicates).
+-   Maintains the **insertion order**.
+-   Values can be **any type**: strings, numbers, objects, etc.
+
+### Basic Example
+
+<CodeBlock fileName="index.js" >
+
+```js showLineNumbers
+const mySet = new Set()
+mySet.add(1)
+mySet.add(2)
+mySet.add(2) // Won’t be added again
+console.log(mySet) // Set(2) { 1, 2 }
+```
+
+</CodeBlock>
+
+### 🔥 Advanced Use Cases for `Set`
+
+#### 1.1. Remove duplicates from an array
+
+<CodeBlock fileName="index.js" >
+
+```js showLineNumbers
+const arr = [1, 2, 2, 3, 4, 4, 5]
+const uniqueArr = [...new Set(arr)]
+console.log(uniqueArr) // [1, 2, 3, 4, 5]
+```
+
+</CodeBlock>
+
+#### 1.2. Check for duplicates
+
+<CodeBlock fileName="index.js" >
+
+```js showLineNumbers
+const hasDuplicates = arr.length !== new Set(arr).size
+console.log(hasDuplicates) // true
+```
+
+</CodeBlock>
+
+#### 1.3. Use Set for managing tags (case-insensitive)
+
+<CodeBlock fileName="index.js" >
+
+```js showLineNumbers
+const tags = new Set()
+
+function addTag(tag) {
+	tags.add(tag.trim().toLowerCase())
+}
+
+addTag('Design')
+addTag('design') // Won’t add again
+addTag('Marketing')
+
+console.log(tags) // Set(2) { 'design', 'marketing' }
+```
+
+</CodeBlock>
+
+---
+
+## 🔸 Part 2: `Map` - The Key-Value Power Tool
+
+### What is a `Map`?
+
+-   A `Map` holds **key-value pairs**, just like an `Object`.
+-   Keys can be **any type**, even objects or functions.
+-   Maintains the **insertion order**.
+-   Built-in methods: `set()`, `get()`, `has()`, `delete()`, etc.
+
+### Basic Example
+
+<CodeBlock fileName="index.js" >
+
+```js showLineNumbers
+const myMap = new Map()
+myMap.set('name', 'John')
+myMap.set(123, 'a number')
+myMap.set({ id: 1 }, 'an object')
+
+console.log(myMap.get('name')) // John
+console.log(myMap.size) // 3
+```
+
+</CodeBlock>
+
+### 🔥 Advanced Use Cases for `Map`
+
+#### 2.1. Use objects as keys
+
+<CodeBlock fileName="index.js" >
+
+```js showLineNumbers
+const user1 = { id: 1 }
+const user2 = { id: 2 }
+
+const roles = new Map()
+roles.set(user1, 'admin')
+roles.set(user2, 'editor')
+
+console.log(roles.get(user1)) // 'admin'
+```
+
+</CodeBlock>
+
+#### 2.2. Count item occurrences
+
+<CodeBlock fileName="index.js" >
+
+```js showLineNumbers
+const fruits = ['apple', 'banana', 'apple', 'orange', 'banana', 'apple']
+const countMap = new Map()
+
+for (const fruit of fruits) {
+	countMap.set(fruit, (countMap.get(fruit) || 0) + 1)
+}
+console.log(countMap) 
+
+// Map(3) { 'apple' => 3, 'banana' => 2, 'orange' => 1 }
+```
+
+</CodeBlock>
+
+#### 2.3. Implement caching with `Map`
+
+<CodeBlock fileName="index.js" >
+
+```js showLineNumbers
+const cache = new Map()
+
+function fetchUser(id) {
+	if (cache.has(id)) {
+		console.log('⚡ From cache')
+		return cache.get(id)
+	}
+	const user = { id, name: `User ${id}` }
+	cache.set(id, user)
+	return user
+}
+
+console.log(fetchUser(1)) // Fetch
+console.log(fetchUser(1)) // From cache
+
+// { "id": 1,"name": "User 1" }
+// ⚡ From cache
+// { "id": 1,"name": "User 1" }
+```
+
+</CodeBlock>
+
+---
+
+## Combine `Map` + `Set`: Real-Life Grouping
+
+### Group users by role, with unique names
+
+<CodeBlock fileName="index.js" >
+
+```js showLineNumbers
+const users = [
+	{ name: 'Alice', role: 'admin' },
+	{ name: 'Bob', role: 'editor' },
+	{ name: 'Charlie', role: 'admin' },
+	{ name: 'Bob', role: 'editor' },
+]
+
+const grouped = new Map()
+
+for (const user of users) {
+	if (!grouped.has(user.role)) {
+		grouped.set(user.role, new Set())
+	}
+	grouped.get(user.role).add(user.name)
+}
+
+for (const [role, names] of grouped) {
+	console.log(`${role}:`, [...names])
+}
+
+// admin: ['Alice', 'Charlie']
+// editor: ['Bob']
+```
+
+</CodeBlock>
+
+---
+
+## Map vs Set - Quick Reference
+
+<Table
+	headers={['Feature', 'Map', 'Set']}
+	rows={[
+		['Structure', 'Key => Value', 'Value only (no key)'],
+		['Key type', 'Any (even objects)', 'N/A'],
+		['Duplicates allowed', 'Keys unique, values can repeat', 'No duplicates allowed'],
+		['Order', 'Maintains insertion order', 'Maintains insertion order'],
+		['Use Case', 'Storing related data (key-value)', 'Ensuring unique values'],
+	]}
+/>
+
+## Pro Tips Recap 💡
+
+<Table
+	headers={['Scenario', 'Use Set', 'Use Map']}
+	rows={[
+		['Remove duplicates from array', '✅', '❌'],
+		['Count frequency of items', '❌', '✅'],
+		['Manage toggle states', '✅', '✅'],
+		['Cache previously fetched data', '❌', '✅'],
+		['Store tags / labels', '✅', '❌'],
+		['Store structured key-value', '❌', '✅'],
+	]}
+/>

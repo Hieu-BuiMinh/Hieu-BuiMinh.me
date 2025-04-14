@@ -101,7 +101,7 @@ function DocPostDetailHeader({ post, className }: IDocPostDetailHeaderProps) {
 				</Button>
 			)}
 			{!postData && postData !== undefined && (
-				<AlertBadge>
+				<AlertBadge className="mt-3">
 					<p>Note: This post is a work in progress 🧪</p>
 					<p>
 						Feel free to read and explore, but keep in mind that some sections might still be under
