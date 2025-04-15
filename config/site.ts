@@ -20,7 +20,7 @@ export const SITE_CONFIG = {
 	links: {
 		twitter: 'https://x.com/Walter_BM_777',
 		youtube: 'https://www.youtube.com/@hieu-bm-0212',
-		instagram: 'https://www.instagram.com/walter.02.12/',
+		instagram: 'https://www.instagram.com/stephen.02.12/',
 		facebook: 'https://www.facebook.com/hieu.buiminh.37',
 		github: 'https://github.com/Hieu-BuiMinh',
 		linkedin: 'https://www.linkedin.com/in/minh-hieu-bui-78a315208',
