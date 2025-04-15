@@ -14,7 +14,7 @@ export const SITE_CONFIG = {
 	author: {
 		avatar: '/assets/images/avt/avt_001.jpg',
 		name: 'Hieu.BuiMinh',
-		nickname: 'Walter',
+		nickname: 'Stephen.K',
 		github: 'https://github.com/Hieu-BuiMinh',
 	},
 	links: {

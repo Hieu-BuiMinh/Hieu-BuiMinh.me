@@ -19,7 +19,7 @@ function AboutTheName() {
 					'p-0 text-muted-foreground/50 hover:text-foreground'
 				)}
 			>
-				Why &quot;Walter Cipher&quot;?
+				Why &quot;Stephen.K&quot;?
 			</DialogTrigger>
 			<DialogContent className="max-w-screen-sm md:max-w-screen-md">
 				<DialogHeader>
@@ -30,29 +30,28 @@ function AboutTheName() {
 				<div className="flex flex-col gap-3">
 					<div className="flex gap-3">
 						<BlurImage
-							src="https://i.imgur.com/hxwdrmN.jpeg"
-							alt="walter-bishop"
+							src="https://i.imgur.com/HkgEaPi.jpeg"
+							alt="stephen-strange"
 							width={500}
 							height={500}
 							className="h-36 w-full rounded-md md:h-56"
-							description="Walter Bishop"
+							description="Stephen Strange"
 						/>
 						<BlurImage
-							src="https://i.imgur.com/dQzxNLV.jpeg"
-							alt="bill-cipher"
+							src="https://i.imgur.com/uSKRoXf.jpeg"
+							alt="back-kaiser"
 							width={500}
 							height={500}
 							className="h-36 w-full rounded-md md:h-56"
-							description="Bill Cipher"
+							description="Black Kaiser"
 						/>
 					</div>
 					<div>
-						Welcome to my world, where creativity knows no bounds! I&apos;m Walter Cipher, a fusion of two
-						iconic figures that have shaped my journey. Walter Bishop, the brilliant mind from Fringe, and
-						Bill Cipher, the enigmatic force from Gravity Falls. These characters, both complex and
-						mysterious, inspire my work and passion for storytelling, technology, and self-expression. If
-						you&apos;re here to explore the world of innovation, mind-bending stories, and transformative
-						ideas, you&apos;re in the right place. Let&apos;s kick off this journey together!
+						Hi, I&apos;m Stephen Kaiser—a storyteller and Developer with a passion for creativity. Inspired
+						by Stephen Strange from Doctor Strange and the resilient Black Kaiser from Polar (2019), I blend
+						intellect with strength in everything I do. This blog is my space to share insights, creative
+						stories, and fresh perspectives on life, coding, and more. Join me as we dive into the stories
+						that shape our world, and let&apos;s explore new ideas together. Welcome aboard!
 					</div>
 				</div>
 			</DialogContent>
