@@ -55,7 +55,7 @@ const AlertBadge = ({ children, title, type, icon, className, fill }: IAlertBadg
 				</div>
 			)}
 
-			<div className="flex gap-3 text-sm text-foreground">
+			<div className="flex gap-3 py-2 text-sm text-foreground">
 				{!title && <Icon size={18} stroke={`rgba(${typeColor})`} />}
 				<div className="flex-1">{children}</div>
 			</div>
