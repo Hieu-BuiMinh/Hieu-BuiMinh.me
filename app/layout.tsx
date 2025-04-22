@@ -2,6 +2,7 @@ import './globals.css'
 
 import type { Metadata, Viewport } from 'next'
 import { Rethink_Sans } from 'next/font/google'
+import Head from 'next/head'
 
 // import localFont from 'next/font/local'
 import AppProvider from '@/components/commons/providers/app-provider'
@@ -138,6 +139,9 @@ export default function RootLayout({
 }>) {
 	return (
 		<html className="scroll-smooth" suppressHydrationWarning lang="en">
+			<Head>
+				<meta name="zalo-platform-site-verification" content="EywtTihW8omlyBa1fVa-0Ldwi3MrZ6PfE3Gt" />
+			</Head>
 			<body suppressHydrationWarning className={`${rethink_Sans.className} antialiased`}>
 				<AppProvider>
 					<SiteHeader />
