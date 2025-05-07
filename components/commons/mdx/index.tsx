@@ -46,6 +46,9 @@ const components = {
 	h4: (props: React.ComponentPropsWithoutRef<'h4'>) => <Heading as="h4" {...props} />,
 	h5: (props: React.ComponentPropsWithoutRef<'h5'>) => <Heading as="h5" {...props} />,
 	h6: (props: React.ComponentPropsWithoutRef<'h6'>) => <Heading as="h6" {...props} />,
+	p: (props: React.ComponentPropsWithRef<'p'>) => (
+		<p className="text-sm text-foreground dark:text-muted-foreground md:text-base">{props.children}</p>
+	),
 	a: (props: React.AnchorHTMLAttributes<HTMLAnchorElement>) => {
 		const { children, href, ...rest } = props
 
