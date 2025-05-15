@@ -32,6 +32,14 @@ export const shortSparksList = [
 		description: `what you are not changing you're choosing`,
 	},
 	{
+		name: `You have to want it more than everyone else`,
+		id: `you-have-to-want-it-more-than-everyone-else`,
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1747276747/you-have-to-want-it-more-than-everyone-else_nkgj3p.mp4',
+		height: 450,
+		previewImage: 'https://i.imgur.com/vdY5p79.png',
+		description: `You have to want it more than everyone else`,
+	},
+	{
 		name: `It's not over until i win`,
 		id: `it_s-not-over-until-i-win`,
 		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1744267038/it_s-not-over-until-i-win_bvuhta.mp4',
