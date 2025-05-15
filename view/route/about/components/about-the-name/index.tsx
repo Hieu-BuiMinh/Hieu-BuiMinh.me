@@ -19,12 +19,14 @@ function AboutTheName() {
 					'p-0 text-muted-foreground/50 hover:text-foreground'
 				)}
 			>
-				Why &quot;Stephen.K&quot;?
+				Why &quot;Stephen&quot;?
 			</DialogTrigger>
 			<DialogContent className="max-w-screen-sm md:max-w-screen-md">
 				<DialogHeader>
-					<DialogTitle>For those curious about my name ⟁</DialogTitle>
-					<DialogDescription>Let me tell you a bit about the inspiration behind my name.</DialogDescription>
+					<DialogTitle className="text-sm md:text-base">For those curious about my name ⟁</DialogTitle>
+					<DialogDescription className="text-xs italic md:text-sm">
+						Let me tell you a bit about the inspiration behind it.
+					</DialogDescription>
 				</DialogHeader>
 
 				<div className="flex flex-col gap-3">
@@ -34,24 +36,16 @@ function AboutTheName() {
 							alt="stephen-strange"
 							width={500}
 							height={500}
-							className="h-36 w-full rounded-md md:h-56"
+							className="m-auto h-48 min-w-48 rounded-md md:h-56 md:w-1/2"
 							description="Stephen Strange"
 						/>
-						<BlurImage
-							src="https://i.imgur.com/uSKRoXf.jpeg"
-							alt="back-kaiser"
-							width={500}
-							height={500}
-							className="h-36 w-full rounded-md md:h-56"
-							description="Black Kaiser"
-						/>
 					</div>
-					<div>
-						Hi, I&apos;m Stephen Kaiser—a storyteller and Developer with a passion for creativity. Inspired
-						by Stephen Strange from Doctor Strange and the resilient Black Kaiser from Polar (2019), I blend
-						intellect with strength in everything I do. This blog is my space to share insights, creative
-						stories, and fresh perspectives on life, coding, and more. Join me as we dive into the stories
-						that shape our world, and let&apos;s explore new ideas together. Welcome aboard!
+					<div className="text-xs md:text-sm">
+						Hey, I&apos;m Stephen _ a storyteller and developer with a passion for creativity. Inspired by
+						Stephen Strange from Doctor Strange, I blend intellect with strength in everything I do. This
+						blog is my space to share insights, creative stories, and fresh perspectives on life, coding,
+						and more. Let&apos;s dive into the stories that shape our world and explore new ideas together.
+						Welcome aboard!
 					</div>
 				</div>
 			</DialogContent>

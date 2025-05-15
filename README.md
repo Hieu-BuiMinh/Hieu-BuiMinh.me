@@ -70,7 +70,7 @@ After a year of learning, I expanded my skills to include React.js and Next.js. 
 
 ## Authentication & Data
 
--   Clerk authentication 🥸
+-   Clerk authentication 🔐
 -   Convex for user store 💾
 
 ## Credits
