@@ -80,6 +80,14 @@ export const shortSparksList = [
 		description: `Success is something you attract`,
 	},
 	{
+		name: `You can reach your goals and full potential`,
+		id: 'you-can-reach-your-goals-and-full-potential',
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1748941798/you-can-reach-your-goals-and-full-potential_paxj7m.mp4',
+		height: 450,
+		previewImage: 'https://i.ibb.co/KzSCxHx7/you-can-reach-your-goals-and-full-potential.png',
+		description: `You can reach your goals and full potential`,
+	},
+	{
 		name: `It's not over until i win`,
 		id: `it_s-not-over-until-i-win`,
 		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1744267038/it_s-not-over-until-i-win_bvuhta.mp4',
