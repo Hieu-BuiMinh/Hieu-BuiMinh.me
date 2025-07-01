@@ -32,6 +32,14 @@ export const shortSparksList = [
 		description: `what you are not changing you're choosing`,
 	},
 	{
+		name: `Fear is the worst enemy`,
+		id: `fear_is_the_worst_enemy`,
+		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1751360954/fear_is_the_worst_enemy_wfdzjt.mp4',
+		height: 450,
+		previewImage: 'https://i.postimg.cc/KvHSxwLT/fear-is-the-worst-enemy.png',
+		description: `Fear is the worst enemy`,
+	},
+	{
 		name: `You have to want it more than everyone else`,
 		id: `you-have-to-want-it-more-than-everyone-else`,
 		src: 'https://res.cloudinary.com/hieu-buiminh/video/upload/v1747276747/you-have-to-want-it-more-than-everyone-else_nkgj3p.mp4',
